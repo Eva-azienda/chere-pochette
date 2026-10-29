@@ -63,8 +63,11 @@ own price**: change those one by one in the admin (open the bag → Prezzo → S
 **Change the shipping fee** → `src/data/site.json` → `"shippingFee": 9`. Product pages and the info page show the new
 fee. With online payment on, the next Deploy run also re-creates the shipping links (until then: "order by e-mail").
 
-**Instagram** → `src/data/site.json` → `"instagram"`: replace the post link with the profile URL,
-e.g. `https://www.instagram.com/<profile>/` (used by the footer, header menu, home and shop).
+**Instagram** → `src/data/site.json` → `"instagram"` = `https://www.instagram.com/chere.pochette/` (used by the footer,
+header menu, home and shop).
+
+**Home hero** → `src/i18n/*.json`: `home.hero.subtitle` (headline), `home.hero.notes` (sketch notes),
+`home.hero.marquee` (words in the scrolling band); team section → `home.team.*`.
 
 **Contact e-mail** → `src/data/site.json` → `"email"`, and also in the three legal files.
 
@@ -82,9 +85,9 @@ The `id` is technical (lowercase, no spaces/accents, never changed later). Do no
 ```
 Empty lists are not shown. Keep it professional: no age, home address, phone or private details.
 
-**Team photos** → not shown yet: `team.json` has `"photo": null` and the pages show initials
-(`src/components/Monogram.astro`). Prepare the portraits ([VISUALS.md §5](VISUALS.md#5-guida-foto-per-il-team-prodotti-team-processo)),
-collect written consent, then a developer makes the small change.
+**Team photos** → `src/assets/team/<slug>.jpg` (4:5 portrait) and `src/assets/team/group.jpg`; `team.json` →
+`"photo": "<slug>"` (`null` = initials). To improve a photo, replace the file with a larger original under the same name
+([VISUALS.md §5](VISUALS.md#5-guida-foto-per-il-team-prodotti-team-processo)). Bios in `team.json` are the members' own texts.
 
 **Legal texts** → `src/content/legal/<lang>.md` in the three languages. After the coach/school review remove the
 `BOZZA` comment at the top and update `LAST_UPDATED` in `src/pages/[...lang]/legal/index.astro`. Section 5 (newsletter)

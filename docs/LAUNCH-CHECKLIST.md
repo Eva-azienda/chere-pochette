@@ -22,8 +22,14 @@ Online payment can be switched on before or after the launch; until then the sho
       `#E8D1D8`, `#82001F`, Lato) set as default; 30-day trial started 29.10.2026
 - [x] Variable `ZAHLS_INSTANCE` + secret `ZAHLS_API_KEY` set; connection check OK in the Deploy run's *Zahls sync*
       step (the manual **Zahls check** workflow has not been run yet — optional)
-- [x] Design: one-line wordmark, full logo opening the home page on phones/tablets, desktop hero with arch photo,
-      compact IT/DE/EN selector, needle/thread icons, firm prices ("Prezzo: CHF 45.–")
+- [x] Design: one-line wordmark header; home hero with the headline in the page's language, animated bag line-drawing
+      (`BagSketch.astro`) and marquee band; compact IT/DE/EN selector; needle/thread icons; firm prices ("Prezzo: CHF 45.–")
+- [x] Team photos from the Instagram post of 26.10.2026: group photo (home + team page), 7 portraits (org chart +
+      member pages, `src/assets/team/`); bios = the members' own texts; Romina = CPO, Chief Product Officer
+- [x] Instagram links → profile https://www.instagram.com/chere.pochette/
+- [x] Impressum address confirmed: c/o SCC Bellinzona, Viale Stefano Franscini 32, 6500 Bellinzona
+- [x] SEO: hreflang/x-default sitemap, structured data (`src/lib/structured-data.ts`), meta texts, `npm run seo:check`
+- [x] While checkout is off, info/FAQ texts describe ordering by e-mail
 - [x] 4 bags for sale: cp-001 Belle Bordeaux 40 · cp-002 Jolie Rosa antico 45 · cp-003 Coquette Giallo 45 · cp-004 Belle Grigio perla 40
 - [x] `npm test` 94/94; brand images reproducible with `scripts/build-visuals.mjs`
 - [x] Drive handover folder: 01_Brief, 02_Branding, 03_Media, 04_Website, 05_Handover
@@ -55,21 +61,19 @@ Online payment can be switched on before or after the launch; until then the sho
 
 - [ ] **Real prices per model** in `src/data/models.json` (45 / 40 / 45 are placeholders) and on the 4 bags (CFO)
 - [ ] **Shipping fee** in `src/data/site.json` (CHF 9 flat is a placeholder) (CFO)
-- [ ] **Instagram profile URL** in `src/data/site.json` (today a link to a single post) (CMO)
-- [ ] **Street address** for the Impressum: legal files + `organisation.address` (today `"TODO: indirizzo postale"`) (CEO/CAO)
 - [ ] **Legal texts** (Impressum, privacy, terms — marked BOZZA) reviewed by the coach/school; remove `BOZZA`;
       update `LAST_UPDATED` (CEO/CAO)
 - [ ] **Written consent** of the women recognisable in the crochet photo (`women-crochet`, home/about/process) — or
       replace it with a hands-only shot ([VISUALS.md §6](VISUALS.md#6-missing-or-weak-visuals-today-to-do-for-the-team)) (CPO)
 - [ ] **Yarn claim vs photo**: `yarn-fettuccia.jpg` (About page) shows store-bought fettuccia spools — confirm the
       wording does not call them recovered yarn, or replace the photo (CMO)
-- [ ] **Team**: photos (7 portraits + consent), CVs and skills in `src/data/team.json` (it/de/en) (all; CAO collects)
+- [ ] **Team**: consent of all 7 for their photos on the site; CVs/skills in `src/data/team.json` (it/de/en) — profiles
+      without skills/experience stay `noindex` (all; CAO collects). Optional: higher-resolution originals of the
+      portraits (today 296×370 px from Instagram) — replace the files in `src/assets/team/` with the same names
 - [ ] **Newsletter provider** (today the form opens an e-mail): choose one with double opt-in, set `newsletter.action`,
       update privacy section 5 ([SETUP.md §8](SETUP.md#8-later-newsletter-provider)) (CMO)
 - [ ] **Logo vector file** (SVG/PDF from Canva) + Bodoni FLF font file into Drive `02_Branding` (CMO)
-- [ ] If launching before payments are on: adapt the texts that describe paying on Zahls — info page "Pagamento" and
-      FAQ "Come posso pagare?", meta descriptions of shop and info ("pagamento con TWINT") in `src/i18n/*.json`, and
-      terms §4–5 in `src/content/legal/*.md` (CMO + CEO/CAO)
+- [ ] Check the remaining payment wording while checkout is off (shop/info meta descriptions, terms §4–5) (CMO + CEO/CAO)
 - [ ] Proper per-bag photos (front, lining, detail, worn) for the 4 bags ([VISUALS.md §5](VISUALS.md#5-guida-foto-per-il-team-prodotti-team-processo)) (CPO)
 - [ ] All texts proofread in Italian, German and English on a phone (team)
 
@@ -80,6 +84,13 @@ Online payment can be switched on before or after the launch; until then the sho
 - [ ] **Launch: delete `SITE_PASSWORD`** (Settings → Secrets and variables → Actions) → Actions → **Deploy** →
       *Run workflow* → check https://cherepochette.ch opens without password (CTO)
 - [ ] Update the Instagram bio link to https://cherepochette.ch (CMO)
+
+## Search engines (after launch)
+
+- [ ] Once `SITE_PASSWORD` is deleted: check https://cherepochette.ch/robots.txt and the canonical tags (CTO)
+- [ ] Google Search Console: add a **Domain** property (TXT record at Hostpoint), submit `sitemap-index.xml` (CTO)
+- [ ] Bing Webmaster Tools: import from Search Console (CTO)
+- [ ] Rich Results Test on one bag page (Product + Offer) (CTO)
 
 ## Known small issues (developer, optional)
 

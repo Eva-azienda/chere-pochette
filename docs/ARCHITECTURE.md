@@ -45,9 +45,13 @@ GitHub Pages serves the site under the domain registered at Hostpoint, and Zahls
 
 - **Header**: one-line wordmark "Chère Pochette" (`src/assets/brand/wordmark.svg`, Bodoni Moda italic converted to
   outlines, coloured with `currentColor`) top-left; compact **IT/DE/EN** selector (`LanguageSwitcher.astro`).
-- **Home, phones and tablets**: opens with the **full logo centred** (needle, thread, slogan; no photo); the header
-  wordmark fades in only after that logo has scrolled away. **Desktop**: text on the left + the bag-on-umbrella photo in
-  an **arch** on the right.
+- **Home hero**: headline in the page's own language (`home.hero.subtitle`) + an animated line drawing of a bag with
+  handwritten notes (`src/components/BagSketch.astro`, `src/assets/brand/bag-sketch.svg`), then a scrolling marquee band;
+  the English tagline appears as a quote on larger screens. The header wordmark is always visible.
+- **Team**: group photo on the home team section and the team page; round portraits in the org chart and a 4:5 portrait
+  on each member page (`src/assets/team/`, `src/lib/team-photos.ts`, `TeamAvatar.astro`; initials as fallback).
+- **SEO**: hreflang/x-default sitemap (`astro.config.mjs`), JSON-LD (`src/lib/structured-data.ts`), `npm run seo:check`
+  (also as warn-only `postbuild`).
 - **Icons**: thin "thread" line icons (`Icon.astro`), e.g. the three pillars reuse / needle-and-thread (handmade) /
   thread heart (together).
 - **Prices**: firm prices, Swiss format — "Prezzo: CHF 45.–" for models, `CHF 40.–` on bags.
