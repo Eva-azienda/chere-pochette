@@ -1,0 +1,45 @@
+---
+/**
+ * For the pages Zahls sends the customer back to (/thanks/ and /payment-cancelled/).
+ *
+ * The Zahls payment links always point to the ITALIAN version of these pages (one link per bag,
+ * not per language). When the customer pressed "buy" on the German or English site, BuyBox.astro
+ * remembered that language (localStorage "cp-lang"), and this tiny script, placed in <head>,
+ * switches to the same page in that language before anything is shown. ?p=<bag> is kept.
+ *
+ * Usage (Italian page only does something):
+ *   <ReturnLanguage lang={lang} path="thanks/" slot="head" />
+ */
+import { DEFAULT_LANG, LOCALES, type Lang } from '../lib/i18n';
+import { localePath } from '../lib/urls';
+
+interface Props {
+  lang: Lang;
+  /** The page's route without language, e.g. "thanks/". */
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+// { de: "/de/thanks/", en: "/en/thanks/" } (with the base path)
+const targets = Object.fromEntries(
+  LOCALES.filter((l) => l !== DEFAULT_LANG).map((l) => [l, localePath(l, path)]),
+);
+---
+
+{
+  lang === DEFAULT_LANG && (
+    <script is:inline define:vars={{ targets }}>
+      try {
+        // Only when arriving from outside (Zahls): a visitor who switches to Italian on our own
+        // site must be able to stay there.
+        var fromOutside = !document.referrer || new URL(document.referrer).origin !== location.origin;
+        var chosen = localStorage.getItem('cp-lang');
+        if (fromOutside && chosen && Object.prototype.hasOwnProperty.call(targets, chosen)) {
+          location.replace(targets[chosen] + location.search + location.hash);
+        }
+      } catch (e) {
+        // storage blocked: stay on the Italian page
+      }
+    </script>
+  )
+}

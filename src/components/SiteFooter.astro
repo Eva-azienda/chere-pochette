@@ -1,0 +1,226 @@
+---
+/** Footer on dark plum: logo, newsletter, links, contact, Instagram, languages, legal. */
+import { Image } from 'astro:assets';
+import logoIvory from '../assets/brand/logo-ivory.png';
+import Icon from './Icon.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import NewsletterForm from './NewsletterForm.astro';
+import { type Lang, useTranslations } from '../lib/i18n';
+import { localePath } from '../lib/urls';
+import { site } from '../lib/catalog';
+
+interface Props {
+  lang: Lang;
+  path: string;
+  /** false on pages that already show a big newsletter block (home). */
+  newsletter?: boolean;
+}
+
+const { lang, path, newsletter = true } = Astro.props;
+const { t } = useTranslations(lang);
+const year = new Date().getFullYear();
+const links = ['shop', 'about', 'process', 'team', 'info'] as const;
+---
+
+<footer class="footer on-dark">
+  {
+    newsletter && (
+      <section class="container footer__nl" aria-labelledby="footer-nl-title">
+        <div class="footer__nl-text">
+          <h2 id="footer-nl-title" class="footer__nl-title">{t('newsletter.title')}</h2>
+          <p>{t('newsletter.text')}</p>
+        </div>
+        <NewsletterForm lang={lang} id="footer-nl" tone="dark" />
+      </section>
+    )
+  }
+
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href={localePath(lang)} class="footer__logo">
+        <Image
+          src={logoIvory}
+          widths={[170, 340, 510]}
+          sizes="170px"
+          alt={t('a11y.homeLink')}
+          loading="lazy"
+        />
+      </a>
+      <p>{t('footer.about')}</p>
+    </div>
+
+    <nav class="footer__col" aria-labelledby="footer-links-title">
+      <h2 id="footer-links-title" class="footer__title">{t('footer.linksTitle')}</h2>
+      <ul role="list">
+        {
+          links.map((key) => (
+            <li>
+              <a href={localePath(lang, `${key}/`)}>{t(`nav.${key}`)}</a>
+            </li>
+          ))
+        }
+        <li><a href={localePath(lang, 'legal/')}>{t('footer.legal')}</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer__col">
+      <h2 class="footer__title">{t('footer.contactTitle')}</h2>
+      <ul role="list">
+        <li>
+          <a href={`mailto:${site.email}`} class="footer__icon-link">
+            <Icon name="mail" size={20} />
+            <span>{site.email}</span>
+          </a>
+        </li>
+        <li>
+          <a href={site.instagram} rel="noopener" class="footer__icon-link">
+            <Icon name="instagram" size={20} />
+            <span>{t('common.instagram')}</span>
+          </a>
+        </li>
+      </ul>
+      <LanguageSwitcher lang={lang} path={path} variant="links" dots class="footer__lang" />
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>{t('footer.yes')}</p>
+    <p>{t('footer.copyright', { year })}</p>
+    <p>{t('footer.privacyNote')}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: auto;
+    padding-top: var(--s-8);
+    padding-bottom: max(var(--s-6), env(safe-area-inset-bottom));
+    background: var(--c-plum);
+    color: var(--c-ivory);
+    font-size: var(--fs-sm);
+    /* language switcher colours on the dark background */
+    --lang-color: color-mix(in srgb, var(--c-ivory) 70%, transparent);
+    --lang-active: var(--c-ivory);
+  }
+
+  .footer a {
+    color: var(--c-ivory);
+  }
+
+  .footer a:hover {
+    color: var(--c-powder);
+  }
+
+  /* Newsletter band */
+  .footer__nl {
+    display: grid;
+    gap: var(--s-5);
+    padding-bottom: var(--s-7);
+    margin-bottom: var(--s-7);
+    border-bottom: 1px solid color-mix(in srgb, var(--c-ivory) 20%, transparent);
+  }
+
+  .footer__nl-text {
+    display: grid;
+    gap: var(--s-2);
+    max-width: 30rem;
+  }
+
+  .footer__nl-title {
+    font-size: var(--fs-xl);
+    color: var(--c-ivory);
+  }
+
+  .footer__nl-text p {
+    opacity: 0.85;
+  }
+
+  .footer__grid {
+    display: grid;
+    gap: var(--s-7);
+  }
+
+  .footer__brand {
+    display: grid;
+    gap: var(--s-4);
+    align-content: start;
+    max-width: 22rem;
+  }
+
+  .footer__logo {
+    display: block;
+    width: 170px;
+  }
+
+  .footer__brand p {
+    opacity: 0.85;
+  }
+
+  .footer__title {
+    font-family: var(--f-body);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--c-powder);
+  }
+
+  .footer__col ul {
+    display: grid;
+    margin-top: var(--s-2);
+  }
+
+  .footer__col a {
+    display: inline-flex;
+    align-items: center;
+    min-width: var(--tap);
+    min-height: var(--tap);
+    text-decoration: none;
+  }
+
+  .footer__col a:hover {
+    text-decoration: underline;
+  }
+
+  .footer__icon-link {
+    gap: var(--s-3);
+    overflow-wrap: anywhere;
+  }
+
+  .footer :global(.footer__lang) {
+    margin-top: var(--s-4);
+    margin-left: calc(var(--s-3) * -1); /* line the first code up with the links above */
+  }
+
+  .footer__bottom {
+    display: grid;
+    gap: var(--s-1);
+    margin-top: var(--s-7);
+    padding-top: var(--s-5);
+    border-top: 1px solid color-mix(in srgb, var(--c-ivory) 20%, transparent);
+    font-size: var(--fs-xs);
+    opacity: 0.85;
+  }
+
+  @media (min-width: 48rem) {
+    .footer__nl {
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      column-gap: var(--s-8);
+    }
+
+    .footer__grid {
+      grid-template-columns: 1.4fr 1fr 1.2fr;
+      column-gap: var(--s-6);
+    }
+
+    .footer__bottom {
+      grid-template-columns: auto auto 1fr;
+      column-gap: var(--s-6);
+    }
+
+    .footer__bottom p:last-child {
+      text-align: right;
+    }
+  }
+</style>

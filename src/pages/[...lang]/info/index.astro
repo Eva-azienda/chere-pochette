@@ -1,0 +1,245 @@
+---
+/** Practical information: shipping, pickup, payment, returns, care, FAQ (accordions), contact. */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import { localeStaticPaths, useTranslations, type Lang, fill } from '../../../lib/i18n';
+import { formatPrice } from '../../../lib/format';
+import { site } from '../../../lib/catalog';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const { t, list, pageMeta } = useTranslations(lang);
+const vars = { fee: formatPrice(site.shippingFee), email: site.email };
+
+// Sections with paragraphs; the id is also the #anchor (links like /info/#returns).
+const topics = ['shipping', 'pickup', 'payment', 'returns'] as const;
+const icons = { shipping: 'truck', pickup: 'pin', payment: 'check', returns: 'arrow-left' } as const;
+const tips = list<string>('info.care.tips');
+const faq = list<{ q: string; a: string }>('info.faq.items');
+const toc = [...topics, 'care', 'faq'] as const;
+const tocLabel = (id: string) => t(`info.${id}.title`);
+---
+
+<BaseLayout lang={lang} path="info/" {...pageMeta('info')}>
+  <PageHeader eyebrow={t('info.eyebrow')} title={t('info.title')} intro={t('info.intro')} />
+
+  <nav class="container toc" aria-label={t('info.tocTitle')}>
+    <ul role="list">
+      {
+        toc.map((id) => (
+          <li>
+            <a href={`#${id}`}>{tocLabel(id)}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <div class="container container--narrow topics">
+    {
+      topics.map((id) => (
+        <section class="topic" id={id} aria-labelledby={`${id}-title`}>
+          <span class="topic__icon">
+            <Icon name={icons[id]} />
+          </span>
+          <div class="topic__body stack">
+            <h2 id={`${id}-title`}>{t(`info.${id}.title`)}</h2>
+            {list<string>(`info.${id}.paragraphs`).map((text) => (
+              <p>{fill(text, vars)}</p>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="topic" id="care" aria-labelledby="care-title">
+      <span class="topic__icon">
+        <Icon name="handmade" size={24} />
+      </span>
+      <div class="topic__body stack">
+        <h2 id="care-title">{t('info.care.title')}</h2>
+        <ul class="tips">
+          {tips.map((tip) => <li>{tip}</li>)}
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <section class="section section--alt" id="faq" aria-labelledby="faq-title">
+    <div class="container container--narrow">
+      <h2 id="faq-title" class="faq__title">{t('info.faq.title')}</h2>
+      <div class="faq">
+        {
+          faq.map((item, i) => (
+            <details id={`faq-${i + 1}`}>
+              <summary>{item.q}</summary>
+              <p>{fill(item.a, vars)}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow center stack">
+      <h2 class="h3">{t('info.contact.title')}</h2>
+      <p>{t('info.contact.text')}</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href={`mailto:${site.email}`}>
+          <Icon name="mail" size={20} />
+          {t('info.contact.cta')}
+        </a>
+      </div>
+      <p class="small muted">{site.email}</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Open a FAQ answer when the address points to it (e.g. a shared link to /info/#faq-3).
+  const openTarget = () => {
+    const target = location.hash && document.getElementById(location.hash.slice(1));
+    const details = target?.closest('details');
+    if (details) details.open = true;
+  };
+  window.addEventListener('hashchange', openTarget);
+  openTarget();
+</script>
+
+<style>
+  .toc ul {
+    display: flex;
+    gap: var(--s-2);
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 0 var(--gutter) var(--s-2);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .toc ul::-webkit-scrollbar {
+    display: none;
+  }
+
+  .toc a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+    padding-inline: var(--s-4);
+    border: 1px solid var(--c-line-strong);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    color: var(--c-plum);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .toc a:hover {
+    border-color: var(--c-plum);
+  }
+
+  @media (min-width: 48rem) {
+    .toc ul {
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+  }
+
+  .topics {
+    display: grid;
+    padding-block: var(--s-6) var(--section-y);
+  }
+
+  .topic {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--s-4);
+    padding-block: var(--s-6);
+    border-top: 1px solid var(--c-line);
+    scroll-margin-top: calc(var(--header-h) + var(--s-4));
+  }
+
+  .topic__icon {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--c-powder-2);
+    color: var(--c-bordeaux);
+  }
+
+  .topic h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .tips {
+    display: grid;
+    gap: var(--s-2);
+    padding-left: 1.1em;
+  }
+
+  .tips li::marker {
+    color: var(--c-bordeaux);
+  }
+
+  #faq {
+    scroll-margin-top: var(--header-h);
+  }
+
+  .faq__title {
+    margin-bottom: var(--s-5);
+    text-align: center;
+  }
+
+  .faq {
+    border-top: 1px solid var(--c-line-strong);
+  }
+
+  .faq details {
+    border-bottom: 1px solid var(--c-line-strong);
+  }
+
+  .faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    min-height: 3.5rem;
+    padding-block: var(--s-3);
+    font-weight: 600;
+    color: var(--c-plum);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq summary::after {
+    content: '+';
+    flex-shrink: 0;
+    font-family: var(--f-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--c-bordeaux);
+    transition: transform var(--dur) var(--ease);
+  }
+
+  .faq details[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  .faq details p {
+    padding-bottom: var(--s-5);
+    max-width: 36rem;
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+/** The team: interactive org chart (data: src/data/team.json). */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import OrgChart from '../../../components/OrgChart.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
+import { localePath } from '../../../lib/urls';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const { t, pageMeta } = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} path="team/" {...pageMeta('team')}>
+  <PageHeader eyebrow={t('team.eyebrow')} title={t('team.title')} intro={t('team.intro')}>
+    <p class="hint">
+      <span class="hint--touch">{t('team.hint')}</span>
+      <span class="hint--pointer">{t('team.hintPointer')}</span>
+    </p>
+  </PageHeader>
+
+  <section class="container org-wrap">
+    <OrgChart lang={lang} />
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow center stack">
+      <p class="tagline">{t('home.story.title')}</p>
+      <div class="btn-row">
+        <a class="btn btn--outline" href={localePath(lang, 'about/')}>{t('home.story.cta')}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hint {
+    font-size: var(--fs-sm);
+    color: var(--c-muted);
+  }
+
+  .hint--pointer {
+    display: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hint--touch {
+      display: none;
+    }
+
+    .hint--pointer {
+      display: inline;
+    }
+  }
+
+  .org-wrap {
+    padding-bottom: var(--section-y);
+  }
+</style>

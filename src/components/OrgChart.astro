@@ -1,0 +1,294 @@
+---
+/**
+ * Interactive org chart: the CEO on top, the six heads of department below, joined by thin
+ * "threads" (CSS lines). Every card is a link to the member's personal page.
+ * Phones/tablets: 2 columns with a central thread; desktop: one row of six.
+ * Order and hierarchy come from src/data/team.json (level / reportsTo).
+ */
+import Monogram from './Monogram.astro';
+import { type Lang, useTranslations } from '../lib/i18n';
+import { localePath } from '../lib/urls';
+import { roleDescription, team } from '../lib/catalog';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const { t } = useTranslations(lang);
+
+const leaders = team.filter((m) => m.level === 1);
+const heads = team.filter((m) => m.level !== 1);
+---
+
+<div class="org" role="group" aria-label={t('a11y.orgChart')}>
+  <p class="org__level"><span>{t('team.levels.level1')}</span></p>
+  <ul role="list" class="org__top">
+    {
+      leaders.map((m) => (
+        <li>
+          <a class="member member--lead" href={localePath(lang, `team/${m.slug}/`)}>
+            <Monogram name={m.name} size="md" />
+            <span class="member__code">{m.roleCode}</span>
+            <span class="member__name">{m.name}</span>
+            <span class="member__role">{roleDescription(m, lang)}</span>
+            <span class="member__more" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="org__stem" aria-hidden="true"></div>
+  <p class="org__level"><span>{t('team.levels.level2')}</span></p>
+  <div class="org__stem org__stem--short" aria-hidden="true"></div>
+
+  <ul role="list" class="org__grid">
+    {
+      heads.map((m) => (
+        <li class="org__node">
+          <a class="member" href={localePath(lang, `team/${m.slug}/`)}>
+            <Monogram name={m.name} size="sm" />
+            <span class="member__code">{m.roleCode}</span>
+            <span class="member__name">{m.name}</span>
+            <span class="member__role">{roleDescription(m, lang)}</span>
+            <span class="member__more" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .org {
+    --thread: var(--c-line-strong);
+    --thread-active: var(--c-bordeaux);
+    --col-gap: 1.75rem;
+    --row-gap: 1.5rem;
+    display: grid;
+    justify-items: center;
+  }
+
+  .org__level {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--c-muted);
+    text-align: center;
+    margin-bottom: var(--s-3);
+  }
+
+  .org__stem + .org__level {
+    margin: 0;
+    padding: var(--s-2) var(--s-3);
+  }
+
+  .org__top {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .org__top li {
+    width: min(100%, 17rem);
+  }
+
+  /* vertical thread between the levels */
+  .org__stem {
+    width: 1px;
+    height: 2rem;
+    background: var(--thread);
+  }
+
+  .org__stem--short {
+    height: 1rem;
+  }
+
+  /* ---------- Cards ---------- */
+  .member {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: var(--s-1);
+    height: 100%;
+    padding: var(--s-5) var(--s-3) var(--s-6);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    background: var(--c-white);
+    color: inherit;
+    text-align: center;
+    text-decoration: none;
+    transition:
+      border-color var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease),
+      transform var(--dur) var(--ease);
+  }
+
+  .member :global(.monogram) {
+    margin-bottom: var(--s-2);
+  }
+
+  .member:hover {
+    border-color: var(--c-bordeaux);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-2px);
+    color: inherit;
+  }
+
+  .member--lead {
+    padding-inline: var(--s-5);
+    background: var(--c-powder-2);
+  }
+
+  .member__code {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    color: var(--c-bordeaux);
+  }
+
+  .member__name {
+    font-family: var(--f-display);
+    font-size: 1.1875rem;
+    line-height: 1.2;
+    color: var(--c-plum);
+    text-wrap: balance;
+  }
+
+  .member--lead .member__name {
+    font-size: var(--fs-xl);
+  }
+
+  .member__role {
+    font-size: var(--fs-xs);
+    line-height: 1.4;
+    color: var(--c-muted);
+    text-wrap: balance;
+  }
+
+  .member__more {
+    position: absolute;
+    right: var(--s-3);
+    bottom: var(--s-2);
+    font-size: var(--fs-sm);
+    color: var(--c-bordeaux);
+    opacity: 0.6;
+    transition:
+      transform var(--dur) var(--ease),
+      opacity var(--dur) var(--ease);
+  }
+
+  .member:hover .member__more {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+
+  /* ---------- Grid with thread connectors (phones/tablets: 2 columns) ---------- */
+  .org__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    row-gap: var(--row-gap);
+    width: 100%;
+    max-width: 36rem;
+  }
+
+  .org__node {
+    position: relative;
+  }
+
+  /* horizontal stub from each card to the central thread */
+  .org__node::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: calc(var(--col-gap) / 2);
+    height: 1px;
+    background: var(--thread);
+    transition: background-color var(--dur) var(--ease);
+  }
+
+  .org__node:nth-child(odd)::after {
+    left: 100%;
+  }
+
+  .org__node:nth-child(even)::after {
+    right: 100%;
+  }
+
+  /* central vertical thread, drawn piece by piece by the left-column cards */
+  .org__node:nth-child(odd)::before {
+    content: '';
+    position: absolute;
+    left: calc(100% + var(--col-gap) / 2);
+    top: calc(var(--row-gap) * -1);
+    bottom: 0;
+    width: 1px;
+    background: var(--thread);
+  }
+
+  .org__node:first-child::before {
+    top: 0;
+  }
+
+  .org__node:nth-child(odd):is(:nth-last-child(1), :nth-last-child(2))::before {
+    bottom: 50%;
+  }
+
+  .org__node:hover::after,
+  .org__node:focus-within::after {
+    background: var(--thread-active);
+  }
+
+  /* ---------- Desktop: one row of six, joined by a horizontal thread ---------- */
+  @media (min-width: 64rem) {
+    .org {
+      --col-gap: 1rem;
+    }
+
+    .org__grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      max-width: none;
+      padding-top: 1.5rem;
+    }
+
+    .org__node::before,
+    .org__node:nth-child(odd)::before {
+      content: '';
+      position: absolute;
+      top: -1.5rem;
+      bottom: auto;
+      left: calc(var(--col-gap) / -2);
+      right: calc(var(--col-gap) / -2);
+      width: auto;
+      height: 1px;
+      background: var(--thread);
+    }
+
+    .org__node:first-child::before {
+      left: 50%;
+      top: -1.5rem;
+    }
+
+    .org__node:last-child::before {
+      right: 50%;
+    }
+
+    .org__node::after,
+    .org__node:nth-child(odd)::after,
+    .org__node:nth-child(even)::after {
+      top: -1.5rem;
+      left: 50%;
+      right: auto;
+      width: 1px;
+      height: 1.5rem;
+    }
+
+    .member {
+      padding-inline: var(--s-2);
+    }
+  }
+</style>

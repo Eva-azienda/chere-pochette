@@ -22,5 +22,8 @@
     "sharp": "^0.35.5"
   },
   "private": true,
-  "description": "Chère Pochette — e-commerce website (Astro, GitHub Pages, Zahls)"
+  "description": "Chère Pochette — e-commerce website (Astro, GitHub Pages, Zahls)",
+  "devDependencies": {
+    "staticrypt": "^3.5.4"
+  }
 }

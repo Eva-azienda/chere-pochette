@@ -6,8 +6,15 @@
   "instagram": "https://www.instagram.com/p/De1RHDQuJui/",
   "currency": "CHF",
   "shippingFee": 9,
-  "shippingCountries": ["CH", "LI"],
+  "shippingCountries": [
+    "CH",
+    "LI"
+  ],
   "pickupPlace": "Bellinzona",
+  "checkout": {
+    "enabled": false,
+    "_comment": "Online payment via Zahls. Keep false until the Zahls account is verified and payment methods are active; then set to true. While false, the site shows 'order by e-mail' and the sync only tests the Zahls connection."
+  },
   "organisation": {
     "legalName": "Chère Pochette – mini-impresa YES",
     "school": "Scuola cantonale di commercio (SCC) Bellinzona",
@@ -22,10 +29,14 @@
     "emailField": "email"
   },
   "github": {
-    "owner": "",
-    "repo": "",
+    "owner": "Eva-azienda",
+    "repo": "chere-pochette",
     "branch": "main"
   },
-  "languages": ["it", "de", "en"],
+  "languages": [
+    "it",
+    "de",
+    "en"
+  ],
   "defaultLanguage": "it"
 }

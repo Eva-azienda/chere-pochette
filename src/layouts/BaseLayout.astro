@@ -1,0 +1,114 @@
+---
+/**
+ * The frame of every page: <head> (SEO, social sharing, icons, fonts), header, main, footer.
+ *
+ * Every page passes:
+ *   lang  – 'it' | 'de' | 'en'
+ *   path  – its route WITHOUT language prefix, ending in "/" ('' for home, 'shop/', 'team/eva-dallacqua/')
+ *           → used for the canonical URL, the hreflang alternates and the language switcher.
+ *   title / description – already translated (see pageMeta() in src/lib/i18n.ts)
+ */
+// Fonts are self-hosted (no request to Google): Bodoni Moda with optical sizes, Red Hat Display.
+import '@fontsource-variable/bodoni-moda/opsz.css';
+import '@fontsource-variable/bodoni-moda/opsz-italic.css';
+import '@fontsource-variable/red-hat-display';
+import '../styles/global.css';
+
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { HREFLANG, LOCALES, DEFAULT_LANG, type Lang, useTranslations } from '../lib/i18n';
+import { absoluteUrl, assetPath, localePath } from '../lib/urls';
+
+interface Props {
+  lang: Lang;
+  path: string;
+  title: string;
+  description: string;
+  /** Pages that must not appear in search engines (sold bags, thanks, payment cancelled, 404). */
+  noindex?: boolean;
+  /** false for pages without language versions at a fixed URL (404). */
+  alternates?: boolean;
+  /** Absolute URL of a page-specific sharing image (default: public/og-image.jpg). */
+  ogImage?: string;
+  ogType?: 'website' | 'product';
+  /** false when the page already contains a newsletter block. */
+  footerNewsletter?: boolean;
+  /** Extra class on <body>, e.g. "has-buybar" on product pages. */
+  bodyClass?: string;
+}
+
+const {
+  lang,
+  path,
+  title,
+  description,
+  noindex = false,
+  alternates = true,
+  ogImage,
+  ogType = 'website',
+  footerNewsletter = true,
+  bodyClass,
+} = Astro.props;
+
+const { t } = useTranslations(lang);
+const canonical = absoluteUrl(localePath(lang, path));
+const image = ogImage ?? absoluteUrl(assetPath('og-image.jpg'));
+const ogLocale = t('meta.ogLocale');
+const otherOgLocales = LOCALES.filter((l) => l !== lang).map((l) => useTranslations(l).t('meta.ogLocale'));
+---
+
+<!doctype html>
+<html lang={HREFLANG[lang]} dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    {alternates && <link rel="canonical" href={canonical} />}
+    {
+      alternates &&
+        LOCALES.map((l) => (
+          <link rel="alternate" hreflang={HREFLANG[l]} href={absoluteUrl(localePath(l, path))} />
+        ))
+    }
+    {alternates && <link rel="alternate" hreflang="x-default" href={absoluteUrl(localePath(DEFAULT_LANG, path))} />}
+
+    <!-- Social sharing (Open Graph) -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={t('meta.siteName')} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {alternates && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={image} />
+    {!ogImage && <meta property="og:image:width" content="1200" />}
+    {!ogImage && <meta property="og:image:height" content="630" />}
+    <meta property="og:locale" content={ogLocale} />
+    {otherOgLocales.map((l) => <meta property="og:locale:alternate" content={l} />)}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Icons -->
+    <link rel="icon" href={assetPath('favicon.ico')} sizes="32x32" />
+    <link rel="icon" href={assetPath('favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={assetPath('apple-touch-icon.png')} />
+    <meta name="theme-color" content="#FAF7F2" />
+    <meta name="generator" content={Astro.generator} />
+
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">{t('a11y.skipToContent')}</a>
+    <SiteHeader lang={lang} path={path} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter lang={lang} path={path} newsletter={footerNewsletter} />
+  </body>
+</html>
+
+<style>
+  main:focus {
+    outline: none;
+  }
+</style>

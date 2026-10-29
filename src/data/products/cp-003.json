@@ -10,14 +10,13 @@
   "photos": [
     {
       "src": "media/products/cp-003/1",
-      "w": 0,
-      "h": 0
+      "w": 1600,
+      "h": 2000
     }
   ],
   "createdAt": "2026-10-29T15:00:00Z",
   "updatedAt": "2026-10-29T15:00:00Z",
   "soldAt": null,
   "soldChannel": null,
-  "zahls": null,
-  "sample": true
+  "zahls": null
 }

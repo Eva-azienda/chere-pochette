@@ -1,0 +1,132 @@
+---
+/**
+ * Small line icons drawn with thin strokes (like the thread of the logo).
+ * Usage: <Icon name="instagram" />  – decorative by default (aria-hidden).
+ * Pass `label` when the icon is the only content of a link/button.
+ */
+interface Props {
+  name:
+    | 'menu'
+    | 'close'
+    | 'arrow-left'
+    | 'arrow-right'
+    | 'chevron-left'
+    | 'chevron-right'
+    | 'chevron-down'
+    | 'instagram'
+    | 'mail'
+    | 'reuse'
+    | 'handmade'
+    | 'together'
+    | 'truck'
+    | 'pin'
+    | 'check';
+  size?: number;
+  label?: string;
+  class?: string;
+}
+
+const { name, size = 24, label, class: className } = Astro.props;
+
+// Each icon is drawn on a 24×24 grid; the three pillar icons on 48×48 for finer lines.
+const big = ['reuse', 'handmade', 'together'].includes(name);
+const viewBox = big ? '0 0 48 48' : '0 0 24 24';
+---
+
+<svg
+  class:list={['icon', className]}
+  width={size}
+  height={size}
+  viewBox={viewBox}
+  fill="none"
+  stroke="currentColor"
+  stroke-width={big ? 1.4 : 1.5}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden={label ? undefined : 'true'}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  focusable="false"
+>
+  {name === 'menu' && <path d="M4 8h16M4 16h16" />}
+  {name === 'close' && <path d="M6 6l12 12M18 6L6 18" />}
+  {name === 'arrow-left' && <path d="M19 12H5m6-6-6 6 6 6" />}
+  {name === 'arrow-right' && <path d="M5 12h14m-6-6 6 6-6 6" />}
+  {name === 'chevron-left' && <path d="m14.5 6-6 6 6 6" />}
+  {name === 'chevron-right' && <path d="m9.5 6 6 6-6 6" />}
+  {name === 'chevron-down' && <path d="m6 9.5 6 6 6-6" />}
+  {
+    name === 'instagram' && (
+      <>
+        <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
+      </>
+    )
+  }
+  {
+    name === 'mail' && (
+      <>
+        <rect x="3" y="5.5" width="18" height="13" rx="2" />
+        <path d="m3.5 7 8.5 6 8.5-6" />
+      </>
+    )
+  }
+  {
+    name === 'truck' && (
+      <>
+        <path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7z" />
+        <circle cx="6.5" cy="17" r="1.6" />
+        <circle cx="17" cy="17" r="1.6" />
+      </>
+    )
+  }
+  {
+    name === 'pin' && (
+      <>
+        <path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z" />
+        <circle cx="12" cy="10" r="2.3" />
+      </>
+    )
+  }
+  {name === 'check' && <path d="m5 12.5 4.5 4.5L19 7.5" />}
+  {
+    /* Umbrella: materials get a second life */
+    name === 'reuse' && (
+      <>
+        <path d="M24 7.5v2.5"/>
+        <path d="M7.5 23C7.5 15 14.6 10 24 10s16.5 5 16.5 13"/>
+        <path d="M7.5 23c1.4-1.6 3.4-1.6 4.1 0 .7-1.6 3.4-1.6 4.1 0 .7-1.6 3.4-1.6 4.1 0 .7-1.6 3.4-1.6 4.2 0 .8-1.6 3.4-1.6 4.1 0 .7-1.6 3.4-1.6 4.1 0 .7-1.6 3.4-1.6 4.1 0 .7-1.6 2.7-1.6 4.1 0"/>
+        <path d="M24 10c-3.6 3.2-5.2 8-5.4 13M24 10c3.6 3.2 5.2 8 5.4 13"/>
+        <path d="M24 23v13.5a3.2 3.2 0 0 1-6.4 0"/>
+      </>
+    )
+  }
+  {
+    /* Needle with thread, drawn like the logo: handmade */
+    name === 'handmade' && (
+      <g transform="translate(3 -2)">
+        <g transform="rotate(40 27 21)">
+          <path d="M24 43 22.1 13.6a1.9 1.9 0 0 1 3.8 0Z"/>
+          <path d="M24 12.4v4" stroke-width="1"/>
+        </g>
+        <path d="M4 36c5.5 1.6 12.2 1.4 17.6-1 2.6-1.1 2.8-4.6.3-4.7-2.4-.1-2.5 4 .9 4.7 6.4 1.2 14.6-2.4 16.4-9.4 1.6-6.4-2.4-12.6-7.8-12.4-1.6.1-2.8.8-3.6 1.6"/>
+      </g>
+    )
+  }
+  {
+    /* Heart drawn with thread, tail ending in a small loop: together, between women */
+    name === 'together' && (
+      <>
+        <path d="M24 37.5S10 29.2 10 19.2C10 14.4 13.5 11 17.6 11c2.8 0 5 1.6 6.4 3.9 1.4-2.3 3.6-3.9 6.4-3.9 4.1 0 7.6 3.4 7.6 8.2 0 10-14 18.3-14 18.3Z"/>
+        <path d="M24 37.5c1.6 2.6 4.6 3.9 7.4 3.2 2.6-.7 3.3-3.6 1.5-4.4-1.9-.8-3.6 1.5-2.2 3.6 1.3 1.9 4.6 2.6 7.8 1.6"/>
+      </>
+    )
+  }
+</svg>
+
+<style>
+  .icon {
+    flex-shrink: 0;
+  }
+</style>

@@ -1,0 +1,398 @@
+---
+/**
+ * Language switcher. Keeps the visitor on the same page in the other language
+ * (all languages share the same slugs, so only the prefix changes).
+ *
+ *   variant="links"      → IT  DE  EN   small text links (desktop header; footer with dots=true → IT · DE · EN)
+ *   variant="menu"       → [IT ⌄] button that opens a small list (phone header)
+ *   variant="segmented"  → Italiano | Deutsch | English   (menu drawer)
+ *
+ * The "menu" list uses the browser's built-in `popover` attribute: it opens, closes with Esc
+ * and closes when tapping outside without any JavaScript. The script below only adds keyboard
+ * comfort (arrow keys, focus). Browsers without popover support hide the button; the menu
+ * drawer still offers the segmented control.
+ *
+ * Colours adapt to the background through two variables the parent can set
+ * (the footer does): --lang-color (other languages) and --lang-active (current language).
+ */
+import Icon from './Icon.astro';
+import { LOCALES, type Lang, useTranslations } from '../lib/i18n';
+import { localePath } from '../lib/urls';
+
+interface Props {
+  lang: Lang;
+  /** Current route without language, e.g. 'shop/cp-001/' ('' = home). */
+  path: string;
+  variant?: 'links' | 'menu' | 'segmented';
+  /** links only: show a small dot between the codes (IT · DE · EN). */
+  dots?: boolean;
+  class?: string;
+}
+
+const { lang, path, variant = 'links', dots = false, class: className } = Astro.props;
+const { t } = useTranslations(lang);
+const label = t('a11y.languageSwitcher');
+
+// Each language with its name written in that language ("Deutsch", not "Tedesco").
+const languages = LOCALES.map((code) => ({
+  code,
+  name: useTranslations(code).t(`languageNames.${code}`),
+  href: localePath(code, path),
+  current: code === lang,
+}));
+const currentName = languages.find((l) => l.current)?.name ?? lang;
+---
+
+{
+  variant === 'links' && (
+    <nav class:list={['lang', 'lang--links', { 'lang--dots': dots }, className]} aria-label={label}>
+      <ul role="list">
+        {languages.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              hreflang={l.code}
+              lang={l.code}
+              aria-current={l.current ? 'page' : undefined}
+              data-lang-link
+            >
+              <span class="lang__code" aria-hidden="true">
+                {l.code.toUpperCase()}
+              </span>
+              <span class="visually-hidden">{l.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+{
+  variant === 'menu' && (
+    <div class:list={['lang', 'lang--menu', className]} data-lang-menu>
+      {/* Fixed id: use the "menu" variant only once per page (it lives in the header). */}
+      <button class="lang__button" type="button" popovertarget="lang-popover">
+        <span class="lang__code" aria-hidden="true">
+          {lang.toUpperCase()}
+        </span>
+        <span class="visually-hidden">
+          {label}: {currentName}
+        </span>
+        <Icon name="chevron-down" size={14} class="lang__chevron" />
+      </button>
+      <nav id="lang-popover" class="lang__popover" popover="auto" aria-label={label}>
+        <ul role="list">
+          {languages.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                hreflang={l.code}
+                lang={l.code}
+                aria-current={l.current ? 'page' : undefined}
+                data-lang-link
+              >
+                <span>{l.name}</span>
+                {l.current && <Icon name="check" size={18} />}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  )
+}
+
+{
+  variant === 'segmented' && (
+    <nav class:list={['lang', 'lang--segmented', className]} aria-label={label}>
+      <p class="lang__label" aria-hidden="true">
+        {label}
+      </p>
+      <ul role="list">
+        {languages.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              hreflang={l.code}
+              lang={l.code}
+              aria-current={l.current ? 'page' : undefined}
+              data-lang-link
+            >
+              {l.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<script>
+  // Keyboard comfort for the phone pop-up (it already works without this script).
+  document.querySelectorAll<HTMLElement>('[data-lang-menu]').forEach((root) => {
+    const button = root.querySelector<HTMLButtonElement>('button');
+    const popover = root.querySelector<HTMLElement>('[popover]');
+    if (!button || !popover) return;
+    const links = [...popover.querySelectorAll<HTMLAnchorElement>('a')];
+
+    popover.addEventListener('toggle', (event) => {
+      const open = (event as ToggleEvent).newState === 'open';
+      button.setAttribute('aria-expanded', String(open));
+      // Start on the current language, so Enter/arrows work right away.
+      if (open) (popover.querySelector<HTMLElement>('[aria-current]') ?? links[0])?.focus();
+    });
+
+    // Arrow down on the button opens the list too.
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        popover.showPopover();
+      }
+    });
+
+    // Arrow keys, Home and End move between the languages.
+    popover.addEventListener('keydown', (event) => {
+      const index = links.indexOf(document.activeElement as HTMLAnchorElement);
+      const next = {
+        ArrowDown: index + 1,
+        ArrowUp: index - 1,
+        Home: 0,
+        End: links.length - 1,
+      }[event.key];
+      if (next === undefined) return;
+      event.preventDefault();
+      links[(next + links.length) % links.length].focus();
+    });
+
+    // Close when the keyboard focus leaves the list (Tab past the last language).
+    popover.addEventListener('focusout', (event) => {
+      const target = event.relatedTarget as Node | null;
+      if (target && !root.contains(target)) popover.hidePopover();
+    });
+
+    // The pop-up belongs to the phone header: close it when the window becomes wide.
+    window.matchMedia('(min-width: 64rem)').addEventListener('change', (event) => {
+      if (event.matches && popover.matches(':popover-open')) popover.hidePopover();
+    });
+  });
+</script>
+
+<style>
+  .lang {
+    --_color: var(--lang-color, var(--c-muted));
+    --_active: var(--lang-active, var(--c-bordeaux));
+  }
+
+  .lang ul {
+    display: flex;
+    align-items: center;
+  }
+
+  .lang a {
+    text-decoration: none;
+  }
+
+  /* Small uppercase codes, wide tracking like the slogan in the logo.
+     The extra space on the left balances the tracking after the last letter,
+     so the code and its underline stay centred. */
+  .lang__code {
+    padding-inline-start: 0.14em;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.14em;
+  }
+
+  /* ---------- links: IT  DE  EN ---------- */
+  .lang--links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: var(--tap);
+    color: var(--_color);
+    transition: color var(--dur) var(--ease);
+  }
+
+  /* The thread under the code: hidden, drawn from the centre on hover, always on for the current language. */
+  .lang--links .lang__code {
+    padding-block: 0.55em; /* puts the thread on the same line as the header navigation's */
+    background: linear-gradient(currentColor, currentColor) no-repeat center bottom / 0 1px;
+    transition: background-size var(--dur) var(--ease);
+  }
+
+  .lang--links a:hover {
+    color: var(--_active);
+  }
+
+  .lang--links a:hover .lang__code,
+  .lang--links a[aria-current] .lang__code {
+    background-size: 100% 1px;
+  }
+
+  .lang--links a[aria-current] {
+    color: var(--_active);
+  }
+
+  .lang--dots li + li::before {
+    content: '·';
+    color: var(--_color);
+    opacity: 0.8;
+  }
+
+  .lang--dots li {
+    display: flex;
+    align-items: center;
+  }
+
+  /* ---------- menu: phone header button + pop-up ---------- */
+  .lang--menu {
+    display: none; /* shown only where the browser supports popovers (below) */
+  }
+
+  @supports selector(:popover-open) {
+    .lang--menu {
+      display: block;
+    }
+  }
+
+  .lang__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-1);
+    min-width: var(--tap);
+    min-height: var(--tap);
+    padding: 0 var(--s-2);
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--c-plum);
+  }
+
+  /* :global because the <svg> is rendered by Icon.astro */
+  .lang__button :global(.lang__chevron) {
+    transition: rotate var(--dur) var(--ease);
+  }
+
+  .lang--menu:has(:popover-open) :global(.lang__chevron) {
+    rotate: 180deg;
+  }
+
+  /* Hidden until opened (also in old browsers that ignore the popover attribute). */
+  .lang__popover {
+    display: none;
+  }
+
+  .lang__popover:popover-open {
+    display: block;
+    position: fixed;
+    inset: auto;
+    top: calc(var(--header-h) - var(--s-2));
+    right: max(var(--gutter), env(safe-area-inset-right));
+    width: 11.5rem;
+    margin: 0;
+    padding: var(--s-1);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    background: var(--c-white);
+    color: var(--c-anthracite);
+    box-shadow: var(--shadow-soft);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lang__popover:popover-open {
+      animation: lang-in 180ms var(--ease);
+    }
+
+    @keyframes lang-in {
+      from {
+        opacity: 0;
+        translate: 0 -6px;
+      }
+    }
+  }
+
+  .lang__popover ul {
+    display: grid;
+  }
+
+  .lang__popover a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+    min-height: var(--tap);
+    padding: 0 var(--s-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-sm);
+    color: var(--c-anthracite);
+  }
+
+  .lang__popover a:hover,
+  .lang__popover a:focus-visible {
+    background: var(--c-powder-2);
+    color: var(--c-anthracite);
+  }
+
+  .lang__popover a:focus-visible {
+    outline-offset: -2px;
+  }
+
+  .lang__popover a[aria-current] {
+    color: var(--c-bordeaux);
+    font-weight: 600;
+  }
+
+  /* ---------- segmented: menu drawer ---------- */
+  .lang--segmented {
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  .lang__label {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+
+  .lang--segmented ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 3px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-pill);
+    background: var(--c-ivory-2);
+  }
+
+  .lang--segmented a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--tap);
+    padding-inline: var(--s-2);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--c-anthracite);
+    transition:
+      background-color var(--dur) var(--ease),
+      color var(--dur) var(--ease);
+  }
+
+  .lang--segmented a:hover {
+    color: var(--c-bordeaux);
+  }
+
+  .lang--segmented a[aria-current] {
+    background: var(--c-white);
+    color: var(--c-bordeaux);
+    font-weight: 600;
+    box-shadow:
+      0 0 0 1px var(--c-line),
+      0 1px 3px color-mix(in srgb, var(--c-plum) 12%, transparent);
+  }
+</style>

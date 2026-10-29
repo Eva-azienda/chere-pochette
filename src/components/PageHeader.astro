@@ -1,0 +1,47 @@
+---
+/** Title block at the top of a page: small eyebrow, big Bodoni title, short intro, thread. */
+import ThreadDivider from './ThreadDivider.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+  /** Show the needle-and-thread line under the intro. */
+  thread?: boolean;
+}
+
+const { eyebrow, title, intro, thread = true } = Astro.props;
+---
+
+<header class="page-header container container--narrow center">
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h1>{title}</h1>
+  {intro && <p class="lead">{intro}</p>}
+  <slot />
+  {thread && <ThreadDivider class="page-header__thread" />}
+</header>
+
+<style>
+  .page-header {
+    display: grid;
+    justify-items: center;
+    gap: var(--s-4);
+    padding-top: var(--s-7);
+    padding-bottom: var(--s-6);
+  }
+
+  .page-header .lead {
+    max-width: 34rem;
+  }
+
+  .page-header :global(.page-header__thread) {
+    width: 100%;
+    margin-top: var(--s-2);
+  }
+
+  @media (min-width: 48rem) {
+    .page-header {
+      padding-top: var(--s-8);
+    }
+  }
+</style>

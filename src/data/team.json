@@ -1,0 +1,317 @@
+[
+  {
+    "slug": "masha-sargenti",
+    "name": "Masha Sargenti",
+    "roleCode": "CEO",
+    "level": 1,
+    "reportsTo": null,
+    "photo": null,
+    "roleTitle": {
+      "it": "CEO – Direttrice generale",
+      "de": "CEO – Geschäftsführerin",
+      "en": "CEO – Chief Executive Officer"
+    },
+    "bio": {
+      "it": "Masha guida Chère Pochette come CEO. Coordina il lavoro del team e tiene insieme i fili del progetto, dall'idea alla vendita.",
+      "de": "Masha leitet Chère Pochette als CEO. Sie koordiniert die Arbeit des ganzen Teams und hält die Fäden des Projekts zusammen, von der Idee bis zum Verkauf.",
+      "en": "Masha leads Chère Pochette as CEO. She coordinates the whole team and holds the threads of the project together, from the first idea to the sale."
+    },
+    "responsibilities": {
+      "it": [
+        "Coordinare il team e le decisioni strategiche",
+        "Pianificare obiettivi e scadenze della mini-impresa",
+        "Guidare le riunioni di direzione",
+        "Rappresentare Chère Pochette verso la scuola, i coach e YES"
+      ],
+      "de": [
+        "Das Team und die strategischen Entscheidungen koordinieren",
+        "Ziele und Termine des Miniunternehmens planen",
+        "Die Sitzungen der Geschäftsleitung führen",
+        "Chère Pochette gegenüber Schule, Coaches und YES vertreten"
+      ],
+      "en": [
+        "Coordinate the team and strategic decisions",
+        "Plan the mini-company's goals and deadlines",
+        "Lead management meetings",
+        "Represent Chère Pochette to the school, our coaches and YES"
+      ]
+    },
+    "skills": { "it": [], "de": [], "en": [] },
+    "experience": { "it": [], "de": [], "en": [] },
+    "education": {
+      "it": ["Scuola cantonale di commercio, Bellinzona"],
+      "de": ["Scuola cantonale di commercio (Kantonale Handelsschule), Bellinzona"],
+      "en": ["Scuola cantonale di commercio (Cantonal Business School), Bellinzona"]
+    }
+  },
+  {
+    "slug": "julia-ronchetto",
+    "name": "Julia Ronchetto",
+    "roleCode": "CAO",
+    "level": 2,
+    "reportsTo": "masha-sargenti",
+    "photo": null,
+    "roleTitle": {
+      "it": "CAO – Responsabile amministrazione e risorse umane",
+      "de": "CAO – Leiterin Administration und Personal",
+      "en": "CAO – Chief Administrative Officer"
+    },
+    "bio": {
+      "it": "Julia è la CAO di Chère Pochette. Si occupa dell'amministrazione e delle risorse umane, perché il team lavori in modo ordinato e sereno.",
+      "de": "Julia ist die CAO von Chère Pochette. Sie kümmert sich um Administration und Personal, damit das Team organisiert und entspannt arbeiten kann.",
+      "en": "Julia is the CAO of Chère Pochette. She looks after administration and human resources, so the team can work in an organised, relaxed way."
+    },
+    "responsibilities": {
+      "it": [
+        "Gestire l'amministrazione e i documenti della mini-impresa",
+        "Organizzare le riunioni e redigere i verbali",
+        "Seguire le risorse umane: ruoli, presenze e comunicazione interna",
+        "Curare la corrispondenza e l'archivio"
+      ],
+      "de": [
+        "Administration und Dokumente des Miniunternehmens führen",
+        "Sitzungen organisieren und Protokolle schreiben",
+        "Personalfragen betreuen: Rollen, Präsenzen und interne Kommunikation",
+        "Korrespondenz und Ablage pflegen"
+      ],
+      "en": [
+        "Manage the mini-company's administration and documents",
+        "Organise meetings and take the minutes",
+        "Look after human resources: roles, attendance and internal communication",
+        "Handle correspondence and filing"
+      ]
+    },
+    "skills": { "it": [], "de": [], "en": [] },
+    "experience": { "it": [], "de": [], "en": [] },
+    "education": {
+      "it": ["Scuola cantonale di commercio, Bellinzona"],
+      "de": ["Scuola cantonale di commercio (Kantonale Handelsschule), Bellinzona"],
+      "en": ["Scuola cantonale di commercio (Cantonal Business School), Bellinzona"]
+    }
+  },
+  {
+    "slug": "eva-dallacqua",
+    "name": "Eva Dall'Acqua",
+    "roleCode": "CTO",
+    "level": 2,
+    "reportsTo": "masha-sargenti",
+    "photo": null,
+    "roleTitle": {
+      "it": "CTO – Responsabile tecnologia e sito web",
+      "de": "CTO – Leiterin Technologie und Website",
+      "en": "CTO – Chief Technology Officer"
+    },
+    "bio": {
+      "it": "Eva è la CTO di Chère Pochette. Ha progettato il sito web della mini-impresa, con lo shop online e l'organigramma interattivo.",
+      "de": "Eva ist die CTO von Chère Pochette. Sie hat die Website des Miniunternehmens konzipiert, mit Online-Shop und interaktivem Organigramm.",
+      "en": "Eva is the CTO of Chère Pochette. She designed the mini-company's website, including the online shop and the interactive org chart."
+    },
+    "responsibilities": {
+      "it": [
+        "Progettare e realizzare il sito web",
+        "Gestire lo shop online e l'inventario delle borse",
+        "Garantire che il sito funzioni bene da computer e da smartphone",
+        "Curare gli strumenti digitali del team"
+      ],
+      "de": [
+        "Die Website konzipieren und umsetzen",
+        "Den Online-Shop und das Taschen-Inventar verwalten",
+        "Sicherstellen, dass die Website auf Computer und Smartphone gut funktioniert",
+        "Die digitalen Werkzeuge des Teams betreuen"
+      ],
+      "en": [
+        "Design and build the website",
+        "Manage the online shop and the bag inventory",
+        "Make sure the website works well on computers and smartphones",
+        "Look after the team's digital tools"
+      ]
+    },
+    "skills": { "it": [], "de": [], "en": [] },
+    "experience": { "it": [], "de": [], "en": [] },
+    "education": {
+      "it": ["Scuola cantonale di commercio, Bellinzona"],
+      "de": ["Scuola cantonale di commercio (Kantonale Handelsschule), Bellinzona"],
+      "en": ["Scuola cantonale di commercio (Cantonal Business School), Bellinzona"]
+    }
+  },
+  {
+    "slug": "michelle-salvi",
+    "name": "Michelle Salvi",
+    "roleCode": "CMO",
+    "level": 2,
+    "reportsTo": "masha-sargenti",
+    "photo": null,
+    "roleTitle": {
+      "it": "CMO – Responsabile marketing e comunicazione",
+      "de": "CMO – Leiterin Marketing und Kommunikation",
+      "en": "CMO – Chief Marketing Officer"
+    },
+    "bio": {
+      "it": "Michelle è una delle due CMO di Chère Pochette. Insieme a Lara cura il marketing, i social media e l'immagine del brand.",
+      "de": "Michelle ist eine der beiden CMOs von Chère Pochette. Zusammen mit Lara kümmert sie sich um Marketing, Social Media und das Markenbild.",
+      "en": "Michelle is one of the two CMOs of Chère Pochette. Together with Lara, she looks after marketing, social media and the brand's image."
+    },
+    "responsibilities": {
+      "it": [
+        "Definire la strategia di marketing e comunicazione",
+        "Gestire i canali social e creare i contenuti",
+        "Curare l'identità visiva del brand",
+        "Preparare campagne e azioni promozionali"
+      ],
+      "de": [
+        "Die Marketing- und Kommunikationsstrategie festlegen",
+        "Die Social-Media-Kanäle betreuen und Inhalte erstellen",
+        "Das visuelle Erscheinungsbild der Marke pflegen",
+        "Kampagnen und Werbeaktionen vorbereiten"
+      ],
+      "en": [
+        "Define the marketing and communication strategy",
+        "Manage our social media channels and create content",
+        "Look after the brand's visual identity",
+        "Prepare campaigns and promotional activities"
+      ]
+    },
+    "skills": { "it": [], "de": [], "en": [] },
+    "experience": { "it": [], "de": [], "en": [] },
+    "education": {
+      "it": ["Scuola cantonale di commercio, Bellinzona"],
+      "de": ["Scuola cantonale di commercio (Kantonale Handelsschule), Bellinzona"],
+      "en": ["Scuola cantonale di commercio (Cantonal Business School), Bellinzona"]
+    }
+  },
+  {
+    "slug": "lara-fieschi",
+    "name": "Lara Fieschi",
+    "roleCode": "CMO",
+    "level": 2,
+    "reportsTo": "masha-sargenti",
+    "photo": null,
+    "roleTitle": {
+      "it": "CMO – Responsabile marketing e comunicazione",
+      "de": "CMO – Leiterin Marketing und Kommunikation",
+      "en": "CMO – Chief Marketing Officer"
+    },
+    "bio": {
+      "it": "Lara è una delle due CMO di Chère Pochette. Insieme a Michelle si occupa di comunicazione, social media e del rapporto con chi ci segue.",
+      "de": "Lara ist eine der beiden CMOs von Chère Pochette. Zusammen mit Michelle kümmert sie sich um Kommunikation, Social Media und den Kontakt mit unserer Community.",
+      "en": "Lara is one of the two CMOs of Chère Pochette. Together with Michelle, she looks after communication, social media and our relationship with the people who follow us."
+    },
+    "responsibilities": {
+      "it": [
+        "Definire la strategia di marketing e comunicazione",
+        "Gestire i canali social e creare i contenuti",
+        "Curare l'identità visiva del brand",
+        "Preparare campagne e azioni promozionali"
+      ],
+      "de": [
+        "Die Marketing- und Kommunikationsstrategie festlegen",
+        "Die Social-Media-Kanäle betreuen und Inhalte erstellen",
+        "Das visuelle Erscheinungsbild der Marke pflegen",
+        "Kampagnen und Werbeaktionen vorbereiten"
+      ],
+      "en": [
+        "Define the marketing and communication strategy",
+        "Manage our social media channels and create content",
+        "Look after the brand's visual identity",
+        "Prepare campaigns and promotional activities"
+      ]
+    },
+    "skills": { "it": [], "de": [], "en": [] },
+    "experience": { "it": [], "de": [], "en": [] },
+    "education": {
+      "it": ["Scuola cantonale di commercio, Bellinzona"],
+      "de": ["Scuola cantonale di commercio (Kantonale Handelsschule), Bellinzona"],
+      "en": ["Scuola cantonale di commercio (Cantonal Business School), Bellinzona"]
+    }
+  },
+  {
+    "slug": "romina-fumi",
+    "name": "Romina Fumi",
+    "roleCode": "CPO",
+    "level": 2,
+    "reportsTo": "masha-sargenti",
+    "photo": null,
+    "roleTitle": {
+      "it": "CPO – Responsabile produzione e qualità",
+      "de": "CPO – Leiterin Produktion und Qualität",
+      "en": "CPO – Chief Production Officer"
+    },
+    "bio": {
+      "it": "Romina è la CPO di Chère Pochette. Segue la produzione delle borse, dal recupero dei materiali al controllo finale di ogni pezzo.",
+      "de": "Romina ist die CPO von Chère Pochette. Sie betreut die Produktion der Taschen, vom Sammeln der Materialien bis zur Schlusskontrolle jedes Stücks.",
+      "en": "Romina is the CPO of Chère Pochette. She oversees how our bags are made, from collecting the materials to the final check of every piece."
+    },
+    "responsibilities": {
+      "it": [
+        "Pianificare la produzione delle borse",
+        "Coordinare il recupero e la selezione dei materiali",
+        "Organizzare il lavoro con le donne ucraine che lavorano all'uncinetto con noi",
+        "Controllare la qualità di ogni borsa prima della vendita"
+      ],
+      "de": [
+        "Die Produktion der Taschen planen",
+        "Das Sammeln und Auswählen der Materialien koordinieren",
+        "Die Zusammenarbeit mit den ukrainischen Frauen organisieren, die mit uns häkeln",
+        "Die Qualität jeder Tasche vor dem Verkauf prüfen"
+      ],
+      "en": [
+        "Plan the production of the bags",
+        "Coordinate the collection and selection of materials",
+        "Organise the work with the Ukrainian women who crochet with us",
+        "Check the quality of every bag before it goes on sale"
+      ]
+    },
+    "skills": { "it": [], "de": [], "en": [] },
+    "experience": { "it": [], "de": [], "en": [] },
+    "education": {
+      "it": ["Scuola cantonale di commercio, Bellinzona"],
+      "de": ["Scuola cantonale di commercio (Kantonale Handelsschule), Bellinzona"],
+      "en": ["Scuola cantonale di commercio (Cantonal Business School), Bellinzona"]
+    }
+  },
+  {
+    "slug": "selina-castelli",
+    "name": "Selina Castelli",
+    "roleCode": "CFO",
+    "level": 2,
+    "reportsTo": "masha-sargenti",
+    "photo": null,
+    "roleTitle": {
+      "it": "CFO – Responsabile finanze",
+      "de": "CFO – Leiterin Finanzen",
+      "en": "CFO – Chief Financial Officer"
+    },
+    "bio": {
+      "it": "Selina è la CFO di Chère Pochette. Tiene i conti della mini-impresa e veglia sulla sua salute finanziaria.",
+      "de": "Selina ist die CFO von Chère Pochette. Sie führt die Buchhaltung des Miniunternehmens und behält seine Finanzen im Blick.",
+      "en": "Selina is the CFO of Chère Pochette. She keeps the mini-company's accounts and watches over its financial health."
+    },
+    "responsibilities": {
+      "it": [
+        "Tenere la contabilità e controllare entrate e uscite",
+        "Preparare il budget e collaborare al calcolo dei prezzi",
+        "Seguire i pagamenti online e la cassa",
+        "Preparare il rendiconto finanziario finale"
+      ],
+      "de": [
+        "Die Buchhaltung führen und Einnahmen und Ausgaben kontrollieren",
+        "Das Budget erstellen und bei der Preiskalkulation mitarbeiten",
+        "Online-Zahlungen und Kasse betreuen",
+        "Den finanziellen Schlussbericht vorbereiten"
+      ],
+      "en": [
+        "Keep the accounts and track income and expenses",
+        "Prepare the budget and help calculate prices",
+        "Look after online payments and the cash box",
+        "Prepare the final financial report"
+      ]
+    },
+    "skills": { "it": [], "de": [], "en": [] },
+    "experience": { "it": [], "de": [], "en": [] },
+    "education": {
+      "it": ["Scuola cantonale di commercio, Bellinzona"],
+      "de": ["Scuola cantonale di commercio (Kantonale Handelsschule), Bellinzona"],
+      "en": ["Scuola cantonale di commercio (Cantonal Business School), Bellinzona"]
+    }
+  }
+]

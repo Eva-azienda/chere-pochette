@@ -1,0 +1,509 @@
+---
+/**
+ * Home page – one file for all languages: / (it), /de/, /en/.
+ * Sections: hero, concept + 3 pillars, bags in the shop, the 3 models, process teaser,
+ * story teaser, newsletter.
+ */
+import { Picture } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArtPicture from '../../components/ArtPicture.astro';
+import BrandPicture from '../../components/BrandPicture.astro';
+import Icon from '../../components/Icon.astro';
+import ModelsShowcase from '../../components/ModelsShowcase.astro';
+import NewsletterForm from '../../components/NewsletterForm.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import ThreadDivider from '../../components/ThreadDivider.astro';
+import heroBag from '../../assets/brand/hero-bag-umbrella-45.jpg';
+import logo from '../../assets/brand/logo-bordeaux.png';
+import umbrellaFabrics from '../../assets/brand/umbrellas-fabrics.jpg';
+import womenLandscape from '../../assets/brand/women-crochet.jpg';
+import womenPortrait from '../../assets/brand/women-crochet-45.jpg';
+import { localeStaticPaths, useTranslations, type Lang } from '../../lib/i18n';
+import { localePath } from '../../lib/urls';
+import { getAvailableProducts, site } from '../../lib/catalog';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const { t, list, pageMeta } = useTranslations(lang);
+const featured = (await getAvailableProducts()).slice(0, 4);
+const pillars = list<{ id: 'reuse' | 'handmade' | 'together'; title: string; text: string }>('home.pillars.items');
+const steps = list<{ id: string; title: string }>('process.steps');
+---
+
+<BaseLayout lang={lang} path="" {...pageMeta('home')} footerNewsletter={false}>
+  <!-- ========== Hero ========== -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__inner container">
+      <div class="hero__text">
+        <!-- Phones and tablets: the full logo (with needle and slogan) opens the page, centred.
+             The header shows the simple wordmark only after this logo has scrolled away. -->
+        <div class="hero__logo" data-hero-logo>
+          <Picture
+            src={logo}
+            formats={['avif', 'webp']}
+            widths={[280, 420, 560, 840]}
+            sizes="min(74vw, 20rem)"
+            alt={`${t('meta.siteName')} – ${t('brand.slogan')}`}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+        <p class="eyebrow">{t('home.hero.eyebrow')}</p>
+        <h1 id="hero-title" class="hero__title" lang={lang === 'en' ? undefined : 'en'}>{t('brand.tagline')}</h1>
+        <p class="hero__lead">{t('home.hero.subtitle')}</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href={localePath(lang, 'shop/')}>{t('home.hero.cta')}</a>
+          <a class="btn btn--outline" href={localePath(lang, 'about/')}>{t('home.hero.ctaSecondary')}</a>
+        </div>
+      </div>
+
+      <!-- Desktop only: the bag on the red umbrella it was born from, in an arch frame with a thin
+           "thread" outline (on phones the opening shows the full logo instead of a photo). -->
+      <div class="hero__media">
+        <div class="hero__arch">
+          <Picture
+            src={heroBag}
+            formats={['avif', 'webp']}
+            widths={[320, 480, 640, 800, 960, 1200]}
+            sizes="(min-width: 64rem) 30rem, (min-width: 48rem) 26rem, 80vw"
+            alt={t('images.heroBagUmbrella')}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Concept + 3 pillars ========== -->
+  <section class="section section--alt" aria-labelledby="intro-title">
+    <div class="container">
+      <div class="heading center">
+        <p class="eyebrow">{t('home.intro.eyebrow')}</p>
+        <h2 id="intro-title">{t('home.intro.title')}</h2>
+        <p class="lead">{t('home.intro.text')}</p>
+      </div>
+      <ThreadDivider />
+      <h3 class="pillars__title tagline center">{t('home.pillars.title')}</h3>
+      <ul role="list" class="pillars">
+        {
+          pillars.map((pillar) => (
+            <li class="pillar">
+              <span class="pillar__icon">
+                <Icon name={pillar.id} size={52} />
+              </span>
+              <h4 class="pillar__title">{pillar.title}</h4>
+              <p>{pillar.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== Bags in the shop ========== -->
+  <section class="section" aria-labelledby="featured-title">
+    <div class="container">
+      <div class="split-heading">
+        <div class="heading">
+          <p class="eyebrow">{t('home.featured.eyebrow')}</p>
+          <h2 id="featured-title">{t('home.featured.title')}</h2>
+          <p>{t('home.featured.text')}</p>
+        </div>
+        {featured.length > 0 && <a class="link-arrow" href={localePath(lang, 'shop/')}>{t('home.featured.cta')}</a>}
+      </div>
+
+      {
+        featured.length > 0 ? (
+          <ul role="list" class="product-grid">
+            {featured.map((product) => (
+              <li>
+                <ProductCard product={product} lang={lang} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="empty">
+            <ThreadDivider />
+            <p class="lead">{t('home.featured.empty')}</p>
+            <a class="btn btn--outline" href={site.instagram} rel="noopener">
+              <Icon name="instagram" size={20} />
+              {t('common.followInstagram')}
+            </a>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- ========== The three models ========== -->
+  <section class="section section--tight" aria-labelledby="models-title">
+    <div class="container">
+      <div class="heading center">
+        <p class="eyebrow">{t('home.models.eyebrow')}</p>
+        <h2 id="models-title">{t('home.models.title')}</h2>
+        <p>{t('home.models.text')}</p>
+      </div>
+      <ModelsShowcase lang={lang} />
+    </div>
+  </section>
+
+  <!-- ========== Process teaser ========== -->
+  <section class="section section--alt" aria-labelledby="process-title">
+    <div class="container feature">
+      <div class="feature__media media">
+        <BrandPicture
+          src={umbrellaFabrics}
+          alt={t('images.umbrellasFabrics')}
+          sizes="(min-width: 48rem) 45vw, 100vw"
+          widths={[480, 768, 1080, 1440]}
+        />
+      </div>
+      <div class="feature__text stack">
+        <p class="eyebrow">{t('home.process.eyebrow')}</p>
+        <h2 id="process-title">{t('home.process.title')}</h2>
+        <p>{t('home.process.text')}</p>
+        <ol class="steps-inline" role="list">
+          {
+            steps.map((step, i) => (
+              <li>
+                <span class="steps-inline__n">{String(i + 1).padStart(2, '0')}</span>
+                {step.title}
+              </li>
+            ))
+          }
+        </ol>
+        <a class="link-arrow" href={localePath(lang, 'process/')}>{t('home.process.cta')}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Story teaser ========== -->
+  <section class="section" aria-labelledby="story-title">
+    <div class="container feature feature--reverse">
+      <div class="feature__media media story__media">
+        <ArtPicture
+          mobile={womenPortrait}
+          desktop={womenLandscape}
+          alt={t('images.womenCrochet')}
+          mobileSizes="100vw"
+          desktopSizes="50vw"
+          mobilePosition="50% 40%"
+          desktopPosition="50% 45%"
+        />
+      </div>
+      <div class="feature__text stack">
+        <p class="eyebrow">{t('home.story.eyebrow')}</p>
+        <h2 id="story-title">{t('home.story.title')}</h2>
+        <p>{t('home.story.text')}</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href={localePath(lang, 'about/')}>{t('home.story.cta')}</a>
+          <a class="btn btn--outline" href={localePath(lang, 'team/')}>{t('home.story.ctaTeam')}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Newsletter + Instagram ========== -->
+  <section class="section section--powder" aria-labelledby="newsletter-title">
+    <div class="container container--narrow newsletter center">
+      <ThreadDivider />
+      <h2 id="newsletter-title">{t('home.newsletter.title')}</h2>
+      <p>{t('home.newsletter.text')}</p>
+      <NewsletterForm lang={lang} id="home-nl" />
+      <p class="newsletter__social">
+        {t('home.social.text')}
+        <a class="link-arrow" href={site.instagram} rel="noopener">{t('home.social.cta')}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---------- Hero ----------
+     Phones: message first (eyebrow, title, lead, buttons), then the photo in an arch.
+     From 64rem: text on the left, arch on the right. */
+  .hero {
+    --arch-radius: 50% 50% var(--radius-sm) var(--radius-sm) / 40% 40% var(--radius-sm) var(--radius-sm);
+    padding-block: var(--s-6) var(--s-8);
+  }
+
+  .hero__inner {
+    display: grid;
+    justify-items: center;
+    gap: var(--s-7);
+  }
+
+  .hero__text {
+    display: grid;
+    justify-items: center;
+    gap: var(--s-4);
+    max-width: 34rem;
+    text-align: center;
+  }
+
+  /* Full logo, centred, only in the single-column layout (phones/tablets). */
+  .hero__logo {
+    width: min(74vw, 20rem);
+    margin-bottom: var(--s-3);
+  }
+
+  .hero__logo :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* About 14 characters per line: four short, balanced lines on every screen. */
+  .hero__title {
+    max-width: 9.5em;
+    font-size: clamp(2.125rem, 1.6rem + 2.2vw, 3.25rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+
+  .hero__lead {
+    max-width: 30rem;
+    color: var(--c-anthracite);
+    text-wrap: balance;
+  }
+
+  /* Phones: two equally wide buttons, one above the other. */
+  .hero__actions {
+    display: grid;
+    gap: var(--s-3);
+    width: min(100%, 18rem);
+    margin-top: var(--s-2);
+  }
+
+  /* Arch photo: desktop only (from 64rem, see below). */
+  .hero__media {
+    display: none;
+    position: relative;
+    width: min(80vw, 52svh * 0.8, 22rem);
+  }
+
+  /* A thin bordeaux line, offset behind the photo, like a stitch. */
+  .hero__media::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid color-mix(in srgb, var(--c-bordeaux) 38%, transparent);
+    border-radius: var(--arch-radius);
+    transform: translate(var(--s-3), calc(var(--s-3) * -1));
+    pointer-events: none;
+  }
+
+  .hero__arch {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--arch-radius);
+    background: var(--placeholder);
+  }
+
+  .hero__arch :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 62%;
+  }
+
+  @media (min-width: 48rem) {
+    .hero {
+      padding-block: var(--s-7) var(--s-8);
+    }
+
+    .hero__media {
+      width: min(26rem, 52svh * 0.8);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: auto;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .hero__logo {
+      display: none;
+    }
+
+    .hero__media {
+      display: block;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      min-height: min(calc(100svh - var(--header-h)), 46rem);
+      padding-block: var(--s-7);
+    }
+
+    .hero__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      justify-items: start;
+      column-gap: var(--s-8);
+    }
+
+    .hero__text {
+      justify-items: start;
+      max-width: 32rem;
+      text-align: left;
+    }
+
+    .hero__actions {
+      justify-content: flex-start;
+    }
+
+    .hero__media {
+      width: calc(min(68svh, 600px) * 0.8);
+      margin-right: var(--s-3);
+    }
+
+    .hero__media::before {
+      transform: translate(var(--s-4), calc(var(--s-4) * -1));
+    }
+  }
+
+  /* ---------- Pillars ----------
+     Three equal columns from 48rem. Subgrid lines up icon, title and text across the
+     columns, so they start on the same lines even when one title wraps. */
+  .pillars__title {
+    margin-top: var(--s-6);
+    margin-bottom: var(--s-7);
+  }
+
+  .pillars {
+    display: grid;
+    gap: var(--s-7);
+    max-width: 62rem;
+    margin-inline: auto;
+  }
+
+  .pillar {
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    gap: var(--s-4);
+    text-align: center;
+  }
+
+  .pillar p {
+    max-width: 22rem;
+  }
+
+  .pillar__icon {
+    display: grid;
+    place-items: center;
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: var(--s-1);
+    border-radius: 50%;
+    background: var(--c-ivory);
+    color: var(--c-bordeaux);
+  }
+
+  .pillar__title {
+    font-size: var(--fs-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .pillars {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: repeat(3, auto);
+      align-items: start;
+      column-gap: var(--s-6);
+      row-gap: 0;
+    }
+
+    .pillar {
+      grid-row: span 3;
+      grid-template-rows: subgrid;
+      row-gap: var(--s-4);
+    }
+
+    .pillar__icon {
+      width: 5.5rem;
+      height: 5.5rem;
+    }
+  }
+
+  .story__media {
+    aspect-ratio: 4 / 5;
+  }
+
+  @media (min-width: 48rem) {
+    .story__media {
+      aspect-ratio: 3 / 2;
+    }
+  }
+
+  .steps-inline {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--c-line);
+  }
+
+  .steps-inline li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-4);
+    padding-block: var(--s-3);
+    border-bottom: 1px solid var(--c-line);
+    font-family: var(--f-display);
+    font-size: var(--fs-lg);
+    color: var(--c-plum);
+  }
+
+  .steps-inline__n {
+    font-family: var(--f-body);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--c-bordeaux);
+  }
+
+  /* ---------- Newsletter ---------- */
+  .newsletter {
+    display: grid;
+    justify-items: center;
+    gap: var(--s-4);
+  }
+
+  .newsletter :global(form) {
+    width: 100%;
+    text-align: left;
+  }
+
+  .newsletter__social {
+    display: grid;
+    justify-items: center;
+    gap: 0;
+    margin-top: var(--s-4);
+    font-size: var(--fs-sm);
+    color: var(--c-muted);
+  }
+</style>
+
+<script>
+  // Phones/tablets: hide the header wordmark while the big hero logo is on screen and show it once
+  // the logo has scrolled under the header (64px). On desktop the hero logo is display:none, so it
+  // never intersects and the wordmark stays; the CSS rule is also limited to < 64rem.
+  // Without JavaScript the wordmark simply stays visible.
+  const heroLogo = document.querySelector<HTMLElement>('[data-hero-logo]');
+  const header = document.querySelector<HTMLElement>('.header');
+  if (heroLogo && header && 'IntersectionObserver' in window) {
+    new IntersectionObserver(
+      ([entry]) => header.classList.toggle('header--hero-logo', entry.isIntersecting),
+      { rootMargin: '-64px 0px 0px 0px' },
+    ).observe(heroLogo);
+  }
+</script>

@@ -17,3 +17,6 @@ npm-debug.log*
 .DS_Store
 .vscode/
 .idea/
+
+# temporary output of scripts/protect-site.mjs
+.gate-out/

@@ -1,0 +1,42 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Zahls check — tests the Zahls connection (instance name + API key) and nothing else.
+#
+# HOW TO RUN: GitHub → repository → Actions → "Zahls check" → Run workflow
+#             (or with the GitHub CLI: gh workflow run zahls-check.yml)
+#   green = Zahls accepted ZAHLS_INSTANCE + ZAHLS_API_KEY ("Zahls connection OK")
+#   red   = open the step "Check the Zahls connection" for the reason
+#
+# It only calls GET /SignatureCheck/: no payment link is created or deleted, no file is changed,
+# and it needs neither GitHub Pages nor write access — so it also works in a private repository
+# before the website is online. Uses the same secret/variable as deploy.yml (docs/OPERATIONS.md).
+# The API key is never printed (and GitHub masks secrets in the log anyway).
+# ─────────────────────────────────────────────────────────────────────────────
+name: Zahls check
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false # nothing is pushed
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      # The script uses only Node.js built-ins, so no "npm ci" is needed.
+      - name: Check the Zahls connection
+        env:
+          ZAHLS_INSTANCE: ${{ vars.ZAHLS_INSTANCE || secrets.ZAHLS_INSTANCE }}
+          ZAHLS_API_KEY: ${{ secrets.ZAHLS_API_KEY }}
+        run: node scripts/zahls-sync.mjs --check

@@ -1,0 +1,507 @@
+---
+/**
+ * Product page of one unique bag: /shop/cp-012/ (+ /de/…, /en/…).
+ * Pages exist for "available" AND "sold" bags (sold → "already found its home", noindex),
+ * never for "hidden" ones.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BuyBox from '../../../components/BuyBox.astro';
+import Icon from '../../../components/Icon.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import ProductGallery from '../../../components/ProductGallery.astro';
+import ThreadDivider from '../../../components/ThreadDivider.astro';
+import { LOCALES, langParam, useTranslations, type Lang } from '../../../lib/i18n';
+import { absoluteUrl, localePath } from '../../../lib/urls';
+import {
+  describeProduct,
+  getAvailableProducts,
+  getPublicProducts,
+  photoUrl,
+  site,
+  type Product,
+} from '../../../lib/catalog';
+
+export async function getStaticPaths() {
+  const products = await getPublicProducts();
+  return LOCALES.flatMap((lang) =>
+    products.map((product) => ({
+      params: { lang: langParam(lang), id: product.id },
+      props: { lang, product },
+    })),
+  );
+}
+
+const { lang, product } = Astro.props as { lang: Lang; product: Product };
+const { t } = useTranslations(lang);
+const info = describeProduct(product, lang);
+const available = product.status === 'available';
+const path = `shop/${product.id}/`;
+
+const title = t('meta.titleTemplate', {
+  title: t('meta.pages.product.title', { model: info.title, number: info.number }),
+});
+// "Belle · Bordeaux, pezzo unico N° 012: …" – colour and number make every bag's description unique.
+const description = t('meta.pages.product.description', { model: info.title, number: info.number });
+
+const related = (await getAvailableProducts()).filter((p) => p.id !== product.id).slice(0, 4);
+const cover = product.photos[0];
+const dimensions = ['length', 'depth', 'height', 'handle'] as const;
+
+// Structured data for search engines (Product + Offer).
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: `${info.title} – ${t('common.uniquePiece', { number: info.number })}`,
+  sku: product.id,
+  productID: product.id,
+  description,
+  image: product.photos.map((p) => absoluteUrl(photoUrl(p.src, 1600))),
+  brand: { '@type': 'Brand', name: site.name },
+  color: info.colour.label,
+  material: t('product.materials.exterior'),
+  category: info.modelType,
+  offers: {
+    '@type': 'Offer',
+    url: absoluteUrl(localePath(lang, path)),
+    price: product.price.toFixed(2),
+    priceCurrency: 'CHF',
+    availability: available ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+    itemCondition: 'https://schema.org/NewCondition',
+    seller: { '@type': 'Organization', name: site.name },
+  },
+};
+// "<" is escaped so the JSON can never close the <script> tag early.
+const jsonLdText = JSON.stringify(jsonLd).replace(/</g, '\\u003c');
+
+const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${product.id} – ${info.title}`)}`;
+---
+
+<BaseLayout
+  lang={lang}
+  path={path}
+  title={title}
+  description={description}
+  noindex={!available}
+  ogType="product"
+  ogImage={cover ? absoluteUrl(photoUrl(cover.src, 1600)) : undefined}
+  bodyClass={available ? 'has-buybar' : undefined}
+>
+  <script type="application/ld+json" slot="head" set:html={jsonLdText} />
+
+  <nav class="container back" aria-label={t('a11y.breadcrumb')}>
+    <a href={localePath(lang, 'shop/')} class="back__link">
+      <Icon name="arrow-left" size={18} />
+      {t('product.backToShop')}
+    </a>
+  </nav>
+
+  <article class="product">
+    <div class="product__gallery">
+      {
+        product.photos.length > 0 && (
+          <ProductGallery
+            lang={lang}
+            photos={product.photos}
+            sold={!available}
+            altFor={(n) =>
+              t('product.photoAlt', { model: info.modelName, colour: info.colour.label, number: info.number, n })
+            }
+          />
+        )
+      }
+    </div>
+
+    <div class="product__info">
+      <header class="product__head">
+        <p class="eyebrow">{info.modelType}</p>
+        <h1 class="product__title">{info.title}</h1>
+        <p class="product__number">{t('common.uniquePiece', { number: info.number })}</p>
+        {
+          available ? (
+            <p class="product__price">
+              {t('common.priceTag', { price: info.price })}
+              <span class="product__price-note">{t('common.priceNote')}</span>
+            </p>
+          ) : (
+            <p class="product__sold-tag">{t('product.sold.badge')}</p>
+          )
+        }
+      </header>
+
+      {
+        product.note && (
+          <div class="product__note">
+            <p class="eyebrow">{t('product.note')}</p>
+            <p lang="it">{product.note}</p>
+          </div>
+        )
+      }
+
+      {
+        available ? (
+          <BuyBox product={product} lang={lang} />
+        ) : (
+          <div class="sold">
+            <ThreadDivider align="start" />
+            <h2 class="h3">{t('product.sold.title')}</h2>
+            <p>{t('product.sold.text')}</p>
+            <a class="btn btn--primary" href={localePath(lang, 'shop/')}>{t('product.sold.cta')}</a>
+          </div>
+        )
+      }
+
+      <dl class="specs">
+        <div>
+          <dt>{t('product.model')}</dt>
+          <dd>{info.modelName}</dd>
+        </div>
+        <div>
+          <dt>{t('product.type')}</dt>
+          <dd>{info.modelType}</dd>
+        </div>
+        <div>
+          <dt>{t('product.colour')}</dt>
+          <dd class="specs__colour">
+            <span class="swatch" style={`--swatch: ${info.colour.swatch}`} aria-hidden="true"></span>
+            {info.colour.label}
+          </dd>
+        </div>
+        <div>
+          <dt>{t('product.lining')}</dt>
+          <dd>{info.lining}</dd>
+        </div>
+      </dl>
+
+      {
+        available && (
+          <div class="unique-note">
+            <p class="unique-note__title">{t('product.unique.title')}</p>
+            <p>{t('product.unique.text')}</p>
+          </div>
+        )
+      }
+
+      <div class="accordions">
+        <details open>
+          <summary>{t('product.dimensions.title')}</summary>
+          <div class="accordion__body">
+            <table class="dims">
+              <caption class="visually-hidden">{t('product.dimensions.title')}</caption>
+              <tbody>
+                {
+                  dimensions.map((d) => (
+                    <tr>
+                      <th scope="row">{t(`product.dimensions.${d}`)}</th>
+                      <td>{t('product.dimensions.value', { value: info.model.dimensions[d] })}</td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+            <p class="small muted">{t('product.dimensions.note')}</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>{t('product.materials.title')}</summary>
+          <div class="accordion__body stack">
+            <p>{t('product.materials.exterior')}</p>
+            <p>{t('product.materials.lining')}</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>{t('product.care.title')}</summary>
+          <div class="accordion__body stack">
+            <p>{t('product.care.text')}</p>
+            <a class="link-arrow" href={localePath(lang, 'info/#care')}>{t('product.care.link')}</a>
+          </div>
+        </details>
+      </div>
+
+      <div class="question">
+        <p>{t('product.question.title')}</p>
+        <a class="link-arrow" href={questionMail}>{t('product.question.cta')}</a>
+      </div>
+    </div>
+  </article>
+
+  {
+    related.length > 0 && (
+      <section class="section section--alt related" aria-labelledby="related-title">
+        <div class="container">
+          <div class="split-heading">
+            <h2 id="related-title">{t('product.related.title')}</h2>
+            <a class="link-arrow" href={localePath(lang, 'shop/')}>
+              {t('product.related.cta')}
+            </a>
+          </div>
+          <ul role="list" class="product-grid">
+            {related.map((p) => (
+              <li>
+                <ProductCard product={p} lang={lang} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .back {
+    padding-block: var(--s-2);
+  }
+
+  .back__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    min-height: var(--tap);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--c-plum);
+    text-decoration: none;
+  }
+
+  .back__link:hover {
+    text-decoration: underline;
+  }
+
+  .product {
+    display: grid;
+    padding-bottom: var(--section-y);
+  }
+
+  .product__info {
+    display: grid;
+    gap: var(--s-6);
+    align-content: start;
+    padding: var(--s-5) var(--gutter) 0;
+    min-width: 0;
+  }
+
+  .product__head {
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  .product__title {
+    font-size: var(--fs-2xl);
+  }
+
+  .product__number {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+
+  /* Prices in the body font: the Bodoni en dash of "40.–" is a hairline and reads poorly. */
+  .product__price {
+    display: grid;
+    margin-top: var(--s-2);
+    font-size: var(--fs-xl);
+    font-weight: 500;
+    font-variant-numeric: lining-nums tabular-nums;
+    color: var(--c-plum);
+  }
+
+  .product__price-note {
+    font-family: var(--f-body);
+    font-size: var(--fs-xs);
+    color: var(--c-muted);
+  }
+
+  .product__sold-tag {
+    justify-self: start;
+    margin-top: var(--s-2);
+    padding: var(--s-1) var(--s-4);
+    border: 1px solid var(--c-plum);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--c-plum);
+  }
+
+  .product__note {
+    display: grid;
+    gap: var(--s-2);
+    padding-left: var(--s-4);
+    border-left: 1px solid var(--c-bordeaux);
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: var(--fs-lg);
+    color: var(--c-plum);
+  }
+
+  .product__note .eyebrow {
+    font-style: normal;
+  }
+
+  .sold {
+    display: grid;
+    gap: var(--s-3);
+    justify-items: start;
+    padding: var(--s-5);
+    border-radius: var(--radius);
+    background: var(--c-powder-2);
+  }
+
+  .sold .btn {
+    margin-top: var(--s-2);
+  }
+
+  /* ---------- Specs ---------- */
+  .specs {
+    display: grid;
+    border-top: 1px solid var(--c-line);
+  }
+
+  .specs > div {
+    display: grid;
+    grid-template-columns: minmax(7rem, 40%) 1fr;
+    gap: var(--s-4);
+    padding-block: var(--s-3);
+    border-bottom: 1px solid var(--c-line);
+    font-size: var(--fs-sm);
+  }
+
+  .specs dt {
+    color: var(--c-muted);
+  }
+
+  .specs dd {
+    font-weight: 500;
+  }
+
+  .specs__colour {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+  }
+
+  .swatch {
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 50%;
+    background: var(--swatch);
+    box-shadow: inset 0 0 0 1px rgba(41, 41, 41, 0.2);
+  }
+
+  .unique-note {
+    display: grid;
+    gap: var(--s-1);
+    font-size: var(--fs-sm);
+  }
+
+  .unique-note__title {
+    font-family: var(--f-display);
+    font-size: var(--fs-lg);
+    color: var(--c-plum);
+  }
+
+  /* ---------- Accordions ---------- */
+  .accordions {
+    border-top: 1px solid var(--c-line);
+  }
+
+  details {
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3.5rem;
+    font-weight: 600;
+    color: var(--c-plum);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: '+';
+    font-family: var(--f-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1;
+    transition: transform var(--dur) var(--ease);
+  }
+
+  details[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  .accordion__body {
+    padding-bottom: var(--s-5);
+    font-size: var(--fs-sm);
+  }
+
+  .dims {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--s-3);
+  }
+
+  .dims th,
+  .dims td {
+    padding: var(--s-2) 0;
+    border-bottom: 1px dashed var(--c-line);
+    text-align: left;
+    font-weight: 400;
+  }
+
+  .dims td {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+
+  .question {
+    display: grid;
+    justify-items: start;
+    padding-top: var(--s-2);
+    font-family: var(--f-display);
+    font-size: var(--fs-lg);
+    color: var(--c-plum);
+  }
+
+  .question .link-arrow {
+    font-family: var(--f-body);
+  }
+
+  .related h2 {
+    font-size: var(--fs-xl);
+  }
+
+  /* ---------- Desktop: gallery left (sticky), information right ---------- */
+  @media (min-width: 64rem) {
+    .product {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: var(--s-8);
+      max-width: calc(var(--container) + 2 * var(--gutter));
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    .product__gallery {
+      position: sticky;
+      top: calc(var(--header-h) + var(--s-4));
+      align-self: start;
+    }
+
+    .product__info {
+      padding: 0;
+    }
+  }
+</style>

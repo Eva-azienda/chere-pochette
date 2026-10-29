@@ -1,0 +1,273 @@
+---
+/**
+ * Swipeable photo gallery: CSS scroll-snap does the swiping (works without JavaScript),
+ * a small script adds the arrows (mouse users) and keeps the dots in sync.
+ */
+import { type Lang, useTranslations } from '../lib/i18n';
+import { photoSrcset, photoUrl, type Product } from '../lib/catalog';
+
+interface Props {
+  lang: Lang;
+  photos: Product['photos'];
+  /** Text for the alt attribute, with {n} = photo number (product.photoAlt already filled). */
+  altFor: (n: number) => string;
+  sold?: boolean;
+}
+
+const { lang, photos, altFor, sold = false } = Astro.props;
+const { t } = useTranslations(lang);
+const total = photos.length;
+---
+
+<div class="gallery" data-gallery>
+  <div class="gallery__frame">
+    <ul
+      class="gallery__track"
+      role="list"
+      aria-label={t('a11y.gallery')}
+      tabindex={total > 1 ? 0 : undefined}
+      data-gallery-track
+    >
+      {
+        photos.map((photo, i) => (
+          <li class="gallery__slide" id={`photo-${i + 1}`}>
+            <img
+              src={photoUrl(photo.src, 900)}
+              srcset={photoSrcset(photo.src)}
+              sizes="(min-width: 64rem) 50vw, 100vw"
+              width={photo.w}
+              height={photo.h}
+              alt={altFor(i + 1)}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={i === 0 ? 'high' : undefined}
+              decoding={i === 0 ? 'sync' : 'async'}
+            />
+          </li>
+        ))
+      }
+    </ul>
+
+    {sold && <span class="gallery__badge">{t('product.sold.badge')}</span>}
+
+    {
+      total > 1 && (
+        <>
+          <button class="gallery__arrow gallery__arrow--prev" type="button" data-gallery-prev hidden>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="m14.5 6-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="visually-hidden">{t('a11y.previousPhoto')}</span>
+          </button>
+          <button class="gallery__arrow gallery__arrow--next" type="button" data-gallery-next hidden>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="m9.5 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="visually-hidden">{t('a11y.nextPhoto')}</span>
+          </button>
+        </>
+      )
+    }
+  </div>
+
+  {
+    total > 1 && (
+      <ol class="gallery__dots" role="list">
+        {photos.map((_, i) => (
+          <li>
+            <a
+              href={`#photo-${i + 1}`}
+              aria-current={i === 0 ? 'true' : undefined}
+              data-gallery-dot
+            >
+              <span class="visually-hidden">{t('a11y.photoCount', { n: i + 1, total })}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
+    const track = gallery.querySelector<HTMLElement>('[data-gallery-track]');
+    if (!track) return;
+    const slides = Array.from(track.children) as HTMLElement[];
+    if (slides.length < 2) return;
+
+    const dots = Array.from(gallery.querySelectorAll<HTMLAnchorElement>('[data-gallery-dot]'));
+    const prev = gallery.querySelector<HTMLButtonElement>('[data-gallery-prev]');
+    const next = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = 0;
+
+    const goTo = (i: number) => {
+      const target = slides[Math.max(0, Math.min(slides.length - 1, i))];
+      track.scrollTo({ left: target.offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
+    };
+
+    const setActive = (i: number) => {
+      current = i;
+      dots.forEach((dot, j) => {
+        if (j === i) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+      if (prev) prev.disabled = i === 0;
+      if (next) next.disabled = i === slides.length - 1;
+    };
+
+    // The slide that is mostly visible becomes the active one (works for swipes, too).
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(slides.indexOf(entry.target as HTMLElement));
+        });
+      },
+      { root: track, threshold: 0.6 },
+    );
+    slides.forEach((slide) => observer.observe(slide));
+
+    // Dots: scroll the gallery instead of jumping the whole page to the #anchor.
+    dots.forEach((dot, i) =>
+      dot.addEventListener('click', (event) => {
+        event.preventDefault();
+        goTo(i);
+      }),
+    );
+
+    prev?.addEventListener('click', () => goTo(current - 1));
+    next?.addEventListener('click', () => goTo(current + 1));
+    if (prev) prev.hidden = false;
+    if (next) next.hidden = false;
+
+    // Arrow keys when the gallery has focus.
+    track.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') { event.preventDefault(); goTo(current + 1); }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); goTo(current - 1); }
+    });
+  });
+</script>
+
+<style>
+  .gallery {
+    position: relative;
+  }
+
+  .gallery__frame {
+    position: relative;
+  }
+
+  .gallery__track {
+    position: relative; /* offsetLeft of the slides is measured from here */
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    background: var(--placeholder);
+  }
+
+  .gallery__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery__slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    aspect-ratio: 4 / 5;
+  }
+
+  .gallery__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gallery__badge {
+    position: absolute;
+    top: var(--s-4);
+    left: var(--s-4);
+    padding: var(--s-2) var(--s-4);
+    border-radius: var(--radius-pill);
+    background: var(--c-ivory);
+    color: var(--c-plum);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .gallery__arrow {
+    position: absolute;
+    top: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: var(--tap);
+    height: var(--tap);
+    padding: 0;
+    border: 1px solid var(--c-line);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--c-ivory) 88%, transparent);
+    color: var(--c-plum);
+    transform: translateY(-50%);
+    transition: opacity var(--dur) var(--ease);
+  }
+
+  .gallery__arrow:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .gallery__arrow--prev {
+    left: var(--s-3);
+  }
+
+  .gallery__arrow--next {
+    right: var(--s-3);
+  }
+
+  /* Arrows only for mouse/trackpad users; on phones you swipe. */
+  @media (hover: hover) and (pointer: fine) {
+    .gallery__arrow:not([hidden]) {
+      display: inline-flex;
+    }
+  }
+
+  .gallery__dots {
+    display: flex;
+    justify-content: center;
+  }
+
+  .gallery__dots a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--tap);
+    height: var(--tap);
+  }
+
+  .gallery__dots a::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--c-plum);
+    border-radius: 50%;
+    transition:
+      background-color var(--dur) var(--ease),
+      transform var(--dur) var(--ease);
+  }
+
+  .gallery__dots a[aria-current='true']::before {
+    background: var(--c-plum);
+    transform: scale(1.15);
+  }
+
+  @media (min-width: 64rem) {
+    .gallery__track,
+    .gallery__slide {
+      border-radius: var(--radius-sm);
+    }
+  }
+</style>

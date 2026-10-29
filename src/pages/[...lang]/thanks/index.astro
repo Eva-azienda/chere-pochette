@@ -1,0 +1,60 @@
+---
+/** Zahls "success" redirect: /thanks/?p=cp-012 (not indexed by search engines). */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ChosenBag from '../../../components/ChosenBag.astro';
+import ReturnLanguage from '../../../components/ReturnLanguage.astro';
+import ThreadDivider from '../../../components/ThreadDivider.astro';
+import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
+import { localePath } from '../../../lib/urls';
+import { site } from '../../../lib/catalog';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const { t, list, pageMeta } = useTranslations(lang);
+const [before, after] = t('thanks.questions').split('{email}');
+---
+
+<BaseLayout lang={lang} path="thanks/" {...pageMeta('thanks')} noindex>
+  <ReturnLanguage lang={lang} path="thanks/" slot="head" />
+  <section class="container container--narrow status">
+    <ThreadDivider />
+    <p class="eyebrow">{t('thanks.eyebrow')}</p>
+    <h1>{t('thanks.title')}</h1>
+    <p class="lead">{t('thanks.lead')}</p>
+    <ChosenBag lang={lang} textKey="thanks.bag" />
+    {list<string>('thanks.paragraphs').map((text) => <p>{text}</p>)}
+    <p>
+      {before}<a href={`mailto:${site.email}`}>{site.email}</a>{after}
+    </p>
+    <div class="btn-row">
+      <a class="btn btn--primary" href={localePath(lang, 'shop/')}>{t('thanks.cta')}</a>
+      <a class="btn btn--outline" href={localePath(lang)}>{t('thanks.ctaHome')}</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .status {
+    display: grid;
+    justify-items: center;
+    gap: var(--s-4);
+    padding-block: var(--s-8) var(--section-y);
+    text-align: center;
+  }
+
+  .status .btn-row {
+    justify-content: center;
+    margin-top: var(--s-3);
+  }
+
+  .status p {
+    max-width: 34rem;
+  }
+
+  .status a:not(.btn) {
+    overflow-wrap: anywhere;
+  }
+</style>

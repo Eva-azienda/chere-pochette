@@ -1,0 +1,101 @@
+---
+/**
+ * Used on /thanks/ and /payment-cancelled/. Zahls sends the customer back with ?p=<product id>
+ * (see scripts/zahls-sync.mjs). The page is static, so a small script reads ?p= in the browser
+ * and shows that bag (photo + name) using the little catalogue embedded below.
+ * It also keeps ?p= when the visitor switches language.
+ */
+import { type Lang, useTranslations } from '../lib/i18n';
+import { describeProduct, getPublicProducts, photoUrl } from '../lib/catalog';
+import { localePath } from '../lib/urls';
+
+interface Props {
+  lang: Lang;
+  /** i18n key of the sentence, with {model} and {number} (e.g. "thanks.bag"). */
+  textKey: string;
+}
+
+const { lang, textKey } = Astro.props;
+const { t } = useTranslations(lang);
+
+const bags = Object.fromEntries(
+  (await getPublicProducts()).map((p) => {
+    const info = describeProduct(p, lang);
+    return [
+      p.id,
+      {
+        model: info.title,
+        number: info.number,
+        photo: p.photos[0] ? photoUrl(p.photos[0].src, 400) : '',
+        url: localePath(lang, `shop/${p.id}/`),
+      },
+    ];
+  }),
+);
+---
+
+<div class="chosen" data-chosen-bag data-text={t(textKey)} hidden>
+  <img class="chosen__photo" src="data:," alt="" width="400" height="500" data-chosen-photo />
+  <p class="chosen__text" data-chosen-text></p>
+</div>
+<script type="application/json" data-chosen-catalogue set:html={JSON.stringify(bags).replace(/</g, '\\u003c')} />
+
+<script>
+  type Bag = { model: string; number: string; photo: string; url: string };
+
+  const box = document.querySelector<HTMLElement>('[data-chosen-bag]');
+  const catalogue = document.querySelector('[data-chosen-catalogue]');
+  const id = new URLSearchParams(location.search).get('p') ?? '';
+
+  if (box && catalogue && /^cp-\d{3,}$/.test(id)) {
+    const bags = JSON.parse(catalogue.textContent || '{}') as Record<string, Bag>;
+    const bag = bags[id];
+    if (bag) {
+      const text = (box.dataset.text ?? '').replace('{model}', bag.model).replace('{number}', bag.number);
+      box.querySelector('[data-chosen-text]')!.textContent = text;
+      const img = box.querySelector<HTMLImageElement>('[data-chosen-photo]')!;
+      if (bag.photo) img.src = bag.photo;
+      else img.remove();
+      box.hidden = false;
+      // Let the page use the bag's URL (e.g. "try again" on /payment-cancelled/).
+      document.querySelectorAll<HTMLAnchorElement>('[data-bag-link]').forEach((a) => (a.href = bag.url));
+    }
+    // Keep ?p= when switching language.
+    document.querySelectorAll<HTMLAnchorElement>('[data-lang-link]').forEach((a) => {
+      a.href = `${a.pathname}?p=${encodeURIComponent(id)}`;
+    });
+  }
+</script>
+
+<style>
+  .chosen {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    padding: var(--s-3);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    background: var(--c-white);
+    text-align: left;
+  }
+
+  .chosen[hidden] {
+    display: none;
+  }
+
+  .chosen__photo {
+    width: 4.5rem;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    background: var(--c-ivory-2);
+  }
+
+  .chosen__text {
+    font-family: var(--f-display);
+    font-size: var(--fs-lg);
+    line-height: var(--lh-snug);
+    color: var(--c-plum);
+  }
+</style>

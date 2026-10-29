@@ -1,0 +1,590 @@
+/* Chère Pochette – global styles.
+   Colours, fonts and spacing come from tokens.css only (never hard-code a colour here).
+   Component-specific styles live in the <style> block of each component. */
+@import './tokens.css';
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + var(--s-4));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+:root {
+  --header-h: 3.875rem; /* sticky header height: 62px on phones, 74px on large screens */
+  --placeholder: var(--c-ivory-2); /* soft tone shown in image frames while photos load */
+  color-scheme: light;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-h: 4.625rem;
+  }
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--c-ivory);
+  color: var(--c-anthracite);
+  font-family: var(--f-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip; /* safety net: never a horizontal scroll */
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+p,
+li,
+dd {
+  overflow-wrap: break-word;
+}
+
+/* `hidden` must always win over component display rules (grid, flex…). */
+[hidden] {
+  display: none !important;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  padding: 0;
+}
+
+/* ---------- Typography ---------- */
+h1,
+h2,
+h3,
+h4,
+.display {
+  font-family: var(--f-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+  color: var(--c-plum);
+  text-wrap: balance;
+}
+
+h1,
+.h1 {
+  font-size: var(--fs-3xl);
+}
+
+h2,
+.h2 {
+  font-size: var(--fs-2xl);
+}
+
+h3,
+.h3 {
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+}
+
+h4,
+.h4 {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-snug);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--c-plum);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--c-bordeaux);
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* Small uppercase label above titles – like the slogan in the logo */
+.eyebrow {
+  display: block;
+  font-family: var(--f-body);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  line-height: var(--lh-snug);
+  color: var(--c-bordeaux);
+}
+
+.lead {
+  font-size: var(--fs-lg);
+  line-height: 1.55;
+  color: var(--c-anthracite);
+}
+
+.muted {
+  color: var(--c-muted);
+}
+
+.small {
+  font-size: var(--fs-sm);
+}
+
+/* Elegant italic Bodoni line (tagline, quotes) */
+.tagline {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+  color: var(--c-plum);
+  text-wrap: balance;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--narrow {
+  max-width: calc(var(--container-narrow) + 2 * var(--gutter));
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.section--tight {
+  padding-block: calc(var(--section-y) * 0.6);
+}
+
+.section--alt {
+  --placeholder: color-mix(in srgb, var(--c-ivory-2) 94%, var(--c-plum));
+  background: var(--c-ivory-2);
+}
+
+.section--powder {
+  background: var(--c-powder-2);
+}
+
+/* Vertical rhythm: every child gets space above it */
+.stack > * + * {
+  margin-top: var(--stack-space, var(--s-4));
+}
+
+.stack-lg > * + * {
+  margin-top: var(--s-6);
+}
+
+.center {
+  text-align: center;
+}
+
+.center .lead,
+.center p {
+  margin-inline: auto;
+}
+
+.measure {
+  max-width: 36rem;
+}
+
+/* Section heading block: eyebrow + title + intro */
+.heading {
+  display: grid;
+  gap: var(--s-3);
+  margin-bottom: var(--s-6);
+}
+
+.heading > p {
+  max-width: 36rem;
+}
+
+.heading.center {
+  justify-items: center;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  padding: var(--s-3) var(--s-6);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-family: var(--f-body);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.btn--primary {
+  background: var(--c-bordeaux);
+  color: var(--c-ivory);
+}
+
+.btn--primary:hover {
+  background: var(--c-bordeaux-2);
+  color: var(--c-ivory);
+}
+
+.btn--outline {
+  background: transparent;
+  border-color: var(--c-plum);
+  color: var(--c-plum);
+}
+
+.btn--outline:hover {
+  background: var(--c-plum);
+  color: var(--c-ivory);
+}
+
+.btn--light {
+  background: var(--c-ivory);
+  color: var(--c-plum);
+}
+
+.btn--light:hover {
+  background: var(--c-powder);
+  color: var(--c-plum);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+
+.center .btn-row {
+  justify-content: center;
+}
+
+/* Text link with a small arrow, e.g. "Scopri il processo →" */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.04em;
+  color: var(--c-plum);
+  text-decoration: underline;
+  text-decoration-color: var(--c-line-strong);
+}
+
+.link-arrow::after {
+  content: '→';
+  transition: transform var(--dur) var(--ease);
+}
+
+.link-arrow:hover {
+  text-decoration-color: currentColor;
+}
+
+.link-arrow:hover::after {
+  transform: translateX(3px);
+}
+
+/* ---------- Media ----------
+   Every image frame has a fixed shape (aspect-ratio) and a soft placeholder colour,
+   so the page never looks empty while lazy-loaded photos arrive. */
+.media {
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--placeholder);
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ratio-4-5 {
+  aspect-ratio: 4 / 5;
+}
+
+.ratio-3-2 {
+  aspect-ratio: 3 / 2;
+}
+
+/* ---------- Shared page blocks ---------- */
+.split-heading {
+  display: grid;
+  gap: var(--s-2);
+  margin-bottom: var(--s-6);
+}
+
+.split-heading .heading {
+  margin-bottom: 0;
+}
+
+@media (min-width: 48rem) {
+  .split-heading {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: var(--s-6);
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-6) var(--s-4);
+}
+
+@media (min-width: 64rem) {
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--s-7) var(--s-5);
+  }
+}
+
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-5);
+  padding: var(--s-6) 0;
+  text-align: center;
+}
+
+.empty .lead {
+  max-width: 30rem;
+}
+
+/* ---------- Image + text features ---------- */
+.feature {
+  display: grid;
+  gap: var(--s-6);
+  align-items: center;
+}
+
+.feature__media {
+  aspect-ratio: 4 / 5;
+}
+
+.feature__media picture,
+.feature__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 48rem) {
+  .feature {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-8);
+  }
+
+  .feature--reverse .feature__media {
+    order: 2;
+  }
+}
+
+/* ---------- Thin lines ---------- */
+.rule {
+  height: 0;
+  border: 0;
+  border-top: 1px solid var(--c-line);
+}
+
+/* ---------- Long text (legal) ---------- */
+.prose {
+  max-width: 42rem;
+}
+
+.prose > * + * {
+  margin-top: var(--s-4);
+}
+
+.prose h2 {
+  margin-top: var(--s-8);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--c-line);
+  font-size: var(--fs-2xl);
+}
+
+.prose > h2:first-child,
+.prose > :first-child + h2 {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+
+.prose h3 {
+  margin-top: var(--s-6);
+  font-size: var(--fs-lg);
+  font-family: var(--f-body);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--c-anthracite);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.25em;
+}
+
+.prose li + li {
+  margin-top: var(--s-2);
+}
+
+.prose li::marker {
+  color: var(--c-bordeaux);
+}
+
+/* ---------- Forms ---------- */
+.field {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--c-white);
+  color: var(--c-anthracite);
+  font-size: var(--fs-base); /* ≥16px: no zoom on iPhone */
+}
+
+.input::placeholder {
+  color: var(--c-muted);
+  opacity: 1; /* Firefox lowers it by default; keeps 4.5:1 contrast */
+}
+
+/* ---------- Accessibility ---------- */
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-bordeaux);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.on-dark :focus-visible,
+:is(.btn--primary):focus-visible {
+  outline-color: var(--c-powder);
+  box-shadow: 0 0 0 5px var(--c-bordeaux);
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--s-2);
+  left: var(--s-2);
+  z-index: 100;
+  padding: var(--s-3) var(--s-5);
+  border-radius: var(--radius-pill);
+  background: var(--c-plum);
+  color: var(--c-ivory);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+  color: var(--c-ivory);
+}
+
+::selection {
+  background: var(--c-powder);
+  color: var(--c-plum);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,95 @@
+---
+/**
+ * Legal notice + privacy policy + terms of sale, on one page with anchors
+ * (#impressum, #privacy, #terms). The texts are in src/content/legal/<lang>.md.
+ */
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
+import { formatDate } from '../../../lib/format';
+
+// ↓ Change this date whenever you edit one of the files in src/content/legal/.
+const LAST_UPDATED = '2026-10-29';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const { t, pageMeta } = useTranslations(lang);
+
+const entry = await getEntry('legal', lang);
+if (!entry) throw new Error(`Missing legal text: src/content/legal/${lang}.md`);
+const { Content } = await render(entry);
+const sections = ['impressum', 'privacy', 'terms'] as const;
+---
+
+<BaseLayout lang={lang} path="legal/" {...pageMeta('legal')}>
+  <PageHeader eyebrow={t('legal.eyebrow')} title={t('legal.title')} intro={t('legal.intro')} />
+
+  <div class="container container--narrow legal">
+    <nav class="legal__toc" aria-labelledby="legal-toc-title">
+      <p id="legal-toc-title" class="eyebrow">{t('legal.toc.title')}</p>
+      <ol role="list">
+        {
+          sections.map((id) => (
+            <li>
+              <a href={`#${id}`}>{t(`legal.toc.${id}`)}</a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <p class="legal__updated small muted">
+      {t('legal.updated', { date: formatDate(LAST_UPDATED, lang) })}
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  .legal {
+    display: grid;
+    gap: var(--s-7);
+    padding-bottom: var(--section-y);
+  }
+
+  .legal__toc {
+    display: grid;
+    gap: var(--s-2);
+    padding: var(--s-5);
+    border-radius: var(--radius);
+    background: var(--c-ivory-2);
+  }
+
+  .legal__toc ol {
+    display: grid;
+  }
+
+  .legal__toc a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+    font-family: var(--f-display);
+    font-size: var(--fs-lg);
+    color: var(--c-plum);
+  }
+
+  .prose :global(h2[id]) {
+    scroll-margin-top: calc(var(--header-h) + var(--s-4));
+  }
+
+  .prose :global(a) {
+    overflow-wrap: anywhere;
+  }
+
+  .legal__updated {
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--c-line);
+  }
+</style>

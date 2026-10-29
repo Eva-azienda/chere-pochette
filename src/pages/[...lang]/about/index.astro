@@ -1,0 +1,239 @@
+---
+/** Our story: YES, the idea, the materials, the Ukrainian women, the slogan, the logo's thread, values. */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArtPicture from '../../../components/ArtPicture.astro';
+import BrandPicture from '../../../components/BrandPicture.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import ThreadDivider from '../../../components/ThreadDivider.astro';
+import yarn from '../../../assets/brand/yarn-fettuccia.jpg';
+import fabrics from '../../../assets/brand/umbrellas-fabrics.jpg';
+import umbrellaBag from '../../../assets/brand/hero-bag-umbrella-45.jpg';
+import womenLandscape from '../../../assets/brand/women-crochet.jpg';
+import womenPortrait from '../../../assets/brand/women-crochet-45.jpg';
+import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
+import { localePath } from '../../../lib/urls';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const { t, list, pageMeta } = useTranslations(lang);
+const p = (key: string) => list<string>(`about.${key}.paragraphs`);
+const values = list<{ title: string; text: string }>('about.values.items');
+---
+
+<BaseLayout lang={lang} path="about/" {...pageMeta('about')}>
+  <PageHeader eyebrow={t('about.eyebrow')} title={t('about.title')} intro={t('about.intro')} />
+
+  <!-- How it began (YES) -->
+  <section class="section section--tight" aria-labelledby="born">
+    <div class="container container--narrow center stack">
+      <p class="chapter">01</p>
+      <h2 id="born">{t('about.born.title')}</h2>
+      {p('born').map((text) => <p>{text}</p>)}
+    </div>
+  </section>
+
+  <!-- The idea: crochet -->
+  <section class="section" aria-labelledby="idea">
+    <div class="container feature">
+      <div class="feature__media media">
+        <BrandPicture src={yarn} alt={t('images.yarnFettuccia')} sizes="(min-width: 48rem) 45vw, 100vw" position="40% 45%" />
+      </div>
+      <div class="feature__text stack">
+        <p class="chapter">02</p>
+        <h2 id="idea">{t('about.idea.title')}</h2>
+        {p('idea').map((text) => <p>{text}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Materials: clothes + umbrellas -->
+  <section class="section section--alt" aria-labelledby="materials">
+    <div class="container feature feature--reverse">
+      <div class="feature__media media">
+        <BrandPicture src={fabrics} alt={t('images.umbrellasFabrics')} sizes="(min-width: 48rem) 45vw, 100vw" />
+      </div>
+      <div class="feature__text stack">
+        <p class="chapter">03</p>
+        <h2 id="materials">{t('about.materials.title')}</h2>
+        {p('materials').map((text) => <p>{text}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Together with Ukrainian women -->
+  <section class="section" aria-labelledby="women">
+    <div class="container">
+      <div class="women__media media">
+        <ArtPicture
+          mobile={womenPortrait}
+          desktop={womenLandscape}
+          alt={t('images.womenCrochet')}
+          mobileSizes="100vw"
+          desktopSizes="(min-width: 72rem) 72rem, 100vw"
+          mobilePosition="50% 40%"
+          desktopPosition="50% 45%"
+        />
+      </div>
+      <div class="women__text container--narrow stack">
+        <p class="chapter">04</p>
+        <h2 id="women">{t('about.women.title')}</h2>
+        {p('women').map((text) => <p class="lead">{text}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Made to carry on -->
+  <section class="section section--powder" aria-labelledby="slogan">
+    <div class="container feature">
+      <div class="feature__media media">
+        <BrandPicture src={umbrellaBag} alt={t('images.heroBagUmbrella')} sizes="(min-width: 48rem) 45vw, 100vw" position="53% 60%" />
+      </div>
+      <div class="feature__text stack">
+        <p class="chapter">05</p>
+        <h2 id="slogan" class="slogan" lang="en">{t('about.slogan.title')}</h2>
+        {p('slogan').map((text) => <p>{text}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- The thread in the logo -->
+  <section class="section" aria-labelledby="thread">
+    <div class="container container--narrow center stack">
+      <p class="chapter">06</p>
+      <h2 id="thread">{t('about.thread.title')}</h2>
+      <ThreadDivider class="thread-big" />
+      {p('thread').map((text) => <p>{text}</p>)}
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section section--alt" aria-labelledby="values">
+    <div class="container">
+      <div class="heading center">
+        <h2 id="values">{t('about.values.title')}</h2>
+      </div>
+      <ol role="list" class="values">
+        {
+          values.map((value, i) => (
+            <li>
+              <span class="values__n">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{value.title}</h3>
+              <p>{value.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Call to action -->
+  <section class="section">
+    <div class="container container--narrow center stack-lg">
+      <h2 class="tagline cta-title">{t('about.cta.title')}</h2>
+      <div class="btn-row">
+        <a class="btn btn--primary" href={localePath(lang, 'shop/')}>{t('about.cta.button')}</a>
+        <a class="btn btn--outline" href={localePath(lang, 'team/')}>{t('about.cta.teamButton')}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .chapter {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: var(--fs-lg);
+    color: var(--c-bordeaux);
+  }
+
+  .women__media {
+    aspect-ratio: 4 / 5;
+  }
+
+  .women__media :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  .women__text {
+    margin-top: var(--s-6);
+    padding: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .women__media {
+      aspect-ratio: 21 / 9;
+    }
+
+    .women__text {
+      margin-inline: auto;
+      text-align: center;
+    }
+  }
+
+  .slogan {
+    font-style: italic;
+    font-size: var(--fs-3xl);
+  }
+
+  .center :global(.thread-big svg) {
+    width: min(100%, 20rem);
+  }
+
+  .values {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--c-line);
+  }
+
+  .values li {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    column-gap: var(--s-3);
+    row-gap: var(--s-1);
+    padding-block: var(--s-5);
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .values__n {
+    grid-row: span 2;
+    font-family: var(--f-display);
+    font-style: italic;
+    color: var(--c-bordeaux);
+  }
+
+  .values h3 {
+    font-size: var(--fs-lg);
+  }
+
+  .values p {
+    color: var(--c-muted);
+  }
+
+  @media (min-width: 64rem) {
+    .values {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: var(--s-5);
+      border-top: 0;
+    }
+
+    .values li {
+      grid-template-columns: 1fr;
+      align-content: start;
+      padding: var(--s-5) 0 0;
+      border-top: 1px solid var(--c-plum);
+      border-bottom: 0;
+    }
+
+    .values__n {
+      grid-row: auto;
+    }
+  }
+
+  .cta-title {
+    font-size: var(--fs-2xl);
+  }
+</style>

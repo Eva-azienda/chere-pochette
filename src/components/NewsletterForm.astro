@@ -1,0 +1,135 @@
+---
+/**
+ * Newsletter sign-up form.
+ *
+ * TWO MODES, chosen by `newsletter.action` in src/data/site.json:
+ *
+ * 1. action is EMPTY (today): the button opens the visitor's e-mail app with a message to
+ *    site.email, subject "Iscrizione newsletter" (small script below). The team then adds the
+ *    address to their list by hand. Without JavaScript the form still opens a mailto: link.
+ *
+ * 2. action is SET: the form is posted directly to the newsletter provider.
+ *    To switch to a real provider (no code change needed):
+ *    - Brevo: Contacts → Forms → create a subscription form → "Share" → copy the form URL
+ *      (https://….sibforms.com/serve/…) into `newsletter.action`, set `method` to "post" and
+ *      `emailField` to "EMAIL".
+ *    - Mailchimp: Audience → Signup forms → Embedded forms → copy the <form action="…"> URL
+ *      (https://….list-manage.com/subscribe/post?u=…&id=…) into `newsletter.action`,
+ *      `method` "post", `emailField` "EMAIL".
+ *    The provider then shows its own confirmation page (double opt-in).
+ *    Remember to name the provider in the privacy policy (src/content/legal/*.md, section 5).
+ */
+import { type Lang, useTranslations } from '../lib/i18n';
+import { localePath } from '../lib/urls';
+import { site } from '../lib/catalog';
+
+interface Props {
+  lang: Lang;
+  /** Unique prefix for the ids (the form can appear twice on a page). */
+  id: string;
+  /** "dark" = on the plum footer. */
+  tone?: 'light' | 'dark';
+}
+
+const { lang, id, tone = 'light' } = Astro.props;
+const { t } = useTranslations(lang);
+
+const providerAction = site.newsletter.action?.trim();
+const mailtoMode = !providerAction;
+// Kept in Italian on purpose: it is the subject the team sees in its inbox.
+const MAILTO_SUBJECT = 'Iscrizione newsletter';
+const inputId = `${id}-email`;
+const noteId = `${id}-note`;
+---
+
+<form
+  class:list={['nl', `nl--${tone}`]}
+  action={mailtoMode ? `mailto:${site.email}` : providerAction}
+  method={mailtoMode ? 'get' : site.newsletter.method || 'post'}
+  data-newsletter={mailtoMode ? 'mailto' : 'provider'}
+  data-to={site.email}
+  data-subject={MAILTO_SUBJECT}
+  data-body={t('newsletter.mailtoBody')}
+>
+  <label class="nl__label" for={inputId}>{t('newsletter.label')}</label>
+  <div class="nl__row">
+    <input
+      class="input nl__input"
+      id={inputId}
+      type="email"
+      name={mailtoMode ? 'body' : site.newsletter.emailField || 'email'}
+      autocomplete="email"
+      inputmode="email"
+      placeholder={t('newsletter.placeholder')}
+      required
+      aria-describedby={noteId}
+    />
+    <button class:list={['btn', tone === 'dark' ? 'btn--light' : 'btn--primary']} type="submit">
+      {t('newsletter.button')}
+    </button>
+  </div>
+  {mailtoMode && <input type="hidden" name="subject" value={MAILTO_SUBJECT} />}
+  <p class="nl__note" id={noteId}>
+    {mailtoMode && <>{t('newsletter.mailtoNote')} </>}
+    {t('newsletter.consent')}{' '}
+    <a href={localePath(lang, 'legal/#privacy')}>{t('newsletter.privacyLink')}</a>
+  </p>
+</form>
+
+<script>
+  // mailto mode: build a clean e-mail (proper subject and body) instead of the raw form query.
+  document.querySelectorAll<HTMLFormElement>('form[data-newsletter="mailto"]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      const input = form.querySelector<HTMLInputElement>('input[type="email"]');
+      if (!input || !input.checkValidity()) return; // the browser shows its own message
+      event.preventDefault();
+      const { to = '', subject = '', body = '' } = form.dataset;
+      const text = body.replace('{subscriber}', input.value.trim());
+      window.location.href =
+        `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+    });
+  });
+</script>
+
+<style>
+  .nl {
+    display: grid;
+    gap: var(--s-2);
+    max-width: 32rem;
+  }
+
+  .nl__label {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+  }
+
+  .nl__row {
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  @media (min-width: 30rem) {
+    .nl__row {
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  .nl__note {
+    font-size: var(--fs-xs);
+    line-height: 1.5;
+    color: var(--c-muted);
+  }
+
+  .nl--dark .nl__input {
+    border-color: transparent;
+  }
+
+  .nl--dark .nl__note {
+    color: inherit;
+    opacity: 0.8;
+  }
+
+  .nl--dark .nl__note a {
+    color: inherit;
+  }
+</style>

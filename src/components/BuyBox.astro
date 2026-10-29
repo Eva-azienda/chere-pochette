@@ -1,0 +1,348 @@
+---
+/**
+ * Delivery choice + buy button of an available bag.
+ *
+ * - Two radio cards: shipping (+ fee from site.json) or free pickup in Bellinzona.
+ * - The buy button goes to the matching Zahls payment link (same tab).
+ *   If a link doesn't exist yet → "order by e-mail" (mailto: with subject and a prefilled body).
+ * - Switching is done in CSS only (:has(), no JavaScript): both buttons are in the HTML and
+ *   the one that doesn't match the checked radio is hidden.
+ * - On phones the bar with total + button is fixed at the bottom of the screen.
+ */
+import Icon from './Icon.astro';
+import { type Lang, useTranslations } from '../lib/i18n';
+import { formatPrice } from '../lib/format';
+import { describeProduct, paymentLink, site, type Delivery, type Product } from '../lib/catalog';
+
+interface Props {
+  product: Product;
+  lang: Lang;
+}
+
+const { product, lang } = Astro.props;
+const { t } = useTranslations(lang);
+const info = describeProduct(product, lang);
+const fee = formatPrice(site.shippingFee);
+
+const options = (['shipping', 'pickup'] as Delivery[]).map((delivery) => {
+  const total = formatPrice(product.price + (delivery === 'shipping' ? site.shippingFee : 0));
+  const link = paymentLink(product, delivery);
+  const deliveryLabel = t(`product.delivery.${delivery}.title`);
+
+  // E-mail fallback: subject "Ordine cp-012 – Belle", body with the chosen delivery.
+  const subject = t('product.orderByEmail.subject', { id: product.id, model: info.modelName });
+  const body = t('product.orderByEmail.body', {
+    model: info.title,
+    number: info.number,
+    id: product.id,
+    delivery: delivery === 'shipping' ? `${deliveryLabel} (+ CHF ${fee})` : deliveryLabel,
+  });
+  const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  return {
+    delivery,
+    total,
+    deliveryLabel,
+    href: link ?? mailto,
+    online: Boolean(link),
+    label: link ? t('product.buyButton', { price: total }) : t('common.orderByEmail'),
+  };
+});
+const allOnline = options.every((o) => o.online);
+---
+
+<div class="buy" data-buy data-lang={lang}>
+  <fieldset class="buy__delivery" id="delivery">
+    <legend class="buy__legend">{t('product.delivery.title')}</legend>
+
+    <label class="option">
+      <input type="radio" name="delivery" value="shipping" checked />
+      <span class="option__icon"><Icon name="truck" /></span>
+      <span class="option__text">
+        <span class="option__title">{t('product.delivery.shipping.title')}</span>
+        <span class="option__desc">{t('product.delivery.shipping.text')}</span>
+      </span>
+      <span class="option__price">{t('product.delivery.shipping.price', { fee })}</span>
+    </label>
+
+    <label class="option">
+      <input type="radio" name="delivery" value="pickup" />
+      <span class="option__icon"><Icon name="pin" /></span>
+      <span class="option__text">
+        <span class="option__title">{t('product.delivery.pickup.title')}</span>
+        <span class="option__desc">{t('product.delivery.pickup.text')}</span>
+      </span>
+      <span class="option__price">{t('product.delivery.pickup.price')}</span>
+    </label>
+  </fieldset>
+
+  <div class="buy__bar">
+    <div class="buy__summary">
+      <span class="buy__total-label">{t('product.total')}</span>
+      {
+        options.map((o) => (
+          <span class="buy__total" data-for={o.delivery}>
+            {t('common.priceTag', { price: o.total })}
+          </span>
+        ))
+      }
+      {
+        options.map((o) => (
+          <a class="buy__change" href="#delivery" data-for={o.delivery}>
+            {o.deliveryLabel}
+            <span class="visually-hidden"> – {t('product.changeDelivery')}</span>
+          </a>
+        ))
+      }
+    </div>
+    {
+      options.map((o) => (
+        <a class="btn btn--primary buy__btn" href={o.href} data-for={o.delivery}>
+          {!o.online && <Icon name="mail" size={20} />}
+          {o.label}
+        </a>
+      ))
+    }
+  </div>
+
+  {
+    allOnline ? (
+      <p class="buy__note">{t('product.paymentNote')}</p>
+    ) : (
+      <div class="buy__note buy__note--email">
+        <p class="buy__note-title">{t('product.orderByEmail.title')}</p>
+        <p>{t('product.orderByEmail.text')}</p>
+      </div>
+    )
+  }
+</div>
+
+<script>
+  // Zahls always sends the customer back to the Italian /thanks/ or /payment-cancelled/ page
+  // (one payment link per bag, not per language). Remember the language of the page where the
+  // buy button was pressed: those two pages then switch to it (see ReturnLanguage.astro).
+  document.querySelectorAll<HTMLElement>('[data-buy]').forEach((box) => {
+    box.querySelectorAll('.buy__btn').forEach((button) =>
+      button.addEventListener('click', () => {
+        try {
+          localStorage.setItem('cp-lang', box.dataset.lang ?? '');
+        } catch {
+          // storage blocked (private mode): the pages simply stay in Italian
+        }
+      }),
+    );
+  });
+</script>
+
+<style>
+  .buy {
+    display: grid;
+    gap: var(--s-5);
+  }
+
+  /* ---------- Delivery choice ---------- */
+  .buy__delivery {
+    display: grid;
+    gap: var(--s-3);
+    min-width: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .buy__legend {
+    margin-bottom: var(--s-3);
+    padding: 0;
+    font-family: var(--f-display);
+    font-size: var(--fs-lg);
+    color: var(--c-plum);
+  }
+
+  .option {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+    gap: var(--s-3);
+    min-height: var(--tap);
+    padding: var(--s-4);
+    border: 1px solid var(--c-line-strong);
+    border-radius: var(--radius);
+    background: var(--c-white);
+    cursor: pointer;
+    transition:
+      border-color var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
+  }
+
+  .option:hover {
+    border-color: var(--c-plum);
+  }
+
+  /* The real radio stays accessible (keyboard, screen readers) but is drawn by the card. */
+  .option input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .option:has(input:checked) {
+    border-color: var(--c-bordeaux);
+    box-shadow: 0 0 0 1px var(--c-bordeaux);
+    background: var(--c-powder-2);
+  }
+
+  .option:has(input:focus-visible) {
+    outline: 2px solid var(--c-bordeaux);
+    outline-offset: 3px;
+  }
+
+  .option__icon {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--c-ivory);
+    color: var(--c-plum);
+  }
+
+  .option__text {
+    display: grid;
+    gap: 2px;
+  }
+
+  .option__title {
+    font-weight: 600;
+  }
+
+  .option__desc {
+    font-size: var(--fs-sm);
+    line-height: 1.45;
+    color: var(--c-muted);
+  }
+
+  .option__price {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Show only what matches the checked delivery (no JavaScript needed) ---------- */
+  .buy:not(:has(input[value='pickup']:checked)) [data-for='pickup'],
+  .buy:has(input[value='pickup']:checked) [data-for='shipping'] {
+    display: none;
+  }
+
+  /* ---------- Total + button ---------- */
+  .buy__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+  }
+
+  .buy__summary {
+    display: grid;
+    flex: 1;
+    min-width: 0;
+    line-height: 1.25;
+  }
+
+  .buy__total-label {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+
+  .buy__total {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    color: var(--c-plum);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+
+  .buy__change {
+    position: relative;
+    justify-self: start;
+    font-size: var(--fs-xs);
+    color: var(--c-muted);
+  }
+
+  /* The link text is small: an invisible area above and below makes it easy to tap (≈ 48px high).
+     Only vertical, so it never covers the buy button next to it. */
+  .buy__change::after {
+    content: '';
+    position: absolute;
+    inset: -16px 0;
+  }
+
+  .buy__btn {
+    flex-shrink: 0;
+    padding-inline: var(--s-5);
+  }
+
+  .buy__note {
+    font-size: var(--fs-sm);
+    color: var(--c-muted);
+  }
+
+  .buy__note--email {
+    display: grid;
+    gap: var(--s-1);
+    padding: var(--s-4);
+    border-radius: var(--radius);
+    background: var(--c-powder-2);
+    color: var(--c-anthracite);
+  }
+
+  .buy__note-title {
+    font-weight: 600;
+  }
+
+  /* Phones & tablets: the bar sticks to the bottom of the screen (above the iPhone home bar). */
+  @media (max-width: 63.99rem) {
+    .buy__bar {
+      position: fixed;
+      inset: auto 0 0 0;
+      z-index: 40;
+      min-height: var(--buybar-h);
+      padding: var(--s-3) var(--gutter) calc(var(--s-3) + env(safe-area-inset-bottom));
+      background: var(--c-ivory);
+      border-top: 1px solid var(--c-line);
+      box-shadow: 0 -8px 24px rgba(84, 21, 44, 0.06);
+    }
+
+    /* Leave room at the end of the page so the bar never hides content. */
+    :global(body.has-buybar) {
+      padding-bottom: calc(var(--buybar-h) + env(safe-area-inset-bottom));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .buy__bar {
+      flex-wrap: wrap;
+      padding-top: var(--s-4);
+      border-top: 1px solid var(--c-line);
+    }
+
+    .buy__change {
+      display: none;
+    }
+
+    .buy__btn {
+      width: 100%;
+      min-height: 3.5rem;
+      font-size: var(--fs-base);
+    }
+  }
+
+  :global(:root) {
+    --buybar-h: 4.75rem;
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+/**
+ * Custom 404 page. GitHub Pages serves this single file for every unknown address,
+ * so it contains the message in all three languages: Italian is shown by default and a tiny
+ * script switches to German/English when the address starts with /de/ or /en/.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ThreadDivider from '../components/ThreadDivider.astro';
+import { DEFAULT_LANG, HREFLANG, LOCALES, useTranslations } from '../lib/i18n';
+import { BASE, localePath } from '../lib/urls';
+
+const { pageMeta } = useTranslations(DEFAULT_LANG);
+---
+
+<BaseLayout lang={DEFAULT_LANG} path="" {...pageMeta('notFound')} noindex alternates={false}>
+  <section class="container container--narrow nf" data-base={BASE}>
+    <ThreadDivider />
+    {
+      LOCALES.map((lang) => {
+        const { t: tr, pageMeta: meta } = useTranslations(lang);
+        return (
+          <div
+            class="nf__msg"
+            data-lang={lang}
+            data-title={meta('notFound').title}
+            lang={HREFLANG[lang]}
+            hidden={lang !== DEFAULT_LANG}
+          >
+            <p class="eyebrow">{tr('notFound.eyebrow')}</p>
+            <h1>{tr('notFound.title')}</h1>
+            <p class="lead">{tr('notFound.text')}</p>
+            <div class="btn-row">
+              <a class="btn btn--primary" href={localePath(lang)}>{tr('notFound.cta')}</a>
+              <a class="btn btn--outline" href={localePath(lang, 'shop/')}>{tr('notFound.ctaShop')}</a>
+            </div>
+          </div>
+        );
+      })
+    }
+  </section>
+</BaseLayout>
+
+<script>
+  const section = document.querySelector<HTMLElement>('[data-base]');
+  if (section) {
+    const base = section.dataset.base ?? '/';
+    const rest = location.pathname.startsWith(base) ? location.pathname.slice(base.length) : '';
+    const lang = rest.split('/')[0];
+    const match = section.querySelector<HTMLElement>(`.nf__msg[data-lang="${lang}"]`);
+    if (match) {
+      section.querySelectorAll<HTMLElement>('.nf__msg').forEach((el) => (el.hidden = el !== match));
+      document.title = match.dataset.title ?? document.title;
+    }
+  }
+</script>
+
+<style>
+  .nf {
+    display: grid;
+    justify-items: center;
+    gap: var(--s-5);
+    padding-block: var(--s-9) var(--section-y);
+    text-align: center;
+  }
+
+  .nf__msg {
+    display: grid;
+    justify-items: center;
+    gap: var(--s-4);
+  }
+
+  .nf__msg[hidden] {
+    display: none;
+  }
+
+  .nf .btn-row {
+    justify-content: center;
+    margin-top: var(--s-3);
+  }
+</style>

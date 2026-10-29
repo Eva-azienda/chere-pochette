@@ -1,0 +1,198 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Deploy — keeps the shop in sync with Zahls and publishes the site on GitHub Pages.
+#
+# ONE-TIME REPOSITORY SETTINGS (GitHub → repository → Settings):
+#   1. Pages → "Build and deployment" → Source: "GitHub Actions".
+#   2. Secrets and variables → Actions:
+#        Secret    ZAHLS_API_KEY   API secret of the Zahls instance
+#                                  (Zahls dashboard → API & Integration)
+#        Variable  ZAHLS_INSTANCE  instance name = the "xyz" in https://xyz.zahls.ch
+#                                  (may also be stored as a secret with the same name)
+#      Without them the Zahls step is skipped and the shop shows "order by e-mail" buttons.
+#      Test them any time with the workflow "Zahls check" (zahls-check.yml).
+#   3. No branch protection rule may block pushes to main by github-actions[bot]
+#      (the sync commits sold bags back to the repository).
+#
+# ONLINE PAYMENT ON/OFF: "checkout": { "enabled": true|false } in src/data/site.json.
+#   false → the sync only tests the Zahls connection (a problem is a warning, never a red run),
+#           creates/deletes no payment links and changes no files; the site is published normally.
+#   true  → full sync: payment links, sold bags, commits.
+#
+# WHEN IT RUNS
+#   • push to main        – e.g. the admin page saved a product          → sync + build + deploy
+#   • every 10 minutes    – looks for new payments                       → sync; build + deploy ONLY if
+#                                                                          something changed or the latest
+#                                                                          commit is not online yet (stays cheap)
+#   • workflow_dispatch   – "Run workflow" button, or the admin page's
+#                           "publish now" (it calls deploy.yml by name)  → sync + build + deploy
+#
+# A push made with GITHUB_TOKEN does not start another workflow run, so after committing the
+# sync result this same run builds and deploys. Details: docs/OPERATIONS.md
+# ─────────────────────────────────────────────────────────────────────────────
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+# Nothing by default; each job asks only for what it needs (see "permissions" in the jobs).
+permissions: {}
+
+# One run at a time; never cancel a run halfway (it might be committing).
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write # commit the sync result (sold bags, new payment links)
+      pages: read # actions/configure-pages reads the site address
+    outputs:
+      deploy: ${{ steps.decide.outputs.deploy }}
+      sha: ${{ steps.decide.outputs.sha }}
+      sync_outcome: ${{ steps.sync.outcome }}
+    steps:
+      # Always the LATEST commit of the branch, not the commit that started this run: a queued run
+      # must see the payment links the previous run just committed, otherwise it would create
+      # a second pair of links for the same bag.
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Read GitHub Pages settings
+        id: pages
+        uses: actions/configure-pages@v6
+
+      # Creates / deletes Zahls payment links and marks paid bags as sold (scripts/zahls-sync.mjs).
+      # With checkout disabled in src/data/site.json it only tests the connection and never fails.
+      # continue-on-error: a Zahls problem must not block publishing the site; the run is still
+      # marked as failed at the very end (see "Report a failed Zahls sync").
+      - name: Zahls sync
+        id: sync
+        continue-on-error: true
+        env:
+          ZAHLS_INSTANCE: ${{ vars.ZAHLS_INSTANCE || secrets.ZAHLS_INSTANCE }}
+          ZAHLS_API_KEY: ${{ secrets.ZAHLS_API_KEY }}
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+        run: node scripts/zahls-sync.mjs
+
+      - name: Commit inventory changes
+        if: steps.sync.outputs.changed == 'true'
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/products
+          if [ -f scripts/zahls-links.json ]; then git add scripts/zahls-links.json; fi
+          git commit -m "chore(inventory): sync with Zahls"
+          # The admin may have pushed in the meantime: rebase on top and try again.
+          # "-X theirs" = in a conflicting line, keep the sync's version (e.g. status "sold").
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${BRANCH}"; then exit 0; fi
+            echo "Push rejected (attempt ${attempt}) – rebasing on the latest ${BRANCH}…"
+            sleep $((attempt * 5))
+            git pull --rebase -X theirs origin "${BRANCH}" || { git rebase --abort; exit 1; }
+          done
+          echo "::error::Could not push the inventory changes after 3 attempts. Payment links created in this run are listed in the 'Zahls sync' step: delete them in the Zahls dashboard."
+          exit 1
+
+      # Scheduled runs deploy only when something changed. "Changed" also covers a commit that is
+      # not online yet: a waiting push run is replaced by a newer scheduled run when both queue up
+      # behind a running one (same concurrency group), so we compare HEAD with the tag "deployed",
+      # which the deploy job moves to the commit it published.
+      - name: Decide whether to deploy
+        id: decide
+        env:
+          EVENT: ${{ github.event_name }}
+          CHANGED: ${{ steps.sync.outputs.changed }}
+        run: |
+          HEAD_SHA=$(git rev-parse HEAD)
+          DEPLOYED_SHA=$(git ls-remote origin refs/tags/deployed | cut -f1)
+          echo "sha=${HEAD_SHA}" >> "$GITHUB_OUTPUT"
+          if [ "$EVENT" != "schedule" ] || [ "$CHANGED" = "true" ] || [ "$HEAD_SHA" != "$DEPLOYED_SHA" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "Scheduled check: nothing changed and the site is up to date – nothing to deploy."
+          fi
+
+      - name: Build site
+        if: steps.decide.outputs.deploy == 'true'
+        env:
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+        run: npm run build
+
+      # Preview phase: while the repository secret SITE_PASSWORD exists, every page is encrypted
+      # behind a password (scripts/protect-site.mjs). Launch = delete the secret and redeploy.
+      - name: Password gate (preview)
+        if: steps.decide.outputs.deploy == 'true'
+        env:
+          SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+        run: node scripts/protect-site.mjs
+
+      - name: Upload site
+        if: steps.decide.outputs.deploy == 'true'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+      - name: Report a failed Zahls sync
+        if: steps.sync.outcome == 'failure' && steps.decide.outputs.deploy != 'true'
+        run: |
+          echo "::error::The Zahls sync needs attention – open the 'Zahls sync' step above (wrong ZAHLS_INSTANCE / ZAHLS_API_KEY, a product that could not be synced, or a payment that needs a refund)."
+          exit 1
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      pages: write # deploy to GitHub Pages
+      id-token: write # required by actions/deploy-pages
+      contents: write # move the "deployed" tag
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+      # Moves the tag "deployed" to the commit that is now online (see "Decide whether to deploy").
+      - name: Remember the published commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ needs.build.outputs.sha }}
+        run: |
+          gh api -X PATCH "repos/${GITHUB_REPOSITORY}/git/refs/tags/deployed" -f sha="$SHA" -F force=true > /dev/null \
+            || gh api -X POST "repos/${GITHUB_REPOSITORY}/git/refs" -f ref=refs/tags/deployed -f sha="$SHA" > /dev/null
+
+      - name: Report a failed Zahls sync
+        if: needs.build.outputs.sync_outcome == 'failure'
+        run: |
+          echo "::error::The site was published, but the Zahls sync needs attention – open the 'Zahls sync' step of the build job (wrong ZAHLS_INSTANCE / ZAHLS_API_KEY, a product that could not be synced, or a payment that needs a refund)."
+          exit 1

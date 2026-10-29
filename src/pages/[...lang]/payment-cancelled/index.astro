@@ -1,0 +1,68 @@
+---
+/** Zahls "failed / cancelled" redirect: /payment-cancelled/?p=cp-012 (not indexed). */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ChosenBag from '../../../components/ChosenBag.astro';
+import ReturnLanguage from '../../../components/ReturnLanguage.astro';
+import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
+import { localePath } from '../../../lib/urls';
+import { site } from '../../../lib/catalog';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const { t, list, pageMeta } = useTranslations(lang);
+const paragraphs = list<string>('cancelled.paragraphs');
+---
+
+<BaseLayout lang={lang} path="payment-cancelled/" {...pageMeta('cancelled')} noindex>
+  <ReturnLanguage lang={lang} path="payment-cancelled/" slot="head" />
+  <section class="container container--narrow status">
+    <p class="eyebrow">{t('cancelled.eyebrow')}</p>
+    <h1>{t('cancelled.title')}</h1>
+    <p class="lead">{t('cancelled.lead')}</p>
+    <ChosenBag lang={lang} textKey="cancelled.bag" />
+    {
+      paragraphs.map((text) => {
+        // "{email}" becomes a mailto: link
+        const [before, after] = text.split('{email}');
+        return after === undefined ? (
+          <p>{text}</p>
+        ) : (
+          <p>
+            {before}<a href={`mailto:${site.email}`}>{site.email}</a>{after}
+          </p>
+        );
+      })
+    }
+    <div class="btn-row">
+      <!-- the script in ChosenBag points this link to the bag's page when ?p= is known -->
+      <a class="btn btn--primary" href={localePath(lang, 'shop/')} data-bag-link>{t('cancelled.retry')}</a>
+      <a class="btn btn--outline" href={localePath(lang, 'shop/')}>{t('cancelled.cta')}</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .status {
+    display: grid;
+    justify-items: center;
+    gap: var(--s-4);
+    padding-block: var(--s-8) var(--section-y);
+    text-align: center;
+  }
+
+  .status .btn-row {
+    justify-content: center;
+    margin-top: var(--s-3);
+  }
+
+  .status p {
+    max-width: 34rem;
+  }
+
+  .status a:not(.btn) {
+    overflow-wrap: anywhere;
+  }
+</style>

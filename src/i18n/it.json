@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "siteName": "Chère Pochette",
+    "htmlLang": "it",
+    "ogLocale": "it_CH",
+    "titleTemplate": "{title} · Chère Pochette",
+    "defaultDescription": "Borse all'uncinetto fatte a mano con materiali recuperati. Pezzi unici di Chère Pochette, mini-impresa YES della SCC di Bellinzona.",
+    "pages": {
+      "home": {
+        "title": "Chère Pochette · Made to carry on",
+        "description": "Borse all'uncinetto fatte a mano con vestiti e ombrelli recuperati. Ogni borsa è un pezzo unico. Mini-impresa YES della SCC di Bellinzona."
+      },
+      "shop": {
+        "title": "Shop – borse uniche all'uncinetto",
+        "description": "Scopri le borse disponibili di Chère Pochette: pezzi unici all'uncinetto, con fodera ricavata da ombrelli rotti. Pagamento con TWINT."
+      },
+      "product": {
+        "title": "{model} · Pezzo unico N° {number}",
+        "description": "{model}, pezzo unico N° {number}: borsa all'uncinetto fatta a mano. Esterno in fettuccia da vestiti recuperati, fodera da ombrelli rotti."
+      },
+      "about": {
+        "title": "La nostra storia",
+        "description": "Sette studentesse della SCC di Bellinzona, un'idea e un filo che ci unisce: la storia di Chère Pochette e il senso di «Made to carry on»."
+      },
+      "process": {
+        "title": "Dall'ombrello alla borsa",
+        "description": "Recupero, selezione, creazione, fodera: come vestiti dimenticati e ombrelli rotti diventano una Chère Pochette, in cinque passi."
+      },
+      "team": {
+        "title": "Il team",
+        "description": "Conosci le sette ragazze di Chère Pochette: l'organigramma della nostra mini-impresa YES, con un profilo per ognuna."
+      },
+      "teamMember": {
+        "title": "{name} – {role}",
+        "description": "{name}, {role} di Chère Pochette, mini-impresa YES della SCC di Bellinzona."
+      },
+      "info": {
+        "title": "Info & FAQ",
+        "description": "Spedizione in Svizzera, ritiro gratuito a Bellinzona, pagamento con TWINT, resi e consigli per la cura della tua borsa all'uncinetto."
+      },
+      "legal": {
+        "title": "Note legali e privacy",
+        "description": "Note legali, informativa sulla privacy e condizioni di vendita di Chère Pochette."
+      },
+      "thanks": {
+        "title": "Grazie per il tuo acquisto",
+        "description": "Il pagamento è andato a buon fine. Grazie per aver scelto Chère Pochette."
+      },
+      "cancelled": {
+        "title": "Pagamento non completato",
+        "description": "Il pagamento non è stato completato. Puoi riprovare quando vuoi."
+      },
+      "notFound": {
+        "title": "Pagina non trovata",
+        "description": "La pagina che cerchi non esiste o è stata spostata."
+      }
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "about": "La nostra storia",
+    "process": "Il processo",
+    "team": "Il team",
+    "info": "Info & FAQ",
+    "legal": "Note legali",
+    "contact": "Contatti"
+  },
+  "languageNames": {
+    "it": "Italiano",
+    "de": "Deutsch",
+    "en": "English"
+  },
+  "brand": {
+    "slogan": "Made to carry on",
+    "sloganMeaning": "Portare la borsa con sé, e dare ai materiali una nuova vita.",
+    "tagline": "From forgotten materials to something worth carrying on.",
+    "taglineSupport": "Dai materiali dimenticati a qualcosa che vale la pena portare con sé."
+  },
+  "common": {
+    "buy": "Acquista",
+    "orderByEmail": "Ordina via e-mail",
+    "uniquePiece": "Pezzo unico N° {number}",
+    "uniquePieceShort": "Pezzo unico",
+    "sold": "Venduta",
+    "available": "Disponibile",
+    "back": "Indietro",
+    "close": "Chiudi",
+    "menu": "Menu",
+    "price": "Prezzo",
+    "priceTag": "CHF {price}",
+    "priceNote": "Prezzo in CHF, spedizione esclusa.",
+    "free": "Gratis",
+    "model": "Modello",
+    "colour": "Colore",
+    "learnMore": "Scopri di più",
+    "viewBag": "Scopri la borsa",
+    "viewAllBags": "Vedi tutte le borse",
+    "writeUs": "Scrivici",
+    "followInstagram": "Seguici su Instagram",
+    "email": "E-mail",
+    "instagram": "Instagram"
+  },
+  "a11y": {
+    "skipToContent": "Vai al contenuto",
+    "openMenu": "Apri il menu",
+    "closeMenu": "Chiudi il menu",
+    "mainNav": "Navigazione principale",
+    "footerNav": "Link utili",
+    "languageSwitcher": "Lingua",
+    "switchTo": "Leggi in {language}",
+    "homeLink": "Chère Pochette – vai alla home",
+    "logoAlt": "Logo di Chère Pochette",
+    "opensNewTab": "(si apre in una nuova scheda)",
+    "gallery": "Foto della borsa",
+    "previousPhoto": "Foto precedente",
+    "nextPhoto": "Foto successiva",
+    "photoCount": "Foto {n} di {total}",
+    "breadcrumb": "Percorso",
+    "orgChart": "Organigramma di Chère Pochette",
+    "colourSwatch": "Colore: {colour}"
+  },
+  "images": {
+    "heroBagHands": "Mani che tengono una borsa Belle all'uncinetto color bordeaux",
+    "heroBagUmbrella": "Borsa all'uncinetto bordeaux appoggiata su un ombrello rosso",
+    "umbrellasCollected": "Ombrelli rotti raccolti in un cestino e in una cassetta",
+    "umbrellasFabrics": "Tessuti di ombrelli recuperati: pois, fiori, animalier e colori vivaci",
+    "yarnFettuccia": "Gomitoli di fettuccia in rosa, bordeaux, panna e nero",
+    "womenCrochet": "Donne attorno a un tavolo di legno mentre lavorano all'uncinetto",
+    "modelJolie": "Modello Jolie, borsa a bauletto all'uncinetto",
+    "modelBelle": "Modello Belle, borsa all'uncinetto senza frange",
+    "modelCoquette": "Modello Coquette, borsa all'uncinetto con frange"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Borse all'uncinetto · Pezzi unici",
+      "title": "Made to carry on",
+      "subtitle": "Borse fatte a mano all'uncinetto con vestiti e ombrelli recuperati. Ognuna è unica, come chi la porta.",
+      "cta": "Scopri le borse",
+      "ctaSecondary": "La nostra storia"
+    },
+    "intro": {
+      "eyebrow": "Il concetto",
+      "title": "Una seconda vita, punto dopo punto",
+      "text": "Vestiti che nessuno indossa più e ombrelli rotti diventano borse eleganti e femminili. Le realizziamo a mano, insieme, una alla volta."
+    },
+    "pillars": {
+      "title": "Tre idee, un unico filo",
+      "items": [
+        {
+          "id": "reuse",
+          "title": "Seconda vita ai materiali",
+          "text": "I vestiti usati diventano fettuccia, gli ombrelli rotti diventano fodera. Materiali dimenticati, pronti a ripartire."
+        },
+        {
+          "id": "handmade",
+          "title": "Fatte a mano all'uncinetto",
+          "text": "Ogni borsa nasce punto dopo punto, con pazienza e cura. Per questo non ne esistono due uguali."
+        },
+        {
+          "id": "together",
+          "title": "Create insieme, tra donne",
+          "text": "Lavoriamo all'uncinetto con donne ucraine. Un filo che lega mani, storie e amicizie."
+        }
+      ]
+    },
+    "featured": {
+      "eyebrow": "Nello shop",
+      "title": "Pezzi unici, pronti a partire",
+      "text": "Ogni borsa esiste una sola volta. Quando trova casa, lascia il posto alla prossima.",
+      "cta": "Vedi tutte le borse",
+      "empty": "Le prossime borse sono in lavorazione. Seguici su Instagram per non perderle."
+    },
+    "models": {
+      "eyebrow": "I modelli",
+      "title": "Jolie, Belle e Coquette",
+      "text": "Tre forme, un solo stile. Colori e fodere cambiano a ogni borsa.",
+      "cta": "Scegli il tuo modello"
+    },
+    "process": {
+      "eyebrow": "Dall'ombrello alla borsa",
+      "title": "Come nasce una Chère Pochette",
+      "text": "Dal recupero dei materiali all'ultimo punto: cinque passi per trasformare ciò che sarebbe stato buttato in una borsa da portare con sé.",
+      "cta": "Scopri il processo"
+    },
+    "story": {
+      "eyebrow": "Chi siamo",
+      "title": "Sette ragazze, un filo comune",
+      "text": "Siamo sette studentesse della Scuola cantonale di commercio di Bellinzona. Con il programma YES abbiamo dato vita alla nostra mini-impresa.",
+      "cta": "La nostra storia",
+      "ctaTeam": "Conosci il team"
+    },
+    "newsletter": {
+      "title": "Non perdere la prossima borsa",
+      "text": "Iscriviti alla newsletter: ti scriviamo quando arrivano nuovi pezzi unici."
+    },
+    "social": {
+      "title": "Seguici su Instagram",
+      "text": "Nuove borse, dietro le quinte e piccole storie del nostro progetto.",
+      "cta": "Vai su Instagram"
+    }
+  },
+  "shop": {
+    "eyebrow": "Shop",
+    "title": "Le nostre borse",
+    "intro": "Ogni borsa è un pezzo unico, fatto a mano con materiali recuperati. Quella che vedi in foto è proprio quella che riceverai.",
+    "filter": {
+      "label": "Filtra per modello",
+      "all": "Tutti i modelli"
+    },
+    "count": {
+      "one": "1 borsa disponibile",
+      "other": "{count} borse disponibili"
+    },
+    "empty": {
+      "title": "Tutte le borse hanno trovato casa",
+      "text": "Stiamo già lavorando alle prossime. Seguici su Instagram per scoprirle appena sono pronte.",
+      "cta": "Seguici su Instagram"
+    },
+    "emptyFiltered": {
+      "title": "Nessuna borsa di questo modello, per ora",
+      "text": "Dai un'occhiata agli altri modelli o torna a trovarci presto.",
+      "cta": "Mostra tutti i modelli"
+    },
+    "unique": {
+      "title": "Perché ogni borsa è unica",
+      "text": "Usiamo materiali recuperati: vestiti e ombrelli che avevano già una storia. Per questo colori, fantasie e piccoli dettagli cambiano sempre, e ogni borsa ha il suo carattere."
+    },
+    "models": {
+      "title": "I nostri modelli",
+      "intro": "Tre forme lavorate all'uncinetto. Colori e fodere cambiano ogni volta.",
+      "typicalPrice": "Prezzo: CHF {price}",
+      "viewModel": "Vedi le borse {model}"
+    },
+    "card": {
+      "view": "Scopri",
+      "photoAlt": "Borsa {model} {colour}, pezzo unico N° {number}"
+    }
+  },
+  "product": {
+    "backToShop": "Torna allo shop",
+    "model": "Modello",
+    "type": "Forma",
+    "colour": "Colore esterno",
+    "lining": "Interno (fodera)",
+    "note": "Una nota su questa borsa",
+    "photoAlt": "Borsa {model} {colour}, pezzo unico N° {number} – foto {n}",
+    "dimensions": {
+      "title": "Dimensioni",
+      "length": "Lunghezza",
+      "depth": "Profondità",
+      "height": "Altezza",
+      "handle": "Altezza del manico",
+      "value": "{value} cm",
+      "note": "Misure indicative: ogni borsa è fatta a mano e può variare leggermente."
+    },
+    "materials": {
+      "title": "Materiali",
+      "exterior": "Esterno: fettuccia (filato da t-shirt) ricavata da vestiti recuperati, lavorata all'uncinetto.",
+      "lining": "Fodera: tessuto recuperato da ombrelli rotti."
+    },
+    "unique": {
+      "title": "Un pezzo unico",
+      "text": "Questa borsa esiste una sola volta: ricevi esattamente quella che vedi nelle foto."
+    },
+    "delivery": {
+      "title": "Come vuoi riceverla?",
+      "shipping": {
+        "title": "Spedizione",
+        "text": "Con La Posta Svizzera, in Svizzera e nel Liechtenstein.",
+        "price": "+ CHF {fee}"
+      },
+      "pickup": {
+        "title": "Ritiro a Bellinzona",
+        "text": "Dopo l'acquisto ti contattiamo per fissare un appuntamento.",
+        "price": "Gratis"
+      }
+    },
+    "total": "Totale",
+    "buyButton": "Acquista · CHF {price}",
+    "paymentNote": "Pagamento sicuro con TWINT, carta o PostFinance tramite Zahls.ch.",
+    "redirectNote": "Il pagamento avviene sulla pagina sicura di Zahls.ch.",
+    "orderByEmail": {
+      "title": "Ordina via e-mail",
+      "text": "Per questa borsa il pagamento online non è ancora attivo. Scrivici: ti rispondiamo il prima possibile.",
+      "subject": "Ordine {id} – {model}",
+      "body": "Buongiorno,\n\nvorrei acquistare la borsa {model}, pezzo unico N° {number} ({id}).\nConsegna: {delivery}.\n\nGrazie!"
+    },
+    "sold": {
+      "badge": "Venduta",
+      "title": "Questa borsa ha già trovato casa",
+      "text": "Era un pezzo unico e ora accompagna qualcun altro. Forse la tua ti aspetta tra le borse disponibili.",
+      "cta": "Vedi le borse disponibili"
+    },
+    "care": {
+      "title": "Come prendersene cura",
+      "text": "Lava a mano in acqua fredda, senza strizzare, e lascia asciugare in piano.",
+      "link": "Tutti i consigli"
+    },
+    "question": {
+      "title": "Hai una domanda su questa borsa?",
+      "cta": "Scrivici"
+    },
+    "related": {
+      "title": "Altri pezzi unici",
+      "cta": "Vedi tutte le borse"
+    },
+    "changeDelivery": "cambia modalità di consegna"
+  },
+  "about": {
+    "eyebrow": "La nostra storia",
+    "title": "Un filo che ci unisce",
+    "intro": "Chère Pochette nasce da un'idea semplice: dare nuova vita ai materiali dimenticati, con le nostre mani.",
+    "born": {
+      "title": "Come è nata Chère Pochette",
+      "paragraphs": [
+        "Siamo sette studentesse della Scuola cantonale di commercio (SCC) di Bellinzona.",
+        "Con il Company Programme di YES – Young Enterprise Switzerland abbiamo fondato una vera mini-impresa: dall'idea al prodotto, fino alla vendita."
+      ]
+    },
+    "idea": {
+      "title": "L'idea: borse all'uncinetto",
+      "paragraphs": [
+        "Abbiamo scelto l'uncinetto: una tecnica paziente, fatta a mano, che lascia spazio alla creatività.",
+        "Così sono nati i nostri tre modelli, Jolie, Belle e Coquette. Stesse forme, ma ogni borsa è diversa."
+      ]
+    },
+    "materials": {
+      "title": "Vestiti e ombrelli, una seconda vita",
+      "paragraphs": [
+        "L'esterno è lavorato con fettuccia, un filato ricavato da vestiti riciclati.",
+        "Gli ombrelli rotti, spesso buttati dopo un colpo di vento, diventano la fodera interna delle nostre borse."
+      ]
+    },
+    "women": {
+      "title": "Insieme alle donne ucraine",
+      "paragraphs": [
+        "Le nostre borse nascono dalla collaborazione con un gruppo di donne ucraine che lavorano all'uncinetto con noi.",
+        "Condividiamo tecnica, idee e tempo. Loro sono amiche fra loro, proprio come noi sette."
+      ]
+    },
+    "slogan": {
+      "title": "Made to carry on",
+      "paragraphs": [
+        "Il nostro slogan ha un doppio significato.",
+        "«Carry on» è il gesto di portare la borsa con sé, ogni giorno. Ma è anche andare avanti: dare un futuro a materiali destinati a essere scartati."
+      ]
+    },
+    "thread": {
+      "title": "Il filo del nostro logo",
+      "paragraphs": [
+        "Ago e filo ricordano il lavoro fatto a mano.",
+        "Il filo è anche un legame invisibile: unisce ogni borsa alle altre e tutte le donne del progetto. È il simbolo della nostra amicizia e del sostegno reciproco."
+      ]
+    },
+    "values": {
+      "title": "I nostri valori",
+      "items": [
+        {
+          "title": "Artigianalità",
+          "text": "Ogni borsa è fatta a mano, con cura e pazienza."
+        },
+        {
+          "title": "Sostenibilità",
+          "text": "Usiamo ciò che esiste già, invece di produrre di nuovo."
+        },
+        {
+          "title": "Riutilizzo",
+          "text": "Vestiti e ombrelli dimenticati diventano materia prima."
+        },
+        {
+          "title": "Collaborazione tra donne",
+          "text": "Creiamo insieme e impariamo le une dalle altre."
+        },
+        {
+          "title": "Amicizia",
+          "text": "Il filo che lega le nostre borse è lo stesso che lega noi."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ogni borsa porta con sé questa storia",
+      "button": "Scopri le borse",
+      "teamButton": "Conosci il team"
+    }
+  },
+  "process": {
+    "eyebrow": "Il nostro processo",
+    "title": "Dall'ombrello alla borsa",
+    "intro": "Un ombrello rotto, un vestito dimenticato. Ecco come diventano una Chère Pochette, in cinque passi.",
+    "stepLabel": "Passo {n}",
+    "steps": [
+      {
+        "id": "recovery",
+        "title": "Recupero",
+        "text": "Tutto parte da ciò che altri buttano: ombrelli rotti e vestiti che nessuno indossa più."
+      },
+      {
+        "id": "selection",
+        "title": "Selezione",
+        "text": "Scegliamo colori, fantasie e tessuti che stanno bene insieme. Ogni combinazione è diversa."
+      },
+      {
+        "id": "creation",
+        "title": "Creazione",
+        "text": "La fettuccia, ricavata da vestiti riciclati, prende forma all'uncinetto, punto dopo punto. Lo facciamo insieme alle donne ucraine."
+      },
+      {
+        "id": "lining",
+        "title": "Fodera",
+        "text": "Il tessuto degli ombrelli diventa la fodera interna. Ogni volta una fantasia diversa, da scoprire aprendo la borsa."
+      },
+      {
+        "id": "final",
+        "title": "Chère Pochette",
+        "text": "Nasce un pezzo unico e numerato, pronto a essere portato. Made to carry on."
+      }
+    ],
+    "closing": {
+      "title": "Il senso di «Made to carry on»",
+      "text": "Portare una borsa e, allo stesso tempo, far continuare la vita dei materiali. È questo che ci guida a ogni punto.",
+      "cta": "Scopri le borse"
+    }
+  },
+  "team": {
+    "eyebrow": "Il team",
+    "title": "Sette ragazze, una mini-impresa",
+    "intro": "Siamo sette studentesse della SCC di Bellinzona. Ognuna ha il suo ruolo; insieme portiamo avanti Chère Pochette.",
+    "hint": "Tocca una persona per scoprire il suo profilo.",
+    "hintPointer": "Clicca su una persona per scoprire il suo profilo.",
+    "viewProfile": "Vedi il profilo",
+    "levels": {
+      "level1": "Direzione generale",
+      "level2": "Responsabili di area"
+    },
+    "member": {
+      "role": "Ruolo",
+      "about": "Presentazione",
+      "skills": "Competenze",
+      "education": "Formazione",
+      "experience": "Esperienze",
+      "responsibilities": "Responsabilità in Chère Pochette",
+      "backToTeam": "Torna al team",
+      "photoAlt": "Ritratto di {name}",
+      "photoComingSoon": "Foto in arrivo",
+      "previous": "Profilo precedente",
+      "next": "Profilo successivo"
+    }
+  },
+  "info": {
+    "eyebrow": "Info",
+    "title": "Informazioni utili",
+    "intro": "Spedizione, ritiro, pagamento e cura della tua borsa: tutto quello che serve sapere, in breve.",
+    "tocTitle": "In questa pagina",
+    "shipping": {
+      "title": "Spedizione",
+      "paragraphs": [
+        "Spediamo con La Posta Svizzera, in Svizzera e nel Liechtenstein.",
+        "Costo forfettario di spedizione: CHF {fee}",
+        "Di solito spediamo entro 5 giorni lavorativi dal pagamento. È un tempo indicativo: prepariamo ogni pacco con cura, tra una lezione e l'altra."
+      ]
+    },
+    "pickup": {
+      "title": "Ritiro a Bellinzona",
+      "paragraphs": [
+        "Puoi anche ritirare la tua borsa a Bellinzona, gratuitamente.",
+        "Dopo l'acquisto ti contattiamo per fissare insieme giorno, ora e luogo."
+      ]
+    },
+    "payment": {
+      "title": "Pagamento",
+      "paragraphs": [
+        "Paghi in modo sicuro su Zahls.ch, con TWINT, carta o PostFinance.",
+        "I dati della tua carta o del tuo conto restano a Zahls.ch: noi non li vediamo."
+      ]
+    },
+    "returns": {
+      "title": "Resi",
+      "paragraphs": [
+        "Ogni borsa è un pezzo unico, e vogliamo che tu sia felice della tua scelta.",
+        "Se non ti convince, scrivici entro 14 giorni dal ricevimento. Se la borsa non è stata usata ed è nelle condizioni originali, puoi restituircela.",
+        "Le spese di rispedizione sono a tuo carico. Quando riceviamo la borsa, ti rimborsiamo il suo prezzo (le spese di spedizione iniziali non sono rimborsabili).",
+        "La borsa è arrivata danneggiata? Scrivici subito con una foto: troviamo insieme una soluzione."
+      ]
+    },
+    "care": {
+      "title": "Cura della borsa",
+      "tips": [
+        "Lava a mano in acqua fredda, con un detergente delicato.",
+        "Non strizzare e non torcere la borsa.",
+        "Lasciala asciugare in piano, lontano da fonti di calore.",
+        "Niente lavatrice né asciugatrice."
+      ]
+    },
+    "faq": {
+      "title": "Domande frequenti",
+      "items": [
+        {
+          "q": "Perché ogni borsa è diversa?",
+          "a": "Usiamo materiali recuperati, quindi colori e fantasie cambiano sempre. E ogni borsa è fatta a mano: le piccole differenze fanno parte del suo carattere."
+        },
+        {
+          "q": "La borsa che ricevo è quella delle foto?",
+          "a": "Sì. Ogni scheda presenta un pezzo unico: ricevi esattamente la borsa che vedi."
+        },
+        {
+          "q": "Quanto costa la spedizione?",
+          "a": "CHF {fee} in Svizzera e nel Liechtenstein. Il ritiro a Bellinzona è gratuito."
+        },
+        {
+          "q": "Come posso pagare?",
+          "a": "Con TWINT, carta o PostFinance, sulla pagina di pagamento sicura di Zahls.ch."
+        },
+        {
+          "q": "Posso regalare una borsa?",
+          "a": "Certo! Scrivici dopo l'acquisto e troviamo insieme la soluzione migliore per la consegna."
+        },
+        {
+          "q": "Chi realizza le borse?",
+          "a": "Noi, sette studentesse della SCC di Bellinzona, insieme a donne ucraine che lavorano all'uncinetto con noi."
+        },
+        {
+          "q": "Come scopro le nuove borse?",
+          "a": "Seguici su Instagram e iscriviti alla newsletter: ti avvisiamo quando arrivano nuovi pezzi unici."
+        }
+      ]
+    },
+    "contact": {
+      "title": "Hai ancora una domanda?",
+      "text": "Scrivici: ti rispondiamo volentieri.",
+      "cta": "Scrivici un'e-mail"
+    }
+  },
+  "legal": {
+    "eyebrow": "Note legali",
+    "title": "Note legali e privacy",
+    "intro": "Chi siamo, come trattiamo i tuoi dati e le nostre condizioni di vendita.",
+    "toc": {
+      "title": "In questa pagina",
+      "impressum": "Note legali",
+      "privacy": "Informativa sulla privacy",
+      "terms": "Condizioni di vendita"
+    },
+    "updated": "Ultimo aggiornamento: {date}"
+  },
+  "thanks": {
+    "eyebrow": "Pagamento riuscito",
+    "title": "Grazie di cuore!",
+    "lead": "Il pagamento è andato a buon fine. La tua Chère Pochette è pronta a iniziare una nuova vita con te.",
+    "paragraphs": [
+      "A breve riceverai un'e-mail di conferma da Zahls.ch. Se non la trovi, controlla anche la cartella spam.",
+      "Ti contatteremo noi per la spedizione o per fissare il ritiro a Bellinzona."
+    ],
+    "questions": "Hai una domanda? Scrivici a {email}.",
+    "cta": "Torna allo shop",
+    "ctaHome": "Vai alla home",
+    "bag": "La tua borsa: {model}, pezzo unico N° {number}"
+  },
+  "cancelled": {
+    "eyebrow": "Pagamento non completato",
+    "title": "Il pagamento non è andato a buon fine",
+    "lead": "Il pagamento è stato annullato o interrotto, quindi l'acquisto non è stato concluso.",
+    "paragraphs": [
+      "La borsa non è stata venduta: se è ancora disponibile, puoi riprovare quando vuoi.",
+      "Hai avuto un problema con il pagamento? Scrivici a {email}: ti aiutiamo volentieri."
+    ],
+    "retry": "Riprova",
+    "cta": "Torna allo shop",
+    "bag": "La borsa che avevi scelto: {model}, pezzo unico N° {number}"
+  },
+  "notFound": {
+    "eyebrow": "Errore 404",
+    "title": "Questo filo si è perso",
+    "text": "La pagina che cerchi non esiste o è stata spostata. Riprendiamo insieme il filo?",
+    "cta": "Vai alla home",
+    "ctaShop": "Vedi le borse"
+  },
+  "newsletter": {
+    "title": "Resta in contatto",
+    "text": "Nuove borse e piccole storie del nostro progetto. Poche e-mail, solo quando abbiamo qualcosa di bello da raccontare.",
+    "label": "Il tuo indirizzo e-mail",
+    "placeholder": "nome@esempio.ch",
+    "button": "Iscriviti",
+    "sending": "Invio in corso…",
+    "success": "Grazie! La tua iscrizione è stata ricevuta.",
+    "error": "Qualcosa non ha funzionato. Riprova più tardi o scrivici a {email}.",
+    "invalid": "Inserisci un indirizzo e-mail valido.",
+    "consent": "Iscrivendoti accetti di ricevere le nostre e-mail. Puoi annullare l'iscrizione in qualsiasi momento.",
+    "privacyLink": "Informativa sulla privacy",
+    "comingSoon": "La newsletter sarà attiva a breve. Nel frattempo, seguici su Instagram!",
+    "mailtoNote": "Il pulsante apre il tuo programma di posta: ti basta inviare l'e-mail.",
+    "mailtoBody": "Buongiorno,\n\nvorrei iscrivermi alla newsletter di Chère Pochette con questo indirizzo: {subscriber}\n\nGrazie!"
+  },
+  "footer": {
+    "about": "Borse all'uncinetto fatte a mano con materiali recuperati.",
+    "contactTitle": "Contatti",
+    "followTitle": "Seguici",
+    "linksTitle": "Scopri",
+    "legal": "Note legali e privacy",
+    "yes": "Mini-impresa YES – SCC Bellinzona",
+    "copyright": "© {year} Chère Pochette",
+    "privacyNote": "Questo sito non usa cookie né strumenti di tracciamento."
+  }
+}

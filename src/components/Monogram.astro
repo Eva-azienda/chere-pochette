@@ -1,0 +1,57 @@
+---
+/**
+ * Round avatar for a team member. There are no portraits yet, so it shows the initials in
+ * Bodoni on powder pink. When a photo is added (team.json → "photo"), replace this component's
+ * content with an <Image> of the portrait – the circle styles stay the same.
+ */
+import { initials } from '../lib/format';
+
+interface Props {
+  name: string;
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { name, size = 'md', class: className } = Astro.props;
+---
+
+<span class:list={['monogram', `monogram--${size}`, className]} aria-hidden="true">
+  <span>{initials(name)}</span>
+</span>
+
+<style>
+  .monogram {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--c-powder);
+    color: var(--c-plum);
+    font-family: var(--f-display);
+    font-optical-sizing: auto;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-plum) 12%, transparent);
+  }
+
+  .monogram--sm {
+    width: 3.5rem;
+    font-size: 1.25rem;
+  }
+
+  .monogram--md {
+    width: 4.75rem;
+    font-size: 1.625rem;
+  }
+
+  .monogram--lg {
+    width: 8rem;
+    font-size: 2.75rem;
+  }
+
+  .monogram span {
+    /* optical centring: Bodoni capitals sit slightly high */
+    transform: translateY(0.04em);
+  }
+</style>

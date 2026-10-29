@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "siteName": "Chère Pochette",
+    "htmlLang": "en",
+    "ogLocale": "en_GB",
+    "titleTemplate": "{title} · Chère Pochette",
+    "defaultDescription": "Handmade crochet bags from recovered materials. One-of-a-kind pieces by Chère Pochette, a YES mini-company at SCC Bellinzona.",
+    "pages": {
+      "home": {
+        "title": "Chère Pochette · Made to carry on",
+        "description": "Handmade crochet bags from recovered clothes and broken umbrellas. Every bag is one of a kind. A YES mini-company at SCC Bellinzona, Switzerland."
+      },
+      "shop": {
+        "title": "Shop – one-of-a-kind crochet bags",
+        "description": "Discover the bags available from Chère Pochette: one-of-a-kind crochet pieces lined with fabric from broken umbrellas. Pay with TWINT."
+      },
+      "product": {
+        "title": "{model} · One of a kind No. {number}",
+        "description": "{model}, one of a kind No. {number}: a handmade crochet bag. Outside: t-shirt yarn from recovered clothes. Lining: fabric from broken umbrellas."
+      },
+      "about": {
+        "title": "Our story",
+        "description": "Seven students from SCC Bellinzona, one idea and a thread that connects us: the story of Chère Pochette and the meaning of “Made to carry on”."
+      },
+      "process": {
+        "title": "From umbrella to bag",
+        "description": "Recovery, selection, creation, lining: how forgotten clothes and broken umbrellas become a Chère Pochette, in five steps."
+      },
+      "team": {
+        "title": "The team",
+        "description": "Meet the seven young women behind Chère Pochette: the org chart of our YES mini-company, with a profile for each of us."
+      },
+      "teamMember": {
+        "title": "{name} – {role}",
+        "description": "{name}, {role} at Chère Pochette, a YES mini-company at SCC Bellinzona."
+      },
+      "info": {
+        "title": "Info & FAQ",
+        "description": "Shipping within Switzerland, free pickup in Bellinzona, payment with TWINT, returns and care tips for your crochet bag."
+      },
+      "legal": {
+        "title": "Legal notice & privacy",
+        "description": "Legal notice, privacy policy and terms of sale of Chère Pochette."
+      },
+      "thanks": {
+        "title": "Thank you for your order",
+        "description": "Your payment was successful. Thank you for choosing Chère Pochette."
+      },
+      "cancelled": {
+        "title": "Payment not completed",
+        "description": "Your payment was not completed. You can try again at any time."
+      },
+      "notFound": {
+        "title": "Page not found",
+        "description": "The page you are looking for doesn't exist or has moved."
+      }
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "about": "Our story",
+    "process": "Our process",
+    "team": "Team",
+    "info": "Info & FAQ",
+    "legal": "Legal",
+    "contact": "Contact"
+  },
+  "languageNames": {
+    "it": "Italiano",
+    "de": "Deutsch",
+    "en": "English"
+  },
+  "brand": {
+    "slogan": "Made to carry on",
+    "sloganMeaning": "Carrying your bag with you – and giving materials a new life.",
+    "tagline": "From forgotten materials to something worth carrying on.",
+    "taglineSupport": "Clothes and umbrellas that were left behind, crocheted into something new."
+  },
+  "common": {
+    "buy": "Buy",
+    "orderByEmail": "Order by e-mail",
+    "uniquePiece": "One of a kind No. {number}",
+    "uniquePieceShort": "One of a kind",
+    "sold": "Sold",
+    "available": "Available",
+    "back": "Back",
+    "close": "Close",
+    "menu": "Menu",
+    "price": "Price",
+    "priceTag": "CHF {price}",
+    "priceNote": "Price in CHF, shipping not included.",
+    "free": "Free",
+    "model": "Model",
+    "colour": "Colour",
+    "learnMore": "Learn more",
+    "viewBag": "View the bag",
+    "viewAllBags": "See all bags",
+    "writeUs": "Write to us",
+    "followInstagram": "Follow us on Instagram",
+    "email": "E-mail",
+    "instagram": "Instagram"
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main navigation",
+    "footerNav": "Useful links",
+    "languageSwitcher": "Language",
+    "switchTo": "Read in {language}",
+    "homeLink": "Chère Pochette – go to the home page",
+    "logoAlt": "Chère Pochette logo",
+    "opensNewTab": "(opens in a new tab)",
+    "gallery": "Photos of the bag",
+    "previousPhoto": "Previous photo",
+    "nextPhoto": "Next photo",
+    "photoCount": "Photo {n} of {total}",
+    "breadcrumb": "Breadcrumb",
+    "orgChart": "Chère Pochette org chart",
+    "colourSwatch": "Colour: {colour}"
+  },
+  "images": {
+    "heroBagHands": "Hands holding a burgundy crochet Belle bag",
+    "heroBagUmbrella": "Burgundy crochet bag resting on a red umbrella",
+    "umbrellasCollected": "Broken umbrellas collected in a bin and a crate",
+    "umbrellasFabrics": "Fabrics from recovered umbrellas: polka dots, flowers, animal print and bright colours",
+    "yarnFettuccia": "Balls of t-shirt yarn in pink, burgundy, cream and black",
+    "womenCrochet": "Women crocheting together around a wooden table",
+    "modelJolie": "Jolie model, crochet barrel bag",
+    "modelBelle": "Belle model, crochet bag without fringe",
+    "modelCoquette": "Coquette model, crochet bag with fringe"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Crochet bags · One of a kind",
+      "title": "Made to carry on",
+      "subtitle": "Handmade crochet bags from recovered clothes and umbrellas. Each one is unique – just like you.",
+      "cta": "Discover the bags",
+      "ctaSecondary": "Our story"
+    },
+    "intro": {
+      "eyebrow": "The idea",
+      "title": "A second life, stitch by stitch",
+      "text": "Clothes no one wears anymore and broken umbrellas become elegant, feminine bags. We make them by hand, together, one at a time."
+    },
+    "pillars": {
+      "title": "Three ideas, one thread",
+      "items": [
+        {
+          "id": "reuse",
+          "title": "A second life for materials",
+          "text": "Old clothes become t-shirt yarn, broken umbrellas become lining. Forgotten materials, ready for a fresh start."
+        },
+        {
+          "id": "handmade",
+          "title": "Crocheted by hand",
+          "text": "Every bag grows stitch by stitch, with patience and care. That's why no two are alike."
+        },
+        {
+          "id": "together",
+          "title": "Made together, by women",
+          "text": "We crochet with Ukrainian women. A thread that connects hands, stories and friendships."
+        }
+      ]
+    },
+    "featured": {
+      "eyebrow": "In the shop",
+      "title": "One of a kind, ready for a new home",
+      "text": "Each bag exists only once. When it finds a home, it makes room for the next one.",
+      "cta": "See all bags",
+      "empty": "Our next bags are in the making. Follow us on Instagram so you don't miss them."
+    },
+    "models": {
+      "eyebrow": "The models",
+      "title": "Jolie, Belle and Coquette",
+      "text": "Three shapes, one style. Colours and linings change with every bag.",
+      "cta": "Choose your model"
+    },
+    "process": {
+      "eyebrow": "From umbrella to bag",
+      "title": "How a Chère Pochette is made",
+      "text": "From collecting materials to the very last stitch: five steps that turn what would have been thrown away into a bag worth carrying on.",
+      "cta": "Discover the process"
+    },
+    "story": {
+      "eyebrow": "Who we are",
+      "title": "Seven young women, one common thread",
+      "text": "We are seven students at the Cantonal Business School (SCC) in Bellinzona. Through the YES programme, we started our own mini-company.",
+      "cta": "Our story",
+      "ctaTeam": "Meet the team"
+    },
+    "newsletter": {
+      "title": "Don't miss the next bag",
+      "text": "Sign up for our newsletter: we'll write to you when new one-of-a-kind pieces arrive."
+    },
+    "social": {
+      "title": "Follow us on Instagram",
+      "text": "New bags, behind the scenes and little stories from our project.",
+      "cta": "Go to Instagram"
+    }
+  },
+  "shop": {
+    "eyebrow": "Shop",
+    "title": "Our bags",
+    "intro": "Every bag is one of a kind, handmade from recovered materials. The bag in the photos is exactly the one you'll receive.",
+    "filter": {
+      "label": "Filter by model",
+      "all": "All models"
+    },
+    "count": {
+      "one": "1 bag available",
+      "other": "{count} bags available"
+    },
+    "empty": {
+      "title": "Every bag has found a home",
+      "text": "We're already working on the next ones. Follow us on Instagram to see them as soon as they're ready.",
+      "cta": "Follow us on Instagram"
+    },
+    "emptyFiltered": {
+      "title": "No bags in this model right now",
+      "text": "Have a look at the other models, or come back soon.",
+      "cta": "Show all models"
+    },
+    "unique": {
+      "title": "Why every bag is unique",
+      "text": "We use recovered materials: clothes and umbrellas that already have a story. That's why colours, patterns and small details always vary – and every bag has its own character."
+    },
+    "models": {
+      "title": "Our models",
+      "intro": "Three crocheted shapes. Colours and linings are different every time.",
+      "typicalPrice": "Price: CHF {price}",
+      "viewModel": "See {model} bags"
+    },
+    "card": {
+      "view": "View",
+      "photoAlt": "{model} bag in {colour}, one of a kind No. {number}"
+    }
+  },
+  "product": {
+    "backToShop": "Back to the shop",
+    "model": "Model",
+    "type": "Shape",
+    "colour": "Exterior colour",
+    "lining": "Interior (lining)",
+    "note": "A note about this bag",
+    "photoAlt": "{model} bag in {colour}, one of a kind No. {number} – photo {n}",
+    "dimensions": {
+      "title": "Dimensions",
+      "length": "Length",
+      "depth": "Depth",
+      "height": "Height",
+      "handle": "Handle height",
+      "value": "{value} cm",
+      "note": "Approximate measurements: every bag is handmade and may vary slightly."
+    },
+    "materials": {
+      "title": "Materials",
+      "exterior": "Exterior: t-shirt yarn (fettuccia) made from recovered clothes, crocheted by hand.",
+      "lining": "Lining: fabric recovered from broken umbrellas."
+    },
+    "unique": {
+      "title": "One of a kind",
+      "text": "This bag exists only once: you'll receive exactly the one you see in the photos."
+    },
+    "delivery": {
+      "title": "How would you like to receive it?",
+      "shipping": {
+        "title": "Shipping",
+        "text": "With Swiss Post, within Switzerland and to Liechtenstein.",
+        "price": "+ CHF {fee}"
+      },
+      "pickup": {
+        "title": "Pickup in Bellinzona",
+        "text": "After your purchase, we'll contact you to arrange a time.",
+        "price": "Free"
+      }
+    },
+    "total": "Total",
+    "buyButton": "Buy · CHF {price}",
+    "paymentNote": "Secure payment with TWINT, card or PostFinance via Zahls.ch.",
+    "redirectNote": "Payment takes place on the secure Zahls.ch page.",
+    "orderByEmail": {
+      "title": "Order by e-mail",
+      "text": "Online payment isn't active for this bag yet. Write to us and we'll reply as soon as we can.",
+      "subject": "Order {id} – {model}",
+      "body": "Hello,\n\nI would like to buy the {model} bag, one of a kind No. {number} ({id}).\nDelivery: {delivery}.\n\nThank you!"
+    },
+    "sold": {
+      "badge": "Sold",
+      "title": "This bag has already found its home",
+      "text": "It was one of a kind, and now it goes everywhere with someone else. Perhaps yours is waiting among the bags still available.",
+      "cta": "See available bags"
+    },
+    "care": {
+      "title": "Caring for your bag",
+      "text": "Hand wash in cold water, don't wring, and let it dry flat.",
+      "link": "All care tips"
+    },
+    "question": {
+      "title": "Have a question about this bag?",
+      "cta": "Write to us"
+    },
+    "related": {
+      "title": "More one-of-a-kind pieces",
+      "cta": "See all bags"
+    },
+    "changeDelivery": "change delivery option"
+  },
+  "about": {
+    "eyebrow": "Our story",
+    "title": "A thread that connects us",
+    "intro": "Chère Pochette began with a simple idea: giving forgotten materials a new life, with our own hands.",
+    "born": {
+      "title": "How Chère Pochette began",
+      "paragraphs": [
+        "We are seven students at the Cantonal Business School (SCC) in Bellinzona.",
+        "Through the Company Programme of YES – Young Enterprise Switzerland, we founded a real mini-company: from the idea to the product, all the way to the sale."
+      ]
+    },
+    "idea": {
+      "title": "The idea: crochet bags",
+      "paragraphs": [
+        "We chose crochet: a patient, handmade craft that leaves room for creativity.",
+        "That's how our three models were born: Jolie, Belle and Coquette. The same shapes, yet every bag is different."
+      ]
+    },
+    "materials": {
+      "title": "Clothes and umbrellas, given a second life",
+      "paragraphs": [
+        "The outside is crocheted with fettuccia, a yarn made from recycled clothes.",
+        "Broken umbrellas, often thrown away after a single gust of wind, become the lining inside our bags."
+      ]
+    },
+    "women": {
+      "title": "Together with Ukrainian women",
+      "paragraphs": [
+        "Our bags are made in collaboration with a group of Ukrainian women who crochet with us.",
+        "We share technique, ideas and time. They are friends with one another – just like the seven of us."
+      ]
+    },
+    "slogan": {
+      "title": "Made to carry on",
+      "paragraphs": [
+        "Our slogan has a double meaning.",
+        "“Carry on” is carrying your bag with you, every day. It also means keeping going: giving a future to materials that would otherwise be thrown away."
+      ]
+    },
+    "thread": {
+      "title": "The thread in our logo",
+      "paragraphs": [
+        "The needle and thread stand for handmade work.",
+        "The thread is also an invisible bond: it links every bag to the others, and all the women in the project. It's a symbol of our friendship and mutual support."
+      ]
+    },
+    "values": {
+      "title": "Our values",
+      "items": [
+        {
+          "title": "Craftsmanship",
+          "text": "Every bag is made by hand, with care and patience."
+        },
+        {
+          "title": "Sustainability",
+          "text": "We use what already exists instead of producing something new."
+        },
+        {
+          "title": "Reuse",
+          "text": "Forgotten clothes and umbrellas become our raw material."
+        },
+        {
+          "title": "Collaboration between women",
+          "text": "We create together and learn from one another."
+        },
+        {
+          "title": "Friendship",
+          "text": "The thread that links our bags is the same one that links us."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Every bag carries this story on",
+      "button": "Discover the bags",
+      "teamButton": "Meet the team"
+    }
+  },
+  "process": {
+    "eyebrow": "Our process",
+    "title": "From umbrella to bag",
+    "intro": "A broken umbrella, a forgotten piece of clothing. Here's how they become a Chère Pochette, in five steps.",
+    "stepLabel": "Step {n}",
+    "steps": [
+      {
+        "id": "recovery",
+        "title": "Recovery",
+        "text": "It all starts with what others throw away: broken umbrellas and clothes no one wears anymore."
+      },
+      {
+        "id": "selection",
+        "title": "Selection",
+        "text": "We choose colours, patterns and fabrics that go well together. Every combination is different."
+      },
+      {
+        "id": "creation",
+        "title": "Creation",
+        "text": "Fettuccia, a yarn made from recycled clothes, takes shape stitch by stitch. We crochet together with the Ukrainian women."
+      },
+      {
+        "id": "lining",
+        "title": "Lining",
+        "text": "The umbrella fabric becomes the lining. A different pattern every time – a little surprise when you open the bag."
+      },
+      {
+        "id": "final",
+        "title": "Chère Pochette",
+        "text": "A numbered, one-of-a-kind piece is born, ready to be carried. Made to carry on."
+      }
+    ],
+    "closing": {
+      "title": "The meaning of “Made to carry on”",
+      "text": "Carrying a bag – and, at the same time, letting its materials live on. That's what guides every stitch we make.",
+      "cta": "Discover the bags"
+    }
+  },
+  "team": {
+    "eyebrow": "The team",
+    "title": "Seven young women, one mini-company",
+    "intro": "We are seven students at SCC Bellinzona. Each of us has her own role; together, we carry Chère Pochette forward.",
+    "hint": "Tap a person to discover her profile.",
+    "hintPointer": "Click on a person to discover her profile.",
+    "viewProfile": "View profile",
+    "levels": {
+      "level1": "Management",
+      "level2": "Heads of department"
+    },
+    "member": {
+      "role": "Role",
+      "about": "About",
+      "skills": "Skills",
+      "education": "Education",
+      "experience": "Experience",
+      "responsibilities": "Responsibilities at Chère Pochette",
+      "backToTeam": "Back to the team",
+      "photoAlt": "Portrait of {name}",
+      "photoComingSoon": "Photo coming soon",
+      "previous": "Previous profile",
+      "next": "Next profile"
+    }
+  },
+  "info": {
+    "eyebrow": "Info",
+    "title": "Good to know",
+    "intro": "Shipping, pickup, payment and caring for your bag: everything you need to know, in short.",
+    "tocTitle": "On this page",
+    "shipping": {
+      "title": "Shipping",
+      "paragraphs": [
+        "We ship with Swiss Post throughout Switzerland and to Liechtenstein.",
+        "Flat shipping fee: CHF {fee}",
+        "We usually ship within 5 working days of payment. This is an estimate: we pack every parcel with care, in between school lessons."
+      ]
+    },
+    "pickup": {
+      "title": "Pickup in Bellinzona",
+      "paragraphs": [
+        "You can also collect your bag in Bellinzona, free of charge.",
+        "After your purchase, we'll contact you to agree on a day, time and place."
+      ]
+    },
+    "payment": {
+      "title": "Payment",
+      "paragraphs": [
+        "You pay securely on Zahls.ch, with TWINT, card or PostFinance.",
+        "Your card or account details stay with Zahls.ch: we never see them."
+      ]
+    },
+    "returns": {
+      "title": "Returns",
+      "paragraphs": [
+        "Every bag is one of a kind, and we want you to be happy with your choice.",
+        "If it's not right for you, write to us within 14 days of receiving it. If the bag is unused and in its original condition, you can send it back.",
+        "Return shipping is at your expense. Once we receive the bag, we refund its price (the original shipping fee is not refundable).",
+        "Did your bag arrive damaged? Write to us right away with a photo and we'll find a solution together."
+      ]
+    },
+    "care": {
+      "title": "Caring for your bag",
+      "tips": [
+        "Hand wash in cold water with a mild detergent.",
+        "Don't wring or twist the bag.",
+        "Let it dry flat, away from heat sources.",
+        "No washing machine, no tumble dryer."
+      ]
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "q": "Why is every bag different?",
+          "a": "We use recovered materials, so colours and patterns always vary. And every bag is handmade: small differences are part of its character."
+        },
+        {
+          "q": "Is the bag I receive the one in the photos?",
+          "a": "Yes. Each product page shows a one-of-a-kind piece: you'll receive exactly the bag you see."
+        },
+        {
+          "q": "How much does shipping cost?",
+          "a": "CHF {fee} within Switzerland and to Liechtenstein. Pickup in Bellinzona is free."
+        },
+        {
+          "q": "How can I pay?",
+          "a": "With TWINT, card or PostFinance, on the secure Zahls.ch payment page."
+        },
+        {
+          "q": "Can I give a bag as a gift?",
+          "a": "Of course! Write to us after your purchase and we'll find the best way to arrange delivery together."
+        },
+        {
+          "q": "Who makes the bags?",
+          "a": "We do – seven students at SCC Bellinzona – together with Ukrainian women who crochet with us."
+        },
+        {
+          "q": "How do I hear about new bags?",
+          "a": "Follow us on Instagram and sign up for our newsletter: we'll let you know when new pieces arrive."
+        }
+      ]
+    },
+    "contact": {
+      "title": "Still have a question?",
+      "text": "Write to us – we're happy to help.",
+      "cta": "Send us an e-mail"
+    }
+  },
+  "legal": {
+    "eyebrow": "Legal",
+    "title": "Legal notice & privacy",
+    "intro": "Who we are, how we handle your data, and our terms of sale.",
+    "toc": {
+      "title": "On this page",
+      "impressum": "Legal notice",
+      "privacy": "Privacy policy",
+      "terms": "Terms of sale"
+    },
+    "updated": "Last updated: {date}"
+  },
+  "thanks": {
+    "eyebrow": "Payment successful",
+    "title": "Thank you so much!",
+    "lead": "Your payment went through. Your Chère Pochette is ready to start a new life with you.",
+    "paragraphs": [
+      "You'll soon receive a confirmation e-mail from Zahls.ch. If you can't find it, please check your spam folder.",
+      "We'll contact you to arrange shipping or your pickup in Bellinzona."
+    ],
+    "questions": "Any questions? Write to us at {email}.",
+    "cta": "Back to the shop",
+    "ctaHome": "Go to the home page",
+    "bag": "Your bag: {model}, one of a kind No. {number}"
+  },
+  "cancelled": {
+    "eyebrow": "Payment not completed",
+    "title": "Your payment didn't go through",
+    "lead": "The payment was cancelled or interrupted, so the purchase was not completed.",
+    "paragraphs": [
+      "The bag has not been sold: if it's still available, you can try again whenever you like.",
+      "Did you have trouble paying? Write to us at {email} – we're happy to help."
+    ],
+    "retry": "Try again",
+    "cta": "Back to the shop",
+    "bag": "The bag you chose: {model}, one of a kind No. {number}"
+  },
+  "notFound": {
+    "eyebrow": "Error 404",
+    "title": "This thread got lost",
+    "text": "The page you're looking for doesn't exist or has moved. Shall we pick up the thread together?",
+    "cta": "Go to the home page",
+    "ctaShop": "See the bags"
+  },
+  "newsletter": {
+    "title": "Stay in touch",
+    "text": "New bags and little stories from our project. Just a few e-mails, only when we have something lovely to share.",
+    "label": "Your e-mail address",
+    "placeholder": "name@example.ch",
+    "button": "Sign up",
+    "sending": "Sending…",
+    "success": "Thank you! Your sign-up has been received.",
+    "error": "Something went wrong. Please try again later or write to us at {email}.",
+    "invalid": "Please enter a valid e-mail address.",
+    "consent": "By signing up, you agree to receive our e-mails. You can unsubscribe at any time.",
+    "privacyLink": "Privacy policy",
+    "comingSoon": "Our newsletter is coming soon. In the meantime, follow us on Instagram!",
+    "mailtoNote": "The button opens your e-mail app – just send the message.",
+    "mailtoBody": "Hello,\n\nI would like to sign up for the Chère Pochette newsletter with this address: {subscriber}\n\nThank you!"
+  },
+  "footer": {
+    "about": "Handmade crochet bags from recovered materials.",
+    "contactTitle": "Contact",
+    "followTitle": "Follow us",
+    "linksTitle": "Explore",
+    "legal": "Legal notice & privacy",
+    "yes": "YES mini-company – SCC Bellinzona",
+    "copyright": "© {year} Chère Pochette",
+    "privacyNote": "This website uses no cookies and no tracking."
+  }
+}

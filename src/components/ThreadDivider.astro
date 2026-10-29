@@ -1,0 +1,47 @@
+---
+/**
+ * Thin "needle and thread" divider inspired by the logo. Purely decorative.
+ * Use it sparingly (one per page section at most) – it is an accent, not a pattern.
+ *   <ThreadDivider />                 centred, bordeaux
+ *   <ThreadDivider align="start" />   left-aligned
+ */
+interface Props {
+  align?: 'center' | 'start';
+  class?: string;
+}
+const { align = 'center', class: className } = Astro.props;
+---
+
+<div class:list={['thread', `thread--${align}`, className]} aria-hidden="true">
+  <svg viewBox="0 0 320 42" width="320" height="42" fill="none" stroke="currentColor" stroke-linecap="round">
+    <!-- the thread: a soft wave, one small loop, then up to the needle's eye -->
+    <path
+      d="M2 26C50 18 100 34 150 26S236 14 260 23C271 27 276 17 268 16.5C259 16 263 29 276 27C290 25 300 15 307.5 9.5"
+      stroke-width="1"
+    ></path>
+    <!-- the needle -->
+    <path d="M284.5 39.5 313.5 5.5" stroke-width="1.6"></path>
+    <ellipse cx="310.6" cy="8.9" rx="0.9" ry="2.6" transform="rotate(40.5 310.6 8.9)" stroke-width="0.8"></ellipse>
+  </svg>
+</div>
+
+<style>
+  .thread {
+    display: flex;
+    color: var(--c-bordeaux);
+    opacity: 0.75;
+  }
+
+  .thread--center {
+    justify-content: center;
+  }
+
+  .thread--start {
+    justify-content: flex-start;
+  }
+
+  .thread svg {
+    width: min(100%, 15rem);
+    height: auto;
+  }
+</style>

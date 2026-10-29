@@ -1,0 +1,385 @@
+---
+/**
+ * Sticky header: logo, desktop navigation, language switcher and the
+ * full-screen menu (a native <dialog>, so focus trap + Esc work out of the box).
+ * Languages: "IT DE EN" links on desktop, a small "IT ⌄" pop-up next to the menu button on
+ * phones, and a segmented control at the bottom of the menu drawer.
+ */
+// Simplified one-line logo ("Chère Pochette" in Bodoni italic) as inline SVG in currentColor.
+// The full logo with needle and slogan is used in the home hero on phones.
+import wordmark from '../assets/brand/wordmark.svg?raw';
+import Icon from './Icon.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { type Lang, useTranslations } from '../lib/i18n';
+import { localePath } from '../lib/urls';
+import { site } from '../lib/catalog';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const { t } = useTranslations(lang);
+
+// Main navigation (same order in header, menu and footer).
+const NAV = ['shop', 'about', 'process', 'team', 'info'] as const;
+const items = NAV.map((key) => ({
+  key,
+  href: localePath(lang, `${key}/`),
+  label: t(`nav.${key}`),
+  current: path.startsWith(`${key}/`),
+}));
+
+---
+
+<header class="header">
+  <div class="header__inner container">
+    <a class="header__logo" href={localePath(lang)} aria-label={t('a11y.homeLink')} set:html={wordmark} />
+
+    <nav class="header__nav" aria-label={t('a11y.mainNav')}>
+      <ul role="list">
+        {
+          items.map((item) => (
+            <li>
+              <a href={item.href} aria-current={item.current ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <LanguageSwitcher lang={lang} path={path} variant="links" class="header__lang" />
+    <LanguageSwitcher lang={lang} path={path} variant="menu" class="header__lang-menu" />
+
+    <button
+      class="header__toggle"
+      type="button"
+      aria-haspopup="dialog"
+      aria-controls="site-menu"
+      aria-expanded="false"
+      data-menu-open
+    >
+      <Icon name="menu" size={26} />
+      <span class="visually-hidden">{t('a11y.openMenu')}</span>
+    </button>
+  </div>
+</header>
+
+<dialog id="site-menu" class="menu" aria-label={t('common.menu')}>
+  <div class="menu__inner">
+    <div class="menu__top">
+      <a class="menu__logo" href={localePath(lang)} aria-label={t('a11y.homeLink')} set:html={wordmark} />
+      <button class="menu__close" type="button" data-menu-close autofocus>
+        <Icon name="close" size={26} />
+        <span class="visually-hidden">{t('a11y.closeMenu')}</span>
+      </button>
+    </div>
+
+    <nav aria-label={t('a11y.mainNav')}>
+      <ul role="list" class="menu__links">
+        <li>
+          <a href={localePath(lang)} aria-current={path === '' ? 'page' : undefined}>{t('nav.home')}</a>
+        </li>
+        {
+          items.map((item) => (
+            <li>
+              <a href={item.href} aria-current={item.current ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="menu__bottom">
+      <LanguageSwitcher lang={lang} path={path} variant="segmented" />
+      <div class="menu__contact">
+        <a href={`mailto:${site.email}`}>
+          <Icon name="mail" size={20} />
+          <span>{site.email}</span>
+        </a>
+        <a href={site.instagram} rel="noopener">
+          <Icon name="instagram" size={20} />
+          <span>{t('common.followInstagram')}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  // --- Full-screen menu (native <dialog>) ---
+  const dialog = document.getElementById('site-menu') as HTMLDialogElement | null;
+  const openButton = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  if (dialog && openButton) {
+    openButton.addEventListener('click', () => {
+      if (!dialog.open) dialog.showModal();
+      openButton.setAttribute('aria-expanded', 'true');
+    });
+    dialog.addEventListener('close', () => openButton.setAttribute('aria-expanded', 'false'));
+    // Close with the X button, and when a link is followed (needed for links to #anchors).
+    dialog.querySelectorAll('[data-menu-close], a').forEach((el) =>
+      el.addEventListener('click', () => dialog.close()),
+    );
+    // The desktop layout has no menu button: make sure the dialog is closed when resizing.
+    window.matchMedia('(min-width: 64rem)').addEventListener('change', (e) => {
+      if (e.matches && dialog.open) dialog.close();
+    });
+  }
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding-top: env(safe-area-inset-top);
+    background: var(--c-ivory);
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    height: var(--header-h);
+    padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
+  }
+
+  /* Wordmark: sized by height (22px phones, 24px desktop), coloured with currentColor.
+     The padding makes the link a 48px-high tap target with clear space around the letters. */
+  .header__logo,
+  .menu__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-height: var(--tap);
+    color: var(--c-bordeaux);
+    border-radius: var(--radius-sm);
+    transition: opacity var(--dur) var(--ease), visibility var(--dur);
+  }
+
+  .header__logo {
+    margin-right: auto;
+  }
+
+  .header__logo :global(svg),
+  .menu__logo :global(svg) {
+    display: block;
+    height: 22px;
+    width: auto;
+  }
+
+  /* Home page on phones: the big logo in the hero introduces the brand, so the header
+     wordmark only fades in once that logo has scrolled away (class set by the home page). */
+  @media (max-width: 63.999rem) {
+    .header:global(.header--hero-logo) .header__logo {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  .header__nav,
+  .header :global(.header__lang) {
+    display: none;
+  }
+
+  /* Phones: the "IT ⌄" button sits close to the menu button, as one small group. */
+  .header :global(.header__lang-menu) {
+    margin-right: calc(var(--s-3) * -1);
+  }
+
+  .header__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--tap);
+    height: var(--tap);
+    margin-right: calc(var(--s-2) * -1);
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--c-plum);
+  }
+
+  @media (min-width: 64rem) {
+    .header__logo :global(svg) {
+      height: 24px;
+    }
+
+    .header__nav,
+    .header :global(.header__lang) {
+      display: block;
+    }
+
+    .header__toggle {
+      display: none;
+    }
+
+    .header__nav ul {
+      display: flex;
+      gap: var(--s-1);
+    }
+
+    .header__nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--tap);
+      padding-inline: var(--s-3);
+      font-size: var(--fs-sm);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--c-anthracite);
+      text-decoration: none;
+      background-image: linear-gradient(var(--c-bordeaux), var(--c-bordeaux));
+      background-repeat: no-repeat;
+      background-position: center calc(100% - 10px);
+      background-size: 0 1px;
+      transition:
+        background-size var(--dur) var(--ease),
+        color var(--dur) var(--ease);
+    }
+
+    .header__nav a:hover,
+    .header__nav a[aria-current='page'] {
+      color: var(--c-bordeaux);
+      background-size: calc(100% - 2 * var(--s-3)) 1px;
+    }
+
+    /* A short hairline separates the languages from the navigation. */
+    .header :global(.header__lang) {
+      display: flex;
+      align-items: center;
+      gap: var(--s-2);
+      margin-right: calc(var(--s-3) * -1);
+    }
+
+    .header :global(.header__lang)::before {
+      content: '';
+      width: 1px;
+      height: 1rem;
+      background: var(--c-line-strong);
+    }
+
+    .header :global(.header__lang-menu) {
+      display: none;
+    }
+  }
+
+  /* ---------- Menu drawer ---------- */
+  .menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--c-ivory);
+    color: var(--c-plum);
+    overscroll-behavior: contain;
+  }
+
+  .menu::backdrop {
+    background: var(--c-ivory);
+  }
+
+  /* While the menu is open the page behind it must not scroll. */
+  :global(html:has(.menu[open])) {
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .menu[open] {
+      animation: menu-in 260ms var(--ease);
+    }
+
+    @keyframes menu-in {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+    }
+  }
+
+  .menu__inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 0 var(--gutter) max(var(--s-6), env(safe-area-inset-bottom));
+  }
+
+  .menu__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-h);
+    flex-shrink: 0;
+  }
+
+  .menu__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--tap);
+    height: var(--tap);
+    margin-right: calc(var(--s-2) * -1);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--c-plum);
+  }
+
+  .menu__links {
+    display: grid;
+    gap: var(--s-1);
+    padding-block: var(--s-6);
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .menu__links a {
+    display: flex;
+    align-items: center;
+    min-height: 3.25rem;
+    font-family: var(--f-display);
+    font-size: 1.875rem;
+    line-height: 1.15;
+    color: var(--c-plum);
+    text-decoration: none;
+  }
+
+  .menu__links a[aria-current='page'] {
+    color: var(--c-bordeaux);
+    font-style: italic;
+  }
+
+  .menu__bottom {
+    display: grid;
+    gap: var(--s-5);
+    margin-top: auto;
+    padding-top: var(--s-6);
+  }
+
+  .menu__contact {
+    display: grid;
+    gap: var(--s-1);
+  }
+
+  .menu__contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    min-height: var(--tap);
+    font-size: var(--fs-sm);
+    color: var(--c-anthracite);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+</style>

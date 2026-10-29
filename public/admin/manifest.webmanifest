@@ -1,0 +1,16 @@
+{
+  "name": "Chère Pochette Admin",
+  "short_name": "CP Admin",
+  "description": "Inventario delle borse Chère Pochette",
+  "lang": "it",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#82001F",
+  "background_color": "#FAF7F2",
+  "icons": [
+    { "src": "../brand/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "../brand/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

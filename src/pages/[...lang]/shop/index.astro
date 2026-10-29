@@ -1,0 +1,244 @@
+---
+/**
+ * Shop: every bag with status "available", newest first, with filter chips by model.
+ *
+ * Filtering works WITHOUT JavaScript: each chip is a link to #jolie / #belle / #coquette and
+ * the CSS :target rules below hide the other bags. A small script only updates the chips,
+ * the counter and the "nothing here" message. Links like /shop/#belle work from anywhere.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import ModelsShowcase from '../../../components/ModelsShowcase.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import ThreadDivider from '../../../components/ThreadDivider.astro';
+import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
+import { getAvailableProducts, models, site } from '../../../lib/catalog';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const { t, pageMeta } = useTranslations(lang);
+const products = await getAvailableProducts();
+
+const countText = (n: number) =>
+  n === 1 ? t('shop.count.one', { count: n }) : t('shop.count.other', { count: n });
+
+// Data for the small script (texts in the page language).
+const countTexts = { one: t('shop.count.one'), other: t('shop.count.other') };
+
+// CSS for the no-JavaScript filter: "#belle:target ~ … .card:not([data-model=belle]) { display:none }"
+const filterCss = models
+  .map(
+    (m) =>
+      `#${m.id}:target ~ .shop-grid > li:not([data-model="${m.id}"]){display:none}` +
+      `#${m.id}:target ~ .shop-chips a[href="#${m.id}"]{background:var(--c-plum);color:var(--c-ivory);border-color:var(--c-plum)}` +
+      `#${m.id}:target ~ .shop-chips a[href="#all"]{background:transparent;color:var(--c-plum);border-color:var(--c-line-strong)}`,
+  )
+  .join('');
+---
+
+<BaseLayout lang={lang} path="shop/" {...pageMeta('shop')}>
+  <PageHeader eyebrow={t('shop.eyebrow')} title={t('shop.title')} intro={t('shop.intro')} />
+
+  <section class="container shop" data-shop data-count-one={countTexts.one} data-count-other={countTexts.other}>
+    {
+      products.length === 0 ? (
+        <div class="empty">
+          <h2 class="h3">{t('shop.empty.title')}</h2>
+          <p class="lead">{t('shop.empty.text')}</p>
+          <a class="btn btn--outline" href={site.instagram} rel="noopener">
+            <Icon name="instagram" size={20} />
+            {t('shop.empty.cta')}
+          </a>
+        </div>
+      ) : (
+        <>
+          <style set:html={filterCss} />
+          {/* invisible jump targets for the filter (must come before chips and grid) */}
+          <span id="all" class="shop-anchor" />
+          {models.map((m) => <span id={m.id} class="shop-anchor" />)}
+
+          <nav class="shop-chips" aria-label={t('shop.filter.label')}>
+            <a href="#all" aria-current="true" data-filter="all">{t('shop.filter.all')}</a>
+            {models.map((m) => (
+              <a href={`#${m.id}`} data-filter={m.id}>
+                {m.name}
+              </a>
+            ))}
+          </nav>
+
+          <p class="shop-count" role="status" data-shop-count>
+            {countText(products.length)}
+          </p>
+
+          <ul role="list" class="product-grid shop-grid">
+            {products.map((product, i) => (
+              <li data-model={product.model}>
+                <ProductCard product={product} lang={lang} headingLevel={2} eager={i < 2} />
+              </li>
+            ))}
+          </ul>
+
+          <div class="empty shop-empty" data-shop-empty hidden>
+            <h2 class="h3">{t('shop.emptyFiltered.title')}</h2>
+            <p>{t('shop.emptyFiltered.text')}</p>
+            <a class="btn btn--outline" href="#all">{t('shop.emptyFiltered.cta')}</a>
+          </div>
+        </>
+      )
+    }
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow center unique">
+      <ThreadDivider />
+      <h2 class="h3">{t('shop.unique.title')}</h2>
+      <p>{t('shop.unique.text')}</p>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="models-title">
+    <div class="container">
+      <div class="heading center">
+        <h2 id="models-title">{t('shop.models.title')}</h2>
+        <p>{t('shop.models.intro')}</p>
+      </div>
+      <ModelsShowcase lang={lang} />
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Progressive enhancement of the :target filter: chip state, counter and empty message.
+  const shop = document.querySelector<HTMLElement>('[data-shop]');
+  if (shop) {
+    const items = Array.from(shop.querySelectorAll<HTMLElement>('.shop-grid > li'));
+    const chips = Array.from(shop.querySelectorAll<HTMLAnchorElement>('[data-filter]'));
+    const count = shop.querySelector<HTMLElement>('[data-shop-count]');
+    const empty = shop.querySelector<HTMLElement>('[data-shop-empty]');
+    const models = chips.map((c) => c.dataset.filter).filter((id) => id && id !== 'all');
+
+    const apply = () => {
+      const hash = decodeURIComponent(location.hash.slice(1));
+      const model = models.includes(hash) ? hash : 'all';
+      let visible = 0;
+      items.forEach((item) => {
+        const show = model === 'all' || item.dataset.model === model;
+        item.hidden = !show;
+        if (show) visible++;
+      });
+      chips.forEach((chip) => {
+        if (chip.dataset.filter === model) chip.setAttribute('aria-current', 'true');
+        else chip.removeAttribute('aria-current');
+      });
+      if (count) {
+        const template = visible === 1 ? shop.dataset.countOne : shop.dataset.countOther;
+        count.textContent = (template ?? '').replace('{count}', String(visible));
+        count.hidden = visible === 0;
+      }
+      if (empty) empty.hidden = visible > 0;
+    };
+
+    shop.classList.add('is-enhanced');
+    window.addEventListener('hashchange', apply);
+    apply();
+  }
+</script>
+
+<style>
+  .shop {
+    padding-bottom: var(--s-6);
+  }
+
+  .shop-anchor {
+    display: block;
+    height: 0;
+    scroll-margin-top: calc(var(--header-h) + var(--s-4));
+  }
+
+  .shop-chips {
+    display: flex;
+    gap: var(--s-2);
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 0 var(--gutter) var(--s-2);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .shop-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .shop-chips a {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-height: var(--tap);
+    padding-inline: var(--s-5);
+    border: 1px solid var(--c-line-strong);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--c-plum);
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color var(--dur) var(--ease),
+      color var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
+  }
+
+  .shop-chips a:hover {
+    border-color: var(--c-plum);
+  }
+
+  .shop-chips a[aria-current='true'] {
+    background: var(--c-plum);
+    border-color: var(--c-plum);
+    color: var(--c-ivory);
+  }
+
+  /* With JavaScript the script manages the chips; the no-JS :target colours must not interfere. */
+  .shop.is-enhanced .shop-chips a:not([aria-current='true']) {
+    background: transparent !important;
+    color: var(--c-plum) !important;
+    border-color: var(--c-line-strong) !important;
+  }
+
+  .shop-count {
+    margin: var(--s-4) 0 var(--s-5);
+    font-size: var(--fs-sm);
+    color: var(--c-muted);
+  }
+
+  .shop-grid > li[hidden] {
+    display: none;
+  }
+
+  .unique {
+    display: grid;
+    justify-items: center;
+    gap: var(--s-4);
+  }
+
+  @media (min-width: 48rem) {
+    .shop-chips {
+      flex-wrap: wrap;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+
+    .product-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .product-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

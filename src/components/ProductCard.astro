@@ -1,0 +1,144 @@
+---
+/** A bag in a grid (shop, home, "other unique pieces"). The whole card is one link. */
+import { type Lang, useTranslations } from '../lib/i18n';
+import { localePath } from '../lib/urls';
+import { describeProduct, photoSrcset, photoUrl, type Product } from '../lib/catalog';
+
+interface Props {
+  product: Product;
+  lang: Lang;
+  /** Heading level of the bag title inside the card (depends on the page outline). */
+  headingLevel?: 2 | 3;
+  /** Image `sizes` attribute: how wide the card is at each breakpoint. */
+  sizes?: string;
+  /** true for the first cards of a page (above the fold on phones). */
+  eager?: boolean;
+}
+
+const {
+  product,
+  lang,
+  headingLevel = 3,
+  sizes = '(min-width: 64rem) 22vw, (min-width: 48rem) 30vw, 46vw',
+  eager = false,
+} = Astro.props;
+const { t } = useTranslations(lang);
+const info = describeProduct(product, lang);
+const cover = product.photos[0];
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+---
+
+<article class="card" data-model={product.model}>
+  <a class="card__link" href={localePath(lang, `shop/${product.id}/`)}>
+    <div class="card__media">
+      {
+        cover ? (
+          <img
+            src={photoUrl(cover.src, 900)}
+            srcset={photoSrcset(cover.src)}
+            sizes={sizes}
+            width={cover.w}
+            height={cover.h}
+            alt=""
+            loading={eager ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+        ) : (
+          <span class="card__placeholder" aria-hidden="true">{info.modelName}</span>
+        )
+      }
+      {product.status === 'sold' && <span class="card__badge">{t('common.sold')}</span>}
+    </div>
+    <div class="card__body">
+      <p class="card__number">{t('common.uniquePiece', { number: info.number })}</p>
+      <Heading class="card__title">{info.title}</Heading>
+      <p class="card__price">{t('common.priceTag', { price: info.price })}</p>
+    </div>
+  </a>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    min-width: 0;
+  }
+
+  .card__link {
+    display: grid;
+    gap: var(--s-3);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .card__media {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background: var(--placeholder);
+  }
+
+  .card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms var(--ease);
+  }
+
+  .card__link:hover .card__media img {
+    transform: scale(1.03);
+  }
+
+  .card__placeholder {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    font-family: var(--f-display);
+    font-size: var(--fs-xl);
+    color: var(--c-muted);
+  }
+
+  .card__badge {
+    position: absolute;
+    top: var(--s-3);
+    left: var(--s-3);
+    padding: var(--s-1) var(--s-3);
+    border-radius: var(--radius-pill);
+    background: var(--c-ivory);
+    color: var(--c-plum);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .card__body {
+    display: grid;
+    gap: var(--s-1);
+  }
+
+  .card__number {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+
+  .card__title {
+    font-family: var(--f-display);
+    font-size: var(--fs-lg);
+    line-height: var(--lh-snug);
+    color: var(--c-plum);
+  }
+
+  .card__link:hover .card__title {
+    color: var(--c-bordeaux);
+  }
+
+  .card__price {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+</style>
