@@ -1,0 +1,28 @@
+{
+  "id": "cp-001",
+  "number": 1,
+  "model": "belle",
+  "status": "available",
+  "price": 40,
+  "colour": "bordeaux",
+  "lining": "tinta-unita",
+  "note": "",
+  "photos": [
+    {
+      "src": "media/products/cp-001/1",
+      "w": 0,
+      "h": 0
+    },
+    {
+      "src": "media/products/cp-001/2",
+      "w": 0,
+      "h": 0
+    }
+  ],
+  "createdAt": "2026-10-29T15:00:00Z",
+  "updatedAt": "2026-10-29T15:00:00Z",
+  "soldAt": null,
+  "soldChannel": null,
+  "zahls": null,
+  "sample": true
+}

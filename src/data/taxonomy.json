@@ -1,0 +1,33 @@
+{
+  "colours": [
+    { "id": "bordeaux", "hex": "#82001F", "it": "Bordeaux", "de": "Bordeaux", "en": "Burgundy" },
+    { "id": "rosso", "hex": "#B3122E", "it": "Rosso", "de": "Rot", "en": "Red" },
+    { "id": "rosa-antico", "hex": "#C08A80", "it": "Rosa antico", "de": "Altrosa", "en": "Dusty pink" },
+    { "id": "rosa-cipria", "hex": "#E8D1D8", "it": "Rosa cipria", "de": "Puderrosa", "en": "Powder pink" },
+    { "id": "lilla", "hex": "#B7A2C9", "it": "Lilla", "de": "Flieder", "en": "Lilac" },
+    { "id": "panna", "hex": "#F1E9D8", "it": "Panna", "de": "Creme", "en": "Cream" },
+    { "id": "beige", "hex": "#D6C3A5", "it": "Beige", "de": "Beige", "en": "Beige" },
+    { "id": "grigio-perla", "hex": "#C9C6C1", "it": "Grigio perla", "de": "Perlgrau", "en": "Pearl grey" },
+    { "id": "cammello", "hex": "#A9744A", "it": "Cammello", "de": "Camel", "en": "Camel" },
+    { "id": "giallo", "hex": "#EFE08A", "it": "Giallo", "de": "Gelb", "en": "Yellow" },
+    { "id": "verde-salvia", "hex": "#9DAE94", "it": "Verde salvia", "de": "Salbeigrün", "en": "Sage green" },
+    { "id": "azzurro", "hex": "#9FC2DD", "it": "Azzurro", "de": "Hellblau", "en": "Sky blue" },
+    { "id": "blu-notte", "hex": "#24304F", "it": "Blu notte", "de": "Nachtblau", "en": "Navy" },
+    { "id": "nero", "hex": "#1E1E1E", "it": "Nero", "de": "Schwarz", "en": "Black" },
+    { "id": "multicolore", "hex": "linear-gradient(135deg,#82001F,#E8D1D8,#EFE08A,#9FC2DD)", "it": "Multicolore", "de": "Mehrfarbig", "en": "Multicolour" }
+  ],
+  "linings": [
+    { "id": "tinta-unita", "it": "Tinta unita", "de": "Uni", "en": "Solid colour" },
+    { "id": "pois", "it": "A pois", "de": "Gepunktet", "en": "Polka dot" },
+    { "id": "floreale", "it": "Floreale", "de": "Geblümt", "en": "Floral" },
+    { "id": "animalier", "it": "Animalier", "de": "Animal-Print", "en": "Animal print" },
+    { "id": "righe", "it": "A righe", "de": "Gestreift", "en": "Striped" },
+    { "id": "geometrico", "it": "Geometrico", "de": "Geometrisch", "en": "Geometric" },
+    { "id": "multicolore", "it": "Multicolore", "de": "Mehrfarbig", "en": "Multicolour" }
+  ],
+  "statuses": [
+    { "id": "available", "it": "In vendita", "de": "Verfügbar", "en": "Available" },
+    { "id": "sold", "it": "Venduta", "de": "Verkauft", "en": "Sold" },
+    { "id": "hidden", "it": "Nascosta", "de": "Ausgeblendet", "en": "Hidden" }
+  ]
+}

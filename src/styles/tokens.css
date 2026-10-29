@@ -1,0 +1,68 @@
+/* Chère Pochette design tokens — single source of truth for colours, type and spacing.
+   Palette from the official brand kit (Branding/kit aziendale.docx). */
+:root {
+  /* Brand palette */
+  --c-bordeaux: #82001f;      /* primary: logo, buttons, key accents */
+  --c-bordeaux-2: #761f26;    /* secondary bordeaux: hover / pressed */
+  --c-plum: #54152c;          /* dark plum: footer, deep accents */
+  --c-powder: #e8d1d8;        /* powder pink: soft surfaces, badges */
+  --c-ivory: #faf7f2;         /* ivory: page background */
+  --c-anthracite: #292929;    /* body text */
+
+  /* Derived neutrals */
+  --c-ivory-2: #f3ece3;       /* slightly deeper ivory for alternating sections */
+  --c-powder-2: #f5e9ed;      /* very light powder for cards / notices */
+  --c-muted: #6d6460;         /* secondary text (AA on ivory) */
+  --c-line: rgba(41, 41, 41, 0.14);
+  --c-line-strong: rgba(41, 41, 41, 0.28);
+  --c-white: #ffffff;
+  --c-success: #2f6b4f;
+  --c-danger: #a3122a;
+
+  /* Typography: Bodoni for display (brand font Bodoni FLF → web: Bodoni Moda),
+     Red Hat Display for body (brand's Canva font). Both self-hosted via @fontsource. */
+  --f-display: 'Bodoni Moda Variable', 'Bodoni Moda', 'Bodoni 72', Didot, 'Times New Roman', serif;
+  --f-body: 'Red Hat Display Variable', 'Red Hat Display', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Fluid type scale (mobile → desktop) */
+  --fs-xs: 0.8125rem;                               /* 13px */
+  --fs-sm: 0.9375rem;                               /* 15px */
+  --fs-base: 1.0625rem;                             /* 17px — comfortable on phones */
+  --fs-lg: clamp(1.1875rem, 1.1rem + 0.4vw, 1.375rem);
+  --fs-xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --fs-2xl: clamp(2rem, 1.6rem + 2vw, 3rem);
+  --fs-3xl: clamp(2.5rem, 1.9rem + 3.2vw, 4.5rem);
+  --lh-tight: 1.1;
+  --lh-snug: 1.3;
+  --lh-body: 1.6;
+  --tracking-wide: 0.18em;    /* slogan / eyebrow labels, as in the logo */
+
+  /* Spacing scale */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+  --gutter: 1rem;             /* 16px side gutter on phones */
+  --section-y: clamp(3rem, 2rem + 5vw, 6rem);
+  --container: 72rem;
+  --container-narrow: 42rem;
+
+  /* Shape & depth: elegant, mostly flat, thin lines */
+  --radius-sm: 4px;
+  --radius: 10px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 1px 2px rgba(84, 21, 44, 0.06), 0 8px 24px rgba(84, 21, 44, 0.08);
+  --tap: 48px;                /* minimum touch target */
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 220ms;
+}
+
+@media (min-width: 48rem) {
+  :root { --gutter: 2rem; }
+}

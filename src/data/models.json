@@ -1,0 +1,26 @@
+[
+  {
+    "id": "jolie",
+    "name": "Jolie",
+    "type": { "it": "Bauletto", "de": "Bauletto-Tasche", "en": "Barrel bag" },
+    "price": 45,
+    "dimensions": { "length": "20–30", "depth": "10–11", "height": "14–17", "handle": "2–3" },
+    "image": "model-jolie"
+  },
+  {
+    "id": "belle",
+    "name": "Belle",
+    "type": { "it": "Carolina senza frange", "de": "Carolina ohne Fransen", "en": "Carolina, without fringe" },
+    "price": 40,
+    "dimensions": { "length": "22–25", "depth": "6", "height": "20–22", "handle": "2–3" },
+    "image": "model-belle"
+  },
+  {
+    "id": "coquette",
+    "name": "Coquette",
+    "type": { "it": "Carolina con frange", "de": "Carolina mit Fransen", "en": "Carolina, with fringe" },
+    "price": 45,
+    "dimensions": { "length": "22–25", "depth": "6", "height": "16–18", "handle": "2–3" },
+    "image": "model-coquette"
+  }
+]

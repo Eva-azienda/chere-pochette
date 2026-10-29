@@ -1,0 +1,31 @@
+{
+  "name": "Chère Pochette",
+  "slogan": "Made to carry on",
+  "tagline": "From forgotten materials to something worth carrying on.",
+  "email": "chere.pochette@sccbellinzona.ch",
+  "instagram": "https://www.instagram.com/p/De1RHDQuJui/",
+  "currency": "CHF",
+  "shippingFee": 9,
+  "shippingCountries": ["CH", "LI"],
+  "pickupPlace": "Bellinzona",
+  "organisation": {
+    "legalName": "Chère Pochette – mini-impresa YES",
+    "school": "Scuola cantonale di commercio (SCC) Bellinzona",
+    "programme": "YES – Young Enterprise Switzerland, Company Programme 2026/27",
+    "address": "TODO: indirizzo postale",
+    "city": "6500 Bellinzona",
+    "country": "Svizzera"
+  },
+  "newsletter": {
+    "action": "",
+    "method": "post",
+    "emailField": "email"
+  },
+  "github": {
+    "owner": "",
+    "repo": "",
+    "branch": "main"
+  },
+  "languages": ["it", "de", "en"],
+  "defaultLanguage": "it"
+}

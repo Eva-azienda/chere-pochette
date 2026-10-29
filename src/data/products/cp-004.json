@@ -1,0 +1,23 @@
+{
+  "id": "cp-004",
+  "number": 4,
+  "model": "belle",
+  "status": "sold",
+  "price": 40,
+  "colour": "grigio-perla",
+  "lining": "pois",
+  "note": "",
+  "photos": [
+    {
+      "src": "media/products/cp-004/1",
+      "w": 0,
+      "h": 0
+    }
+  ],
+  "createdAt": "2026-10-29T15:00:00Z",
+  "updatedAt": "2026-10-29T15:00:00Z",
+  "soldAt": "2026-10-29T15:00:00Z",
+  "soldChannel": "manual",
+  "zahls": null,
+  "sample": true
+}
