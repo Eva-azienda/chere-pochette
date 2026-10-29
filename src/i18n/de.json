@@ -5,42 +5,43 @@
     "ogLocale": "de_CH",
     "titleTemplate": "{title} · Chère Pochette",
     "defaultDescription": "Von Hand gehäkelte Taschen aus wiederverwerteten Materialien. Unikate von Chère Pochette, einem YES-Miniunternehmen der SCC Bellinzona.",
+    "ogImageAlt": "Logo von Chère Pochette neben einer bordeauxroten Häkeltasche in den Händen",
     "pages": {
       "home": {
-        "title": "Chère Pochette · Made to carry on",
-        "description": "Von Hand gehäkelte Taschen aus geretteten Kleidern und kaputten Regenschirmen. Jede Tasche ist ein Unikat. Ein YES-Miniunternehmen der SCC Bellinzona."
+        "title": "Handgemachte Häkeltaschen aus dem Tessin · Chère Pochette",
+        "description": "Handgemachte Häkeltaschen aus alten Kleidern und kaputten Regenschirmen: Upcycling-Unikate aus dem Tessin, vom YES-Miniunternehmen der SCC Bellinzona."
       },
       "shop": {
-        "title": "Shop – einzigartige Häkeltaschen",
-        "description": "Entdecke die verfügbaren Taschen von Chère Pochette: gehäkelte Unikate mit Futter aus kaputten Regenschirmen. Bezahlung mit TWINT."
+        "title": "Shop – handgemachte Häkeltaschen",
+        "description": "Häkeltaschen Jolie, Belle und Coquette: nummerierte Unikate, von Hand gemacht aus geretteten Materialien. Versand in der Schweiz oder Abholung in Bellinzona."
       },
       "product": {
-        "title": "{model} · Unikat Nr. {number}",
-        "description": "{model}, Unikat Nr. {number}: von Hand gehäkelte Tasche. Aussen T-Shirt-Garn aus wiederverwerteten Kleidern, Futter aus kaputten Regenschirmen."
+        "title": "{model} – Häkeltasche Nr. {number}",
+        "description": "{model}, Unikat Nr. {number}: von Hand gehäkelte Tasche aus geretteten Kleidern, mit Futter aus kaputten Regenschirmen. CHF {price}"
       },
       "about": {
-        "title": "Unsere Geschichte",
-        "description": "Sieben Schülerinnen der SCC Bellinzona, eine Idee und ein Faden, der uns verbindet: die Geschichte von Chère Pochette und die Bedeutung von «Made to carry on»."
+        "title": "Unsere Geschichte: Häkeln und Upcycling",
+        "description": "Sieben Schülerinnen der SCC Bellinzona und eine Gruppe ukrainischer Frauen: So entstehen unsere Häkeltaschen aus alten Kleidern und Regenschirmen."
       },
       "process": {
-        "title": "Vom Regenschirm zur Tasche",
-        "description": "Sammeln, Auswahl, Kreation, Futter: So werden vergessene Kleider und kaputte Regenschirme in fünf Schritten zu einer Chère Pochette."
+        "title": "Vom Regenschirm zur Häkeltasche",
+        "description": "Sammeln, auswählen, häkeln, füttern: So werden alte Kleider und kaputte Regenschirme in fünf Schritten zu einer handgemachten Upcycling-Tasche."
       },
       "team": {
-        "title": "Das Team",
-        "description": "Lerne die sieben jungen Frauen von Chère Pochette kennen: das Organigramm unseres YES-Miniunternehmens, mit einem Profil für jede von uns."
+        "title": "Unser Team aus Bellinzona",
+        "description": "Lerne die sieben Schülerinnen der SCC Bellinzona hinter Chère Pochette kennen, dem YES-Miniunternehmen für Häkeltaschen: Organigramm und Profile."
       },
       "teamMember": {
         "title": "{name} – {role}",
         "description": "{name}, {role} bei Chère Pochette, einem YES-Miniunternehmen der SCC Bellinzona."
       },
       "info": {
-        "title": "Info & FAQ",
-        "description": "Versand in der Schweiz, kostenlose Abholung in Bellinzona, Bezahlung mit TWINT, Rückgabe und Pflegetipps für deine Häkeltasche."
+        "title": "Info & FAQ: Versand, Rückgabe, Pflege",
+        "description": "Versand in der ganzen Schweiz und nach Liechtenstein, kostenlose Abholung in Bellinzona, Rückgabe innert 14 Tagen und Pflegetipps für deine Häkeltasche."
       },
       "legal": {
-        "title": "Impressum & Datenschutz",
-        "description": "Impressum, Datenschutzerklärung und Verkaufsbedingungen von Chère Pochette."
+        "title": "Impressum, Datenschutz & AGB",
+        "description": "Impressum, Datenschutzerklärung und Verkaufsbedingungen von Chère Pochette, YES-Miniunternehmen der SCC Bellinzona. Keine Cookies, kein Tracking."
       },
       "thanks": {
         "title": "Danke für deinen Einkauf",
@@ -129,7 +130,9 @@
     "womenCrochet": "Frauen häkeln gemeinsam an einem Holztisch",
     "modelJolie": "Modell Jolie, gehäkelte Bauletto-Tasche",
     "modelBelle": "Modell Belle, gehäkelte Tasche ohne Fransen",
-    "modelCoquette": "Modell Coquette, gehäkelte Tasche mit Fransen"
+    "modelCoquette": "Modell Coquette, gehäkelte Tasche mit Fransen",
+    "bagSketch": "Strichzeichnung einer Häkeltasche mit Nadel und Faden",
+    "teamGroup": "Das Team von Chère Pochette: sieben junge Frauen der SCC Bellinzona, draussen, in bordeauxroten Oberteilen"
   },
   "home": {
     "hero": {
@@ -137,7 +140,18 @@
       "title": "Made to carry on",
       "subtitle": "Von Hand gehäkelte Taschen aus geretteten Kleidern und Regenschirmen. Jede ist einzigartig – genau wie du.",
       "cta": "Taschen entdecken",
-      "ctaSecondary": "Unsere Geschichte"
+      "ctaSecondary": "Unsere Geschichte",
+      "notes": {
+        "yarn": "Fettuccia aus geretteten Kleidern",
+        "handle": "gehäkelter Henkel",
+        "unique": "Unikat, nummeriert"
+      },
+      "marquee": [
+        "Unikate",
+        "Von Hand gehäkelt",
+        "Gerettete Kleider und Schirme",
+        "Made in Bellinzona"
+      ]
     },
     "intro": {
       "eyebrow": "Die Idee",
@@ -184,11 +198,16 @@
       "cta": "Den Prozess entdecken"
     },
     "story": {
-      "eyebrow": "Wer wir sind",
-      "title": "Sieben junge Frauen, ein gemeinsamer Faden",
-      "text": "Wir sind sieben Schülerinnen der Kantonalen Handelsschule (SCC) in Bellinzona. Mit dem YES-Programm haben wir unser eigenes Miniunternehmen gegründet.",
-      "cta": "Unsere Geschichte",
-      "ctaTeam": "Lerne das Team kennen"
+      "eyebrow": "Von vielen Händen gemacht",
+      "title": "Gemeinsam mit ukrainischen Frauen",
+      "text": "Unsere Taschen entstehen in Zusammenarbeit mit einer Gruppe ukrainischer Frauen, die mit uns häkeln. Wir teilen Technik, Ideen und Zeit.",
+      "cta": "Unsere Geschichte"
+    },
+    "team": {
+      "eyebrow": "Das Team",
+      "title": "Sieben junge Frauen, ein Faden",
+      "text": "Wir sind sieben Schülerinnen der Kantonalen Handelsschule (SCC) in Bellinzona und führen im Rahmen des YES-Programms gemeinsam unser Miniunternehmen.",
+      "cta": "Lerne das Team kennen"
     },
     "newsletter": {
       "title": "Verpasse keine neue Tasche",
@@ -202,7 +221,7 @@
   },
   "shop": {
     "eyebrow": "Shop",
-    "title": "Unsere Taschen",
+    "title": "Unsere Häkeltaschen",
     "intro": "Jede Tasche ist ein Unikat, von Hand gefertigt aus wiederverwerteten Materialien. Die Tasche auf den Fotos ist genau die, die du erhältst.",
     "filter": {
       "label": "Nach Modell filtern",
@@ -239,12 +258,13 @@
   },
   "product": {
     "backToShop": "Zurück zum Shop",
+    "eyebrow": "Handgemachte Häkeltasche",
     "model": "Modell",
     "type": "Form",
     "colour": "Farbe aussen",
     "lining": "Innen (Futter)",
     "note": "Eine Notiz zu dieser Tasche",
-    "photoAlt": "Tasche {model} in {colour}, Unikat Nr. {number} – Foto {n}",
+    "photoAlt": "Häkeltasche {model} in {colour}, Unikat Nr. {number} – Foto {n}",
     "dimensions": {
       "title": "Masse",
       "length": "Länge",
@@ -257,7 +277,8 @@
     "materials": {
       "title": "Materialien",
       "exterior": "Aussen: T-Shirt-Garn (Fettuccia) aus wiederverwerteten Kleidern, von Hand gehäkelt.",
-      "lining": "Futter: Stoff aus kaputten Regenschirmen."
+      "lining": "Futter: Stoff aus kaputten Regenschirmen.",
+      "schema": "Fettuccia (T-Shirt-Garn) aus geretteten Kleidern; Futter aus Regenschirmstoff"
     },
     "unique": {
       "title": "Ein Unikat",
@@ -285,6 +306,11 @@
       "text": "Für diese Tasche ist die Online-Zahlung noch nicht aktiv. Schreib uns – wir antworten so schnell wie möglich.",
       "subject": "Bestellung {id} – {model}",
       "body": "Guten Tag\n\nIch möchte die Tasche {model}, Unikat Nr. {number} ({id}), kaufen.\nLieferung: {delivery}.\n\nVielen Dank!"
+    },
+    "legalNote": {
+      "text": "Mit deiner Bestellung akzeptierst du unsere",
+      "terms": "Verkaufsbedingungen (AGB)",
+      "returns": "Rückgabe innert 14 Tagen"
     },
     "sold": {
       "badge": "Verkauft",
@@ -474,6 +500,12 @@
         "Deine Karten- oder Kontodaten bleiben bei Zahls.ch: Wir sehen sie nicht."
       ]
     },
+    "paymentEmail": {
+      "paragraphs": [
+        "Die Online-Zahlung ist noch nicht aktiv: Vorerst bestellst du deine Tasche per E-Mail, direkt auf ihrer Seite.",
+        "In unserer Bestätigung per E-Mail steht, wie du bezahlst."
+      ]
+    },
     "returns": {
       "title": "Rückgabe",
       "paragraphs": [
@@ -509,7 +541,8 @@
         },
         {
           "q": "Wie kann ich bezahlen?",
-          "a": "Mit TWINT, Karte oder PostFinance, auf der sicheren Zahlungsseite von Zahls.ch."
+          "a": "Mit TWINT, Karte oder PostFinance, auf der sicheren Zahlungsseite von Zahls.ch.",
+          "aEmail": "Vorerst bestellst du per E-Mail auf der Seite der Tasche: In unserer Bestätigung steht, wie du bezahlst."
         },
         {
           "q": "Kann ich eine Tasche verschenken?",
@@ -533,7 +566,7 @@
   },
   "legal": {
     "eyebrow": "Rechtliches",
-    "title": "Impressum & Datenschutz",
+    "title": "Impressum, Datenschutz & AGB",
     "intro": "Wer wir sind, wie wir mit deinen Daten umgehen und unsere Verkaufsbedingungen.",
     "toc": {
       "title": "Auf dieser Seite",
@@ -573,7 +606,12 @@
     "title": "Dieser Faden ist verloren gegangen",
     "text": "Die gesuchte Seite gibt es nicht oder sie wurde verschoben. Nehmen wir den Faden gemeinsam wieder auf?",
     "cta": "Zur Startseite",
-    "ctaShop": "Taschen ansehen"
+    "ctaShop": "Taschen ansehen",
+    "bag": {
+      "eyebrow": "Unikat",
+      "title": "Diese Tasche ist nicht mehr online",
+      "text": "Sie war ein Unikat und wurde verkauft oder aus dem Shop genommen. Die anderen handgemachten Taschen warten im Shop auf dich."
+    }
   },
   "newsletter": {
     "title": "Bleib in Kontakt",
@@ -592,11 +630,10 @@
     "mailtoBody": "Guten Tag\n\nIch möchte mich mit dieser Adresse für den Newsletter von Chère Pochette anmelden: {subscriber}\n\nVielen Dank!"
   },
   "footer": {
-    "about": "Von Hand gehäkelte Taschen aus wiederverwerteten Materialien.",
+    "about": "Von Hand gehäkelte Upcycling-Taschen aus dem Tessin.",
     "contactTitle": "Kontakt",
     "followTitle": "Folge uns",
     "linksTitle": "Entdecken",
-    "legal": "Impressum & Datenschutz",
     "yes": "YES-Miniunternehmen – SCC Bellinzona",
     "copyright": "© {year} Chère Pochette",
     "privacyNote": "Diese Website verwendet keine Cookies und kein Tracking."

@@ -1,0 +1,78 @@
+---
+/**
+ * Round avatar of a team member for the org chart: her portrait (src/assets/team/<photo>.jpg,
+ * cropped to a circle with the face in the middle) or, when there is no photo, the initials
+ * (Monogram). Size: 96px on phones, 120px from 64rem; `lead` is a little larger (CEO).
+ */
+import { Picture } from 'astro:assets';
+import Monogram from './Monogram.astro';
+import { teamPhoto } from '../lib/team-photos';
+import type { TeamMember } from '../lib/catalog';
+
+interface Props {
+  member: TeamMember;
+  /** Leave empty ("", the default) when the name is written next to the avatar, as in the org chart. */
+  alt?: string;
+  lead?: boolean;
+}
+
+const { member, alt = '', lead = false } = Astro.props;
+const photo = teamPhoto(member);
+const sizes = lead ? '(min-width: 64rem) 136px, 112px' : '(min-width: 64rem) 120px, 96px';
+// Enough for 1×, 2× and 3× screens; never larger than the file (Astro doesn't upscale).
+const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) => !photo || w <= photo.width);
+---
+
+{
+  photo ? (
+    <Picture
+      src={photo}
+      alt={alt}
+      formats={['avif', 'webp']}
+      widths={widths}
+      sizes={sizes}
+      class:list={['avatar', { 'avatar--lead': lead }]}
+      loading="lazy"
+      decoding="async"
+    />
+  ) : (
+    <Monogram name={member.name} size={lead ? 'md' : 'sm'} />
+  )
+}
+
+<style>
+  .avatar {
+    display: block;
+    flex-shrink: 0;
+    width: 6rem;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    /* portraits are 4:5 with the face in the upper part */
+    object-position: center 20%;
+    background: var(--c-powder);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--c-plum) 12%, transparent),
+      0 0 0 5px var(--c-white),
+      0 0 0 6px color-mix(in srgb, var(--c-bordeaux) 22%, transparent);
+  }
+
+  .avatar--lead {
+    width: 7rem;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--c-plum) 12%, transparent),
+      0 0 0 5px var(--c-powder-2),
+      0 0 0 6px color-mix(in srgb, var(--c-bordeaux) 30%, transparent);
+  }
+
+  @media (min-width: 64rem) {
+    .avatar {
+      width: 7.5rem;
+    }
+
+    .avatar--lead {
+      width: 8.5rem;
+    }
+  }
+</style>

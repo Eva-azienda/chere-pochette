@@ -1,188 +1,165 @@
-# One-time setup with the real accounts
+# Accounts and one-time setup
 
-Step by step, for Eva (CTO) or the developer, with the Chère Pochette accounts. Do the steps in order;
-each one says how to check it worked. Background and troubleshooting: [OPERATIONS.md](OPERATIONS.md).
-Tick the boxes in [LAUNCH-CHECKLIST.md](LAUNCH-CHECKLIST.md) as you go.
+What was set up on **29 October 2026**, with which settings, and how to redo or change each part.
+For Eva (CTO) or a developer. Day-to-day automation: [OPERATIONS.md](OPERATIONS.md).
+What is still open: [LAUNCH-CHECKLIST.md](LAUNCH-CHECKLIST.md).
 
-Values used below (from `src/data/site.json` → `"github"`): owner **`Eva-azienda`**, repository
-**`chere-pochette`**, branch **`main`**. If you choose other names, change them in `site.json` too.
+> Never paste a password, token or API key into a file in the repository, the Drive folder, a chat or an e-mail.
+> They go only into GitHub Secrets, the setup script, or a password manager. None is written in these docs.
 
-> Never paste a password, token or API key into a file in the repository, a chat or an e-mail.
-> They go only into GitHub Secrets, the setup script or a password manager.
+## 0. Accounts at a glance
 
-## 1. GitHub account
+| Service | Account / address | Used for | Status |
+|---|---|---|---|
+| GitHub | account **`Eva-azienda`** → repository **`Eva-azienda/chere-pochette`** (public) | code, data, automation, hosting, secrets | done |
+| Hostpoint | domain **`cherepochette.ch`** (registration + DNS) | the web address; yearly renewal | done |
+| Zahls | instance **`cherepochette`** → https://cherepochette.zahls.ch | online payments (Payrexx-based) | set up; **verification (KYC) open**; trial since 29.10.2026 |
+| Shop mailbox | `chere.pochette@sccbellinzona.ch` (school mailbox) | contact address on the site, Zahls order e-mails, admin login e-mail | in use |
+| Admin | https://cherepochette.ch/admin/ — shop e-mail + admin password | managing bags from phones | done |
+| Google Drive | folder "Website Eva" (01_Brief … 05_Handover) | brief, branding, original photos, code snapshot, docs | done |
 
-1. Log in to github.com with the Chère Pochette account (`Eva-azienda`). If the login does not work, use
-   "Forgot password?" with the account's e-mail address first.
-2. **Change the account password** (it was shared in a chat): Settings → Password and authentication.
-   Use a password manager.
-3. **Turn on two-factor authentication** (same page) and store the recovery codes somewhere safe (not in the repo).
-4. Settings → Emails: check that the e-mail address is one the team reads — GitHub sends failed-run alerts
-   (double payments!) and the "schedule disabled" warning there.
+Passwords of GitHub, Zahls and Hostpoint were shared in a chat during setup → **change them** (§1, checklist).
 
-## 2. Repository and first push
+## 1. GitHub account `Eva-azienda`
 
-1. github.com → **+** → *New repository* → name `chere-pochette`, owner `Eva-azienda`, **Public**
-   (free GitHub Pages and unlimited Actions minutes need a public repository), **no** README/licence/.gitignore.
-2. On the computer with the project (Node 22, see [README.md](../README.md#quick-start-developers)):
-   ```bash
-   git remote add origin https://github.com/Eva-azienda/chere-pochette.git
-   git push -u origin main
-   ```
-   Git asks you to log in; the easiest way is the GitHub CLI (`gh auth login`) or GitHub Desktop.
-3. Check: the files are visible on github.com. The **Actions** tab shows a first **Deploy** run that fails at
-   *"Read GitHub Pages settings"* — expected until step 3.
-4. Settings → **Branches**: make sure no branch protection rule blocks pushes to `main` by
-   `github-actions[bot]` (the sync commits sold bags).
+Done: the repository, Pages, secrets and the admin token all belong to this account.
 
-## 3. GitHub Pages
+To do (security):
+1. **Change the account password** (Settings → Password and authentication) and turn on **two-factor
+   authentication**; keep the recovery codes outside the repository.
+2. Settings → Emails: make sure the address is read by the team — GitHub sends failed-run alerts and the
+   "scheduled workflow disabled" warning there.
+3. The **GitHub CLI** on the setup developer's Mac was authorised for this account (used for `gh secret set`
+   and checks). When no longer needed: Settings → **Applications** → *Authorized OAuth Apps* → **GitHub CLI** →
+   *Revoke*.
 
-1. Repository → **Settings → Pages** → *Build and deployment* → Source: **GitHub Actions**.
-2. **Actions → Deploy → Run workflow** (branch `main`). Green after ≈ 3–5 minutes.
-3. Check: the site is online at **https://eva-azienda.github.io/chere-pochette/** (also shown in Settings → Pages).
+## 2. Repository
 
-### Optional: preview password while the shop is not launched
-The Deploy workflow can lock every page (not `/admin/`) behind one password (StatiCrypt, `scripts/protect-site.mjs`):
+Done: `https://github.com/Eva-azienda/chere-pochette`, **public** (free Pages + unlimited Actions minutes),
+default branch `main`, no branch protection (the Deploy workflow's bot must be able to push to `main`).
+These values are also in `src/data/site.json` → `"github"` and in `public/admin/auth.json`.
 
-- Settings → Secrets and variables → Actions → *Secrets* → **New repository secret** `SITE_PASSWORD` = the
-  preview password → Actions → Deploy → Run workflow. Visitors see a "Il sito è in anteprima" page; "Ricordami"
-  keeps them in for 30 days. Search engines are blocked (robots `Disallow: /`, no sitemap).
-- **Launch** = delete the `SITE_PASSWORD` secret and run Deploy again.
-- It hides the pages from visitors, **not** the content: the repository is public, so every text is readable there.
-  Images, CSS and JS files are not encrypted. The `/thanks/` page is behind the gate too, so test purchases
-  during the preview show the password page first.
+To redo from scratch: create the repository (public, empty) → `git remote add origin …` → `git push -u origin main`
+→ continue with §3.
 
-## 4. Admin access token (fine-grained)
+## 3. GitHub Pages and the custom domain
 
-1. github.com (logged in as `Eva-azienda`) → avatar → **Settings → Developer settings → Personal access tokens →
-   Fine-grained tokens → Generate new token**.
-2. Fill in:
-   - **Token name**: `chere-pochette-admin`
-   - **Expiration**: 1 year (custom date) → put a **calendar reminder two weeks before**: when it expires the
-     admin stops saving.
-   - **Resource owner**: `Eva-azienda`
-   - **Repository access**: *Only select repositories* → `chere-pochette`
-   - **Repository permissions**: **Contents → Read and write**, **Actions → Read and write**.
-     *Metadata → Read-only* is added automatically. Nothing else.
-3. **Generate token** → copy it (it is shown once). Do not save it anywhere: it goes straight into step 5.
+Done (repository → **Settings → Pages**):
 
-## 5. Admin login file (`npm run admin:setup`)
+| Setting | Value |
+|---|---|
+| Build and deployment → Source | **GitHub Actions** (workflow `.github/workflows/deploy.yml`) |
+| Custom domain | **`cherepochette.ch`** (DNS check successful) |
+| Enforce HTTPS | **on** |
+| `www.cherepochette.ch` | redirected by GitHub to `https://cherepochette.ch` |
+| Domain verification | `cherepochette.ch` verified for the **`Eva-azienda` account** (account Settings → Pages → Verified domains) — protects the domain from takeover |
 
-On the computer with the project (after `npm ci`):
+No `CNAME` file is needed (GitHub ignores it with Actions deployments). The workflow reads the address from the Pages
+settings, so `SITE_URL` = `https://cherepochette.ch` and `BASE_PATH` = `/` automatically.
 
-```bash
-npm run admin:setup
-```
+To redo (e.g. new repository): Settings → Pages → Source **GitHub Actions** → Custom domain `cherepochette.ch` → Save
+→ wait for the DNS check → tick **Enforce HTTPS** → Actions → **Deploy** → *Run workflow*.
 
-It asks, in this order (press Enter to accept the value in brackets):
-1. GitHub owner / repository / branch — `Eva-azienda` / `chere-pochette` / `main`;
-2. **admin e-mail** — default `chere.pochette@sccbellinzona.ch` (used only to log in, not stored);
-3. **admin password**, twice, hidden — at least 12 characters, not containing the e-mail, **used nowhere
-   else** (not the GitHub, Zahls or e-mail password). A 4-word passphrase is suggested;
-4. the **token** from step 4 (hidden) — checked with GitHub (repo access, write permission, Actions).
+## 4. DNS at Hostpoint
 
-It writes `public/admin/auth.json` (the token, encrypted with the e-mail + password). Then:
+Done (Hostpoint control panel → domain `cherepochette.ch` → DNS):
 
-```bash
-git add public/admin/auth.json
-git commit -m "chore(admin): admin access"
-git push
-```
+| Type | Name | Value |
+|---|---|---|
+| A | `@` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (4 records) |
+| AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` (4 records) |
+| CNAME | `www` | `eva-azienda.github.io` |
+| TXT | `_github-pages-challenge-Eva-azienda` | the verification code GitHub showed (account Settings → Pages) |
+| MX / mail records | — | Hostpoint's e-mail records were **kept unchanged** |
 
-Check: after the deploy open **https://eva-azienda.github.io/chere-pochette/admin/** on a phone and log in with the
-e-mail and password. Give them to the team **in person** (or via a password manager), never in a group chat.
-To change the password or replace the token later: run the script again (`--force` overwrites without asking),
-commit, push. Options: `--skip-verify` (no GitHub check), `--out <file>`; non-interactive with the environment
-variables `ADMIN_OWNER`, `ADMIN_REPO`, `ADMIN_BRANCH`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_TOKEN`.
+Check from a terminal: `dig +short cherepochette.ch A` (the four GitHub addresses) and
+`dig +short www.cherepochette.ch CNAME` (`eva-azienda.github.io.`). Current GitHub values:
+[Managing a custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
+Do not delete the TXT record. Renew the domain at Hostpoint every year (whoever holds the Hostpoint account).
 
-## 6. Zahls account
+## 5. Secrets and variables
 
-Menu names in the Zahls dashboard can differ slightly; ask Zahls support if something is not where described.
+Repository → **Settings → Secrets and variables → Actions**:
 
-1. **Account and verification (KYC)** — CFO + legal representative: complete the company profile, upload the
-   documents Zahls asks for (identity of the responsible persons, organisation, bank account for payouts) and
-   wait for Zahls to confirm the account.
-2. **Payment methods**: activate **TWINT**, **cards** (Visa, Mastercard) and **PostFinance** — the website's info
-   page promises exactly these. **Do not activate** prepayment / invoice or other slow methods: while such a
-   payment is pending the bag stays on sale.
-3. **Look & feel** of the payment page: shop name *Chère Pochette*, logo `public/brand/logo-bordeaux.png`, main
-   colour **#82001F** (bordeaux), background **#FAF7F2** (ivory).
-4. **Notifications**: the e-mail address that receives each order (customer name, address, phone) — the shop
-   address `chere.pochette@sccbellinzona.ch`, read by the people who ship.
-5. **API key**: *API & Integration* → copy the **API secret**. The **instance name** is the `xyz` in
-   `https://xyz.zahls.ch` (the address of your dashboard). Note both for step 7 only.
+| Name | Kind | Status | Purpose |
+|---|---|---|---|
+| `ZAHLS_API_KEY` | secret | **set** | Zahls API secret (Zahls → *API & Integration*) |
+| `ZAHLS_INSTANCE` | variable | **set** = `cherepochette` | Zahls instance name (the `xyz` of `xyz.zahls.ch`) |
+| `SITE_PASSWORD` | secret | **set** (preview phase) | while it exists every page is password-protected. **Launch = delete it** and re-run Deploy |
+| `GITHUB_TOKEN` | automatic | — | provided by GitHub to the workflows |
 
-## 7. Connect Zahls to GitHub and go live
+Change a value: web → the secret → *Update*, or with the GitHub CLI `gh secret set SITE_PASSWORD` /
+`gh secret set ZAHLS_API_KEY` (it asks for the value; nothing is shown or logged) → then **Actions → Deploy →
+Run workflow**. Changing `SITE_PASSWORD` logs every visitor out of the preview.
 
-1. Repository → **Settings → Secrets and variables → Actions**:
-   - *Secrets* → **New repository secret** `ZAHLS_API_KEY` = the API secret;
-   - *Variables* → **New repository variable** `ZAHLS_INSTANCE` = the instance name.
-2. **Actions → Zahls check → Run workflow** → must be **green** ("Zahls connection OK"). Red: see
-   [OPERATIONS.md §5](OPERATIONS.md).
-3. **Remove the 4 demo bags** `cp-001`…`cp-004` (brand photos, not real bags) in the admin — *Elimina* — or replace
-   them with real bags first. Otherwise they get real payment links.
-4. Optional check: latest **Deploy** run → step *Zahls sync* → list "With checkout enabled, the sync would: …"
-   (right bags, right amounts).
-5. **Switch payment on**: github.com → `src/data/site.json` → pencil → in `"checkout"` change `"enabled": false`
-   to `"enabled": true` → *Commit changes* to `main`. The Deploy run creates two links per available bag.
-   The admin shows "Pagamenti online: attivi".
+## 6. Admin access (`npm run admin:setup`)
 
-## 8. Test purchase (CHF 1) on a phone
+Done: one admin login — e-mail **`chere.pochette@sccbellinzona.ch`** + admin password — and
+`public/admin/auth.json` (format v2) committed.
 
-1. Admin → **Nuova borsa**: one photo, any model/colour, price **1**, note `TEST – non acquistare`.
-   (If Zahls refuses such a small amount, use a few francs.)
-2. After ≈ 3 minutes open the bag on the site on a phone → choose **Ritiro a Bellinzona** (CHF 1; shipping would
-   add the fee) → **Acquista** → pay with **TWINT**.
-3. Check, in this order:
-   - you land on the **thank-you page** (in the language you used);
-   - the order e-mail from Zahls arrives (and the payment appears in the dashboard);
-   - within ≈ 10–20 minutes (or after "Aggiorna vendite ora") the bag is in **Vendute** in the admin with
-     "online, ritiro", and has disappeared from the shop; the Deploy run is green.
-4. **Refund** the payment in the Zahls dashboard, then **delete** the test bag in the admin.
-5. If the bag does not turn sold, see [OPERATIONS.md §13](OPERATIONS.md) ("Assumptions to confirm").
+| Item | Value |
+|---|---|
+| Token type | GitHub **fine-grained** personal access token, owner `Eva-azienda` |
+| Repository access | **only** `chere-pochette` |
+| Permissions | **Contents: Read and write**, **Actions: Read and write** (Metadata read-only is automatic) |
+| Expires | **29 October 2027** → renew before (calendar reminder 2 weeks earlier) |
+| Storage | encrypted inside `auth.json` (AES-256-GCM, key = PBKDF2-SHA256, 600 000 rounds, from e-mail + password). The e-mail and password are **not** stored |
 
-## 9. Later: custom domain
+**Redo / renew / change the password** (on a computer with the project, `npm ci` done):
 
-The admin's CSV export already builds page links for **`https://cherepochette.ch/`**
-(`LIVE_SITE_URL` in `public/admin/js/csv.js`); change it there if the domain is different.
+1. If a new token is needed: github.com (as `Eva-azienda`) → Settings → Developer settings → Personal access tokens →
+   **Fine-grained tokens → Generate new token** → name `chere-pochette-admin`, resource owner `Eva-azienda`,
+   *Only select repositories* → `chere-pochette`, permissions as above, expiry up to 1 year → copy it (shown once).
+2. `npm run admin:setup` — asks, in this order: GitHub **owner / repository / branch** (Enter accepts
+   `Eva-azienda` / `chere-pochette` / `main`), the **admin e-mail** (default: the shop address), the **admin password
+   twice** (hidden; ≥ 12 characters, must not contain the e-mail; use a passphrase not used anywhere else — not the
+   GitHub, Zahls or Hostpoint password), then the **token** (hidden), which it checks with GitHub.
+   Options go after `--`, e.g. `npm run admin:setup -- --force` (overwrite without asking); also `--skip-verify`,
+   `--out <file>`.
+3. `git add public/admin/auth.json && git commit -m "chore(admin): admin access" && git push`
+4. After the deploy (≈ 3 minutes) log in at https://cherepochette.ch/admin/. Give the password to the team
+   **in person**. Then revoke the old token on GitHub (if you replaced it).
 
-1. Buy/keep the domain at a registrar. Recommended first: github.com → your **account** Settings → Pages →
-   *Add a domain* → add the TXT record it shows (protects the domain from takeover).
-2. Repository → Settings → Pages → **Custom domain** → `cherepochette.ch` (or `www.cherepochette.ch`) → Save.
-   No `CNAME` file is needed: with GitHub Actions deployments GitHub ignores it.
-3. At the registrar's DNS (keep the existing **MX** records if e-mail runs on the domain):
+Do the same immediately if a phone with the admin is lost, the password leaks, or someone who knew it leaves the team.
 
-   | Type | Name | Value |
-   |---|---|---|
-   | A | `@` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (4 records) |
-   | AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` |
-   | CNAME | `www` | `eva-azienda.github.io` |
+## 7. Zahls
 
-   Check the current values in [GitHub's guide](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
-4. Wait for the DNS check (minutes to hours) → tick **Enforce HTTPS** (available once the certificate is issued).
-5. **Actions → Deploy → Run workflow**. The workflow reads the address and base path from the Pages settings,
-   so `SITE_URL`/`BASE_PATH` switch to `https://cherepochette.ch` and `/` automatically. No change in
-   `site.json` or the workflow is needed.
-6. After it: re-add the admin to the phones' home screens (new address `…/admin/`); update the link in the
-   Instagram bio and in Zahls (shop website). Existing payment links still return customers to the old
-   `github.io` address, which GitHub redirects; to renew them run the sync locally once with `RECREATE_LINKS=1`
-   ([OPERATIONS.md §8](OPERATIONS.md)).
+Done (dashboard https://cherepochette.zahls.ch):
 
-## 10. Later: newsletter provider
+- Instance **`cherepochette`** created; **30-day trial started 29.10.2026** → **choose a plan before ~28.11.2026** (CFO).
+- **Company profile** filled in.
+- **Look & Feel** profile **"Chère Pochette"** set as default: logo, background `#FAF7F2`, header `#E8D1D8`,
+  buttons `#82001F`, font Lato.
+- **API key** saved as `ZAHLS_API_KEY`, instance as `ZAHLS_INSTANCE` (§5); connection test OK on 29.10.2026 in the
+  Deploy run (step *Zahls sync*: "Zahls connection OK (instance "cherepochette")"). The separate **Zahls check**
+  workflow has not been run yet (optional, [OPERATIONS.md §5](OPERATIONS.md#5-checking-the-zahls-connection-zahls-check)).
 
-1. Create a free account at a provider (e.g. Brevo or Mailchimp) and a sign-up form with **double opt-in**.
-2. Copy the form's URL into `src/data/site.json` → `"newsletter"` → `"action"`, with `"method": "post"` and the
-   provider's e-mail field name in `"emailField"` (`"EMAIL"` for both). Exact clicks: comment at the top of
-   `src/components/NewsletterForm.astro`.
-3. Update section 5 of the privacy policy in `src/content/legal/{it,de,en}.md`: today it says the team keeps the
-   subscriber list itself, without an external service — name the provider instead.
-4. Until then the form opens an e-mail to the shop (subject "Iscrizione newsletter"); add those addresses by hand.
+Open — **account verification (KYC)**, done by the **CFO**: company data, identity documents and residence of the
+legal representatives, business data (including the website `https://cherepochette.ch` and the terms of sale),
+**IBAN** for payouts. Only after Zahls confirms the account does **Payrexx Pay** activate the payment methods
+(**TWINT, cards, PostFinance, Apple Pay / Google Pay**). Do not activate invoice/prepayment: while such a payment is
+pending the bag stays on sale. Also check in Zahls that order notifications go to the shop mailbox.
 
-## Yearly / when people change
+Then switch online payment on: [OPERATIONS.md §4–6](OPERATIONS.md#6-going-live-with-payments) (set
+`checkout.enabled` to `true`, wait for the links, a CHF test purchase, refund).
 
-- **Token**: before it expires (or if a phone with the admin is lost, or someone leaves the team): revoke it
-  (Settings → Developer settings → Fine-grained tokens), create a new one (step 4), run step 5 again.
-- **Admin password**: change it by running step 5 again when someone who knew it leaves.
-- **Zahls API key**: if it leaks, generate a new one in Zahls and update the `ZAHLS_API_KEY` secret.
-- **Long breaks** (> 60 days without commits): GitHub pauses the 10-minute schedule → Actions → Deploy →
-  *Enable workflow* ([OPERATIONS.md §10](OPERATIONS.md)).
+If the API key leaks: generate a new one in Zahls (the old one stops working) and update the `ZAHLS_API_KEY` secret.
+
+## 8. Later: newsletter provider
+
+Today the form opens an e-mail to the shop (subject "Iscrizione newsletter"); those addresses are added by hand.
+
+1. Create an account at a provider (e.g. Brevo or Mailchimp) with a **double opt-in** sign-up form.
+2. `src/data/site.json` → `"newsletter"`: form URL in `"action"`, `"method": "post"`, the provider's e-mail field name
+   in `"emailField"` (`"EMAIL"` for both). Exact clicks: comment at the top of `src/components/NewsletterForm.astro`.
+3. Update section 5 of the privacy policy in `src/content/legal/{it,de,en}.md` with the provider's name.
+
+## 9. Yearly / when people change
+
+| When | What |
+|---|---|
+| Before **29.10.2027** (token expiry) | New token → §6 |
+| Phone lost, password leaked, member leaves | Revoke the token, new token + new admin password → §6 |
+| Every year | Renew `cherepochette.ch` at Hostpoint; check the Zahls plan |
+| Long break (> 60 days without commits) | GitHub pauses the 10-minute schedule → [OPERATIONS.md §9](OPERATIONS.md#9-scheduled-runs--caveats) |
+| CTO changes | Hand over the GitHub, Hostpoint and Zahls access (change the passwords afterwards) |

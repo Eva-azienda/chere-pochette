@@ -3,7 +3,7 @@
   "slogan": "Made to carry on",
   "tagline": "From forgotten materials to something worth carrying on.",
   "email": "chere.pochette@sccbellinzona.ch",
-  "instagram": "https://www.instagram.com/p/De1RHDQuJui/",
+  "instagram": "https://www.instagram.com/chere.pochette/",
   "currency": "CHF",
   "shippingFee": 9,
   "shippingCountries": [
@@ -11,6 +11,21 @@
     "LI"
   ],
   "pickupPlace": "Bellinzona",
+  "delivery": {
+    "handlingDays": [
+      1,
+      5
+    ],
+    "transitDays": [
+      1,
+      3
+    ],
+    "_comment": "Working days, shown to search engines (structured data). handlingDays = from payment to the parcel at Swiss Post (info page: within 5 working days). transitDays = Swiss Post to CH/LI."
+  },
+  "returns": {
+    "days": 14,
+    "_comment": "Return window shown to search engines. Must match the legal texts (src/content/legal) and info.returns."
+  },
   "checkout": {
     "enabled": false,
     "_comment": "Online payment via Zahls. Keep false until the Zahls account is verified and payment methods are active; then set to true. While false, the site shows 'order by e-mail' and the sync only tests the Zahls connection."
@@ -19,7 +34,7 @@
     "legalName": "Chère Pochette – mini-impresa YES",
     "school": "Scuola cantonale di commercio (SCC) Bellinzona",
     "programme": "YES – Young Enterprise Switzerland, Company Programme 2026/27",
-    "address": "TODO: indirizzo postale",
+    "address": "Viale Stefano Franscini 32",
     "city": "6500 Bellinzona",
     "country": "Svizzera"
   },
@@ -27,6 +42,11 @@
     "action": "",
     "method": "post",
     "emailField": "email"
+  },
+  "seo": {
+    "googleSiteVerification": "",
+    "bingSiteVerification": "",
+    "_comment": "Only the content value of the verification <meta> tag; empty = no tag. Not needed when Google Search Console verifies the domain by DNS."
   },
   "github": {
     "owner": "Eva-azienda",

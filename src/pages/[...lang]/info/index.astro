@@ -5,7 +5,7 @@ import Icon from '../../../components/Icon.astro';
 import PageHeader from '../../../components/PageHeader.astro';
 import { localeStaticPaths, useTranslations, type Lang, fill } from '../../../lib/i18n';
 import { formatPrice } from '../../../lib/format';
-import { site } from '../../../lib/catalog';
+import { checkoutEnabled, site } from '../../../lib/catalog';
 
 export function getStaticPaths() {
   return localeStaticPaths();
@@ -14,14 +14,18 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: Lang };
 const { t, list, pageMeta } = useTranslations(lang);
 const vars = { fee: formatPrice(site.shippingFee), email: site.email };
+// While online payment is off (src/data/site.json → checkout), payment texts describe ordering by e-mail.
+const online = checkoutEnabled();
 
 // Sections with paragraphs; the id is also the #anchor (links like /info/#returns).
 const topics = ['shipping', 'pickup', 'payment', 'returns'] as const;
 const icons = { shipping: 'truck', pickup: 'pin', payment: 'check', returns: 'arrow-left' } as const;
 const tips = list<string>('info.care.tips');
-const faq = list<{ q: string; a: string }>('info.faq.items');
-const toc = [...topics, 'care', 'faq'] as const;
-const tocLabel = (id: string) => t(`info.${id}.title`);
+const faq = list<{ q: string; a: string; aEmail?: string }>('info.faq.items');
+const toc = [...topics, 'care', 'faq', 'contact'] as const;
+const tocLabel = (id: string) => (id === 'contact' ? t('nav.contact') : t(`info.${id}.title`));
+const paragraphs = (id: string) =>
+  list<string>(id === 'payment' && !online ? 'info.paymentEmail.paragraphs' : `info.${id}.paragraphs`);
 ---
 
 <BaseLayout lang={lang} path="info/" {...pageMeta('info')}>
@@ -48,7 +52,7 @@ const tocLabel = (id: string) => t(`info.${id}.title`);
           </span>
           <div class="topic__body stack">
             <h2 id={`${id}-title`}>{t(`info.${id}.title`)}</h2>
-            {list<string>(`info.${id}.paragraphs`).map((text) => (
+            {paragraphs(id).map((text) => (
               <p>{fill(text, vars)}</p>
             ))}
           </div>
@@ -77,7 +81,7 @@ const tocLabel = (id: string) => t(`info.${id}.title`);
           faq.map((item, i) => (
             <details id={`faq-${i + 1}`}>
               <summary>{item.q}</summary>
-              <p>{fill(item.a, vars)}</p>
+              <p>{fill(!online && item.aEmail ? item.aEmail : item.a, vars)}</p>
             </details>
           ))
         }
@@ -85,9 +89,9 @@ const tocLabel = (id: string) => t(`info.${id}.title`);
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="contact" aria-labelledby="contact-title">
     <div class="container container--narrow center stack">
-      <h2 class="h3">{t('info.contact.title')}</h2>
+      <h2 id="contact-title" class="h3">{t('info.contact.title')}</h2>
       <p>{t('info.contact.text')}</p>
       <div class="btn-row">
         <a class="btn btn--primary" href={`mailto:${site.email}`}>

@@ -8,11 +8,13 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "postbuild": "node scripts/check-seo.mjs --warn",
     "preview": "astro preview",
     "astro": "astro",
     "test": "node --test scripts/test/",
     "zahls:sync": "node scripts/zahls-sync.mjs",
-    "admin:setup": "node scripts/admin-setup.mjs"
+    "admin:setup": "node scripts/admin-setup.mjs",
+    "seo:check": "node scripts/check-seo.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

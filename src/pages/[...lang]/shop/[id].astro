@@ -12,6 +12,7 @@ import ProductGallery from '../../../components/ProductGallery.astro';
 import ThreadDivider from '../../../components/ThreadDivider.astro';
 import { LOCALES, langParam, useTranslations, type Lang } from '../../../lib/i18n';
 import { absoluteUrl, localePath } from '../../../lib/urls';
+import { breadcrumbJsonLd, productJsonLd } from '../../../lib/structured-data';
 import {
   describeProduct,
   getAvailableProducts,
@@ -37,41 +38,26 @@ const info = describeProduct(product, lang);
 const available = product.status === 'available';
 const path = `shop/${product.id}/`;
 
-const title = t('meta.titleTemplate', {
-  title: t('meta.pages.product.title', { model: info.title, number: info.number }),
-});
-// "Belle · Bordeaux, pezzo unico N° 012: …" – colour and number make every bag's description unique.
-const description = t('meta.pages.product.description', { model: info.title, number: info.number });
+const metaVars = { model: info.title, number: info.number, price: info.price };
+const title = t('meta.titleTemplate', { title: t('meta.pages.product.title', metaVars) });
+// "Belle · Bordeaux, pezzo unico N° 012: … CHF 40.–" – colour and number make every bag's description unique.
+const description = t('meta.pages.product.description', metaVars);
 
 const related = (await getAvailableProducts()).filter((p) => p.id !== product.id).slice(0, 4);
 const cover = product.photos[0];
 const dimensions = ['length', 'depth', 'height', 'handle'] as const;
 
-// Structured data for search engines (Product + Offer).
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: `${info.title} – ${t('common.uniquePiece', { number: info.number })}`,
-  sku: product.id,
-  productID: product.id,
-  description,
-  image: product.photos.map((p) => absoluteUrl(photoUrl(p.src, 1600))),
-  brand: { '@type': 'Brand', name: site.name },
-  color: info.colour.label,
-  material: t('product.materials.exterior'),
-  category: info.modelType,
-  offers: {
-    '@type': 'Offer',
-    url: absoluteUrl(localePath(lang, path)),
-    price: product.price.toFixed(2),
-    priceCurrency: 'CHF',
-    availability: available ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
-    itemCondition: 'https://schema.org/NewCondition',
-    seller: { '@type': 'Organization', name: site.name },
-  },
-};
-// "<" is escaped so the JSON can never close the <script> tag early.
-const jsonLdText = JSON.stringify(jsonLd).replace(/</g, '\\u003c');
+// Structured data for search engines: Product + Offer (shipping, returns) and the breadcrumb trail.
+const jsonLd = [
+  productJsonLd(product, lang),
+  breadcrumbJsonLd(lang, [
+    { name: t('nav.home'), path: '' },
+    { name: t('nav.shop'), path: 'shop/' },
+    { name: info.title, path },
+  ]),
+];
+const photoAlt = (n: number) =>
+  t('product.photoAlt', { model: info.modelName, colour: info.colour.label, number: info.number, n });
 
 const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${product.id} – ${info.title}`)}`;
 ---
@@ -83,10 +69,17 @@ const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${produ
   description={description}
   noindex={!available}
   ogType="product"
-  ogImage={cover ? absoluteUrl(photoUrl(cover.src, 1600)) : undefined}
+  ogImage={cover ? { url: absoluteUrl(photoUrl(cover.src, 1600)), width: cover.w, height: cover.h, alt: photoAlt(1) } : undefined}
+  jsonLd={jsonLd}
   bodyClass={available ? 'has-buybar' : undefined}
 >
-  <script type="application/ld+json" slot="head" set:html={jsonLdText} />
+  <Fragment slot="head">
+    <meta property="product:price:amount" content={product.price.toFixed(2)} />
+    <meta property="product:price:currency" content={site.currency} />
+    <meta property="product:availability" content={available ? 'in stock' : 'out of stock'} />
+    <meta property="product:condition" content="new" />
+    <meta property="product:retailer_item_id" content={product.id} />
+  </Fragment>
 
   <nav class="container back" aria-label={t('a11y.breadcrumb')}>
     <a href={localePath(lang, 'shop/')} class="back__link">
@@ -103,9 +96,7 @@ const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${produ
             lang={lang}
             photos={product.photos}
             sold={!available}
-            altFor={(n) =>
-              t('product.photoAlt', { model: info.modelName, colour: info.colour.label, number: info.number, n })
-            }
+            altFor={photoAlt}
           />
         )
       }
@@ -113,7 +104,7 @@ const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${produ
 
     <div class="product__info">
       <header class="product__head">
-        <p class="eyebrow">{info.modelType}</p>
+        <p class="eyebrow">{t('product.eyebrow')}</p>
         <h1 class="product__title">{info.title}</h1>
         <p class="product__number">{t('common.uniquePiece', { number: info.number })}</p>
         {

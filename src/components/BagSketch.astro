@@ -1,0 +1,255 @@
+---
+/**
+ * The home hero drawing: a line sketch of a Belle bag that draws itself – first the outline and
+ * handle, then the thread that runs out of the bag to the needle (as in the logo). Three small
+ * notes point at the handle, the bag and the thread.
+ *
+ * The drawing is assets/brand/bag-sketch.svg (viewBox 0 0 480 520, stroke="currentColor").
+ * Its paths carry pathLength="1" and a class: s-main (outline, handle) or s-thread (thread;
+ * the needle also has s-needle).
+ * To move a note, edit NOTES below (coordinates in the SVG's viewBox).
+ * With reduced motion the drawing is simply shown complete.
+ */
+import sketch from '../assets/brand/bag-sketch.svg?raw';
+import { useTranslations, type Lang } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const { t } = useTranslations(lang);
+
+const VIEWBOX = { width: 480, height: 520 };
+// x/y: the point on the drawing the note's hairline touches; side: where the text sits.
+const NOTES: { key: 'yarn' | 'handle' | 'unique'; x: number; y: number; side: 'top' | 'right' | 'bottom' }[] = [
+  { key: 'handle', x: 240, y: 112, side: 'top' },
+  { key: 'yarn', x: 390, y: 236, side: 'right' },
+  { key: 'unique', x: 232, y: 424, side: 'bottom' },
+];
+
+const svg = sketch.replace('<svg ', '<svg class="sketch__svg" aria-hidden="true" focusable="false" ');
+---
+
+<figure class="sketch" role="img" aria-label={t('images.bagSketch')}>
+  <Fragment set:html={svg} />
+  <ul role="list" class="sketch__notes" aria-hidden="true">
+    {
+      NOTES.map((note) => (
+        <li
+          class:list={['note', `note--${note.side}`]}
+          style={`--x:${((note.x / VIEWBOX.width) * 100).toFixed(2)}%;--y:${((note.y / VIEWBOX.height) * 100).toFixed(2)}%`}
+        >
+          <span>{t(`home.hero.notes.${note.key}`)}</span>
+        </li>
+      ))
+    }
+  </ul>
+</figure>
+
+<style>
+  .sketch {
+    position: relative;
+    margin: 0;
+    color: var(--c-bordeaux);
+  }
+
+  /* a soft powder disc behind the bag */
+  .sketch::before {
+    content: '';
+    position: absolute;
+    top: 2%;
+    left: 12%;
+    width: 76%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--c-powder-2);
+  }
+
+  .sketch :global(.sketch__svg) {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Phones and tablets: the drawing is small, so the lines are drawn a little thicker. */
+  @media (max-width: 63.999rem) {
+    .sketch :global(.s-main) {
+      stroke-width: 3.4;
+    }
+
+    .sketch :global(.s-thread) {
+      stroke-width: 2.2;
+    }
+
+    .sketch :global(path.s-needle) {
+      stroke-width: 4;
+    }
+  }
+
+  /* ---------- Drawing animation ---------- */
+  .sketch :global(:is(.s-main, .s-thread)) {
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+    animation: sketch-draw 1.4s var(--ease) 0.2s forwards;
+  }
+
+  .sketch :global(.s-thread) {
+    animation-duration: 1.4s;
+    animation-delay: 1.3s;
+  }
+
+  .sketch :global(.s-needle) {
+    animation-duration: 0.5s;
+    animation-delay: 2.4s;
+  }
+
+  @keyframes sketch-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sketch :global(:is(.s-main, .s-thread)) {
+      animation: none;
+      stroke-dasharray: none;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* ---------- Notes ----------
+     Each note is a hairline from a small dot on the drawing to a short italic label.
+     Phones: small text and short hairlines; from 48rem: larger. */
+  .sketch__notes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .note {
+    --leader: 1.75rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: var(--s-1);
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: var(--fs-xs);
+    line-height: 1.2;
+    color: var(--c-plum);
+    opacity: 0;
+    animation: note-in 0.6s var(--ease) 2.8s forwards;
+  }
+
+  .note span {
+    width: max-content;
+    max-width: 8.5rem;
+    text-wrap: balance;
+  }
+
+  .note::before {
+    content: '';
+    flex: none;
+    background: currentColor;
+    opacity: 0.4;
+  }
+
+  .note::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--c-bordeaux);
+  }
+
+  .note--right {
+    --leader: 1rem;
+    top: var(--y);
+    left: var(--x);
+    translate: 0 -50%;
+  }
+
+  /* the side note has only the strip between the bag and the screen edge on phones */
+  .note--right span {
+    max-width: 4.75rem;
+  }
+
+  .note--right::before {
+    width: var(--leader);
+    height: 1px;
+  }
+
+  .note--right::after {
+    top: 50%;
+    left: 0;
+    translate: -50% -50%;
+  }
+
+  .note--top,
+  .note--bottom {
+    left: var(--x);
+    text-align: center;
+    translate: -50% 0;
+  }
+
+  .note--top {
+    bottom: calc(100% - var(--y));
+    flex-direction: column-reverse;
+  }
+
+  .note--bottom {
+    top: var(--y);
+    flex-direction: column;
+  }
+
+  .note--top::before,
+  .note--bottom::before {
+    width: 1px;
+    height: var(--leader);
+  }
+
+  .note--top::after {
+    bottom: 0;
+    left: 50%;
+    translate: -50% 50%;
+  }
+
+  .note--bottom::after {
+    top: 0;
+    left: 50%;
+    translate: -50% -50%;
+  }
+
+  @media (min-width: 48rem) {
+    .note {
+      --leader: 2.75rem;
+      gap: var(--s-2);
+      font-size: var(--fs-base);
+      line-height: 1.25;
+    }
+
+    .note--right {
+      --leader: 2.25rem;
+    }
+
+    .note--right span {
+      max-width: 8.5rem;
+    }
+  }
+
+  @keyframes note-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .note {
+      opacity: 1;
+      animation: none;
+    }
+  }
+</style>

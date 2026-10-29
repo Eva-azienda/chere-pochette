@@ -5,7 +5,7 @@
  * In a page:
  *
  *   const { t, list } = useTranslations(lang);
- *   t('shop.title')                         → "Le nostre borse"
+ *   t('shop.title')                         → "Le nostre borse all'uncinetto"
  *   t('common.uniquePiece', { number: '012' }) → "Pezzo unico N° 012"
  *   list('about.born.paragraphs')           → an array from the JSON file
  *
@@ -19,8 +19,15 @@ export const LOCALES = ['it', 'de', 'en'] as const;
 export type Lang = (typeof LOCALES)[number];
 export const DEFAULT_LANG: Lang = 'it';
 
-/** Values for hreflang / og:locale. Swiss variants for it/de; English is for everyone. */
-export const HREFLANG: Record<Lang, string> = { it: 'it-CH', de: 'de-CH', en: 'en' };
+/** <html lang> and lang="" attributes: Swiss variants for it/de; English is for everyone. */
+export const HTML_LANG: Record<Lang, string> = { it: 'it-CH', de: 'de-CH', en: 'en' };
+
+/**
+ * hreflang (head + sitemap): language only. There is one version per language, so speakers in
+ * Switzerland, Liechtenstein, Italy, Germany and Austria all find "their" page.
+ * Keep in sync with HREFLANG in astro.config.mjs.
+ */
+export const HREFLANG: Record<Lang, string> = { it: 'it', de: 'de', en: 'en' };
 
 const dictionaries: Record<Lang, unknown> = { it, de, en };
 

@@ -33,7 +33,7 @@ domain is attached. **Every internal URL must respect `import.meta.env.BASE_URL`
 relative URLs only.
 
 ## Data files (source of truth, all JSON, committed to git)
-- `src/data/site.json` — brand/contact/config (email, instagram, shippingFee CHF, newsletter action, github owner/repo).
+- `src/data/site.json` — brand/contact/config (email, instagram, shippingFee CHF, newsletter action, github owner/repo; `delivery` / `returns` = shipping and return facts for search engines, `seo` = optional Search Console / Bing verification codes).
 - `src/data/models.json` — the 3 official models (jolie, belle, coquette): default price CHF, dimensions in cm, localized type name, `image` key.
 - `src/data/taxonomy.json` — `colours[]` (id, hex or CSS gradient, it/de/en), `linings[]` (id, it/de/en), `statuses[]`.
 - `src/data/products/<id>.json` — **one file per unique bag**, written by the admin and by the Zahls sync:
@@ -81,6 +81,10 @@ If `zahls` is null or has no links (Zahls not configured yet), the product page 
   `model-jolie.png`, `model-belle.png`, `model-coquette.png` (cut-outs on ivory),
   `logo-bordeaux.png`, `logo-ivory.png` (transparent).
 - Product photos (pre-sized, NOT processed by Astro): `public/media/products/<id>/<n>-{400,900,1600}.jpg`.
+- Team photos (optimised by Astro): `src/assets/team/group.jpg` and `src/assets/team/<member-slug>.jpg` (4:5 portrait);
+  `src/data/team.json` → `"photo": "<member-slug>"` (null → initials avatar). Source: Instagram post of 26.10.2026,
+  originals in Drive `03_Media/originals/instagram-team-post-2026-10-26/`.
+- Brand wordmark (header/menu): `src/assets/brand/wordmark.svg` (inline SVG, currentColor; masters in Drive `02_Branding/logo/`).
 - Public brand files: `public/favicon.svg`, `public/favicon.ico`, `public/apple-touch-icon.png`, `public/og-image.jpg`,
   `public/brand/logo-bordeaux.png`, `public/brand/logo-ivory.png` (used by admin + emails).
 

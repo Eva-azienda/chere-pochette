@@ -30,6 +30,8 @@ const photos: Record<string, { src: ImageMetadata; alt: string; position?: strin
   lining: { src: bagUmbrella, alt: 'images.heroBagUmbrella', position: '53% 60%' },
   final: { src: bagHands, alt: 'images.heroBagHands' },
 };
+// The first step photo is visible right below the title: load it first (largest image on screen).
+const firstPhoto = steps.findIndex((step) => photos[step.id]);
 ---
 
 <BaseLayout lang={lang} path="process/" {...pageMeta('process')}>
@@ -54,6 +56,7 @@ const photos: Record<string, { src: ImageMetadata; alt: string; position?: strin
                       sizes="(min-width: 64rem) 30rem, (min-width: 48rem) 45vw, 85vw"
                       widths={[400, 640, 960, 1280]}
                       position={photo.position}
+                      loading={i === firstPhoto ? 'eager' : 'lazy'}
                     />
                   </div>
                 )}

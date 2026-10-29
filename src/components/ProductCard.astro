@@ -13,6 +13,8 @@ interface Props {
   sizes?: string;
   /** true for the first cards of a page (above the fold on phones). */
   eager?: boolean;
+  /** true for the very first card of the shop: often the largest image on screen. */
+  priority?: boolean;
 }
 
 const {
@@ -21,6 +23,7 @@ const {
   headingLevel = 3,
   sizes = '(min-width: 64rem) 22vw, (min-width: 48rem) 30vw, 46vw',
   eager = false,
+  priority = false,
 } = Astro.props;
 const { t } = useTranslations(lang);
 const info = describeProduct(product, lang);
@@ -40,7 +43,8 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3';
             width={cover.w}
             height={cover.h}
             alt=""
-            loading={eager ? 'eager' : 'lazy'}
+            loading={eager || priority ? 'eager' : 'lazy'}
+            fetchpriority={priority ? 'high' : undefined}
             decoding="async"
           />
         ) : (

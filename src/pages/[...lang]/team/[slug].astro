@@ -1,8 +1,11 @@
 ---
 /**
  * Personal page of a team member: /team/<slug>/.
- * Skills and experience are shown only when filled in (src/data/team.json).
+ * Portrait (src/assets/team/<photo>.jpg, initials if there is none), name, role and her own words;
+ * skills and experience are shown only when filled in (src/data/team.json).
+ * Phones: portrait on top, then the text. From 48rem: portrait left, name + role + bio right.
  */
+import { Picture } from 'astro:assets';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import Monogram from '../../../components/Monogram.astro';
@@ -10,6 +13,9 @@ import ThreadDivider from '../../../components/ThreadDivider.astro';
 import { LOCALES, langParam, useTranslations, type Lang } from '../../../lib/i18n';
 import { localePath } from '../../../lib/urls';
 import { roleDescription, team, type TeamMember } from '../../../lib/catalog';
+import { teamPhoto } from '../../../lib/team-photos';
+import { breadcrumbJsonLd } from '../../../lib/structured-data';
+import { metaDescription } from '../../../lib/format';
 
 export function getStaticPaths() {
   return LOCALES.flatMap((lang) =>
@@ -23,11 +29,22 @@ export function getStaticPaths() {
 const { lang, member } = Astro.props as { lang: Lang; member: TeamMember };
 const { t } = useTranslations(lang);
 
-const role = member.roleTitle[lang];
+const photo = teamPhoto(member);
+// 240px wide on phones, 296px (the size of the file) from 48rem.
+const photoWidths = [240, 296, 480].filter((w) => photo && w <= photo.width);
 const meta = {
   title: t('meta.titleTemplate', { title: t('meta.pages.teamMember.title', { name: member.name, role: member.roleCode }) }),
-  description: t('meta.pages.teamMember.description', { name: member.name, role }),
+  // The bio is unique per person and exists in all three languages (shortened for search results).
+  description: metaDescription(member.bio[lang]),
 };
+// Profiles without CV data (skills / experience in src/data/team.json) stay out of search engines
+// until they are filled in; astro.config.mjs keeps them out of the sitemap with the same rule.
+const profileDraft = LOCALES.some((l) => member.skills[l].length === 0 || member.experience[l].length === 0);
+const jsonLd = breadcrumbJsonLd(lang, [
+  { name: t('nav.home'), path: '' },
+  { name: t('nav.team'), path: 'team/' },
+  { name: member.name, path: `team/${member.slug}/` },
+]);
 
 const sections = [
   { key: 'responsibilities', items: member.responsibilities[lang] },
@@ -42,7 +59,7 @@ const prev = team[(index - 1 + team.length) % team.length];
 const next = team[(index + 1) % team.length];
 ---
 
-<BaseLayout lang={lang} path={`team/${member.slug}/`} {...meta}>
+<BaseLayout lang={lang} path={`team/${member.slug}/`} {...meta} noindex={profileDraft} jsonLd={jsonLd}>
   <nav class="container back" aria-label={t('a11y.breadcrumb')}>
     <a href={localePath(lang, 'team/')} class="back__link">
       <Icon name="arrow-left" size={18} />
@@ -50,19 +67,40 @@ const next = team[(index + 1) % team.length];
     </a>
   </nav>
 
-  <article class="container container--narrow profile">
-    <header class="profile__head">
-      <Monogram name={member.name} size="lg" />
-      <p class="eyebrow">{member.roleCode}</p>
-      <h1>{member.name}</h1>
-      <p class="profile__role">{roleDescription(member, lang)}</p>
-      <ThreadDivider />
-    </header>
+  <article class="container profile">
+    <div class="profile__top">
+      <div class="profile__photo">
+        {
+          photo ? (
+            <Picture
+              src={photo}
+              alt={t('team.member.photoAlt', { name: member.name })}
+              formats={['avif', 'webp']}
+              widths={photoWidths}
+              sizes="(min-width: 48rem) 296px, 240px"
+              class="portrait"
+              loading="eager"
+              fetchpriority="high"
+            />
+          ) : (
+            <Monogram name={member.name} size="lg" />
+          )
+        }
+      </div>
 
-    <section class="profile__section" aria-labelledby="about-title">
-      <h2 id="about-title">{t('team.member.about')}</h2>
-      <p class="lead">{member.bio[lang]}</p>
-    </section>
+      <header class="profile__head">
+        <p class="eyebrow">{member.roleCode}</p>
+        <h1>{member.name}</h1>
+        <p class="profile__role">{roleDescription(member, lang)}</p>
+      </header>
+
+      <section class="profile__section profile__about" aria-labelledby="about-title">
+        <h2 id="about-title">{t('team.member.about')}</h2>
+        <p class="lead">{member.bio[lang]}</p>
+      </section>
+    </div>
+
+    <ThreadDivider class="profile__thread" />
 
     {
       sections.map((section) => (
@@ -109,19 +147,44 @@ const next = team[(index + 1) % team.length];
   .profile {
     display: grid;
     gap: var(--s-7);
+    max-width: calc(var(--container-narrow) + 2 * var(--gutter));
     padding-bottom: var(--section-y);
   }
 
+  /* ---------- Portrait + name + role + bio ---------- */
+  .profile__top {
+    display: grid;
+    grid-template-areas: 'photo' 'head' 'about';
+    gap: var(--s-6);
+    padding-top: var(--s-4);
+  }
+
+  .profile__photo {
+    grid-area: photo;
+    justify-self: center;
+  }
+
+  /* An arch (rounded top, like the circle on our Instagram cards) on powder pink, with a thin
+     bordeaux "thread" around it. The photos are 296 × 370 px, so never show them wider. */
+  .profile__photo :global(.portrait) {
+    display: block;
+    width: 15rem;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 50% 50% var(--radius) var(--radius) / 40% 40% var(--radius) var(--radius);
+    background: var(--c-powder);
+    outline: 1px solid color-mix(in srgb, var(--c-bordeaux) 28%, transparent);
+    outline-offset: 7px;
+  }
+
   .profile__head {
+    grid-area: head;
     display: grid;
     justify-items: center;
     gap: var(--s-2);
-    padding-top: var(--s-4);
     text-align: center;
-  }
-
-  .profile__head :global(.monogram) {
-    margin-bottom: var(--s-3);
   }
 
   .profile__role {
@@ -129,9 +192,42 @@ const next = team[(index + 1) % team.length];
     color: var(--c-muted);
   }
 
-  .profile__head :global(.thread) {
+  .profile__about {
+    grid-area: about;
+  }
+
+  .profile :global(.profile__thread) {
     width: 100%;
-    margin-top: var(--s-4);
+  }
+
+  @media (min-width: 48rem) {
+    .profile {
+      max-width: calc(54rem + 2 * var(--gutter));
+    }
+
+    .profile__top {
+      grid-template-columns: auto minmax(0, 1fr);
+      grid-template-rows: auto 1fr;
+      grid-template-areas: 'photo head' 'photo about';
+      column-gap: var(--s-8);
+      row-gap: var(--s-5);
+      padding-top: var(--s-6);
+    }
+
+    .profile__photo {
+      justify-self: start;
+      padding: 8px; /* room for the outline */
+    }
+
+    .profile__photo :global(.portrait) {
+      width: 18.5rem;
+    }
+
+    .profile__head {
+      justify-items: start;
+      padding-top: var(--s-5);
+      text-align: left;
+    }
   }
 
   .profile__section {

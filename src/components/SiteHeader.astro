@@ -174,15 +174,6 @@ const items = NAV.map((key) => ({
     width: auto;
   }
 
-  /* Home page on phones: the big logo in the hero introduces the brand, so the header
-     wordmark only fades in once that logo has scrolled away (class set by the home page). */
-  @media (max-width: 63.999rem) {
-    .header:global(.header--hero-logo) .header__logo {
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
-
   .header__nav,
   .header :global(.header__lang) {
     display: none;

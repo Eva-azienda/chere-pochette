@@ -27,6 +27,19 @@ export function formatDate(iso: string, lang: string): string {
   return date.toLocaleDateString('de-CH', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
 
+/**
+ * A meta description from a longer text: search engines show about 155 characters, so keep the
+ * whole sentences that fit in `max`, or cut at a word and add "…" when even the first is longer.
+ */
+export function metaDescription(text: string, max = 160): string {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max);
+  const sentenceEnd = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('! '), cut.lastIndexOf('? '));
+  if (sentenceEnd >= 60) return cut.slice(0, sentenceEnd + 1);
+  return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:–-]$/, '')}…`;
+}
+
 /** Initials for the monogram avatars: "Eva Dall'Acqua" → "ED". */
 export function initials(name: string): string {
   const parts = name.trim().split(/\s+/);

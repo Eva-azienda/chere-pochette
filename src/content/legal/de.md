@@ -3,161 +3,78 @@
 <h2 id="impressum">Impressum</h2>
 
 **Chère Pochette – YES-Miniunternehmen**<br>
-Scuola cantonale di commercio (SCC) Bellinzona<br>
+c/o Scuola cantonale di commercio (SCC) Bellinzona<br>
+Viale Stefano Franscini 32<br>
 6500 Bellinzona<br>
 Schweiz
 
 E-Mail: [chere.pochette@sccbellinzona.ch](mailto:chere.pochette@sccbellinzona.ch)
 
-### Wer wir sind
+Verantwortlich: Masha Sargenti (CEO), für das Team von Chère Pochette.
 
-Chère Pochette ist ein Miniunternehmen zu Ausbildungszwecken. Es ist im Rahmen von «YES – Young Enterprise Switzerland, Company Programme 2026/27» an der Kantonalen Handelsschule (SCC) Bellinzona entstanden.
-
-Verantwortlich für den Inhalt: das Team von Chère Pochette, vertreten durch Masha Sargenti (CEO).
-
-### Inhalte und Links
-
-Wir pflegen die Inhalte dieser Website sorgfältig, können aber nicht garantieren, dass sie immer vollständig und aktuell sind.
-
-Für die Inhalte externer Websites, auf die wir verlinken, wie Instagram oder Zahls.ch, sind wir nicht verantwortlich.
-
-### Urheberrecht
-
-Texte, Fotos und Logo gehören Chère Pochette, sofern nicht anders angegeben. Für eine Weiterverwendung braucht es unsere schriftliche Zustimmung.
+Chère Pochette ist ein Miniunternehmen zu Ausbildungszwecken im Programm «YES – Young Enterprise Switzerland, Company Programme 2026/27». Texte, Fotos und Logo gehören Chère Pochette, sofern nicht anders angegeben.
 
 <h2 id="privacy">Datenschutzerklärung</h2>
 
-Der Schutz deiner Daten ist uns wichtig. Hier erklären wir, welche Personendaten wir bearbeiten, warum und welche Rechte du hast – gemäss dem Bundesgesetz über den Datenschutz (DSG).
+Wir bearbeiten nur die Daten, die wir brauchen – gemäss dem Bundesgesetz über den Datenschutz (DSG). Verantwortlich ist Chère Pochette (Adresse oben). Fragen an: [chere.pochette@sccbellinzona.ch](mailto:chere.pochette@sccbellinzona.ch).
 
-### 1. Verantwortliche Stelle
+### Besuch der Website
 
-Chère Pochette – YES-Miniunternehmen, Scuola cantonale di commercio (SCC) Bellinzona, 6500 Bellinzona, Schweiz.
+Die Website liegt bei GitHub Pages (GitHub, Inc., USA). Der Server speichert automatisch technische Daten wie IP-Adresse, Datum, Uhrzeit und aufgerufene Seite, um die Website anzuzeigen und vor Missbrauch zu schützen. Auch die automatische Kontrolle der Online-Zahlungen läuft über GitHub. Diese Daten können deshalb in den USA bearbeitet werden; GitHub ist nach dem Swiss-U.S. Data Privacy Framework zertifiziert.
 
-Für alle Fragen zum Datenschutz: [chere.pochette@sccbellinzona.ch](mailto:chere.pochette@sccbellinzona.ch).
+Wir verwenden keine Cookies, keine Analyse-Tools und keine Werbung. Die Schriften liegen auf unserer eigenen Website. Wenn du auf den Button zum Kaufen oder Bestellen tippst, speichert dein Browser nur die Sprache der Seite (lokaler Speicher, Eintrag «cp-lang»), damit wir dir die Bestätigung in derselben Sprache zeigen: Der Eintrag enthält keine Personendaten und wird uns nicht übermittelt. Du kannst das ablehnen, indem du den lokalen Speicher im Browser blockierst; die Bestätigung erscheint dann auf Italienisch.
 
-### 2. Besuch der Website (Hosting)
+Der Link zu Instagram übermittelt erst Daten, wenn du ihn anklickst.
 
-Die Website wird auf GitHub Pages gehostet, einem Dienst der GitHub, Inc. (USA).
+### Bestellung, Zahlung und Lieferung
 
-Wenn du die Website besuchst, speichert der Server automatisch einige technische Daten: IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browser und Betriebssystem. Sie dienen nur dazu, die Website anzuzeigen und vor Missbrauch zu schützen. Wir verwenden sie nicht, um dich zu identifizieren.
+Für eine Bestellung verwenden wir Name, E-Mail, allenfalls Telefonnummer, Lieferadresse, die gewählte Tasche und den Betrag.
 
-Mehr dazu in der [Datenschutzerklärung von GitHub](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement).
+- Die Online-Zahlung läuft über Zahls.ch, einen Schweizer Zahlungsdienstleister: Die Daten deiner Karte oder deines Kontos sehen wir nie.
+- Wenn du per E-Mail bestellst, verwenden wir deine Angaben nur für Bestellung und Lieferung.
+- Für den Versand geben wir Name und Adresse an die Schweizerische Post weiter.
 
-### 3. Keine Cookies, kein Tracking
+Buchhaltungsunterlagen bewahren wir so lange auf, wie es das Gesetz verlangt; alle anderen Daten löschen wir, sobald wir sie nicht mehr brauchen.
 
-Unsere Website verwendet keine Cookies, keine Analyse-Tools und keine Werbung.
+### E-Mail und Newsletter
 
-Die Schriften werden direkt von unserer Website geladen: Es werden keine Daten an externe Dienste wie Google Fonts übermittelt.
+Wenn du uns schreibst, verwenden wir deine Daten nur für die Antwort. Unsere E-Mails laufen über den Mailserver der SCC Bellinzona.
 
-### 4. Kontakt per E-Mail
+Wenn du dich für den Newsletter anmeldest, verwenden wir deine E-Mail-Adresse nur für unsere Neuigkeiten. Die Liste führen wir selbst, ohne externen Dienst. Du kannst dich jederzeit abmelden, indem du uns schreibst.
 
-Wenn du uns schreibst, bearbeiten wir deinen Namen, deine E-Mail-Adresse und den Inhalt deiner Nachricht nur, um dir zu antworten.
+### Deine Rechte
 
-Unsere E-Mail-Adresse gehört zur Domain der SCC Bellinzona. Wir löschen Nachrichten, sobald sie nicht mehr nötig sind, sofern keine gesetzliche Aufbewahrungspflicht besteht.
-
-### 5. Newsletter
-
-Wenn du dich für den Newsletter anmeldest, verwenden wir deine E-Mail-Adresse nur, um dir unsere Neuigkeiten zu senden. Grundlage ist deine Einwilligung.
-
-Du kannst dich jederzeit abmelden, über den Link in jeder E-Mail oder indem du uns schreibst. Die Liste der Abonnentinnen und Abonnenten führen wir zurzeit selbst, ohne externen Dienst.
-
-### 6. Bestellungen und Zahlungen (Zahls.ch)
-
-Die Zahlung erfolgt auf der Seite von Zahls.ch, einem Schweizer Zahlungsdienstleister. Zahls.ch bearbeitet die für die Zahlung nötigen Daten gemäss der eigenen Datenschutzerklärung, abrufbar auf zahls.ch.
-
-Von Zahls.ch erhalten wir nur die Daten, die wir für die Bestellung brauchen: Name, Kontaktangaben, Lieferadresse (bei Versand), gekaufte Tasche und Betrag. Deine vollständigen Karten- oder Kontodaten sehen wir nie.
-
-Wir verwenden diese Daten nur, um dir die Tasche zu liefern, die Abholung zu vereinbaren und für unsere Buchhaltung. Für den Versand geben wir Name und Adresse an die Schweizerische Post weiter.
-
-Deine Daten werden weder veröffentlicht noch auf der Website gespeichert. Buchhaltungsunterlagen bewahren wir so lange auf, wie es das Gesetz verlangt.
-
-### 7. Instagram
-
-Auf der Website findest du einen Link zu unserem Instagram-Profil. Es werden keine Daten an Instagram übermittelt, solange du nicht auf den Link klickst. Auf Instagram gilt die Datenschutzerklärung von Meta.
-
-### 8. Daten im Ausland
-
-GitHub hat seinen Sitz in den USA: Die unter Punkt 2 beschriebenen technischen Daten können daher im Ausland bearbeitet werden. GitHub gibt an, sie mit geeigneten Garantien zu schützen, zum Beispiel mit Standardvertragsklauseln.
-
-### 9. Deine Rechte
-
-Gemäss DSG hast du das Recht:
-
-- zu erfahren, welche Daten wir über dich bearbeiten (Auskunftsrecht);
-- falsche Daten berichtigen zu lassen;
-- die Löschung zu verlangen oder der Bearbeitung zu widersprechen;
-- deine Daten in einem gängigen Format zu erhalten;
-- eine erteilte Einwilligung jederzeit zu widerrufen, zum Beispiel für den Newsletter.
-
-Schreib uns dafür an [chere.pochette@sccbellinzona.ch](mailto:chere.pochette@sccbellinzona.ch). Du kannst dich auch an den Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) wenden.
-
-### 10. Sicherheit
-
-Die Website verwendet eine verschlüsselte Verbindung (HTTPS). Wir gehen sorgfältig mit deinen Daten um, und nur die Teammitglieder, die sie brauchen, haben Zugriff darauf.
-
-### 11. Änderungen
-
-Wir können diese Datenschutzerklärung anpassen. Es gilt immer die auf dieser Seite veröffentlichte Version.
+Du kannst Auskunft über deine Daten verlangen, sie berichtigen oder löschen lassen und eine Einwilligung widerrufen (zum Beispiel für den Newsletter). Schreib uns an [chere.pochette@sccbellinzona.ch](mailto:chere.pochette@sccbellinzona.ch). Du kannst dich auch an den Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) wenden.
 
 <h2 id="terms">Verkaufsbedingungen (AGB)</h2>
 
-### 1. Geltungsbereich
+### Unsere Taschen
 
-Diese Bedingungen gelten für alle Käufe auf der Website von Chère Pochette. Mit dem Kauf einer Tasche akzeptierst du sie.
+Jede Tasche ist ein Unikat, von Hand gehäkelt aus geretteten Materialien. Kleine Unregelmässigkeiten und leichte Farbabweichungen zu den Fotos gehören zu ihrem Charakter. Die Masse sind ungefähre Angaben.
 
-### 2. Unsere Taschen
+### Preise
 
-Jede Tasche ist ein Unikat, von Hand gehäkelt aus wiederverwerteten Materialien.
+Alle Preise sind in Schweizer Franken (CHF) und Endpreise. Der Versand kostet eine Pauschale, die vor dem Kauf auf der Website steht; die Abholung in Bellinzona ist kostenlos.
 
-Kleine Unregelmässigkeiten und leichte Farbabweichungen gegenüber den Fotos gehören zu ihrem Charakter und sind keine Mängel. Die angegebenen Masse sind Richtwerte.
+### Bestellung und Zahlung
 
-### 3. Preise
+- **Online:** Du wählst Tasche und Lieferart und bezahlst auf Zahls.ch (zum Beispiel mit TWINT, Karte oder PostFinance). Vor dem Bezahlen kannst du deine Angaben prüfen und korrigieren. Der Vertrag kommt zustande, sobald die Zahlung erfolgreich ist; du erhältst eine Bestätigung per E-Mail.
+- **Per E-Mail** (solange die Online-Zahlung nicht aktiv ist): Du schreibst uns von der Seite der Tasche aus. Der Vertrag kommt zustande, sobald wir deine Bestellung per E-Mail bestätigen; in der Bestätigung steht, wie du bezahlst.
 
-Die Preise verstehen sich in Schweizer Franken (CHF) und sind Endpreise.
+Wird dieselbe Tasche wegen eines Fehlers zweimal bezahlt, erhält die zweite Person den vollen Betrag zurück.
 
-Die Versandkosten werden vor der Zahlung auf der Website angezeigt und kommen zum Preis der Tasche hinzu. Die Abholung in Bellinzona ist kostenlos.
+### Lieferung
 
-### 4. Vertragsabschluss
+Wir versenden mit der Schweizerischen Post in die Schweiz und nach Liechtenstein, meist innert 5 Arbeitstagen nach der Zahlung. Wählst du die Abholung in Bellinzona, melden wir uns für einen Termin.
 
-Der Vertrag kommt zustande, sobald die Zahlung über Zahls.ch erfolgreich abgeschlossen ist.
+### Rückgabe und Mängel
 
-Jede Tasche gibt es nur einmal. Sollte dieselbe Tasche wegen eines technischen Fehlers von zwei Personen bezahlt werden, erhält die zweite Person den vollen Betrag zurück.
+In der Schweiz gibt es kein gesetzliches Widerrufsrecht für Online-Käufe – eine Rückgabe ist bei uns trotzdem möglich: Schreib uns innert 14 Tagen nach Erhalt oder Abholung. Ist die Tasche unbenutzt und im Originalzustand, schickst du sie zurück (auf deine Kosten) oder bringst sie nach Absprache in Bellinzona vorbei. Wir erstatten dir den Preis der Tasche innert 14 Tagen nach ihrem Eingang; die ursprünglichen Versandkosten erstatten wir nicht.
 
-### 5. Zahlung
+Wohnst du in Liechtenstein, hast du von Gesetzes wegen 14 Tage ab Erhalt, um ohne Angabe von Gründen vom Vertrag zurückzutreten: In diesem Fall erstatten wir dir auch die ursprünglichen Versandkosten.
 
-Die Zahlung erfolgt im Voraus über Zahls.ch, zum Beispiel mit TWINT, Karte oder PostFinance. Die verfügbaren Zahlungsmittel werden auf der Zahlungsseite angezeigt.
+Kommt die Tasche beschädigt oder mangelhaft an, schreib uns innert 14 Tagen mit einem Foto: Wir schlagen dir eine Reparatur oder die Rückerstattung vor. Normale Abnutzung ist kein Mangel.
 
-### 6. Lieferung und Abholung
+### Anwendbares Recht
 
-Wir versenden mit der Schweizerischen Post in die Schweiz und nach Liechtenstein. Die auf der Website angegebenen Lieferzeiten sind Richtwerte.
-
-Wählst du die Abholung in Bellinzona, melden wir uns nach dem Kauf bei dir, um einen Termin zu vereinbaren.
-
-### 7. Rückgabe (Kulanz)
-
-In der Schweiz gibt es kein gesetzliches Widerrufsrecht für Online-Käufe. Wir bieten dir trotzdem diese Möglichkeit:
-
-- Schreib uns innerhalb von 14 Tagen nach Erhalt oder Abholung der Tasche.
-- Die Tasche muss unbenutzt und im Originalzustand sein.
-- Die Kosten für die Rücksendung trägst du. Alternativ kannst du die Tasche nach Absprache in Bellinzona zurückbringen.
-- Wir erstatten dir den Preis der Tasche innerhalb von 14 Tagen nach ihrem Eingang. Die ursprünglichen Versandkosten werden nicht erstattet.
-
-### 8. Mängel
-
-Bitte prüfe die Tasche bei Erhalt. Ist sie beschädigt oder mangelhaft, schreib uns innerhalb von 14 Tagen mit einem Foto.
-
-Jede Tasche ist ein Unikat und kann nicht durch eine identische ersetzt werden: Wir bieten dir eine Reparatur oder die Rückerstattung an. Normale Abnutzung und typische Eigenschaften wiederverwerteter Materialien sind keine Mängel.
-
-### 9. Haftung
-
-Soweit gesetzlich zulässig, haften wir nur für Schäden, die vorsätzlich oder grobfahrlässig verursacht wurden.
-
-### 10. Datenschutz
-
-Wir bearbeiten deine Daten wie in der [Datenschutzerklärung](#privacy) beschrieben.
-
-### 11. Anwendbares Recht und Gerichtsstand
-
-Es gilt Schweizer Recht unter Ausschluss des Wiener Kaufrechts (CISG).
-
-Gerichtsstand ist Bellinzona. Vorbehalten bleiben zwingende gesetzliche Gerichtsstände, insbesondere für Konsumentinnen und Konsumenten.
+Es gilt Schweizer Recht. Gerichtsstand ist Bellinzona; zwingende Gerichtsstände für Konsumentinnen und Konsumenten bleiben vorbehalten.

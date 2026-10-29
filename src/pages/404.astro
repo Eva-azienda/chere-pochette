@@ -1,18 +1,31 @@
 ---
 /**
- * Custom 404 page. GitHub Pages serves this single file for every unknown address,
+ * Custom 404 page. GitHub Pages serves this single file (status 404) for every unknown address,
  * so it contains the message in all three languages: Italian is shown by default and a tiny
  * script switches to German/English when the address starts with /de/ or /en/.
+ *
+ * Two special cases, handled by the same script:
+ *  - /it/… (Italian has no prefix) → sends the visitor to the same address without "it/";
+ *  - /shop/cp-012/ of a bag that no longer has a page (deleted or hidden) → "this one-off bag
+ *    is no longer online" with the shop button first, instead of the generic message.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ThreadDivider from '../components/ThreadDivider.astro';
-import { DEFAULT_LANG, HREFLANG, LOCALES, useTranslations } from '../lib/i18n';
+import { DEFAULT_LANG, HTML_LANG, LOCALES, useTranslations } from '../lib/i18n';
 import { BASE, localePath } from '../lib/urls';
 
 const { pageMeta } = useTranslations(DEFAULT_LANG);
 ---
 
 <BaseLayout lang={DEFAULT_LANG} path="" {...pageMeta('notFound')} noindex alternates={false}>
+  <script is:inline slot="head" define:vars={{ base: BASE }}>
+    // /it/shop/ → /shop/ (the target never starts with "it/", so this cannot loop).
+    var rest = location.pathname.indexOf(base) === 0 ? location.pathname.slice(base.length) : '';
+    if (rest === 'it' || rest.indexOf('it/') === 0) {
+      location.replace(base + rest.slice(3) + location.search + location.hash);
+    }
+  </script>
+
   <section class="container container--narrow nf" data-base={BASE}>
     <ThreadDivider />
     {
@@ -23,36 +36,73 @@ const { pageMeta } = useTranslations(DEFAULT_LANG);
             class="nf__msg"
             data-lang={lang}
             data-title={meta('notFound').title}
-            lang={HREFLANG[lang]}
+            data-bag-eyebrow={tr('notFound.bag.eyebrow')}
+            data-bag-title={tr('notFound.bag.title')}
+            data-bag-text={tr('notFound.bag.text')}
+            lang={HTML_LANG[lang]}
             hidden={lang !== DEFAULT_LANG}
           >
-            <p class="eyebrow">{tr('notFound.eyebrow')}</p>
-            <h1>{tr('notFound.title')}</h1>
-            <p class="lead">{tr('notFound.text')}</p>
+            <p class="eyebrow" data-nf-eyebrow>
+              {tr('notFound.eyebrow')}
+            </p>
+            <h1 data-nf-title>{tr('notFound.title')}</h1>
+            <p class="lead" data-nf-text>
+              {tr('notFound.text')}
+            </p>
             <div class="btn-row">
-              <a class="btn btn--primary" href={localePath(lang)}>{tr('notFound.cta')}</a>
-              <a class="btn btn--outline" href={localePath(lang, 'shop/')}>{tr('notFound.ctaShop')}</a>
+              <a class="btn btn--primary" href={localePath(lang)} data-nf-home>
+                {tr('notFound.cta')}
+              </a>
+              <a class="btn btn--outline" href={localePath(lang, 'shop/')} data-nf-shop>
+                {tr('notFound.ctaShop')}
+              </a>
             </div>
           </div>
         );
       })
     }
   </section>
-</BaseLayout>
 
-<script>
-  const section = document.querySelector<HTMLElement>('[data-base]');
-  if (section) {
-    const base = section.dataset.base ?? '/';
-    const rest = location.pathname.startsWith(base) ? location.pathname.slice(base.length) : '';
-    const lang = rest.split('/')[0];
-    const match = section.querySelector<HTMLElement>(`.nf__msg[data-lang="${lang}"]`);
-    if (match) {
-      section.querySelectorAll<HTMLElement>('.nf__msg').forEach((el) => (el.hidden = el !== match));
-      document.title = match.dataset.title ?? document.title;
-    }
-  }
-</script>
+  <!-- Inline (not bundled): runs while the page is parsed, so the Italian text never flashes. -->
+  <script is:inline>
+    (function () {
+      var section = document.querySelector('.nf[data-base]');
+      if (!section) return;
+      var base = section.dataset.base || '/';
+      var rest = location.pathname.indexOf(base) === 0 ? location.pathname.slice(base.length) : '';
+      var lang = rest.split('/')[0];
+      var match = lang !== 'it' ? section.querySelector('.nf__msg[data-lang="' + lang + '"]') : null;
+      var route = match ? rest.slice(lang.length + 1) : rest;
+      if (match) {
+        section.querySelectorAll('.nf__msg').forEach(function (el) {
+          el.hidden = el !== match;
+        });
+        document.title = match.dataset.title || document.title;
+      } else {
+        match = section.querySelector('.nf__msg[data-lang="it"]');
+      }
+      // A bag page that no longer exists: every bag is one of a kind, so say so and point to the shop.
+      if (/^shop\/cp-\d{3,}\/?$/.test(route)) {
+        match.querySelector('[data-nf-eyebrow]').textContent = match.dataset.bagEyebrow;
+        match.querySelector('[data-nf-title]').textContent = match.dataset.bagTitle;
+        match.querySelector('[data-nf-text]').textContent = match.dataset.bagText;
+        var shop = match.querySelector('[data-nf-shop]');
+        var home = match.querySelector('[data-nf-home]');
+        shop.parentElement.prepend(shop);
+        shop.classList.replace('btn--outline', 'btn--primary');
+        home.classList.replace('btn--primary', 'btn--outline');
+      }
+      // The menu must not mark "Home" as the current page (this page is built with path "").
+      // Header, footer and language switcher stay Italian (with lang="it-CH"): only the message
+      // above is translated, and it carries its own lang attribute.
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('a[aria-current="page"]:not([data-lang-link])').forEach(function (a) {
+          a.removeAttribute('aria-current');
+        });
+      });
+    })();
+  </script>
+</BaseLayout>
 
 <style>
   .nf {

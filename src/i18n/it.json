@@ -5,42 +5,43 @@
     "ogLocale": "it_CH",
     "titleTemplate": "{title} · Chère Pochette",
     "defaultDescription": "Borse all'uncinetto fatte a mano con materiali recuperati. Pezzi unici di Chère Pochette, mini-impresa YES della SCC di Bellinzona.",
+    "ogImageAlt": "Logo di Chère Pochette accanto a una borsa all'uncinetto bordeaux tenuta in mano",
     "pages": {
       "home": {
-        "title": "Chère Pochette · Made to carry on",
-        "description": "Borse all'uncinetto fatte a mano con vestiti e ombrelli recuperati. Ogni borsa è un pezzo unico. Mini-impresa YES della SCC di Bellinzona."
+        "title": "Borse all'uncinetto fatte a mano in Ticino · Chère Pochette",
+        "description": "Borse all'uncinetto fatte a mano con vestiti e ombrelli recuperati: upcycling dal Ticino, pezzi unici. Una mini-impresa YES della SCC di Bellinzona."
       },
       "shop": {
-        "title": "Shop – borse uniche all'uncinetto",
-        "description": "Scopri le borse disponibili di Chère Pochette: pezzi unici all'uncinetto, con fodera ricavata da ombrelli rotti. Pagamento con TWINT."
+        "title": "Shop – borse all'uncinetto fatte a mano",
+        "description": "Borse all'uncinetto Jolie, Belle e Coquette: pezzi unici numerati, fatti a mano con materiali recuperati. Spedizione in Svizzera o ritiro a Bellinzona."
       },
       "product": {
-        "title": "{model} · Pezzo unico N° {number}",
-        "description": "{model}, pezzo unico N° {number}: borsa all'uncinetto fatta a mano. Esterno in fettuccia da vestiti recuperati, fodera da ombrelli rotti."
+        "title": "{model} – borsa all'uncinetto N° {number}",
+        "description": "{model}, pezzo unico N° {number}: borsa all'uncinetto fatta a mano con vestiti recuperati e fodera da ombrelli rotti. CHF {price}"
       },
       "about": {
-        "title": "La nostra storia",
-        "description": "Sette studentesse della SCC di Bellinzona, un'idea e un filo che ci unisce: la storia di Chère Pochette e il senso di «Made to carry on»."
+        "title": "La nostra storia: uncinetto e upcycling",
+        "description": "Sette studentesse della SCC di Bellinzona e un gruppo di donne ucraine: così nascono le nostre borse all'uncinetto, da vestiti e ombrelli recuperati."
       },
       "process": {
-        "title": "Dall'ombrello alla borsa",
-        "description": "Recupero, selezione, creazione, fodera: come vestiti dimenticati e ombrelli rotti diventano una Chère Pochette, in cinque passi."
+        "title": "Dall'ombrello alla borsa all'uncinetto",
+        "description": "Recupero, selezione, uncinetto, fodera: in cinque passi vestiti dimenticati e ombrelli rotti diventano una borsa fatta a mano. Ecco il nostro upcycling."
       },
       "team": {
-        "title": "Il team",
-        "description": "Conosci le sette ragazze di Chère Pochette: l'organigramma della nostra mini-impresa YES, con un profilo per ognuna."
+        "title": "Il nostro team a Bellinzona",
+        "description": "Conosci le sette studentesse della SCC di Bellinzona dietro Chère Pochette, la mini-impresa YES di borse all'uncinetto: organigramma e profili."
       },
       "teamMember": {
         "title": "{name} – {role}",
         "description": "{name}, {role} di Chère Pochette, mini-impresa YES della SCC di Bellinzona."
       },
       "info": {
-        "title": "Info & FAQ",
-        "description": "Spedizione in Svizzera, ritiro gratuito a Bellinzona, pagamento con TWINT, resi e consigli per la cura della tua borsa all'uncinetto."
+        "title": "Info & FAQ: spedizione, resi e cura",
+        "description": "Spedizione in Svizzera e Liechtenstein, ritiro gratuito a Bellinzona, resi entro 14 giorni e consigli per lavare la tua borsa all'uncinetto."
       },
       "legal": {
-        "title": "Note legali e privacy",
-        "description": "Note legali, informativa sulla privacy e condizioni di vendita di Chère Pochette."
+        "title": "Note legali, privacy e condizioni di vendita",
+        "description": "Note legali, informativa sulla privacy e condizioni di vendita di Chère Pochette, mini-impresa YES della SCC di Bellinzona. Niente cookie, niente tracciamento."
       },
       "thanks": {
         "title": "Grazie per il tuo acquisto",
@@ -129,7 +130,9 @@
     "womenCrochet": "Donne attorno a un tavolo di legno mentre lavorano all'uncinetto",
     "modelJolie": "Modello Jolie, borsa a bauletto all'uncinetto",
     "modelBelle": "Modello Belle, borsa all'uncinetto senza frange",
-    "modelCoquette": "Modello Coquette, borsa all'uncinetto con frange"
+    "modelCoquette": "Modello Coquette, borsa all'uncinetto con frange",
+    "bagSketch": "Disegno a tratto di una borsa all’uncinetto con ago e filo",
+    "teamGroup": "Il team di Chère Pochette: sette ragazze della SCC di Bellinzona, all'aperto, con maglie bordeaux"
   },
   "home": {
     "hero": {
@@ -137,7 +140,18 @@
       "title": "Made to carry on",
       "subtitle": "Borse fatte a mano all'uncinetto con vestiti e ombrelli recuperati. Ognuna è unica, come chi la porta.",
       "cta": "Scopri le borse",
-      "ctaSecondary": "La nostra storia"
+      "ctaSecondary": "La nostra storia",
+      "notes": {
+        "yarn": "fettuccia da vestiti recuperati",
+        "handle": "manico all’uncinetto",
+        "unique": "pezzo unico, numerato"
+      },
+      "marquee": [
+        "Pezzi unici",
+        "Fatte a mano all’uncinetto",
+        "Vestiti e ombrelli recuperati",
+        "Made in Bellinzona"
+      ]
     },
     "intro": {
       "eyebrow": "Il concetto",
@@ -184,11 +198,16 @@
       "cta": "Scopri il processo"
     },
     "story": {
-      "eyebrow": "Chi siamo",
-      "title": "Sette ragazze, un filo comune",
-      "text": "Siamo sette studentesse della Scuola cantonale di commercio di Bellinzona. Con il programma YES abbiamo dato vita alla nostra mini-impresa.",
-      "cta": "La nostra storia",
-      "ctaTeam": "Conosci il team"
+      "eyebrow": "Fatte a più mani",
+      "title": "Insieme alle donne ucraine",
+      "text": "Le nostre borse nascono dalla collaborazione con un gruppo di donne ucraine che lavorano all'uncinetto con noi. Condividiamo tecnica, idee e tempo.",
+      "cta": "La nostra storia"
+    },
+    "team": {
+      "eyebrow": "Il team",
+      "title": "Sette ragazze, un unico filo",
+      "text": "Siamo sette studentesse della Scuola cantonale di commercio di Bellinzona e, con il programma YES, portiamo avanti insieme la nostra mini-impresa.",
+      "cta": "Conosci il team"
     },
     "newsletter": {
       "title": "Non perdere la prossima borsa",
@@ -202,7 +221,7 @@
   },
   "shop": {
     "eyebrow": "Shop",
-    "title": "Le nostre borse",
+    "title": "Le nostre borse all'uncinetto",
     "intro": "Ogni borsa è un pezzo unico, fatto a mano con materiali recuperati. Quella che vedi in foto è proprio quella che riceverai.",
     "filter": {
       "label": "Filtra per modello",
@@ -239,12 +258,13 @@
   },
   "product": {
     "backToShop": "Torna allo shop",
+    "eyebrow": "Borsa all'uncinetto fatta a mano",
     "model": "Modello",
     "type": "Forma",
     "colour": "Colore esterno",
     "lining": "Interno (fodera)",
     "note": "Una nota su questa borsa",
-    "photoAlt": "Borsa {model} {colour}, pezzo unico N° {number} – foto {n}",
+    "photoAlt": "Borsa all'uncinetto {model} color {colour}, pezzo unico N° {number} – foto {n}",
     "dimensions": {
       "title": "Dimensioni",
       "length": "Lunghezza",
@@ -257,7 +277,8 @@
     "materials": {
       "title": "Materiali",
       "exterior": "Esterno: fettuccia (filato da t-shirt) ricavata da vestiti recuperati, lavorata all'uncinetto.",
-      "lining": "Fodera: tessuto recuperato da ombrelli rotti."
+      "lining": "Fodera: tessuto recuperato da ombrelli rotti.",
+      "schema": "Fettuccia da vestiti recuperati; fodera in tessuto da ombrelli rotti"
     },
     "unique": {
       "title": "Un pezzo unico",
@@ -285,6 +306,11 @@
       "text": "Per questa borsa il pagamento online non è ancora attivo. Scrivici: ti rispondiamo il prima possibile.",
       "subject": "Ordine {id} – {model}",
       "body": "Buongiorno,\n\nvorrei acquistare la borsa {model}, pezzo unico N° {number} ({id}).\nConsegna: {delivery}.\n\nGrazie!"
+    },
+    "legalNote": {
+      "text": "Ordinando accetti le nostre",
+      "terms": "condizioni di vendita",
+      "returns": "Resi entro 14 giorni"
     },
     "sold": {
       "badge": "Venduta",
@@ -474,6 +500,12 @@
         "I dati della tua carta o del tuo conto restano a Zahls.ch: noi non li vediamo."
       ]
     },
+    "paymentEmail": {
+      "paragraphs": [
+        "Il pagamento online non è ancora attivo: per ora ordini la tua borsa via e-mail, direttamente dalla sua pagina.",
+        "Nella nostra conferma per e-mail ti indichiamo come pagare."
+      ]
+    },
     "returns": {
       "title": "Resi",
       "paragraphs": [
@@ -509,7 +541,8 @@
         },
         {
           "q": "Come posso pagare?",
-          "a": "Con TWINT, carta o PostFinance, sulla pagina di pagamento sicura di Zahls.ch."
+          "a": "Con TWINT, carta o PostFinance, sulla pagina di pagamento sicura di Zahls.ch.",
+          "aEmail": "Per ora ordini via e-mail dalla pagina della borsa: nella nostra conferma ti indichiamo come pagare."
         },
         {
           "q": "Posso regalare una borsa?",
@@ -533,7 +566,7 @@
   },
   "legal": {
     "eyebrow": "Note legali",
-    "title": "Note legali e privacy",
+    "title": "Note legali, privacy e condizioni di vendita",
     "intro": "Chi siamo, come trattiamo i tuoi dati e le nostre condizioni di vendita.",
     "toc": {
       "title": "In questa pagina",
@@ -573,7 +606,12 @@
     "title": "Questo filo si è perso",
     "text": "La pagina che cerchi non esiste o è stata spostata. Riprendiamo insieme il filo?",
     "cta": "Vai alla home",
-    "ctaShop": "Vedi le borse"
+    "ctaShop": "Vedi le borse",
+    "bag": {
+      "eyebrow": "Pezzo unico",
+      "title": "Questa borsa non è più online",
+      "text": "Era un pezzo unico: è stata venduta o tolta dal negozio. Le altre borse fatte a mano ti aspettano nello shop."
+    }
   },
   "newsletter": {
     "title": "Resta in contatto",
@@ -592,11 +630,10 @@
     "mailtoBody": "Buongiorno,\n\nvorrei iscrivermi alla newsletter di Chère Pochette con questo indirizzo: {subscriber}\n\nGrazie!"
   },
   "footer": {
-    "about": "Borse all'uncinetto fatte a mano con materiali recuperati.",
+    "about": "Borse all'uncinetto fatte a mano in Ticino, con materiali recuperati.",
     "contactTitle": "Contatti",
     "followTitle": "Seguici",
     "linksTitle": "Scopri",
-    "legal": "Note legali e privacy",
     "yes": "Mini-impresa YES – SCC Bellinzona",
     "copyright": "© {year} Chère Pochette",
     "privacyNote": "Questo sito non usa cookie né strumenti di tracciamento."

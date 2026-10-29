@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 520" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+<path class="s-main" pathLength="1" stroke-width="2.2" d="M389 188C387 150 380 120 370 102C364 90 352 87 326 84C300 81 296 73 240 73C184 73 180 81 154 84C128 87 116 90 110 102C100 120 90 174 90 236C90 292 104 330 166 333C180 336 300 336 314 333C376 330 390 292 390 236C390 214 390 200 388 176"/>
+<path class="s-main" pathLength="1" stroke-width="2.2" d="M240 141C212 141 183 138 184 127C185 118 210 115 240 115C272 115 295 118 296 127C297 138 268 141 240 141C208 141 177 139 177 127C178 114 208 109 240 109C266 109 286 111 294 114"/>
+<path class="s-thread" pathLength="1" stroke-width="1.3" d="M104.8 304.4C86 330 98 418 220 420C296 421 336 408 356 392C370 380 368 362 354 366C340 370 348 398 376 398C398 398 420 382 445.4 378.3"/>
+<path class="s-thread s-needle" pathLength="1" stroke-width="2.6" d="M390 458 434.2 384.8"/>
+<ellipse class="s-thread s-needle" pathLength="1" stroke-width="1.5" cx="439.4" cy="376.3" rx="9.5" ry="3.2" transform="rotate(-58.8 439.4 376.3)"/>
+</svg>

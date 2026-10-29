@@ -12,6 +12,11 @@ import { formatPrice, padNumber } from './format';
 import { assetPath } from './urls';
 
 export const site = siteData;
+
+// The Instagram link (footer, home, structured data) should open the profile, not a single post.
+if (/instagram\.com\/(p|reel)\//.test(site.instagram)) {
+  console.warn('[site] src/data/site.json "instagram" is a link to one post – use the profile URL https://www.instagram.com/<name>/');
+}
 export type Product = CollectionEntry<'products'>['data'];
 export type Model = (typeof modelsData)[number];
 export type TeamMember = (typeof teamData)[number];

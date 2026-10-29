@@ -13,11 +13,16 @@ import '@fontsource-variable/bodoni-moda/opsz.css';
 import '@fontsource-variable/bodoni-moda/opsz-italic.css';
 import '@fontsource-variable/red-hat-display';
 import '../styles/global.css';
+// Preloaded: every h1 uses Bodoni, and its arrival changes the line breaks of the titles.
+// Same file as in the fontsource CSS above, so the browser downloads it only once.
+import bodoniLatin from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-opsz-normal.woff2?url';
 
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { HREFLANG, LOCALES, DEFAULT_LANG, type Lang, useTranslations } from '../lib/i18n';
+import { HREFLANG, HTML_LANG, LOCALES, DEFAULT_LANG, type Lang, useTranslations } from '../lib/i18n';
 import { absoluteUrl, assetPath, localePath } from '../lib/urls';
+import { site } from '../lib/catalog';
+import { jsonLdScript, organizationJsonLd, websiteJsonLd, type JsonLdNode } from '../lib/structured-data';
 
 interface Props {
   lang: Lang;
@@ -28,9 +33,11 @@ interface Props {
   noindex?: boolean;
   /** false for pages without language versions at a fixed URL (404). */
   alternates?: boolean;
-  /** Absolute URL of a page-specific sharing image (default: public/og-image.jpg). */
-  ogImage?: string;
+  /** Page-specific sharing image (default: public/og-image.jpg). `url` must be absolute. */
+  ogImage?: { url: string; width: number; height: number; alt: string };
   ogType?: 'website' | 'product';
+  /** schema.org nodes from src/lib/structured-data.ts, printed as one JSON-LD script (the home page adds the organisation itself). */
+  jsonLd?: JsonLdNode | JsonLdNode[];
   /** false when the page already contains a newsletter block. */
   footerNewsletter?: boolean;
   /** Extra class on <body>, e.g. "has-buybar" on product pages. */
@@ -46,25 +53,39 @@ const {
   alternates = true,
   ogImage,
   ogType = 'website',
+  jsonLd,
   footerNewsletter = true,
   bodyClass,
 } = Astro.props;
 
 const { t } = useTranslations(lang);
 const canonical = absoluteUrl(localePath(lang, path));
-const image = ogImage ?? absoluteUrl(assetPath('og-image.jpg'));
+const image = ogImage ?? {
+  url: absoluteUrl(assetPath('og-image.jpg')),
+  width: 1200,
+  height: 630,
+  alt: t('meta.ogImageAlt'),
+};
 const ogLocale = t('meta.ogLocale');
 const otherOgLocales = LOCALES.filter((l) => l !== lang).map((l) => useTranslations(l).t('meta.ogLocale'));
+// Structured data: the page's own nodes, plus who we are (shop + website name) on the home page.
+const isHome = path === '' && alternates; // the 404 page also uses path '' but has no alternates
+const structuredData = [...(isHome ? [organizationJsonLd(lang), websiteJsonLd()] : []), ...[jsonLd ?? []].flat()];
+// Search Console / Bing Webmaster verification (src/data/site.json → "seo"); empty = no tag.
+const verification = (site as { seo?: { googleSiteVerification?: string; bingSiteVerification?: string } }).seo ?? {};
 ---
 
 <!doctype html>
-<html lang={HREFLANG[lang]} dir="ltr">
+<html lang={HTML_LANG[lang]} dir="ltr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="preload" href={bodoniLatin} as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, follow" />}
+    {verification.googleSiteVerification && <meta name="google-site-verification" content={verification.googleSiteVerification} />}
+    {verification.bingSiteVerification && <meta name="msvalidate.01" content={verification.bingSiteVerification} />}
 
     {alternates && <link rel="canonical" href={canonical} />}
     {
@@ -81,19 +102,26 @@ const otherOgLocales = LOCALES.filter((l) => l !== lang).map((l) => useTranslati
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {alternates && <meta property="og:url" content={canonical} />}
-    <meta property="og:image" content={image} />
-    {!ogImage && <meta property="og:image:width" content="1200" />}
-    {!ogImage && <meta property="og:image:height" content="630" />}
+    <meta property="og:image" content={image.url} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content={String(image.width)} />
+    <meta property="og:image:height" content={String(image.height)} />
+    <meta property="og:image:alt" content={image.alt} />
     <meta property="og:locale" content={ogLocale} />
     {otherOgLocales.map((l) => <meta property="og:locale:alternate" content={l} />)}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image:alt" content={image.alt} />
 
     <!-- Icons -->
     <link rel="icon" href={assetPath('favicon.ico')} sizes="32x32" />
     <link rel="icon" href={assetPath('favicon.svg')} type="image/svg+xml" />
     <link rel="apple-touch-icon" href={assetPath('apple-touch-icon.png')} />
+    <link rel="manifest" href={assetPath('site.webmanifest')} />
     <meta name="theme-color" content="#FAF7F2" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Structured data for search engines (src/lib/structured-data.ts) -->
+    {structuredData.length > 0 && <script type="application/ld+json" set:html={jsonLdScript(structuredData)} />}
 
     <slot name="head" />
   </head>

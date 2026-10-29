@@ -12,6 +12,7 @@
 import Icon from './Icon.astro';
 import { type Lang, useTranslations } from '../lib/i18n';
 import { formatPrice } from '../lib/format';
+import { localePath } from '../lib/urls';
 import { describeProduct, paymentLink, site, type Delivery, type Product } from '../lib/catalog';
 
 interface Props {
@@ -115,6 +116,13 @@ const allOnline = options.every((o) => o.online);
       </div>
     )
   }
+
+  <!-- The terms of sale must be reachable before the order (they are part of the contract). -->
+  <p class="buy__legal">
+    {t('product.legalNote.text')} <a href={localePath(lang, 'legal/#terms')}>{t('product.legalNote.terms')}</a>{' · '}<a
+      href={localePath(lang, 'info/#returns')}>{t('product.legalNote.returns')}</a
+    >
+  </p>
 </div>
 
 <script>
@@ -303,6 +311,15 @@ const allOnline = options.every((o) => o.online);
 
   .buy__note-title {
     font-weight: 600;
+  }
+
+  .buy__legal {
+    font-size: var(--fs-xs);
+    color: var(--c-muted);
+  }
+
+  .buy__legal a {
+    color: inherit;
   }
 
   /* Phones & tablets: the bar sticks to the bottom of the screen (above the iPhone home bar). */

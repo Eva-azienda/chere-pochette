@@ -59,7 +59,13 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
             </li>
           ))
         }
-        <li><a href={localePath(lang, 'legal/')}>{t('footer.legal')}</a></li>
+        {
+          (['impressum', 'privacy', 'terms'] as const).map((id) => (
+            <li>
+              <a href={localePath(lang, `legal/#${id}`)}>{t(`legal.toc.${id}`)}</a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
 

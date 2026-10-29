@@ -5,42 +5,43 @@
     "ogLocale": "en_GB",
     "titleTemplate": "{title} · Chère Pochette",
     "defaultDescription": "Handmade crochet bags from recovered materials. One-of-a-kind pieces by Chère Pochette, a YES mini-company at SCC Bellinzona.",
+    "ogImageAlt": "Chère Pochette logo next to a burgundy crochet bag held in two hands",
     "pages": {
       "home": {
-        "title": "Chère Pochette · Made to carry on",
-        "description": "Handmade crochet bags from recovered clothes and broken umbrellas. Every bag is one of a kind. A YES mini-company at SCC Bellinzona, Switzerland."
+        "title": "Handmade crochet bags from Ticino · Chère Pochette",
+        "description": "Handmade crochet bags from recovered clothes and broken umbrellas: upcycled, one-of-a-kind pieces by a YES student company in Bellinzona, Switzerland."
       },
       "shop": {
-        "title": "Shop – one-of-a-kind crochet bags",
-        "description": "Discover the bags available from Chère Pochette: one-of-a-kind crochet pieces lined with fabric from broken umbrellas. Pay with TWINT."
+        "title": "Shop – handmade crochet bags",
+        "description": "Jolie, Belle and Coquette crochet bags: numbered one-of-a-kind pieces, handmade from recovered materials. Shipping in Switzerland or free pickup in Bellinzona."
       },
       "product": {
-        "title": "{model} · One of a kind No. {number}",
-        "description": "{model}, one of a kind No. {number}: a handmade crochet bag. Outside: t-shirt yarn from recovered clothes. Lining: fabric from broken umbrellas."
+        "title": "{model} – crochet bag No. {number}",
+        "description": "{model}, one of a kind No. {number}: a handmade crochet bag from recovered clothes, lined with broken-umbrella fabric. CHF {price}"
       },
       "about": {
-        "title": "Our story",
-        "description": "Seven students from SCC Bellinzona, one idea and a thread that connects us: the story of Chère Pochette and the meaning of “Made to carry on”."
+        "title": "Our story: crochet and upcycling",
+        "description": "Seven students from SCC Bellinzona and a group of Ukrainian women: how our crochet bags are made from recovered clothes and broken umbrellas."
       },
       "process": {
-        "title": "From umbrella to bag",
-        "description": "Recovery, selection, creation, lining: how forgotten clothes and broken umbrellas become a Chère Pochette, in five steps."
+        "title": "From broken umbrella to crochet bag",
+        "description": "Collect, select, crochet, line: how forgotten clothes and broken umbrellas become a handmade, upcycled bag in five steps."
       },
       "team": {
-        "title": "The team",
-        "description": "Meet the seven young women behind Chère Pochette: the org chart of our YES mini-company, with a profile for each of us."
+        "title": "Our team in Bellinzona",
+        "description": "Meet the seven SCC Bellinzona students behind Chère Pochette, the YES mini-company making upcycled crochet bags: our org chart and profiles."
       },
       "teamMember": {
         "title": "{name} – {role}",
         "description": "{name}, {role} at Chère Pochette, a YES mini-company at SCC Bellinzona."
       },
       "info": {
-        "title": "Info & FAQ",
-        "description": "Shipping within Switzerland, free pickup in Bellinzona, payment with TWINT, returns and care tips for your crochet bag."
+        "title": "Info & FAQ: shipping, returns and care",
+        "description": "Shipping within Switzerland and Liechtenstein, free pickup in Bellinzona, returns within 14 days and care tips for your crochet bag."
       },
       "legal": {
-        "title": "Legal notice & privacy",
-        "description": "Legal notice, privacy policy and terms of sale of Chère Pochette."
+        "title": "Legal notice, privacy & terms of sale",
+        "description": "Legal notice, privacy policy and terms of sale of Chère Pochette, a YES mini-company at SCC Bellinzona. No cookies, no tracking."
       },
       "thanks": {
         "title": "Thank you for your order",
@@ -129,7 +130,9 @@
     "womenCrochet": "Women crocheting together around a wooden table",
     "modelJolie": "Jolie model, crochet barrel bag",
     "modelBelle": "Belle model, crochet bag without fringe",
-    "modelCoquette": "Coquette model, crochet bag with fringe"
+    "modelCoquette": "Coquette model, crochet bag with fringe",
+    "bagSketch": "Line drawing of a crochet bag with needle and thread",
+    "teamGroup": "The Chère Pochette team: seven young women from SCC Bellinzona, outdoors, in burgundy tops"
   },
   "home": {
     "hero": {
@@ -137,7 +140,18 @@
       "title": "Made to carry on",
       "subtitle": "Handmade crochet bags from recovered clothes and umbrellas. Each one is unique – just like you.",
       "cta": "Discover the bags",
-      "ctaSecondary": "Our story"
+      "ctaSecondary": "Our story",
+      "notes": {
+        "yarn": "yarn from recovered clothes",
+        "handle": "crocheted handle",
+        "unique": "one of a kind, numbered"
+      },
+      "marquee": [
+        "One of a kind",
+        "Crocheted by hand",
+        "Recovered clothes and umbrellas",
+        "Made in Bellinzona"
+      ]
     },
     "intro": {
       "eyebrow": "The idea",
@@ -184,11 +198,16 @@
       "cta": "Discover the process"
     },
     "story": {
-      "eyebrow": "Who we are",
-      "title": "Seven young women, one common thread",
-      "text": "We are seven students at the Cantonal Business School (SCC) in Bellinzona. Through the YES programme, we started our own mini-company.",
-      "cta": "Our story",
-      "ctaTeam": "Meet the team"
+      "eyebrow": "Made by many hands",
+      "title": "Together with Ukrainian women",
+      "text": "Our bags are made in collaboration with a group of Ukrainian women who crochet with us. We share technique, ideas and time.",
+      "cta": "Our story"
+    },
+    "team": {
+      "eyebrow": "The team",
+      "title": "Seven young women, one thread",
+      "text": "We are seven students at the Cantonal Business School (SCC) in Bellinzona, running our own mini-company together through the YES programme.",
+      "cta": "Meet the team"
     },
     "newsletter": {
       "title": "Don't miss the next bag",
@@ -202,7 +221,7 @@
   },
   "shop": {
     "eyebrow": "Shop",
-    "title": "Our bags",
+    "title": "Our crochet bags",
     "intro": "Every bag is one of a kind, handmade from recovered materials. The bag in the photos is exactly the one you'll receive.",
     "filter": {
       "label": "Filter by model",
@@ -239,12 +258,13 @@
   },
   "product": {
     "backToShop": "Back to the shop",
+    "eyebrow": "Handmade crochet bag",
     "model": "Model",
     "type": "Shape",
     "colour": "Exterior colour",
     "lining": "Interior (lining)",
     "note": "A note about this bag",
-    "photoAlt": "{model} bag in {colour}, one of a kind No. {number} – photo {n}",
+    "photoAlt": "{model} crochet bag in {colour}, one of a kind No. {number} – photo {n}",
     "dimensions": {
       "title": "Dimensions",
       "length": "Length",
@@ -257,7 +277,8 @@
     "materials": {
       "title": "Materials",
       "exterior": "Exterior: t-shirt yarn (fettuccia) made from recovered clothes, crocheted by hand.",
-      "lining": "Lining: fabric recovered from broken umbrellas."
+      "lining": "Lining: fabric recovered from broken umbrellas.",
+      "schema": "Fettuccia (t-shirt yarn) from recovered clothes; lining from umbrella fabric"
     },
     "unique": {
       "title": "One of a kind",
@@ -285,6 +306,11 @@
       "text": "Online payment isn't active for this bag yet. Write to us and we'll reply as soon as we can.",
       "subject": "Order {id} – {model}",
       "body": "Hello,\n\nI would like to buy the {model} bag, one of a kind No. {number} ({id}).\nDelivery: {delivery}.\n\nThank you!"
+    },
+    "legalNote": {
+      "text": "By ordering, you accept our",
+      "terms": "terms of sale",
+      "returns": "Returns within 14 days"
     },
     "sold": {
       "badge": "Sold",
@@ -474,6 +500,12 @@
         "Your card or account details stay with Zahls.ch: we never see them."
       ]
     },
+    "paymentEmail": {
+      "paragraphs": [
+        "Online payment is not active yet: for now you order your bag by e-mail, straight from its page.",
+        "Our confirmation e-mail tells you how to pay."
+      ]
+    },
     "returns": {
       "title": "Returns",
       "paragraphs": [
@@ -509,7 +541,8 @@
         },
         {
           "q": "How can I pay?",
-          "a": "With TWINT, card or PostFinance, on the secure Zahls.ch payment page."
+          "a": "With TWINT, card or PostFinance, on the secure Zahls.ch payment page.",
+          "aEmail": "For now you order by e-mail from the bag's page: our confirmation tells you how to pay."
         },
         {
           "q": "Can I give a bag as a gift?",
@@ -533,7 +566,7 @@
   },
   "legal": {
     "eyebrow": "Legal",
-    "title": "Legal notice & privacy",
+    "title": "Legal notice, privacy & terms of sale",
     "intro": "Who we are, how we handle your data, and our terms of sale.",
     "toc": {
       "title": "On this page",
@@ -573,7 +606,12 @@
     "title": "This thread got lost",
     "text": "The page you're looking for doesn't exist or has moved. Shall we pick up the thread together?",
     "cta": "Go to the home page",
-    "ctaShop": "See the bags"
+    "ctaShop": "See the bags",
+    "bag": {
+      "eyebrow": "One of a kind",
+      "title": "This bag is no longer online",
+      "text": "It was one of a kind and has been sold or taken out of the shop. The other handmade bags are waiting for you in the shop."
+    }
   },
   "newsletter": {
     "title": "Stay in touch",
@@ -592,11 +630,10 @@
     "mailtoBody": "Hello,\n\nI would like to sign up for the Chère Pochette newsletter with this address: {subscriber}\n\nThank you!"
   },
   "footer": {
-    "about": "Handmade crochet bags from recovered materials.",
+    "about": "Handmade upcycled crochet bags from Ticino, Switzerland.",
     "contactTitle": "Contact",
     "followTitle": "Follow us",
     "linksTitle": "Explore",
-    "legal": "Legal notice & privacy",
     "yes": "YES mini-company – SCC Bellinzona",
     "copyright": "© {year} Chère Pochette",
     "privacyNote": "This website uses no cookies and no tracking."

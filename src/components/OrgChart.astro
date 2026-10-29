@@ -4,8 +4,11 @@
  * "threads" (CSS lines). Every card is a link to the member's personal page.
  * Phones/tablets: 2 columns with a central thread; desktop: one row of six.
  * Order and hierarchy come from src/data/team.json (level / reportsTo).
+ * Each card shows the member's round portrait (src/assets/team/) or her initials if there is none.
+ * The portrait has an empty alt on purpose: the card (a link) already says the name and the role,
+ * so a screen reader would otherwise read them twice.
  */
-import Monogram from './Monogram.astro';
+import TeamAvatar from './TeamAvatar.astro';
 import { type Lang, useTranslations } from '../lib/i18n';
 import { localePath } from '../lib/urls';
 import { roleDescription, team } from '../lib/catalog';
@@ -28,7 +31,7 @@ const heads = team.filter((m) => m.level !== 1);
       leaders.map((m) => (
         <li>
           <a class="member member--lead" href={localePath(lang, `team/${m.slug}/`)}>
-            <Monogram name={m.name} size="md" />
+            <TeamAvatar member={m} lead />
             <span class="member__code">{m.roleCode}</span>
             <span class="member__name">{m.name}</span>
             <span class="member__role">{roleDescription(m, lang)}</span>
@@ -48,7 +51,7 @@ const heads = team.filter((m) => m.level !== 1);
       heads.map((m) => (
         <li class="org__node">
           <a class="member" href={localePath(lang, `team/${m.slug}/`)}>
-            <Monogram name={m.name} size="sm" />
+            <TeamAvatar member={m} />
             <span class="member__code">{m.roleCode}</span>
             <span class="member__name">{m.name}</span>
             <span class="member__role">{roleDescription(m, lang)}</span>
@@ -127,8 +130,9 @@ const heads = team.filter((m) => m.level !== 1);
       transform var(--dur) var(--ease);
   }
 
-  .member :global(.monogram) {
-    margin-bottom: var(--s-2);
+  .member :global(.monogram),
+  .member :global(.avatar) {
+    margin-bottom: var(--s-3);
   }
 
   .member:hover {

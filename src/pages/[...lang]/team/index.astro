@@ -1,10 +1,15 @@
 ---
-/** The team: interactive org chart (data: src/data/team.json). */
+/**
+ * The team: group photo (src/assets/team/group.jpg) and the interactive org chart
+ * (data: src/data/team.json, portraits: src/assets/team/<slug>.jpg).
+ */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BrandPicture from '../../../components/BrandPicture.astro';
 import OrgChart from '../../../components/OrgChart.astro';
 import PageHeader from '../../../components/PageHeader.astro';
 import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
 import { localePath } from '../../../lib/urls';
+import { teamGroupPhoto } from '../../../lib/team-photos';
 
 export function getStaticPaths() {
   return localeStaticPaths();
@@ -15,20 +20,36 @@ const { t, pageMeta } = useTranslations(lang);
 ---
 
 <BaseLayout lang={lang} path="team/" {...pageMeta('team')}>
-  <PageHeader eyebrow={t('team.eyebrow')} title={t('team.title')} intro={t('team.intro')}>
-    <p class="hint">
+  <PageHeader eyebrow={t('team.eyebrow')} title={t('team.title')} intro={t('team.intro')} />
+
+  {
+    teamGroupPhoto && (
+      <div class="container group">
+        <div class="group__frame media">
+          <BrandPicture
+            src={teamGroupPhoto}
+            alt={t('images.teamGroup')}
+            sizes="(min-width: 60rem) 900px, 100vw"
+            widths={[480, 768, 900]}
+            loading="eager"
+          />
+        </div>
+      </div>
+    )
+  }
+
+  <section class="container org-wrap">
+    <!-- The hint sits right above the chart, so it isn't read as being about the group photo. -->
+    <p class="hint center">
       <span class="hint--touch">{t('team.hint')}</span>
       <span class="hint--pointer">{t('team.hintPointer')}</span>
     </p>
-  </PageHeader>
-
-  <section class="container org-wrap">
     <OrgChart lang={lang} />
   </section>
 
   <section class="section section--alt">
     <div class="container container--narrow center stack">
-      <p class="tagline">{t('home.story.title')}</p>
+      <p class="tagline">{t('about.title')}</p>
       <div class="btn-row">
         <a class="btn btn--outline" href={localePath(lang, 'about/')}>{t('home.story.cta')}</a>
       </div>
@@ -54,6 +75,20 @@ const { t, pageMeta } = useTranslations(lang);
     .hint--pointer {
       display: inline;
     }
+  }
+
+  .group {
+    max-width: calc(56.25rem + 2 * var(--gutter)); /* 900px: the size of the photo */
+    margin-bottom: var(--s-7);
+  }
+
+  .group__frame {
+    aspect-ratio: 900 / 630;
+    border-radius: var(--radius);
+  }
+
+  .hint {
+    margin-bottom: var(--s-6);
   }
 
   .org-wrap {

@@ -5,35 +5,35 @@
     "roleCode": "CEO",
     "level": 1,
     "reportsTo": null,
-    "photo": null,
+    "photo": "masha-sargenti",
     "roleTitle": {
       "it": "CEO – Direttrice generale",
       "de": "CEO – Geschäftsführerin",
       "en": "CEO – Chief Executive Officer"
     },
     "bio": {
-      "it": "Masha guida Chère Pochette come CEO. Coordina il lavoro del team e tiene insieme i fili del progetto, dall'idea alla vendita.",
-      "de": "Masha leitet Chère Pochette als CEO. Sie koordiniert die Arbeit des ganzen Teams und hält die Fäden des Projekts zusammen, von der Idee bis zum Verkauf.",
-      "en": "Masha leads Chère Pochette as CEO. She coordinates the whole team and holds the threads of the project together, from the first idea to the sale."
+      "it": "In quanto CEO di Chère Pochette, mi occupo di dirigere la mini-impresa, assicurandomi che tutte le attività vengano svolte correttamente. Inoltre, motivo e aiuto i membri del team nel loro lavoro e rappresento l'azienda nelle occasioni pubbliche.",
+      "de": "Als CEO von Chère Pochette leite ich das Miniunternehmen und sorge dafür, dass alle Aufgaben korrekt erledigt werden. Ausserdem motiviere und unterstütze ich die Mitglieder des Teams bei ihrer Arbeit und vertrete das Unternehmen bei öffentlichen Anlässen.",
+      "en": "As CEO of Chère Pochette, I lead the mini-company and make sure that all our activities are carried out properly. I also motivate and support my teammates in their work and represent the company at public events."
     },
     "responsibilities": {
       "it": [
-        "Coordinare il team e le decisioni strategiche",
-        "Pianificare obiettivi e scadenze della mini-impresa",
-        "Guidare le riunioni di direzione",
-        "Rappresentare Chère Pochette verso la scuola, i coach e YES"
+        "Dirigere la mini-impresa e coordinare il lavoro del team",
+        "Assicurarsi che tutte le attività vengano svolte correttamente",
+        "Motivare e aiutare i membri del team nel loro lavoro",
+        "Rappresentare Chère Pochette nelle occasioni pubbliche"
       ],
       "de": [
-        "Das Team und die strategischen Entscheidungen koordinieren",
-        "Ziele und Termine des Miniunternehmens planen",
-        "Die Sitzungen der Geschäftsleitung führen",
-        "Chère Pochette gegenüber Schule, Coaches und YES vertreten"
+        "Das Miniunternehmen leiten und die Arbeit des Teams koordinieren",
+        "Dafür sorgen, dass alle Aufgaben korrekt erledigt werden",
+        "Die Teammitglieder motivieren und bei ihrer Arbeit unterstützen",
+        "Chère Pochette bei öffentlichen Anlässen vertreten"
       ],
       "en": [
-        "Coordinate the team and strategic decisions",
-        "Plan the mini-company's goals and deadlines",
-        "Lead management meetings",
-        "Represent Chère Pochette to the school, our coaches and YES"
+        "Lead the mini-company and coordinate the team's work",
+        "Make sure that all activities are carried out properly",
+        "Motivate and support team members in their work",
+        "Represent Chère Pochette at public events"
       ]
     },
     "skills": { "it": [], "de": [], "en": [] },
@@ -50,35 +50,35 @@
     "roleCode": "CAO",
     "level": 2,
     "reportsTo": "masha-sargenti",
-    "photo": null,
+    "photo": "julia-ronchetto",
     "roleTitle": {
       "it": "CAO – Responsabile amministrazione e risorse umane",
       "de": "CAO – Leiterin Administration und Personal",
       "en": "CAO – Chief Administrative Officer"
     },
     "bio": {
-      "it": "Julia è la CAO di Chère Pochette. Si occupa dell'amministrazione e delle risorse umane, perché il team lavori in modo ordinato e sereno.",
-      "de": "Julia ist die CAO von Chère Pochette. Sie kümmert sich um Administration und Personal, damit das Team organisiert und entspannt arbeiten kann.",
-      "en": "Julia is the CAO of Chère Pochette. She looks after administration and human resources, so the team can work in an organised, relaxed way."
+      "it": "In qualità di CAO di Chère Pochette, mi occupo della gestione della documentazione aziendale e del coordinamento delle attività amministrative per garantire un'organizzazione e una comunicazione interna efficace.",
+      "de": "Als CAO von Chère Pochette verwalte ich die Unternehmensdokumente und koordiniere die administrativen Aufgaben – für eine gute Organisation und eine wirksame interne Kommunikation.",
+      "en": "As CAO of Chère Pochette, I manage the company's documents and coordinate our administrative work, to ensure good organisation and effective internal communication."
     },
     "responsibilities": {
       "it": [
-        "Gestire l'amministrazione e i documenti della mini-impresa",
-        "Organizzare le riunioni e redigere i verbali",
-        "Seguire le risorse umane: ruoli, presenze e comunicazione interna",
-        "Curare la corrispondenza e l'archivio"
+        "Gestire la documentazione aziendale",
+        "Coordinare le attività amministrative",
+        "Garantire una buona organizzazione del team",
+        "Curare una comunicazione interna efficace"
       ],
       "de": [
-        "Administration und Dokumente des Miniunternehmens führen",
-        "Sitzungen organisieren und Protokolle schreiben",
-        "Personalfragen betreuen: Rollen, Präsenzen und interne Kommunikation",
-        "Korrespondenz und Ablage pflegen"
+        "Die Unternehmensdokumente verwalten",
+        "Die administrativen Aufgaben koordinieren",
+        "Für eine gute Organisation im Team sorgen",
+        "Eine wirksame interne Kommunikation sicherstellen"
       ],
       "en": [
-        "Manage the mini-company's administration and documents",
-        "Organise meetings and take the minutes",
-        "Look after human resources: roles, attendance and internal communication",
-        "Handle correspondence and filing"
+        "Manage the company's documents",
+        "Coordinate administrative tasks",
+        "Keep the team well organised",
+        "Ensure effective internal communication"
       ]
     },
     "skills": { "it": [], "de": [], "en": [] },
@@ -95,35 +95,35 @@
     "roleCode": "CTO",
     "level": 2,
     "reportsTo": "masha-sargenti",
-    "photo": null,
+    "photo": "eva-dallacqua",
     "roleTitle": {
       "it": "CTO – Responsabile tecnologia e sito web",
       "de": "CTO – Leiterin Technologie und Website",
       "en": "CTO – Chief Technology Officer"
     },
     "bio": {
-      "it": "Eva è la CTO di Chère Pochette. Ha progettato il sito web della mini-impresa, con lo shop online e l'organigramma interattivo.",
-      "de": "Eva ist die CTO von Chère Pochette. Sie hat die Website des Miniunternehmens konzipiert, mit Online-Shop und interaktivem Organigramm.",
-      "en": "Eva is the CTO of Chère Pochette. She designed the mini-company's website, including the online shop and the interactive org chart."
+      "it": "In quanto CTO di Chère Pochette, mi occupo di gestire i social media, assicurandomi che i nostri canali siano chiari, comprensibili e costantemente aggiornati. Mi occuperò inoltre dello sviluppo e della gestione del futuro sito web e shop online.",
+      "de": "Als CTO von Chère Pochette betreue ich unsere Social-Media-Kanäle und sorge dafür, dass sie klar, verständlich und immer aktuell sind. Ausserdem werde ich mich um die Entwicklung und Betreuung der künftigen Website mit Online-Shop kümmern.",
+      "en": "As CTO of Chère Pochette, I manage our social media, making sure our channels are clear, easy to understand and always up to date. I will also take care of developing and running our future website and online shop."
     },
     "responsibilities": {
       "it": [
-        "Progettare e realizzare il sito web",
-        "Gestire lo shop online e l'inventario delle borse",
-        "Garantire che il sito funzioni bene da computer e da smartphone",
-        "Curare gli strumenti digitali del team"
+        "Gestire i canali social di Chère Pochette",
+        "Mantenere i canali chiari, comprensibili e sempre aggiornati",
+        "Sviluppare il sito web e lo shop online",
+        "Gestire il sito e lo shop nel tempo"
       ],
       "de": [
-        "Die Website konzipieren und umsetzen",
-        "Den Online-Shop und das Taschen-Inventar verwalten",
-        "Sicherstellen, dass die Website auf Computer und Smartphone gut funktioniert",
-        "Die digitalen Werkzeuge des Teams betreuen"
+        "Die Social-Media-Kanäle von Chère Pochette betreuen",
+        "Die Kanäle klar, verständlich und immer aktuell halten",
+        "Die Website und den Online-Shop entwickeln",
+        "Website und Shop laufend betreuen"
       ],
       "en": [
-        "Design and build the website",
-        "Manage the online shop and the bag inventory",
-        "Make sure the website works well on computers and smartphones",
-        "Look after the team's digital tools"
+        "Manage Chère Pochette's social media channels",
+        "Keep our channels clear, easy to understand and up to date",
+        "Develop the website and online shop",
+        "Run and update the website and shop"
       ]
     },
     "skills": { "it": [], "de": [], "en": [] },
@@ -140,35 +140,35 @@
     "roleCode": "CMO",
     "level": 2,
     "reportsTo": "masha-sargenti",
-    "photo": null,
+    "photo": "michelle-salvi",
     "roleTitle": {
       "it": "CMO – Responsabile marketing e comunicazione",
       "de": "CMO – Leiterin Marketing und Kommunikation",
       "en": "CMO – Chief Marketing Officer"
     },
     "bio": {
-      "it": "Michelle è una delle due CMO di Chère Pochette. Insieme a Lara cura il marketing, i social media e l'immagine del brand.",
-      "de": "Michelle ist eine der beiden CMOs von Chère Pochette. Zusammen mit Lara kümmert sie sich um Marketing, Social Media und das Markenbild.",
-      "en": "Michelle is one of the two CMOs of Chère Pochette. Together with Lara, she looks after marketing, social media and the brand's image."
+      "it": "In quanto CMO di Chère Pochette, mi occupo di attuare il piano di marketing attraverso ricerche di mercato, analizzando il nostro target e i concorrenti. Pianifico strategie di comunicazione e pubblicità per promuovere i nostri prodotti e distinguerci dalle altre mini-imprese.",
+      "de": "Als CMO von Chère Pochette setze ich unseren Marketingplan um: mit Marktforschung und mit Analysen unserer Zielgruppe und der Konkurrenz. Ich plane Kommunikations- und Werbestrategien, um unsere Produkte bekannt zu machen und uns von anderen Miniunternehmen abzuheben.",
+      "en": "As CMO of Chère Pochette, I put our marketing plan into action through market research, analysing our target audience and our competitors. I plan communication and advertising strategies to promote our products and help us stand out from other mini-companies."
     },
     "responsibilities": {
       "it": [
-        "Definire la strategia di marketing e comunicazione",
-        "Gestire i canali social e creare i contenuti",
-        "Curare l'identità visiva del brand",
-        "Preparare campagne e azioni promozionali"
+        "Attuare il piano di marketing",
+        "Svolgere ricerche di mercato sul nostro target e sui concorrenti",
+        "Pianificare strategie di comunicazione e pubblicità",
+        "Promuovere i prodotti e distinguerci dalle altre mini-imprese"
       ],
       "de": [
-        "Die Marketing- und Kommunikationsstrategie festlegen",
-        "Die Social-Media-Kanäle betreuen und Inhalte erstellen",
-        "Das visuelle Erscheinungsbild der Marke pflegen",
-        "Kampagnen und Werbeaktionen vorbereiten"
+        "Den Marketingplan umsetzen",
+        "Marktforschung zu Zielgruppe und Konkurrenz betreiben",
+        "Kommunikations- und Werbestrategien planen",
+        "Unsere Produkte bekannt machen und uns von anderen Miniunternehmen abheben"
       ],
       "en": [
-        "Define the marketing and communication strategy",
-        "Manage our social media channels and create content",
-        "Look after the brand's visual identity",
-        "Prepare campaigns and promotional activities"
+        "Put the marketing plan into action",
+        "Carry out market research on our target audience and competitors",
+        "Plan communication and advertising strategies",
+        "Promote our products and help us stand out from other mini-companies"
       ]
     },
     "skills": { "it": [], "de": [], "en": [] },
@@ -185,35 +185,35 @@
     "roleCode": "CMO",
     "level": 2,
     "reportsTo": "masha-sargenti",
-    "photo": null,
+    "photo": "lara-fieschi",
     "roleTitle": {
       "it": "CMO – Responsabile marketing e comunicazione",
       "de": "CMO – Leiterin Marketing und Kommunikation",
       "en": "CMO – Chief Marketing Officer"
     },
     "bio": {
-      "it": "Lara è una delle due CMO di Chère Pochette. Insieme a Michelle si occupa di comunicazione, social media e del rapporto con chi ci segue.",
-      "de": "Lara ist eine der beiden CMOs von Chère Pochette. Zusammen mit Michelle kümmert sie sich um Kommunikation, Social Media und den Kontakt mit unserer Community.",
-      "en": "Lara is one of the two CMOs of Chère Pochette. Together with Michelle, she looks after communication, social media and our relationship with the people who follow us."
+      "it": "In quanto CMO di Chère Pochette, mi occupo di attuare il piano di marketing attraverso ricerche di mercato, analizzando il nostro target e i concorrenti. Pianifico strategie di comunicazione e pubblicità per promuovere i nostri prodotti e distinguerci dalle altre mini-imprese.",
+      "de": "Als CMO von Chère Pochette setze ich unseren Marketingplan um: mit Marktforschung und mit Analysen unserer Zielgruppe und der Konkurrenz. Ich plane Kommunikations- und Werbestrategien, um unsere Produkte bekannt zu machen und uns von anderen Miniunternehmen abzuheben.",
+      "en": "As CMO of Chère Pochette, I put our marketing plan into action through market research, analysing our target audience and our competitors. I plan communication and advertising strategies to promote our products and help us stand out from other mini-companies."
     },
     "responsibilities": {
       "it": [
-        "Definire la strategia di marketing e comunicazione",
-        "Gestire i canali social e creare i contenuti",
-        "Curare l'identità visiva del brand",
-        "Preparare campagne e azioni promozionali"
+        "Attuare il piano di marketing",
+        "Svolgere ricerche di mercato sul nostro target e sui concorrenti",
+        "Pianificare strategie di comunicazione e pubblicità",
+        "Promuovere i prodotti e distinguerci dalle altre mini-imprese"
       ],
       "de": [
-        "Die Marketing- und Kommunikationsstrategie festlegen",
-        "Die Social-Media-Kanäle betreuen und Inhalte erstellen",
-        "Das visuelle Erscheinungsbild der Marke pflegen",
-        "Kampagnen und Werbeaktionen vorbereiten"
+        "Den Marketingplan umsetzen",
+        "Marktforschung zu Zielgruppe und Konkurrenz betreiben",
+        "Kommunikations- und Werbestrategien planen",
+        "Unsere Produkte bekannt machen und uns von anderen Miniunternehmen abheben"
       ],
       "en": [
-        "Define the marketing and communication strategy",
-        "Manage our social media channels and create content",
-        "Look after the brand's visual identity",
-        "Prepare campaigns and promotional activities"
+        "Put the marketing plan into action",
+        "Carry out market research on our target audience and competitors",
+        "Plan communication and advertising strategies",
+        "Promote our products and help us stand out from other mini-companies"
       ]
     },
     "skills": { "it": [], "de": [], "en": [] },
@@ -230,35 +230,35 @@
     "roleCode": "CPO",
     "level": 2,
     "reportsTo": "masha-sargenti",
-    "photo": null,
+    "photo": "romina-fumi",
     "roleTitle": {
-      "it": "CPO – Responsabile produzione e qualità",
-      "de": "CPO – Leiterin Produktion und Qualität",
-      "en": "CPO – Chief Production Officer"
+      "it": "CPO – Responsabile prodotto",
+      "de": "CPO – Produktverantwortliche",
+      "en": "CPO – Chief Product Officer"
     },
     "bio": {
-      "it": "Romina è la CPO di Chère Pochette. Segue la produzione delle borse, dal recupero dei materiali al controllo finale di ogni pezzo.",
-      "de": "Romina ist die CPO von Chère Pochette. Sie betreut die Produktion der Taschen, vom Sammeln der Materialien bis zur Schlusskontrolle jedes Stücks.",
-      "en": "Romina is the CPO of Chère Pochette. She oversees how our bags are made, from collecting the materials to the final check of every piece."
+      "it": "In quanto CPO di Chère Pochette, mi occupo dello sviluppo dei prodotti, della ricerca e dell'acquisto dei materiali necessari e della gestione del magazzino. Collaboro inoltre con il CFO per calcolare e definire i prezzi dei nostri prodotti.",
+      "de": "Als CPO von Chère Pochette bin ich für die Produktentwicklung, die Suche und den Einkauf der benötigten Materialien sowie für die Lagerverwaltung zuständig. Ausserdem berechne ich zusammen mit unserer CFO die Preise unserer Produkte und lege sie fest.",
+      "en": "As CPO of Chère Pochette, I'm responsible for product development, for finding and buying the materials we need and for managing our stock. I also work with our CFO to calculate and set the prices of our products."
     },
     "responsibilities": {
       "it": [
-        "Pianificare la produzione delle borse",
-        "Coordinare il recupero e la selezione dei materiali",
-        "Organizzare il lavoro con le donne ucraine che lavorano all'uncinetto con noi",
-        "Controllare la qualità di ogni borsa prima della vendita"
+        "Sviluppare i prodotti",
+        "Ricercare e acquistare i materiali necessari",
+        "Gestire il magazzino",
+        "Calcolare e definire i prezzi insieme alla CFO"
       ],
       "de": [
-        "Die Produktion der Taschen planen",
-        "Das Sammeln und Auswählen der Materialien koordinieren",
-        "Die Zusammenarbeit mit den ukrainischen Frauen organisieren, die mit uns häkeln",
-        "Die Qualität jeder Tasche vor dem Verkauf prüfen"
+        "Die Produkte entwickeln",
+        "Die benötigten Materialien suchen und einkaufen",
+        "Das Lager verwalten",
+        "Zusammen mit der CFO die Preise berechnen und festlegen"
       ],
       "en": [
-        "Plan the production of the bags",
-        "Coordinate the collection and selection of materials",
-        "Organise the work with the Ukrainian women who crochet with us",
-        "Check the quality of every bag before it goes on sale"
+        "Develop our products",
+        "Find and buy the materials we need",
+        "Manage our stock",
+        "Calculate and set prices together with the CFO"
       ]
     },
     "skills": { "it": [], "de": [], "en": [] },
@@ -275,35 +275,35 @@
     "roleCode": "CFO",
     "level": 2,
     "reportsTo": "masha-sargenti",
-    "photo": null,
+    "photo": "selina-castelli",
     "roleTitle": {
       "it": "CFO – Responsabile finanze",
       "de": "CFO – Leiterin Finanzen",
       "en": "CFO – Chief Financial Officer"
     },
     "bio": {
-      "it": "Selina è la CFO di Chère Pochette. Tiene i conti della mini-impresa e veglia sulla sua salute finanziaria.",
-      "de": "Selina ist die CFO von Chère Pochette. Sie führt die Buchhaltung des Miniunternehmens und behält seine Finanzen im Blick.",
-      "en": "Selina is the CFO of Chère Pochette. She keeps the mini-company's accounts and watches over its financial health."
+      "it": "In quanto CFO di Chère Pochette, mi occupo della contabilità e della gestione finanziaria, monitorando le entrate e le uscite per gestire al meglio le risorse economiche. Calcolo il punto di pareggio (break-even point) e mi occupo della chiusura finanziaria.",
+      "de": "Als CFO von Chère Pochette bin ich für die Buchhaltung und die Finanzverwaltung zuständig. Ich überwache Einnahmen und Ausgaben, damit wir unsere finanziellen Mittel bestmöglich einsetzen. Ich berechne den Break-even-Point und kümmere mich um den Jahresabschluss.",
+      "en": "As CFO of Chère Pochette, I look after the accounts and financial management, keeping track of income and expenses so that we make the best use of our resources. I calculate the break-even point and take care of the final accounts."
     },
     "responsibilities": {
       "it": [
-        "Tenere la contabilità e controllare entrate e uscite",
-        "Preparare il budget e collaborare al calcolo dei prezzi",
-        "Seguire i pagamenti online e la cassa",
-        "Preparare il rendiconto finanziario finale"
+        "Tenere la contabilità e gestire le finanze",
+        "Monitorare entrate e uscite per gestire al meglio le risorse",
+        "Calcolare il punto di pareggio (break-even point)",
+        "Curare la chiusura finanziaria"
       ],
       "de": [
-        "Die Buchhaltung führen und Einnahmen und Ausgaben kontrollieren",
-        "Das Budget erstellen und bei der Preiskalkulation mitarbeiten",
-        "Online-Zahlungen und Kasse betreuen",
-        "Den finanziellen Schlussbericht vorbereiten"
+        "Die Buchhaltung führen und die Finanzen verwalten",
+        "Einnahmen und Ausgaben überwachen, um die Mittel bestmöglich einzusetzen",
+        "Den Break-even-Point berechnen",
+        "Den Jahresabschluss erstellen"
       ],
       "en": [
-        "Keep the accounts and track income and expenses",
-        "Prepare the budget and help calculate prices",
-        "Look after online payments and the cash box",
-        "Prepare the final financial report"
+        "Keep the accounts and manage the finances",
+        "Track income and expenses to make the best use of our resources",
+        "Calculate the break-even point",
+        "Prepare the final accounts"
       ]
     },
     "skills": { "it": [], "de": [], "en": [] },

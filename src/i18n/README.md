@@ -24,26 +24,26 @@ Keys are written in `camelCase` and grouped by page or component.
 
 | Top-level key | What it contains |
 |---|---|
-| `meta` | `siteName`, `htmlLang`, `ogLocale`, `titleTemplate`, `defaultDescription`, and `pages.<page>.title` / `.description` for every page: `home`, `shop`, `product`, `about`, `process`, `team`, `teamMember`, `info`, `legal`, `thanks`, `cancelled`, `notFound` |
+| `meta` | `siteName`, `htmlLang`, `ogLocale`, `titleTemplate`, `defaultDescription`, `ogImageAlt` (describes `public/og-image.jpg` for link previews), and `pages.<page>.title` / `.description` for every page: `home`, `shop`, `product`, `about`, `process`, `team`, `info`, `legal`, `thanks`, `cancelled`, `notFound` (`teamMember` has only a `title`: its description is the person's bio from `team.json`) |
 | `nav` | Menu labels: `home`, `shop`, `about`, `process`, `team`, `info`, `legal`, `contact` |
 | `languageNames` | Name of each language **in its own language** (Italiano, Deutsch, English) – identical in all files |
 | `brand` | `slogan`, `tagline` (both stay in English everywhere), `sloganMeaning`, `taglineSupport` (localized) |
 | `common` | Shared buttons and labels: buy, order by e-mail, "Pezzo unico N° {number}", sold, available, back, close, menu, price… |
 | `a11y` | Screen-reader texts: skip link, menu buttons, gallery, breadcrumb, language switcher… |
-| `images` | Alt texts for the brand photos in `src/assets/brand/` (key = file name in camelCase, e.g. `hero-bag-hands.jpg` → `heroBagHands`) |
-| `home` | `hero`, `intro`, `pillars` (3 items), `featured`, `models`, `process`, `story`, `newsletter`, `social` |
+| `images` | Alt texts for the brand photos in `src/assets/brand/` (key = file name in camelCase, e.g. `hero-bag-hands.jpg` → `heroBagHands`), plus `teamGroup` for `src/assets/team/group.jpg` |
+| `home` | `hero`, `intro`, `pillars` (3 items), `featured`, `models`, `process`, `story`, `team`, `newsletter`, `social` |
 | `shop` | Title, intro, `filter`, `count` (plural), `empty`, `emptyFiltered`, `unique` ("every bag is unique"), `models`, `card` |
-| `product` | Labels, `dimensions`, `materials`, `unique`, `delivery` (shipping / pickup), buy button, payment notes, `orderByEmail` (fallback), `sold`, `care`, `question`, `related` |
+| `product` | `eyebrow` ("handmade crochet bag" above the title), labels, `dimensions`, `materials` (`schema` = one-line version for search engines), `unique`, `delivery` (shipping / pickup), buy button, payment notes, `orderByEmail` (fallback), `legalNote` (terms + returns links under the buy button), `sold`, `care`, `question`, `related` |
 | `about` | Sections `born`, `idea`, `materials`, `women`, `slogan`, `thread`, `values`, `cta` |
 | `process` | Intro, `stepLabel`, `steps` (exactly 5), `closing` |
 | `team` | Org chart texts (`hint`, `levels`…) and `member` = labels of the personal pages |
-| `info` | `shipping`, `pickup`, `payment`, `returns`, `care` (tips), `faq` (7 questions), `contact` |
+| `info` | `shipping`, `pickup`, `payment`, `paymentEmail` (shown instead of `payment` while online payment is off), `returns`, `care` (tips), `faq` (7 questions; the payment question also has `aEmail`, used while online payment is off), `contact` |
 | `legal` | Labels of the legal page (title, table of contents, "last updated") – the legal text itself is in `src/content/legal/` |
 | `thanks` | Page after a successful payment (Zahls redirect) |
 | `cancelled` | Page after a cancelled/failed payment |
-| `notFound` | 404 page |
+| `notFound` | 404 page; `bag` = message for the address of a bag that no longer has a page |
 | `newsletter` | Newsletter form: title, text, label, placeholder, button, messages, consent, `comingSoon` |
-| `footer` | Footer texts, YES mention, copyright, privacy note |
+| `footer` | Footer texts, YES mention, copyright, privacy note (the legal links reuse `legal.toc.*`) |
 
 ### Naming conventions for values
 
@@ -65,7 +65,7 @@ Dynamic values are written between curly braces. **Never translate or rename a p
 
 | Placeholder | Filled with | Example |
 |---|---|---|
-| `{title}` | Page title (in `meta.titleTemplate`) | `Shop – borse uniche all'uncinetto` |
+| `{title}` | Page title (in `meta.titleTemplate`) | `Shop – borse all'uncinetto fatte a mano` |
 | `{price}` | Bag price, **already formatted, without "CHF"** | `40.–` (whole francs, Swiss style) or `42.50` |
 | `{fee}` | Shipping fee from `site.json`, same format as `{price}` | `9.–` |
 | `{number}` | Unique piece number, zero-padded to 3 digits | `012` |
@@ -88,8 +88,11 @@ Notes:
 - `meta.titleTemplate` (`{title} · Chère Pochette`) is used for all pages **except the home page**,
   whose `meta.pages.home.title` is already complete.
 - Plurals: `shop.count.one` for exactly 1, `shop.count.other` for every other number.
-- `meta.pages.product.title` / `.description`: `{model}` is "Model · Colour" and `{number}` the piece
-  number, so every bag gets its own title and description in search results.
+- `meta.pages.product.title` / `.description`: `{model}` is "Model · Colour", `{number}` the piece
+  number and `{price}` the price, so every bag gets its own title and description in search results.
+  Keep the words people search for ("borsa all'uncinetto", "Häkeltasche", "crochet bag") in them.
+- Search engines show about 60 characters of a title and 155 of a description: keep new texts short.
+  `npm run build` runs `scripts/check-seo.mjs` afterwards (titles, canonicals, sitemap, broken links).
 - `product.orderByEmail.subject` (`{id} – {model}`) and `.body` are used for the `mailto:` fallback when
   Zahls links are not available yet. In the body, `{model}` is "Model · Colour" and `{delivery}` the option
   the customer picked. `\n` = line break. Both are encoded with `encodeURIComponent()` in the link.
@@ -147,9 +150,9 @@ An array of 7 members, in org-chart order (CEO first). Each member:
   "roleCode": "CTO",
   "level": 2,                      // 1 = CEO, 2 = heads of department
   "reportsTo": "masha-sargenti",   // slug of the manager (null for the CEO)
-  "photo": null,                   // later: image path, null = show initials/placeholder
-  "roleTitle":        { "it": "…", "de": "…", "en": "…" },
-  "bio":              { "it": "…", "de": "…", "en": "…" },   // 2 sentences
+  "photo": "eva-dallacqua",        // file name (without .jpg) in src/assets/team/; null = show initials
+  "roleTitle":        { "it": "…", "de": "…", "en": "…" },   // "CODE – description": the part after " – " is shown under the name
+  "bio":              { "it": "…", "de": "…", "en": "…" },   // her own words, first person (it = as she wrote it)
   "responsibilities": { "it": [ … ], "de": [ … ], "en": [ … ] },
   "skills":           { "it": [], "de": [], "en": [] },      // to be filled by the member
   "experience":       { "it": [], "de": [], "en": [] },      // to be filled by the member
@@ -158,6 +161,14 @@ An array of 7 members, in org-chart order (CEO first). Each member:
 ```
 
 Empty arrays mean "not filled in yet": the page simply leaves that section out.
+
+Photos (optimised by Astro, never linked by path in the pages):
+
+- `src/assets/team/<photo>.jpg` – portrait, **4:5**, face in the upper half, plain powder-pink background
+  (currently 296 × 370 px, cut from the Instagram team cards). Shown round in the org chart and as an
+  arch on the personal page. If `photo` is `null` or the file is missing, the initials are shown instead.
+- `src/assets/team/group.jpg` – group photo (900 × 630), on the home page and at the top of `/team/`.
+  Its alt text is `images.teamGroup`.
 Keep profiles professional and privacy-friendly: no age, home address, phone number or private details.
 
 ---

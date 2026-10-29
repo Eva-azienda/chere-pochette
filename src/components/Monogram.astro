@@ -1,8 +1,7 @@
 ---
 /**
- * Round avatar for a team member. There are no portraits yet, so it shows the initials in
- * Bodoni on powder pink. When a photo is added (team.json → "photo"), replace this component's
- * content with an <Image> of the portrait – the circle styles stay the same.
+ * Round initials avatar (Bodoni on powder pink): the fallback for a team member without a photo
+ * (team.json → "photo": null). Portraits are shown by TeamAvatar.astro and the member page.
  */
 import { initials } from '../lib/format';
 

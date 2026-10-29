@@ -15,9 +15,11 @@ interface Props {
   /** CSS object-position (focal point), e.g. "50% 40%". */
   position?: string;
   class?: string;
+  /** "eager" only for a photo that is visible when the page opens (it then also loads first). */
+  loading?: 'lazy' | 'eager';
 }
 
-const { src, alt, sizes, widths, position, class: className } = Astro.props;
+const { src, alt, sizes, widths, position, class: className, loading = 'lazy' } = Astro.props;
 // Never ask for a width larger than the original file (Astro doesn't upscale).
 const candidateWidths = (widths ?? [480, 768, 1080, 1440, 1920]).filter((w) => w <= src.width);
 ---
@@ -30,6 +32,7 @@ const candidateWidths = (widths ?? [480, 768, 1080, 1440, 1920]).filter((w) => w
   sizes={sizes}
   class={className}
   style={position ? `object-position: ${position}` : undefined}
-  loading="lazy"
+  loading={loading}
+  fetchpriority={loading === 'eager' ? 'high' : undefined}
   decoding="async"
 />
