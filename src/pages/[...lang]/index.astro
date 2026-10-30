@@ -282,7 +282,7 @@ const marquee = list('home.hero.marquee');
     letter-spacing: -0.01em;
   }
 
-  /* The English tagline: small italic Bodoni under a bordeaux opening quote mark. */
+  /* The English tagline: small italic Bodoni (no quote mark). */
   .hero__quote {
     max-width: 17em;
     margin: 0;
@@ -292,16 +292,6 @@ const marquee = list('home.hero.marquee');
     line-height: 1.25;
     color: var(--c-plum);
     text-wrap: balance;
-  }
-
-  .hero__quote::before {
-    content: '\201C' / '';
-    display: block;
-    height: 0.36em;
-    font-size: 5em;
-    font-variation-settings: 'opsz' 96; /* the fine display cut: teardrops, not dots */
-    line-height: 1;
-    color: var(--c-bordeaux);
   }
 
   /* Phones: the drawing gets the space instead. */
