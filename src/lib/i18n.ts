@@ -75,7 +75,7 @@ export function useTranslations(lang: Lang) {
   function pageMeta(page: string, vars?: Record<string, string | number>) {
     const title = t(`meta.pages.${page}.title`, vars);
     return {
-      // The home title is already complete; every other page uses "{title} · Chère Pochette".
+      // The home title is already complete; every other page uses "Chère Pochette · {title}".
       title: page === 'home' ? title : t('meta.titleTemplate', { title }),
       description: t(`meta.pages.${page}.description`, vars),
     };

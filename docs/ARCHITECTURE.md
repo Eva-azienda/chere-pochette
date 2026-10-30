@@ -44,7 +44,8 @@ GitHub Pages serves the site under the domain registered at Hostpoint, and Zahls
 ### Front-end at a glance
 
 - **Header**: one-line wordmark "Chère Pochette" (`src/assets/brand/wordmark.svg`, Bodoni Moda italic converted to
-  outlines, coloured with `currentColor`) top-left; compact **IT/DE/EN** selector (`LanguageSwitcher.astro`).
+  outlines, coloured with `currentColor`) top-left, navigation on desktop, menu button on phones. No language selector
+  in the header bar: **IT · DE · EN** is in the footer and at the bottom of the menu drawer (`LanguageSwitcher.astro`).
 - **Home**: short and shop-first. Hero = short headline (`home.hero.title`), one sentence (`home.hero.lead`) and one
   button to the shop, next to the Jolie bag in rosa antico on a powder circle (transparent cut-out
   `src/assets/brand/hero-jolie.png`) with an animated thread, needle and handwritten notes

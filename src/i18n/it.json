@@ -3,12 +3,12 @@
     "siteName": "Chère Pochette",
     "htmlLang": "it",
     "ogLocale": "it_CH",
-    "titleTemplate": "{title} · Chère Pochette",
+    "titleTemplate": "Chère Pochette · {title}",
     "defaultDescription": "Borse all'uncinetto fatte a mano con materiali recuperati. Pezzi unici di Chère Pochette, mini-impresa YES della SCC di Bellinzona.",
     "ogImageAlt": "Logo di Chère Pochette accanto a una borsa all'uncinetto bordeaux tenuta in mano",
     "pages": {
       "home": {
-        "title": "Borse all'uncinetto fatte a mano in Ticino · Chère Pochette",
+        "title": "Chère Pochette · Borse all'uncinetto fatte a mano in Ticino",
         "description": "Borse all'uncinetto fatte a mano con vestiti e ombrelli recuperati: upcycling dal Ticino, pezzi unici. Una mini-impresa YES della SCC di Bellinzona."
       },
       "shop": {

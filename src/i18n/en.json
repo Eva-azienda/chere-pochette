@@ -3,12 +3,12 @@
     "siteName": "Chère Pochette",
     "htmlLang": "en",
     "ogLocale": "en_GB",
-    "titleTemplate": "{title} · Chère Pochette",
+    "titleTemplate": "Chère Pochette · {title}",
     "defaultDescription": "Handmade crochet bags from recovered materials. One-of-a-kind pieces by Chère Pochette, a YES mini-company at SCC Bellinzona.",
     "ogImageAlt": "Chère Pochette logo next to a burgundy crochet bag held in two hands",
     "pages": {
       "home": {
-        "title": "Handmade crochet bags from Ticino · Chère Pochette",
+        "title": "Chère Pochette · Handmade crochet bags from Ticino",
         "description": "Handmade crochet bags from recovered clothes and broken umbrellas: upcycled, one-of-a-kind pieces by a YES student company in Bellinzona, Switzerland."
       },
       "shop": {

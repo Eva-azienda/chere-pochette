@@ -3,12 +3,12 @@
     "siteName": "Chère Pochette",
     "htmlLang": "de",
     "ogLocale": "de_CH",
-    "titleTemplate": "{title} · Chère Pochette",
+    "titleTemplate": "Chère Pochette · {title}",
     "defaultDescription": "Von Hand gehäkelte Taschen aus wiederverwerteten Materialien. Unikate von Chère Pochette, einem YES-Miniunternehmen der SCC Bellinzona.",
     "ogImageAlt": "Logo von Chère Pochette neben einer bordeauxroten Häkeltasche in den Händen",
     "pages": {
       "home": {
-        "title": "Handgemachte Häkeltaschen aus dem Tessin · Chère Pochette",
+        "title": "Chère Pochette · Handgemachte Häkeltaschen aus dem Tessin",
         "description": "Handgemachte Häkeltaschen aus alten Kleidern und kaputten Regenschirmen: Upcycling-Unikate aus dem Tessin, vom YES-Miniunternehmen der SCC Bellinzona."
       },
       "shop": {

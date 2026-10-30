@@ -1,9 +1,8 @@
 ---
 /**
- * Sticky header: logo, desktop navigation, language switcher and the
- * full-screen menu (a native <dialog>, so focus trap + Esc work out of the box).
- * Languages: "IT DE EN" links on desktop, a small "IT ⌄" pop-up next to the menu button on
- * phones, and a segmented control at the bottom of the menu drawer.
+ * Sticky header: logo, desktop navigation and the full-screen menu
+ * (a native <dialog>, so focus trap + Esc work out of the box).
+ * Languages are not in the header bar: they are in the footer and at the bottom of the menu drawer.
  */
 // Simplified one-line logo ("Chère Pochette" in Bodoni italic) as inline SVG in currentColor.
 // The full logo with needle and slogan is used in the home hero on phones.
@@ -50,9 +49,6 @@ const items = NAV.map((key) => ({
         }
       </ul>
     </nav>
-
-    <LanguageSwitcher lang={lang} path={path} variant="links" class="header__lang" />
-    <LanguageSwitcher lang={lang} path={path} variant="menu" class="header__lang-menu" />
 
     <button
       class="header__toggle"
@@ -174,14 +170,8 @@ const items = NAV.map((key) => ({
     width: auto;
   }
 
-  .header__nav,
-  .header :global(.header__lang) {
+  .header__nav {
     display: none;
-  }
-
-  /* Phones: the "IT ⌄" button sits close to the menu button, as one small group. */
-  .header :global(.header__lang-menu) {
-    margin-right: calc(var(--s-3) * -1);
   }
 
   .header__toggle {
@@ -203,9 +193,10 @@ const items = NAV.map((key) => ({
       height: 24px;
     }
 
-    .header__nav,
-    .header :global(.header__lang) {
+    /* The negative margin lines the last link's text up with the right edge of the page. */
+    .header__nav {
       display: block;
+      margin-right: calc(var(--s-3) * -1);
     }
 
     .header__toggle {
@@ -240,25 +231,6 @@ const items = NAV.map((key) => ({
     .header__nav a[aria-current='page'] {
       color: var(--c-bordeaux);
       background-size: calc(100% - 2 * var(--s-3)) 1px;
-    }
-
-    /* A short hairline separates the languages from the navigation. */
-    .header :global(.header__lang) {
-      display: flex;
-      align-items: center;
-      gap: var(--s-2);
-      margin-right: calc(var(--s-3) * -1);
-    }
-
-    .header :global(.header__lang)::before {
-      content: '';
-      width: 1px;
-      height: 1rem;
-      background: var(--c-line-strong);
-    }
-
-    .header :global(.header__lang-menu) {
-      display: none;
     }
   }
 

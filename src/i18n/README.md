@@ -84,8 +84,8 @@ Dynamic values are written between curly braces. **Never translate or rename a p
 
 Notes:
 
-- `meta.titleTemplate` (`{title} · Chère Pochette`) is used for all pages **except the home page**,
-  whose `meta.pages.home.title` is already complete.
+- `meta.titleTemplate` (`Chère Pochette · {title}`) is used for all pages **except the home page**,
+  whose `meta.pages.home.title` is already complete. Every browser tab starts with the brand name.
 - Plurals: `shop.count.one` for exactly 1, `shop.count.other` for every other number.
 - `meta.pages.product.title` / `.description`: `{model}` is "Model · Colour", `{number}` the piece
   number and `{price}` the price, so every bag gets its own title and description in search results.
