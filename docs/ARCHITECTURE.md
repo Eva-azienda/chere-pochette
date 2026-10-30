@@ -56,7 +56,7 @@ GitHub Pages serves the site under the domain registered at Hostpoint, and Zahls
   (also as warn-only `postbuild`).
 - **Icons**: thin "thread" line icons (`Icon.astro`), e.g. the three pillars reuse / needle-and-thread (handmade) /
   thread heart (together).
-- **Prices**: firm prices, Swiss format — "Prezzo: CHF 45.–" for models, `CHF 40.–` on bags.
+- **Prices**: firm prices, Swiss format — `CHF 40.–` on bag cards and pages. The "I modelli" section shows no price; the model price in `models.json` is only the default the admin fills in for a new bag.
 - Design tokens: `src/styles/tokens.css` (bordeaux `#82001F`, ivory `#FAF7F2`, powder `#E8D1D8`…; Bodoni Moda + Red Hat
   Display, self-hosted). Mobile-first: 375 px, 16 px gutters, 48 px tap targets.
 

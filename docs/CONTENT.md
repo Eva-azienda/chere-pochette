@@ -56,8 +56,8 @@ online**. Fix the file (or copy back the old text from the commit history) and c
 **Change a text** → edit the same key in `it.json`, `de.json`, `en.json`. Prices are formatted by the site
 (`CHF 40.–`), never typed by hand.
 
-**Change the price of a model** → `src/data/models.json` → `"price": 45`. It is shown as **"Prezzo: CHF 45.–"** in the
-models section (home and shop) and pre-filled when a new bag is added in the admin. **Bags already for sale keep their
+**Change the price of a model** → `src/data/models.json` → `"price": 45`. It is not shown on the site
+(the "I modelli" section has no price); it is pre-filled when a new bag is added in the admin. **Bags already for sale keep their
 own price**: change those one by one in the admin (open the bag → Prezzo → Salva modifiche).
 
 **Change the shipping fee** → `src/data/site.json` → `"shippingFee": 9`. Product pages and the info page show the new
@@ -106,7 +106,7 @@ must name the provider once one is used.
 - **Testi del sito**: `src/i18n/it.json`, `de.json`, `en.json` (stessa chiave nei tre file, si cambia solo il testo tra
   virgolette). **Team**: `src/data/team.json`. **Testi legali**: `src/content/legal/*.md` (ancora BOZZA).
 - **Impostazioni** (e-mail, Instagram, spedizione, pagamento online sì/no, indirizzo, newsletter): `src/data/site.json`.
-  **Prezzi dei modelli** («Prezzo: CHF 45.–»): `src/data/models.json` — oggi sono provvisori; le borse già in vendita
+  **Prezzi dei modelli** (prezzo proposto per una nuova borsa nell'admin, non mostrato sul sito): `src/data/models.json` — oggi sono provvisori; le borse già in vendita
   mantengono il loro prezzo (si cambia nell'admin). **Colori e fodere**: `src/data/taxonomy.json`.
 - **Come modificare**: su github.com apri il file → matita → cambia il testo → *Commit changes* → aspetta 3–5 minuti
   (scheda *Actions*, pallino verde). Se il file ha un errore la pubblicazione si ferma (pallino rosso) e resta online la
