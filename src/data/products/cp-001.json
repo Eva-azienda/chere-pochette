@@ -1,7 +1,7 @@
 {
   "id": "cp-001",
   "number": 1,
-  "model": "belle",
+  "model": "coquette",
   "status": "available",
   "price": 40,
   "colour": "bordeaux",
@@ -20,7 +20,7 @@
     }
   ],
   "createdAt": "2026-10-29T15:00:00Z",
-  "updatedAt": "2026-10-30T09:30:53Z",
+  "updatedAt": "2026-10-30T10:18:47Z",
   "soldAt": null,
   "soldChannel": null,
   "zahls": {
