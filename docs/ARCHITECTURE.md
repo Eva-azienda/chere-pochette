@@ -46,15 +46,16 @@ GitHub Pages serves the site under the domain registered at Hostpoint, and Zahls
 - **Header**: one-line wordmark "Chère Pochette" (`src/assets/brand/wordmark.svg`, Bodoni Moda italic converted to
   outlines, coloured with `currentColor`) top-left, navigation on desktop, menu button on phones. No language selector
   in the header bar: **IT · DE · EN** is in the footer and at the bottom of the menu drawer (`LanguageSwitcher.astro`).
-- **Home**: short and shop-first. Hero = short headline (`home.hero.title`), one sentence (`home.hero.lead`) and one
-  button to the shop, next to the Jolie bag in rosa antico on a powder circle (transparent cut-out
-  `src/assets/brand/hero-jolie.png`) with an animated thread, needle and handwritten notes
-  (`src/components/BagSketch.astro`; `variant="sketch"` in `index.astro` brings back the line drawing `bag-sketch.svg`).
-  On phones the bag, headline, sentence and button fit on the first screen (the drawing's size follows the screen
-  height; the notes are hidden, the thread is thin). Then: the bags on sale (grid, 2 columns on phones, up to 6 bags,
-  with prices), the scrolling marquee band, one story block (bag held by a woman, materials + the Ukrainian women →
-  `/about/`), a compact team strip and an Instagram block (a plain link, no embedded feed). Process, models and values
-  are on their own pages. The header wordmark is always visible.
+- **Home**: shop-first, one message per section. Hero = headline in two lines (`home.hero.title`), one sentence
+  (`home.hero.lead`) and one button to the shop, then the lifestyle photo `src/assets/brand/hero-lifestyle.jpg` (4:5,
+  the whole frame, so the bag is always fully visible). Phones: text and button first, photo below; from 48rem a compact
+  split (text left, photo right, its height follows the screen height). Then: the bags on sale (real photos, prices,
+  grid with 2 columns on phones), the concept (two sentences, no photo), the three models (Belle on the oak chair
+  `belle-oak-chair.jpg`; each model name links to `shop/#<model>`), how a bag is made (real photo of a bag on umbrella
+  fabric + the 5 steps → `/process/`), the Ukrainian women (real photo → `/about/`), a compact team strip (real group
+  photo → `/team/`) and an Instagram block (a plain link, no embedded feed). `hero-lifestyle.jpg` and
+  `belle-oak-chair.jpg` are generated images: only on the home page, never on a product card.
+  `BagSketch.astro` (the Jolie/line-drawing hero) is kept but not used.
 - **Team**: group photo on the home team section and the team page; round portraits in the org chart and a 4:5 portrait
   on each member page (`src/assets/team/`, `src/lib/team-photos.ts`, `TeamAvatar.astro`; initials as fallback).
 - **SEO**: hreflang/x-default sitemap (`astro.config.mjs`), JSON-LD (`src/lib/structured-data.ts`), `npm run seo:check`

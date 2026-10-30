@@ -31,7 +31,7 @@ Keys are written in `camelCase` and grouped by page or component.
 | `common` | Shared buttons and labels: buy, order by e-mail, "Pezzo unico N° {number}", sold, available, back, close, menu, price… |
 | `a11y` | Screen-reader texts: skip link, menu buttons, gallery, breadcrumb, language switcher… |
 | `images` | Alt texts for the brand photos in `src/assets/brand/` (key = file name in camelCase, e.g. `hero-bag-hands.jpg` → `heroBagHands`), plus `teamGroup` for `src/assets/team/group.jpg` |
-| `home` | `hero` (`title` = headline, `lead`, `cta`, `notes`, `marquee`), `featured`, `story`, `team`, `newsletter`, `social` |
+| `home` | `hero` (`title` = headline, `lead`, `cta`, `notes` = only for the unused `BagSketch`), `featured`, `concept`, `models`, `process`, `story` (the Ukrainian women), `team`, `newsletter` (unused for now), `social` |
 | `shop` | Title, intro, `filter`, `count` (plural), `empty`, `emptyFiltered`, `unique` ("every bag is unique"), `models`, `card` |
 | `product` | `eyebrow` ("handmade crochet bag" above the title), labels, `dimensions`, `materials` (`schema` = one-line version for search engines), `unique`, `delivery` (shipping / pickup), `availableNote` ("Pezzo unico · disponibile" in the sticky buy bar), buy button, payment notes, `orderByEmail` (fallback), `legalNote` (terms + returns links under the buy button), `sold`, `care`, `question`, `related` |
 | `about` | Sections `born`, `idea`, `materials`, `women`, `slogan`, `thread`, `values`, `cta` |

@@ -78,6 +78,8 @@ const CORR = {
   'umbrellas-fabrics.jpeg': {},
   'yarn-fettuccia.jpeg': {},
   'women-crochet.jpeg': { recomb: [0.975, 1, 1.04] }, // warm indoor light: cool it down a touch
+  'lifestyle-belle-bordeaux-ticino.png': {},
+  'belle-bordeaux-oak-chair.png': {},
 };
 
 /** Crop (in original pixels), apply the gentle correction, resize, light output sharpening. */
@@ -101,6 +103,9 @@ const EDITORIAL = [
   { name: 'yarn-fettuccia.jpg', file: 'yarn-fettuccia.jpeg', crop: [0, 100, 2880, 3600], size: [1920, 2400] },
   { name: 'women-crochet.jpg', file: 'women-crochet.jpeg', crop: [300, 0, 4320, 2880], size: [2400, 1600] },
   { name: 'women-crochet-45.jpg', file: 'women-crochet.jpeg', crop: [800, 180, 2160, 2700], size: [1920, 2400] },
+  // Generated lifestyle images (supplied 30.10.2026, already 4:5): only on editorial sections, never on a product card.
+  { name: 'hero-lifestyle.jpg', file: 'lifestyle-belle-bordeaux-ticino.png', crop: null, size: [1120, 1400] },
+  { name: 'belle-oak-chair.jpg', file: 'belle-bordeaux-oak-chair.png', crop: null, size: [1120, 1400] },
 ];
 
 async function buildEditorial() {

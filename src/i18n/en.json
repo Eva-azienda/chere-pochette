@@ -122,6 +122,7 @@
     "colourSwatch": "Colour: {colour}"
   },
   "images": {
+    "heroLifestyle": "A woman in a white shirt and beige trousers carries a bordeaux crochet Belle bag in her hand, next to a stone wall",
     "heroBagHands": "Hands holding a burgundy crochet Belle bag",
     "heroBagUmbrella": "Burgundy crochet bag resting on a red umbrella",
     "umbrellasCollected": "Broken umbrellas collected in a bin and a crate",
@@ -132,24 +133,19 @@
     "modelBelle": "Belle model, crochet bag without fringe",
     "modelCoquette": "Coquette model, crochet bag with fringe",
     "bagSketch": "Line drawing of a crochet bag with needle and thread",
-    "teamGroup": "The Chère Pochette team: seven young women from SCC Bellinzona, outdoors, in burgundy tops"
+    "teamGroup": "The Chère Pochette team: seven young women from SCC Bellinzona, outdoors, in burgundy tops",
+    "belleOakChair": "Bordeaux crochet Belle bag resting on an oak chair"
   },
   "home": {
     "hero": {
-      "title": "Each one is unique. Like the person who carries it.",
+      "title": "A second life. A one-of-a-kind bag.",
       "lead": "Crochet bags handmade in Ticino from rescued clothes and umbrellas.",
       "cta": "Discover the bags",
       "notes": {
         "yarn": "yarn from recovered clothes",
         "handle": "crocheted handle",
         "unique": "one of a kind, numbered"
-      },
-      "marquee": [
-        "One of a kind",
-        "Crocheted by hand",
-        "Recovered clothes and umbrellas",
-        "Made in Bellinzona"
-      ]
+      }
     },
     "featured": {
       "eyebrow": "In the shop",
@@ -158,10 +154,27 @@
       "cta": "See all bags",
       "empty": "Our next bags are in the making. Follow us on Instagram so you don't miss them."
     },
+    "concept": {
+      "eyebrow": "The idea",
+      "title": "A garment outside, an umbrella inside",
+      "text": "The T-shirt yarn comes from clothes no one wears anymore, the lining from the fabric of broken umbrellas. So every bag tells two stories: one outside and one inside."
+    },
+    "models": {
+      "eyebrow": "The models",
+      "title": "Jolie, Belle and Coquette",
+      "text": "Three shapes, three characters. Pictured: Belle.",
+      "cta": "Choose your model"
+    },
+    "process": {
+      "eyebrow": "From umbrella to bag",
+      "title": "How a Chère Pochette is made",
+      "text": "Five steps, from collecting the materials to the very last stitch.",
+      "cta": "Discover the process"
+    },
     "story": {
       "eyebrow": "Made by many hands",
-      "title": "A second life, stitch by stitch",
-      "text": "Clothes no one wears anymore become t-shirt yarn, and broken umbrellas become the lining. We crochet together with a group of Ukrainian women, sharing technique, ideas and time.",
+      "title": "Together with Ukrainian women",
+      "text": "Our bags are made in collaboration with a group of Ukrainian women who crochet with us. We share technique, ideas and time.",
       "cta": "Our story"
     },
     "team": {

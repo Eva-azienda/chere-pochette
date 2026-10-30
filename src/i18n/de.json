@@ -122,6 +122,7 @@
     "colourSwatch": "Farbe: {colour}"
   },
   "images": {
+    "heroLifestyle": "Eine Frau in weisser Bluse und beiger Hose trägt eine bordeauxrote Belle-Häkeltasche in der Hand, neben einer Steinmauer",
     "heroBagHands": "Hände halten eine bordeauxrote gehäkelte Tasche Belle",
     "heroBagUmbrella": "Bordeauxrote Häkeltasche auf einem roten Regenschirm",
     "umbrellasCollected": "Gesammelte kaputte Regenschirme in einem Eimer und einer Kiste",
@@ -132,24 +133,19 @@
     "modelBelle": "Modell Belle, gehäkelte Tasche ohne Fransen",
     "modelCoquette": "Modell Coquette, gehäkelte Tasche mit Fransen",
     "bagSketch": "Strichzeichnung einer Häkeltasche mit Nadel und Faden",
-    "teamGroup": "Das Team von Chère Pochette: sieben junge Frauen der SCC Bellinzona, draussen, in bordeauxroten Oberteilen"
+    "teamGroup": "Das Team von Chère Pochette: sieben junge Frauen der SCC Bellinzona, draussen, in bordeauxroten Oberteilen",
+    "belleOakChair": "Bordeauxrote Belle-Häkeltasche auf einem Stuhl aus Eichenholz"
   },
   "home": {
     "hero": {
-      "title": "Jede ist einzigartig. Wie die Person, die sie trägt.",
+      "title": "Ein zweites Leben. Eine einzigartige Tasche.",
       "lead": "Von Hand gehäkelte Taschen aus dem Tessin, aus geretteten Kleidern und Regenschirmen.",
       "cta": "Taschen entdecken",
       "notes": {
         "yarn": "Fettuccia aus geretteten Kleidern",
         "handle": "gehäkelter Henkel",
         "unique": "Unikat, nummeriert"
-      },
-      "marquee": [
-        "Unikate",
-        "Von Hand gehäkelt",
-        "Gerettete Kleider und Schirme",
-        "Made in Bellinzona"
-      ]
+      }
     },
     "featured": {
       "eyebrow": "Im Shop",
@@ -158,10 +154,27 @@
       "cta": "Alle Taschen ansehen",
       "empty": "Die nächsten Taschen entstehen gerade. Folge uns auf Instagram, um keine zu verpassen."
     },
+    "concept": {
+      "eyebrow": "Die Idee",
+      "title": "Aussen ein Kleid, innen ein Regenschirm",
+      "text": "Das T-Shirt-Garn entsteht aus Kleidern, die niemand mehr trägt, das Futter aus dem Stoff kaputter Regenschirme. So erzählt jede Tasche zwei Geschichten: eine aussen und eine innen."
+    },
+    "models": {
+      "eyebrow": "Die Modelle",
+      "title": "Jolie, Belle und Coquette",
+      "text": "Drei Formen, drei Charaktere. Im Bild: Belle.",
+      "cta": "Wähle dein Modell"
+    },
+    "process": {
+      "eyebrow": "Vom Regenschirm zur Tasche",
+      "title": "So entsteht eine Chère Pochette",
+      "text": "Fünf Schritte, vom Sammeln der Materialien bis zur letzten Masche.",
+      "cta": "Den Prozess entdecken"
+    },
     "story": {
       "eyebrow": "Von vielen Händen gemacht",
-      "title": "Ein zweites Leben, Masche für Masche",
-      "text": "Kleider, die niemand mehr trägt, werden zu T-Shirt-Garn, kaputte Regenschirme zum Futter. Wir häkeln gemeinsam mit einer Gruppe ukrainischer Frauen und teilen Technik, Ideen und Zeit.",
+      "title": "Gemeinsam mit ukrainischen Frauen",
+      "text": "Unsere Taschen entstehen in Zusammenarbeit mit einer Gruppe ukrainischer Frauen, die mit uns häkeln. Wir teilen Technik, Ideen und Zeit.",
       "cta": "Unsere Geschichte"
     },
     "team": {

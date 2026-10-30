@@ -122,6 +122,7 @@
     "colourSwatch": "Colore: {colour}"
   },
   "images": {
+    "heroLifestyle": "Una donna in camicia bianca e pantaloni beige porta a mano una borsa Belle all'uncinetto color bordeaux, accanto a un muro di pietra",
     "heroBagHands": "Mani che tengono una borsa Belle all'uncinetto color bordeaux",
     "heroBagUmbrella": "Borsa all'uncinetto bordeaux appoggiata su un ombrello rosso",
     "umbrellasCollected": "Ombrelli rotti raccolti in un cestino e in una cassetta",
@@ -132,24 +133,19 @@
     "modelBelle": "Modello Belle, borsa all'uncinetto senza frange",
     "modelCoquette": "Modello Coquette, borsa all'uncinetto con frange",
     "bagSketch": "Disegno a tratto di una borsa all’uncinetto con ago e filo",
-    "teamGroup": "Il team di Chère Pochette: sette ragazze della SCC di Bellinzona, all'aperto, con maglie bordeaux"
+    "teamGroup": "Il team di Chère Pochette: sette ragazze della SCC di Bellinzona, all'aperto, con maglie bordeaux",
+    "belleOakChair": "Borsa Belle all'uncinetto color bordeaux appoggiata su una sedia di legno di quercia"
   },
   "home": {
     "hero": {
-      "title": "Ognuna è unica. Come chi la porta.",
+      "title": "Una seconda vita. Una borsa unica.",
       "lead": "Borse all'uncinetto fatte a mano in Ticino, con vestiti e ombrelli recuperati.",
       "cta": "Scopri le borse",
       "notes": {
         "yarn": "fettuccia da vestiti recuperati",
         "handle": "manico all’uncinetto",
         "unique": "pezzo unico, numerato"
-      },
-      "marquee": [
-        "Pezzi unici",
-        "Fatte a mano all’uncinetto",
-        "Vestiti e ombrelli recuperati",
-        "Made in Bellinzona"
-      ]
+      }
     },
     "featured": {
       "eyebrow": "Nello shop",
@@ -158,10 +154,27 @@
       "cta": "Vedi tutte le borse",
       "empty": "Le prossime borse sono in lavorazione. Seguici su Instagram per non perderle."
     },
+    "concept": {
+      "eyebrow": "Il concetto",
+      "title": "Fuori un vestito, dentro un ombrello",
+      "text": "La fettuccia nasce da vestiti che nessuno indossa più, la fodera dalla stoffa di ombrelli rotti. Così ogni borsa racconta due storie: una fuori e una dentro."
+    },
+    "models": {
+      "eyebrow": "I modelli",
+      "title": "Jolie, Belle e Coquette",
+      "text": "Tre forme, tre caratteri. Nella foto: Belle.",
+      "cta": "Scegli il tuo modello"
+    },
+    "process": {
+      "eyebrow": "Dall'ombrello alla borsa",
+      "title": "Come nasce una Chère Pochette",
+      "text": "Cinque passi, dalla raccolta dei materiali all'ultimo punto.",
+      "cta": "Scopri il processo"
+    },
     "story": {
       "eyebrow": "Fatte a più mani",
-      "title": "Una seconda vita, punto dopo punto",
-      "text": "I vestiti che nessuno indossa più diventano fettuccia, gli ombrelli rotti diventano la fodera. Lavoriamo all'uncinetto insieme a un gruppo di donne ucraine e condividiamo tecnica, idee e tempo.",
+      "title": "Insieme alle donne ucraine",
+      "text": "Le nostre borse nascono dalla collaborazione con un gruppo di donne ucraine che lavorano all'uncinetto con noi. Condividiamo tecnica, idee e tempo.",
       "cta": "La nostra storia"
     },
     "team": {

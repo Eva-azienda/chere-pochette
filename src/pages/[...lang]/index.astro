@@ -1,21 +1,30 @@
 ---
 /**
  * Home page – one file for all languages: / (it), /de/, /en/.
- * Sections, in this order: hero (bag + short headline + one button), the bags on sale (grid with
- * prices), the marquee band, one short story block (materials + the Ukrainian women → /about/),
- * the team strip (group photo → /team/), Instagram.
- * The detail (process, models, values) lives on the dedicated pages, not here.
+ * Sections, in this order: hero (headline, one sentence, one button + the lifestyle photo), the bags
+ * on sale (grid with prices), the concept (two sentences), the three models (Belle on the oak chair),
+ * how a bag is made (5 steps → /process/), the Ukrainian women (→ /about/), the team strip
+ * (group photo → /team/), Instagram.
+ * Each section says one thing: the details live on the dedicated pages.
+ *
+ * Photos: hero-lifestyle.jpg and belle-oak-chair.jpg are generated images, used only here as mood
+ * pictures. Product cards always show the real photos of each bag; the women and team sections
+ * always show real photos of the project.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BagSketch from '../../components/BagSketch.astro';
+import ArtPicture from '../../components/ArtPicture.astro';
 import BrandPicture from '../../components/BrandPicture.astro';
 import Icon from '../../components/Icon.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import ThreadDivider from '../../components/ThreadDivider.astro';
-import bagHands from '../../assets/brand/hero-bag-hands.jpg';
+import heroLifestyle from '../../assets/brand/hero-lifestyle.jpg';
+import belleChair from '../../assets/brand/belle-oak-chair.jpg';
+import bagUmbrella from '../../assets/brand/hero-bag-umbrella-45.jpg';
+import womenLandscape from '../../assets/brand/women-crochet.jpg';
+import womenPortrait from '../../assets/brand/women-crochet-45.jpg';
 import { localeStaticPaths, useTranslations, type Lang } from '../../lib/i18n';
 import { localePath } from '../../lib/urls';
-import { getAvailableProducts, site } from '../../lib/catalog';
+import { getAvailableProducts, models, site } from '../../lib/catalog';
 import { teamGroupPhoto } from '../../lib/team-photos';
 
 export function getStaticPaths() {
@@ -25,6 +34,9 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: Lang };
 const { t, list, pageMeta } = useTranslations(lang);
 
+// "Una seconda vita. Una borsa unica." → two lines, the second in italic.
+const titleLines = t('home.hero.title').split(/(?<=[.!?])\s+/);
+
 // Up to 6 bags. From 64rem: 4 columns, or 3 when that fills the rows better (3, 5 or 6 bags).
 const featured = (await getAvailableProducts()).slice(0, 6);
 const threeColumns = featured.length === 3 || featured.length >= 5;
@@ -32,31 +44,41 @@ const cardSizes = threeColumns
   ? '(min-width: 72rem) 22rem, (min-width: 64rem) 30vw, 46vw'
   : '(min-width: 72rem) 16rem, (min-width: 64rem) 22vw, 46vw';
 
-const marquee = list('home.hero.marquee');
+const steps = list<{ title: string }>('process.steps');
 // "https://www.instagram.com/chere.pochette/" → "@chere.pochette"
 const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[1] ?? 'chere.pochette'}`;
 ---
 
 <BaseLayout lang={lang} path="" {...pageMeta('home')}>
   <!-- ========== Hero ==========
-       Phones: the bag on its powder circle, the headline, one sentence and one button – all
-       above the fold (the drawing's size follows the screen height, the notes are hidden).
-       From 64rem: text on the left, the large bag with its notes on the right. -->
+       Phones: headline, one sentence and the shop button first, then the 4:5 photo (whole frame,
+       so the bag is always fully visible).
+       From 48rem: a compact split, text left and photo right; the photo's height follows the
+       screen height, so text and photo fit on the first screen. -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero__inner container">
-      <div class="hero__art">
-        <BagSketch lang={lang} />
-      </div>
       <div class="hero__text">
-        <h1 id="hero-title" class="hero__title">{t('home.hero.title')}</h1>
+        <h1 id="hero-title" class="hero__title">
+          {titleLines.map((line) => <span>{line}</span>)}
+        </h1>
         <p class="hero__lead">{t('home.hero.lead')}</p>
         <a class="btn btn--primary hero__cta" href={localePath(lang, 'shop/')}>{t('home.hero.cta')}</a>
+      </div>
+      <div class="hero__media media">
+        <BrandPicture
+          src={heroLifestyle}
+          alt={t('images.heroLifestyle')}
+          sizes="(min-width: 64rem) 28rem, (min-width: 48rem) 40vw, calc(100vw - 2rem)"
+          widths={[400, 560, 720, 900, 1120]}
+          loading="eager"
+        />
       </div>
     </div>
   </section>
 
   <!-- ========== Bags on sale ==========
-       A grid (never a carousel): 2 columns on phones, 3–4 from 64rem. Photo, name and price on every card. -->
+       A grid (never a carousel): 2 columns on phones, 3–4 from 64rem. The real photo, name, price
+       and link of every bag. -->
   <section class="section featured" aria-labelledby="featured-title">
     <div class="container">
       <div class="heading featured__heading">
@@ -93,37 +115,102 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     </div>
   </section>
 
-  <!-- A slow band of the four promises, between the bags and the story. Decorative: the same
-       words are on the page as text, so screen readers skip it. -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      {
-        [0, 1].map(() => (
-          <ul role="list" class="marquee__group">
-            {marquee.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        ))
-      }
+  <!-- ========== The concept ==========
+       Two sentences, no picture: outside a garment, inside an umbrella. -->
+  <section class="section section--alt concept" aria-labelledby="concept-title">
+    <div class="container container--narrow heading center concept__inner">
+      <p class="eyebrow">{t('home.concept.eyebrow')}</p>
+      <h2 id="concept-title">{t('home.concept.title')}</h2>
+      <p class="lead">{t('home.concept.text')}</p>
     </div>
-  </div>
+  </section>
 
-  <!-- ========== Story: recovered materials + the women who crochet with us ==========
-       The photo of a bag held against the body also shows its size.
-       Phones: photo above the text. From 48rem: text left, photo right. -->
-  <section class="section story" aria-labelledby="story-title">
-    <div class="container feature feature--reverse">
-      <div class="feature__media media story__media">
+  <!-- ========== The three models ==========
+       The Belle on the oak chair introduces the models; each name links to the shop filtered by
+       that model (shop/#belle). Phones: photo above the text. From 48rem: photo left. -->
+  <section class="section models" aria-labelledby="models-title">
+    <div class="container feature">
+      <figure class="feature__media media models__media">
         <BrandPicture
-          src={bagHands}
-          alt={t('images.heroBagHands')}
-          sizes="(min-width: 72rem) 34rem, (min-width: 48rem) 45vw, 100vw"
+          src={belleChair}
+          alt={t('images.belleOakChair')}
+          sizes="(min-width: 72rem) 34rem, (min-width: 48rem) 45vw, calc(100vw - 2rem)"
+          widths={[480, 720, 960, 1120]}
+          position="50% 52%"
+        />
+        <figcaption class="models__caption">Belle</figcaption>
+      </figure>
+      <div class="feature__text stack">
+        <p class="eyebrow">{t('home.models.eyebrow')}</p>
+        <h2 id="models-title">{t('home.models.title')}</h2>
+        <p>{t('home.models.text')}</p>
+        <ul role="list" class="models__list">
+          {
+            models.map((model) => (
+              <li>
+                <a href={localePath(lang, `shop/#${model.id}`)}>
+                  <span class="models__name">{model.name}</span>
+                  <span class="models__type">{model.type[lang]}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a class="link-arrow" href={localePath(lang, 'shop/')}>{t('home.models.cta')}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== How a bag is made ==========
+       A real photo of a crocheted bag on umbrella fabric, the five steps, link to /process/
+       (the recovered-material photos are on that page). From 48rem: photo right. -->
+  <section class="section section--alt process-teaser" aria-labelledby="process-title">
+    <div class="container feature feature--reverse">
+      <div class="feature__media media">
+        <BrandPicture
+          src={bagUmbrella}
+          alt={t('images.heroBagUmbrella')}
+          sizes="(min-width: 72rem) 34rem, (min-width: 48rem) 45vw, calc(100vw - 2rem)"
           widths={[480, 768, 1080, 1440]}
-          position="45% 55%"
+          position="50% 60%"
         />
       </div>
-      <div class="feature__text stack story__text">
+      <div class="feature__text stack">
+        <p class="eyebrow">{t('home.process.eyebrow')}</p>
+        <h2 id="process-title">{t('home.process.title')}</h2>
+        <p>{t('home.process.text')}</p>
+        <ol role="list" class="steps-inline">
+          {
+            steps.map((step, i) => (
+              <li>
+                <span class="steps-inline__n">{String(i + 1).padStart(2, '0')}</span>
+                {step.title}
+              </li>
+            ))
+          }
+        </ol>
+        <a class="link-arrow" href={localePath(lang, 'process/')}>{t('home.process.cta')}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Together with the Ukrainian women ==========
+       Real photo: women-crochet.jpg (landscape) above the text on phones, its 4:5 crop
+       women-crochet-45.jpg on the left from 48rem. -->
+  <section class="section story" aria-labelledby="story-title">
+    <div class="container feature">
+      <div class="feature__media media">
+        <ArtPicture
+          mobile={womenLandscape}
+          desktop={womenPortrait}
+          alt={t('images.womenCrochet')}
+          mobileSizes="calc(100vw - 2rem)"
+          desktopSizes="(min-width: 72rem) 34rem, 45vw"
+          mobilePosition="50% 45%"
+          desktopPosition="50% 40%"
+        />
+      </div>
+      <div class="feature__text stack">
         <p class="eyebrow">{t('home.story.eyebrow')}</p>
         <h2 id="story-title">{t('home.story.title')}</h2>
         <p>{t('home.story.text')}</p>
@@ -133,8 +220,7 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
   </section>
 
   <!-- ========== The team (compact strip) ==========
-       Phones: the group photo, then the text. From 48rem: photo left, text right.
-       Photo: src/assets/team/group.jpg -->
+       Real group photo (src/assets/team/group.jpg). Phones: photo, then text. From 48rem: photo left. -->
   <section class="section section--alt team-strip" aria-labelledby="team-title">
     <div class="container team-strip__inner">
       {
@@ -143,7 +229,7 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
             <BrandPicture
               src={teamGroupPhoto}
               alt={t('images.teamGroup')}
-              sizes="(min-width: 48rem) 26rem, 100vw"
+              sizes="(min-width: 48rem) 26rem, calc(100vw - 2rem)"
               widths={[480, 768, 900]}
             />
           </div>
@@ -176,50 +262,45 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
 <style>
   /* ---------- Hero ----------
-     Phones: bag, headline, one sentence, one button – centred and tight, so all four fit on the
-     first screen. The drawing's width follows the screen height (svh): on short phones it gets a
-     little smaller instead of pushing the button below the fold.
-     From 48rem: more air and the notes; from 64rem: two columns. */
+     Phones: text centred, then the photo at full width in 4:5 (the photo's own shape, nothing
+     is cut off). From 48rem: two columns, text left; the photo is as tall as the screen allows
+     (minus header and padding), never taller than 35rem. */
   .hero {
-    /* 96vw at most (powder circle ≈ 73% of the width); the rest of the screen height is kept for
-       header (62px), headline, sentence and button (≈ 20.5rem in the longest language). */
-    --art-w: clamp(13rem, (100svh - 20.5rem) * 1.04, min(96vw, 26rem));
-    padding-block: var(--s-2) var(--s-6);
+    padding-block: var(--s-4) var(--s-6);
   }
 
   .hero__inner {
     display: grid;
-    justify-items: center;
-    gap: var(--s-3);
-  }
-
-  .hero__art {
-    width: var(--art-w);
-    /* may be a little wider than the text column: equal negative margins keep it centred */
-    margin-inline: calc((100% - var(--art-w)) / 2);
-    /* the strip under the needle is only for the bottom note, hidden on phones */
-    margin-bottom: calc(var(--art-w) * -0.1);
+    gap: var(--s-5);
   }
 
   .hero__text {
     display: grid;
     justify-items: center;
-    gap: var(--s-2);
-    max-width: 34rem;
+    gap: var(--s-3);
     text-align: center;
   }
 
   .hero__title {
-    max-width: 15em;
-    font-size: clamp(1.625rem, 1.1rem + 2.6vw, 3.5rem);
-    line-height: 1.12;
+    font-size: clamp(1.875rem, 1.2rem + 3vw, 3.75rem);
+    line-height: 1.1;
     letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .hero__title span {
+    display: block;
+  }
+
+  .hero__title span + span {
+    font-style: italic;
+    color: var(--c-bordeaux);
   }
 
   .hero__lead {
-    max-width: 30em;
-    font-size: 1rem;
-    line-height: 1.45;
+    max-width: 26em;
+    font-size: var(--fs-base);
+    line-height: 1.5;
     color: var(--c-anthracite);
   }
 
@@ -229,74 +310,58 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     white-space: nowrap;
   }
 
+  .hero__media {
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius);
+  }
+
+  .hero__media :global(picture),
+  .hero__media :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   @media (min-width: 48rem) {
     .hero {
       padding-block: var(--s-6) var(--s-7);
     }
 
     .hero__inner {
-      gap: var(--s-5);
-    }
-
-    /* the notes are back: room above for the top one, below for the bottom one */
-    .hero__art {
-      width: min(56vw, 26rem);
-      margin: var(--s-6) 0 var(--s-7);
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: var(--s-7);
     }
 
     .hero__text {
+      justify-items: start;
       gap: var(--s-4);
+      text-align: left;
     }
 
     .hero__lead {
       font-size: var(--fs-lg);
-      line-height: 1.5;
     }
 
     .hero__cta {
       width: auto;
     }
+
+    /* at most 40% of the width, so "Una seconda vita." stays on one line on tablets */
+    .hero__media {
+      width: clamp(17rem, (100svh - 13rem) * 0.8, 28rem);
+      max-width: 40vw;
+    }
   }
 
   @media (min-width: 64rem) {
-    .hero {
-      padding-block: var(--s-6);
-    }
-
     .hero__inner {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      align-items: center;
-      column-gap: var(--s-7);
-    }
-
-    /* left-aligned in its column, so the notes on the right of the drawing have room */
-    .hero__art {
-      order: 2;
-      width: min(78%, 34rem, 60svh);
-      margin-block: 0;
-      justify-self: start;
+      column-gap: var(--s-8);
     }
 
     .hero__text {
-      justify-items: start;
       gap: var(--s-5);
-      max-width: 30rem;
-      text-align: left;
-    }
-
-    .hero__cta {
-      margin-top: 0;
-    }
-  }
-
-  @media (min-width: 80rem) {
-    /* large screens: the drawing takes the wider column */
-    .hero__inner {
-      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    }
-
-    .hero__art {
-      width: min(82%, 34rem, 60svh);
     }
   }
 
@@ -338,70 +403,98 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     width: min(100%, 20rem);
   }
 
-  /* ---------- Marquee band ---------- */
-  .marquee {
-    overflow: hidden;
-    background: var(--c-bordeaux);
-    color: var(--c-ivory);
+  /* ---------- Concept ---------- */
+  .concept__inner {
+    margin-bottom: 0;
   }
 
-  .marquee__track {
-    display: flex;
-    width: max-content;
-    animation: marquee 48s linear infinite;
+  .concept__inner .lead {
+    max-width: 34rem;
   }
 
-  .marquee__group {
-    display: flex;
-    flex-shrink: 0;
+  /* ---------- Models ---------- */
+  .models__media {
+    position: relative;
+    margin: 0;
   }
 
-  .marquee__group li {
-    display: flex;
-    align-items: center;
-    padding-block: var(--s-3);
+  /* the model's name on the photo, like a small label */
+  .models__caption {
+    position: absolute;
+    left: var(--s-3);
+    bottom: var(--s-3);
+    padding: var(--s-1) var(--s-3);
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--c-ivory) 92%, transparent);
     font-family: var(--f-display);
     font-style: italic;
+    font-size: var(--fs-base);
+    color: var(--c-plum);
+  }
+
+  /* one row per model: name (Bodoni) + type, the whole row is a 48px link */
+  .models__list {
+    border-top: 1px solid var(--c-line);
+  }
+
+  .models__list a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+    min-height: var(--tap);
+    padding-block: var(--s-3);
+    border-bottom: 1px solid var(--c-line);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .models__name {
+    font-family: var(--f-display);
     font-size: var(--fs-lg);
-    line-height: 1.6;
-    white-space: nowrap;
+    color: var(--c-plum);
   }
 
-  /* a small stitch between the words */
-  .marquee__group li::after {
-    content: '';
-    width: 0.4em;
-    height: 0.4em;
-    margin-inline: 1.4em;
-    border: 1px solid currentColor;
-    border-radius: 50%;
-    opacity: 0.7;
+  .models__type {
+    font-size: var(--fs-sm);
+    color: var(--c-muted);
+    text-align: right;
   }
 
-  @keyframes marquee {
-    to {
-      transform: translateX(-50%);
-    }
+  .models__list a:hover .models__name {
+    color: var(--c-bordeaux);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .marquee__track {
-      animation: none;
-    }
+  /* ---------- Process teaser ---------- */
+  .steps-inline {
+    border-top: 1px solid var(--c-line);
   }
 
-  /* ---------- Story ----------
-     Phones: a compact landscape photo (3:2) above the text. From 48rem: 4:3 next to the text. */
-  .feature__media.story__media {
-    aspect-ratio: 3 / 2;
+  .steps-inline li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-4);
+    padding-block: var(--s-2);
+    border-bottom: 1px solid var(--c-line);
+    font-family: var(--f-display);
+    font-size: var(--fs-lg);
+    color: var(--c-plum);
   }
 
+  /* same-width figures, so the step names line up */
+  .steps-inline__n {
+    min-width: 1.75em;
+    font-family: var(--f-body);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.12em;
+    color: var(--c-bordeaux);
+  }
+
+  /* ---------- Story / process / models: text column ---------- */
   @media (min-width: 48rem) {
-    .feature__media.story__media {
-      aspect-ratio: 4 / 3;
-    }
-
-    .story__text {
+    .feature__text {
       max-width: 30rem;
     }
   }

@@ -66,10 +66,13 @@ fee. With online payment on, the next Deploy run also re-creates the shipping li
 **Instagram** → `src/data/site.json` → `"instagram"` = `https://www.instagram.com/chere.pochette/` (used by the footer,
 header menu, home and shop).
 
-**Home hero** → `src/i18n/*.json`: `home.hero.title` (headline), `home.hero.lead` (the sentence under it),
-`home.hero.notes` (sketch notes, larger screens only), `home.hero.marquee` (words in the scrolling band);
-bags → `home.featured.*`; story block → `home.story.*`; team strip → `home.team.*`; Instagram → `home.social.*`
-(the handle comes from `site.json` → `"instagram"`).
+**Home page** → `src/i18n/*.json`, in page order: hero → `home.hero.title` (headline; each sentence gets its own
+line, the second in italic) and `home.hero.lead` (the sentence under it); bags → `home.featured.*`; concept →
+`home.concept.*`; models → `home.models.*` (names and types come from `src/data/models.json`); process →
+`home.process.*` (the 5 step names come from `process.steps`); Ukrainian women → `home.story.*`; team strip →
+`home.team.*`; Instagram → `home.social.*` (the handle comes from `site.json` → `"instagram"`).
+Rule: every section says something new. Don't repeat the hero sentence in another section.
+`home.hero.notes` only belong to the unused `BagSketch.astro`.
 
 **Contact e-mail** → `src/data/site.json` → `"email"`, and also in the three legal files.
 
