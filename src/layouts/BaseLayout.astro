@@ -38,8 +38,6 @@ interface Props {
   ogType?: 'website' | 'product';
   /** schema.org nodes from src/lib/structured-data.ts, printed as one JSON-LD script (the home page adds the organisation itself). */
   jsonLd?: JsonLdNode | JsonLdNode[];
-  /** false when the page already contains a newsletter block. */
-  footerNewsletter?: boolean;
   /** Extra class on <body>, e.g. "has-buybar" on product pages. */
   bodyClass?: string;
 }
@@ -54,7 +52,6 @@ const {
   ogImage,
   ogType = 'website',
   jsonLd,
-  footerNewsletter = true,
   bodyClass,
 } = Astro.props;
 
@@ -131,7 +128,7 @@ const verification = (site as { seo?: { googleSiteVerification?: string; bingSit
     <main id="main" tabindex="-1">
       <slot />
     </main>
-    <SiteFooter lang={lang} path={path} newsletter={footerNewsletter} />
+    <SiteFooter lang={lang} path={path} />
   </body>
 </html>
 

@@ -70,8 +70,8 @@ Online payment can be switched on before or after the launch; until then the sho
 - [ ] **Team**: consent of all 7 for their photos on the site; CVs/skills in `src/data/team.json` (it/de/en) — profiles
       without skills/experience stay `noindex` (all; CAO collects). Optional: higher-resolution originals of the
       portraits (today 296×370 px from Instagram) — replace the files in `src/assets/team/` with the same names
-- [ ] **Newsletter provider** (today the form opens an e-mail): choose one with double opt-in, set `newsletter.action`,
-      update privacy section 5 ([SETUP.md §8](SETUP.md#8-later-newsletter-provider)) (CMO)
+- [ ] **Newsletter (later, optional)**: removed from the site on 30.10.2026 (footer + home). To bring it back: choose a
+      provider with double opt-in, set `newsletter.action` in `site.json`, re-add `NewsletterForm.astro` and update privacy §5 (CMO)
 - [ ] **Logo vector file** (SVG/PDF from Canva) + Bodoni FLF font file into Drive `02_Branding` (CMO)
 - [ ] Check the remaining payment wording while checkout is off (shop/info meta descriptions, terms §4–5) (CMO + CEO/CAO)
 - [ ] Proper per-bag photos (front, lining, detail, worn) for the 4 bags ([VISUALS.md §5](VISUALS.md#5-guida-foto-per-il-team-prodotti-team-processo)) (CPO)

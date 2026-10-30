@@ -1,10 +1,13 @@
 ---
-/** Footer on dark plum: logo, newsletter, links, contact, Instagram, languages, legal. */
+/**
+ * Footer on dark plum, kept light: logo + one line about us, the page links in one row,
+ * e-mail / Instagram / languages, and a thin bottom bar with © · YES and the legal links.
+ * (No newsletter for now — NewsletterForm.astro stays in the project for later.)
+ */
 import { Image } from 'astro:assets';
 import logoIvory from '../assets/brand/logo-ivory.png';
 import Icon from './Icon.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
-import NewsletterForm from './NewsletterForm.astro';
 import { type Lang, useTranslations } from '../lib/i18n';
 import { localePath } from '../lib/urls';
 import { site } from '../lib/catalog';
@@ -12,50 +15,27 @@ import { site } from '../lib/catalog';
 interface Props {
   lang: Lang;
   path: string;
-  /** false on pages that already show a big newsletter block (home). */
-  newsletter?: boolean;
 }
 
-const { lang, path, newsletter = true } = Astro.props;
+const { lang, path } = Astro.props;
 const { t } = useTranslations(lang);
 const year = new Date().getFullYear();
 const links = ['shop', 'about', 'process', 'team', 'info'] as const;
+const legal = ['impressum', 'privacy', 'terms'] as const;
 ---
 
 <footer class="footer on-dark">
-  {
-    newsletter && (
-      <section class="container" aria-labelledby="footer-nl-title">
-        <div class="footer__nl">
-          <div class="footer__nl-text">
-            <h2 id="footer-nl-title" class="footer__nl-title">{t('newsletter.title')}</h2>
-            <p>{t('newsletter.text')}</p>
-          </div>
-          <NewsletterForm lang={lang} id="footer-nl" tone="dark" />
-        </div>
-      </section>
-    )
-  }
+  <div class="container footer__inner">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href={localePath(lang)} class="footer__logo">
+          <Image src={logoIvory} widths={[136, 272, 408]} sizes="136px" alt={t('a11y.homeLink')} loading="lazy" />
+        </a>
+        <p>{t('footer.about')}</p>
+      </div>
 
-  <div class="container footer__grid">
-    <div class="footer__brand">
-      <a href={localePath(lang)} class="footer__logo">
-        <Image
-          src={logoIvory}
-          widths={[170, 340, 510]}
-          sizes="170px"
-          alt={t('a11y.homeLink')}
-          loading="lazy"
-        />
-      </a>
-      <p>{t('footer.about')}</p>
-    </div>
-
-    <nav class="footer__col" aria-labelledby="footer-links-title">
-      <h2 id="footer-links-title" class="footer__title">{t('footer.linksTitle')}</h2>
-      <!-- Two short lists side by side: the pages, then the legal texts. -->
-      <div class="footer__lists">
-        <ul role="list">
+      <nav aria-label={t('footer.linksTitle')}>
+        <ul role="list" class="footer__nav">
           {
             links.map((key) => (
               <li>
@@ -64,43 +44,38 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
             ))
           }
         </ul>
-        <ul role="list">
-          {
-            (['impressum', 'privacy', 'terms'] as const).map((id) => (
-              <li>
-                <a href={localePath(lang, `legal/#${id}`)}>{t(`legal.toc.${id}`)}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </nav>
+      </nav>
+    </div>
 
-    <div class="footer__col">
-      <h2 class="footer__title">{t('footer.contactTitle')}</h2>
-      <ul role="list">
+    <div class="footer__meta">
+      <ul role="list" class="footer__contact" aria-label={t('footer.contactTitle')}>
         <li>
-          <a href={`mailto:${site.email}`} class="footer__icon-link">
-            <Icon name="mail" size={20} />
+          <a href={`mailto:${site.email}`}>
+            <Icon name="mail" size={18} />
             <span>{site.email}</span>
           </a>
         </li>
         <li>
-          <a href={site.instagram} rel="noopener" class="footer__icon-link">
-            <Icon name="instagram" size={20} />
+          <a href={site.instagram} rel="noopener">
+            <Icon name="instagram" size={18} />
             <span>{t('common.instagram')}</span>
           </a>
         </li>
       </ul>
       <LanguageSwitcher lang={lang} path={path} variant="links" dots class="footer__lang" />
     </div>
-  </div>
 
-  <div class="container">
     <div class="footer__bottom">
-      <p>{t('footer.yes')}</p>
-      <p>{t('footer.copyright', { year })}</p>
-      <p>{t('footer.privacyNote')}</p>
+      <p>{t('footer.copyright', { year })} · {t('footer.yes')}</p>
+      <ul role="list" class="footer__legal">
+        {
+          legal.map((id) => (
+            <li>
+              <a href={localePath(lang, `legal/#${id}`)}>{t(`legal.toc.${id}`)}</a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </div>
 </footer>
@@ -108,8 +83,8 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
 <style>
   .footer {
     margin-top: auto;
-    padding-top: var(--s-7);
-    padding-bottom: max(var(--s-6), env(safe-area-inset-bottom));
+    padding-top: var(--s-6);
+    padding-bottom: max(var(--s-5), env(safe-area-inset-bottom));
     background: var(--c-plum);
     color: var(--c-ivory);
     font-size: var(--fs-sm);
@@ -120,156 +95,119 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
 
   .footer a {
     color: var(--c-ivory);
+    text-decoration: none;
   }
 
   .footer a:hover {
     color: var(--c-powder);
+    text-decoration: underline;
   }
 
-  /* Newsletter band */
-  .footer__nl {
+  .footer__inner {
     display: grid;
     gap: var(--s-5);
-    padding-bottom: var(--s-6);
-    margin-bottom: var(--s-6);
-    border-bottom: 1px solid color-mix(in srgb, var(--c-ivory) 20%, transparent);
   }
 
-  .footer__nl-text {
+  /* Logo + one sentence, then the page links */
+  .footer__top {
     display: grid;
-    gap: var(--s-2);
-    max-width: 30rem;
-  }
-
-  .footer__nl-title {
-    font-size: var(--fs-xl);
-    color: var(--c-ivory);
-  }
-
-  .footer__nl-text p {
-    opacity: 0.85;
-  }
-
-  .footer__grid {
-    display: grid;
-    gap: var(--s-6);
+    gap: var(--s-4);
   }
 
   .footer__brand {
     display: grid;
-    gap: var(--s-4);
-    align-content: start;
+    gap: var(--s-3);
     max-width: 22rem;
   }
 
   .footer__logo {
     display: block;
-    width: 170px;
+    width: 136px;
   }
 
   .footer__brand p {
-    opacity: 0.85;
+    opacity: 0.8;
   }
 
-  .footer__title {
-    font-family: var(--f-body);
-    font-size: var(--fs-xs);
-    font-weight: 600;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--c-powder);
+  /* One row of links that wraps; each link keeps a 48px tap height on touch screens. */
+  .footer__nav,
+  .footer__contact,
+  .footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--s-5);
   }
 
-  .footer__col ul {
-    display: grid;
-    align-content: start;
-  }
-
-  .footer__col > ul,
-  .footer__lists {
-    margin-top: var(--s-2);
-  }
-
-  .footer__lists {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--s-4);
-  }
-
-  .footer__col a {
+  .footer__nav a,
+  .footer__contact a,
+  .footer__legal a {
     display: inline-flex;
     align-items: center;
-    min-width: var(--tap);
+    gap: var(--s-2);
     min-height: var(--tap);
-    line-height: 1.3;
-    text-decoration: none;
-  }
-
-  .footer__col a:hover {
-    text-decoration: underline;
-  }
-
-  .footer__icon-link {
-    gap: var(--s-3);
     overflow-wrap: anywhere;
   }
 
-  .footer :global(.footer__lang) {
-    margin-top: var(--s-4);
-    margin-left: calc(var(--s-3) * -1); /* line the first code up with the links above */
+  /* E-mail · Instagram on the left, languages on the right */
+  .footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-2) var(--s-5);
   }
 
+  .footer :global(.footer__lang) {
+    margin-left: calc(var(--s-3) * -1); /* line the first code up with the links */
+  }
+
+  /* Thin bottom bar */
   .footer__bottom {
-    display: grid;
-    gap: var(--s-1);
-    margin-top: var(--s-6);
-    padding-top: var(--s-5);
-    border-top: 1px solid color-mix(in srgb, var(--c-ivory) 20%, transparent);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0 var(--s-5);
+    padding-top: var(--s-3);
+    border-top: 1px solid color-mix(in srgb, var(--c-ivory) 18%, transparent);
     font-size: var(--fs-xs);
+  }
+
+  .footer__bottom p {
+    opacity: 0.75;
+  }
+
+  .footer__legal {
+    column-gap: var(--s-4);
+  }
+
+  .footer__legal a {
     opacity: 0.85;
   }
 
-  @media (min-width: 48rem) {
-    .footer__nl {
-      grid-template-columns: 1fr 1fr;
-      align-items: end;
-      column-gap: var(--s-8);
-    }
-
-    /* Tablets: the brand on its own row, then links and contacts side by side. */
-    .footer__grid {
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      column-gap: var(--s-6);
-    }
-
-    .footer__brand {
-      grid-column: 1 / -1;
-    }
-
-    .footer__bottom {
-      grid-template-columns: auto auto 1fr;
-      column-gap: var(--s-6);
-    }
-
-    .footer__bottom p:last-child {
-      text-align: right;
-    }
-  }
-
-  /* Large screens: brand | links (two short lists) | contacts. */
+  /* Desktop: logo left, links right on the same line */
   @media (min-width: 64rem) {
-    .footer__grid {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1.1fr);
+    .footer__top {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      column-gap: var(--s-7);
     }
 
-    .footer__brand {
-      grid-column: auto;
+    .footer__nav {
+      justify-content: flex-end;
+    }
+
+    .footer :global(.footer__lang) {
+      margin-left: 0;
+      margin-right: calc(var(--s-3) * -1);
     }
   }
 
-  /* Mouse and trackpad: links can sit closer together (still well above the 24px minimum). */
-  @media (min-width: 64rem) and (pointer: fine) {
-    .footer__col a {
+  /* Mouse and trackpad: links can sit closer together (still above the 24px minimum). */
+  @media (pointer: fine) {
+    .footer__nav a,
+    .footer__contact a,
+    .footer__legal a {
       min-height: 2.25rem;
     }
   }

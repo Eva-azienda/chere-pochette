@@ -2,7 +2,7 @@
 /**
  * Home page – one file for all languages: / (it), /de/, /en/.
  * Sections: hero, concept + 3 pillars, bags in the shop, the 3 models, process teaser,
- * story teaser (the Ukrainian women), the team (group photo), newsletter.
+ * story teaser (the Ukrainian women), the team (group photo), Instagram.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArtPicture from '../../components/ArtPicture.astro';
@@ -10,7 +10,6 @@ import BagSketch from '../../components/BagSketch.astro';
 import BrandPicture from '../../components/BrandPicture.astro';
 import Icon from '../../components/Icon.astro';
 import ModelsShowcase from '../../components/ModelsShowcase.astro';
-import NewsletterForm from '../../components/NewsletterForm.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import ThreadDivider from '../../components/ThreadDivider.astro';
 import umbrellaFabrics from '../../assets/brand/umbrellas-fabrics.jpg';
@@ -33,7 +32,7 @@ const steps = list<{ id: string; title: string }>('process.steps');
 const marquee = list('home.hero.marquee');
 ---
 
-<BaseLayout lang={lang} path="" {...pageMeta('home')} footerNewsletter={false}>
+<BaseLayout lang={lang} path="" {...pageMeta('home')}>
   <!-- ========== Hero ==========
        Phones: the annotated sketch, the headline (in the page's language) and one button.
        From 64rem: text on the left, the large annotated sketch on the right. -->
@@ -229,17 +228,13 @@ const marquee = list('home.hero.marquee');
     </div>
   </section>
 
-  <!-- ========== Newsletter + Instagram ========== -->
-  <section class="section section--powder" aria-labelledby="newsletter-title">
-    <div class="container container--narrow newsletter center">
+  <!-- ========== Instagram (no newsletter for now) ========== -->
+  <section class="section" aria-labelledby="social-title">
+    <div class="container container--narrow social center">
       <ThreadDivider />
-      <h2 id="newsletter-title">{t('home.newsletter.title')}</h2>
-      <p>{t('home.newsletter.text')}</p>
-      <NewsletterForm lang={lang} id="home-nl" />
-      <p class="newsletter__social">
-        {t('home.social.text')}
-        <a class="link-arrow" href={site.instagram} rel="noopener">{t('home.social.cta')}</a>
-      </p>
+      <h2 id="social-title">{t('home.social.title')}</h2>
+      <p>{t('home.social.text')}</p>
+      <a class="btn btn--outline" href={site.instagram} rel="noopener">{t('home.social.cta')}</a>
     </div>
   </section>
 </BaseLayout>
@@ -577,24 +572,14 @@ const marquee = list('home.hero.marquee');
     color: var(--c-bordeaux);
   }
 
-  /* ---------- Newsletter ---------- */
-  .newsletter {
+  /* ---------- Instagram ---------- */
+  .social {
     display: grid;
     justify-items: center;
     gap: var(--s-4);
   }
 
-  .newsletter :global(form) {
-    width: 100%;
-    text-align: left;
-  }
-
-  .newsletter__social {
-    display: grid;
-    justify-items: center;
-    gap: 0;
-    margin-top: var(--s-4);
-    font-size: var(--fs-sm);
+  .social p {
     color: var(--c-muted);
   }
 </style>
