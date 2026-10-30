@@ -38,7 +38,7 @@ Where every text, price and setting lives, and how to change it on github.com wi
 4. Change only the text **between the quotes** after the colon. Never change the key on the left.
    `"title": "Il team",` → `"title": "Il nostro team",`
 5. **Commit changes…** → short message (e.g. "Testo pagina team") → *Commit directly to the `main` branch* → **Commit changes**.
-6. **Actions** tab: the **Deploy** run starts. Green after ≈ 3–5 minutes = online at https://cherepochette.ch
+6. **Actions** tab: the **Deploy** run starts. Green after ≈ 1–2 minutes = online at https://cherepochette.ch
    (preview password still needed before launch). Reload, sometimes twice (GitHub Pages caches for a few minutes).
 
 **JSON survival rules:**
@@ -113,7 +113,7 @@ must name the provider once one is used.
 - **Impostazioni** (e-mail, Instagram, spedizione, pagamento online sì/no, indirizzo, newsletter): `src/data/site.json`.
   **Prezzi dei modelli** (prezzo proposto per una nuova borsa nell'admin, non mostrato sul sito): `src/data/models.json` — oggi sono provvisori; le borse già in vendita
   mantengono il loro prezzo (si cambia nell'admin). **Colori e fodere**: `src/data/taxonomy.json`.
-- **Come modificare**: su github.com apri il file → matita → cambia il testo → *Commit changes* → aspetta 3–5 minuti
+- **Come modificare**: su github.com apri il file → matita → cambia il testo → *Commit changes* → aspetta 1–2 minuti
   (scheda *Actions*, pallino verde). Se il file ha un errore la pubblicazione si ferma (pallino rosso) e resta online la
   versione precedente: correggi e riprova.
 - **Da completare**: URL del profilo Instagram, indirizzo postale, prezzi veri e spedizione, CV e foto del team.

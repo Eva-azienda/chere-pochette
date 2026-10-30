@@ -12,7 +12,7 @@ Stato al **29 ottobre 2026**. Una pagina per il team: cosa c'è, chi fa cosa, qu
   N° 004 Belle Grigio perla 40.
 - **Ordini**: per ora **via e-mail** («Ordina via e-mail»). I **pagamenti online** (Zahls: TWINT, carte, PostFinance,
   Apple/Google Pay) sono pronti ma **spenti** finché Zahls non ha verificato il nostro conto.
-- **Automazione**: ogni modifica (admin o file) pubblica il sito da sola in 3–5 minuti. Con i pagamenti attivi, una
+- **Automazione**: ogni modifica (admin o file) pubblica il sito da sola in 1–2 minuti. Con i pagamenti attivi, una
   borsa pagata passa da sola tra le vendute.
 - **Codice e documentazione**: https://github.com/Eva-azienda/chere-pochette (pubblico) → [README](../README.md) e `docs/`.
 - **Cartella Drive "Website Eva"**: `01_Brief` (brief, modelli) · `02_Branding` (kit, logo, wordmark) · `03_Media`

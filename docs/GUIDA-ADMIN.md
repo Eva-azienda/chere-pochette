@@ -44,7 +44,7 @@ Su un telefono che non è tuo tocca sempre **Esci** alla fine. La volta dopo l'e
 ## 3. La schermata Inventario
 
 Dall'alto in basso:
-- **Stato della pubblicazione**: «Online ✓», «Pubblicazione in corso…» (il sito si aggiorna, 2–5 minuti) oppure
+- **Stato della pubblicazione**: «Online ✓», «Pubblicazione in corso…» (il sito si aggiorna, 1–3 minuti) oppure
   «Problema nell'ultimo aggiornamento» con il link **Dettagli** (vedi § 12).
 - **Pagamenti online**: oggi «**non ancora attivi – ordini via e-mail**» (vedi § 7). Diventerà «attivi».
 - Tre schede: **In vendita**, **Vendute**, **Nascoste** (con il numero di borse).
@@ -168,7 +168,7 @@ nell'admin:
 | «Non è stato possibile salvare» / «Connessione assente o instabile» | Controlla la rete e tocca di nuovo **Metti in vendita** / **Salva modifiche**. Quello che hai inserito resta. |
 | «Qualcun altro sta salvando proprio adesso» | Aspetta qualche secondo e riprova. |
 | «GitHub ha ricevuto troppe richieste. Riprova tra … minuti» | Aspetta i minuti indicati. |
-| **«Pubblicazione in corso…»** | Normale: 2–5 minuti. Puoi continuare a lavorare. Se dura più di 15 minuti, avvisa Eva. |
+| **«Pubblicazione in corso…»** | Normale: 1–3 minuti. Puoi continuare a lavorare. Se dura più di 15 minuti, avvisa Eva. |
 | «Problema nell'ultimo aggiornamento» | Le tue modifiche sono salvate. Avvisa Eva (vede i **Dettagli** e riceve un'e-mail da GitHub). |
 | La borsa non si vede sul sito dopo «Fatto!» | Aspetta «Online ✓», poi ricarica la pagina del sito (a volte due volte). |
 | Il sito chiede una password («Il sito è in anteprima») | Normale prima del lancio: chiedi a Eva la password dell'anteprima e spunta «Ricordami». |

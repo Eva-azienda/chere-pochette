@@ -24,18 +24,23 @@ sync, and what to do when something goes wrong. No server is involved — everyt
 
 | Trigger | What happens |
 |---|---|
-| **push to `main`** (admin save, edit on github.com, bot commit not included) | tests → sync → build → gate → deploy (≈ 3–5 min) |
+| **push to `main`** (admin save, edit on github.com, bot commit not included) | tests → sync → build → gate → deploy (≈ 1 min; ≈ 3.5 min when the image cache is rebuilt) |
 | **every 10 minutes** (cron) | tests → sync; build + deploy **only** if the sync changed something or the latest commit is not online yet |
 | **Run workflow** (Actions → Deploy), the admin's **Aggiorna vendite ora**, or `gh workflow run deploy.yml` | like a push |
 
 Steps of the `build` job: checkout of the **latest** `main` → Node 22 → `npm ci` → **`npm test`** → read Pages settings
 (`SITE_URL` = `https://cherepochette.ch`, `BASE_PATH` = `/`) → **Zahls sync** (`continue-on-error`) → commit
-`chore(inventory): sync with Zahls` if needed (3 push attempts with rebase) → decide → `npm run build` →
-**Password gate (preview)** → upload. The `deploy` job publishes to Pages and moves the git tag **`deployed`** to the
+`chore(inventory): sync with Zahls` if needed (3 push attempts with rebase) → decide → restore image cache →
+`npm run build` → prune + save image cache → **Password gate (preview)** → upload. The `deploy` job publishes to Pages and moves the git tag **`deployed`** to the
 published commit (used by the cron to know what is online — do not use that tag for anything else).
 
 - Runs never overlap and are never cancelled halfway (`concurrency: deploy`).
 - A broken data file fails the build: the **previous version stays online**.
+- **Image cache** (since 30.10.2026): Astro's optimized brand/team images (~320 AVIF/WebP/JPEG files,
+  `node_modules/.astro/assets`) are kept in the GitHub Actions cache. A normal run reuses them (the build takes
+  seconds instead of ~2.5 min). Bag photos from the admin are pre-sized and never touch this cache. The cache is
+  rebuilt by itself after a change to `package-lock.json` or `astro.config.mjs`; to force a rebuild, change `v1`
+  to `v2` in the "Image cache key" step of `deploy.yml`.
 - A failed Zahls sync never blocks publishing; the run is still marked red at the end so someone looks at it.
 - Permissions are minimal per job (`permissions: {}` by default).
 
