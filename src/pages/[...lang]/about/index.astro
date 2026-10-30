@@ -28,7 +28,7 @@ const values = list<{ title: string; text: string }>('about.values.items');
 
   <!-- How it began (YES) -->
   <section class="section section--tight" aria-labelledby="born">
-    <div class="container container--narrow center stack">
+    <div class="container container--narrow center-md stack">
       <p class="chapter">01</p>
       <h2 id="born">{t('about.born.title')}</h2>
       {p('born').map((text) => <p>{text}</p>)}
@@ -101,10 +101,10 @@ const values = list<{ title: string; text: string }>('about.values.items');
 
   <!-- The thread in the logo -->
   <section class="section" aria-labelledby="thread">
-    <div class="container container--narrow center stack">
+    <div class="container container--narrow center-md stack">
       <p class="chapter">06</p>
       <h2 id="thread">{t('about.thread.title')}</h2>
-      <ThreadDivider class="thread-big" />
+      <ThreadDivider class="thread-big" align="responsive" />
       {p('thread').map((text) => <p>{text}</p>)}
     </div>
   </section>
@@ -149,8 +149,9 @@ const values = list<{ title: string; text: string }>('about.values.items');
     color: var(--c-bordeaux);
   }
 
+  /* same shapes as the other photos: landscape on phones, wide band from 48rem */
   .women__media {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 3;
   }
 
   .women__media :global(picture) {
@@ -179,7 +180,7 @@ const values = list<{ title: string; text: string }>('about.values.items');
     font-size: var(--fs-3xl);
   }
 
-  .center :global(.thread-big svg) {
+  .stack :global(.thread-big svg) {
     width: min(100%, 20rem);
   }
 

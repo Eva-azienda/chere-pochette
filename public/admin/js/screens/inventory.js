@@ -2,7 +2,7 @@
  * Inventory home: publish status, online-payments status, tabs In vendita / Vendute / Nascoste,
  * "Esporta CSV", list of bags, "Aggiorna vendite ora" and the sticky "+ Nuova borsa" button.
  */
-import { h, icon, topbar, stickyBar, photoThumb, formatPrice, soldLine, labels, setChildren, toast } from '../ui.js';
+import { h, icon, topbar, stickyBar, photoThumb, formatPrice, formatNumber, soldLine, labels, setChildren, toast } from '../ui.js';
 import { inventoryCsv, csvFilename } from '../csv.js';
 
 export const TABS = [
@@ -104,8 +104,7 @@ export function renderInventory(app) {
     h(
       'main',
       { class: 'content' },
-      deployEl,
-      payEl,
+      h('div', { class: 'status-lines' }, deployEl, payEl),
       tabsEl,
       exportEl,
       listEl,
@@ -135,7 +134,7 @@ export function renderInventory(app) {
             },
           },
           h('span', { class: 'tab-label' }, tab.label),
-          h('span', { class: 'tab-count' }, `(${groups[tab.id].length})`),
+          h('span', { class: 'tab-count' }, String(groups[tab.id].length)),
         ),
       ),
     );
@@ -152,9 +151,13 @@ export function renderInventory(app) {
         h(
           'div',
           { class: 'card-body' },
-          h('p', { class: 'card-title' }, L.title(p)),
-          h('p', { class: 'card-price' }, formatPrice(p.price)),
+          // "N° 012 · Belle" on one line, the colour (with its swatch) below: no awkward wrapping
+          h('p', { class: 'card-title' }, `${formatNumber(p.number)} · ${L.model(p.model)}`),
+          h('p', { class: 'card-meta' },
+            h('span', { class: 'swatch swatch-sm', 'aria-hidden': 'true', style: { background: L.colourHex(p.colour) } }),
+            L.colour(p.colour)),
           p.status === 'sold' ? h('p', { class: 'card-meta' }, soldLine(p)) : null,
+          h('p', { class: 'card-price' }, formatPrice(p.price)),
           p.sample ? h('span', { class: 'tag' }, 'Esempio') : null,
         ),
         icon('chevron', 'icon card-chevron'),

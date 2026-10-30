@@ -190,6 +190,11 @@ const firstPhoto = steps.findIndex((step) => photos[step.id]);
       gap: var(--s-7);
     }
 
+    /* every photo gets the same column width, on the left or on the right */
+    .step:nth-child(even) .step__body {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    }
+
     .step:nth-child(even) .step__media {
       order: 2;
     }

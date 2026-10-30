@@ -25,12 +25,14 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
 <footer class="footer on-dark">
   {
     newsletter && (
-      <section class="container footer__nl" aria-labelledby="footer-nl-title">
-        <div class="footer__nl-text">
-          <h2 id="footer-nl-title" class="footer__nl-title">{t('newsletter.title')}</h2>
-          <p>{t('newsletter.text')}</p>
+      <section class="container" aria-labelledby="footer-nl-title">
+        <div class="footer__nl">
+          <div class="footer__nl-text">
+            <h2 id="footer-nl-title" class="footer__nl-title">{t('newsletter.title')}</h2>
+            <p>{t('newsletter.text')}</p>
+          </div>
+          <NewsletterForm lang={lang} id="footer-nl" tone="dark" />
         </div>
-        <NewsletterForm lang={lang} id="footer-nl" tone="dark" />
       </section>
     )
   }
@@ -51,22 +53,27 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
 
     <nav class="footer__col" aria-labelledby="footer-links-title">
       <h2 id="footer-links-title" class="footer__title">{t('footer.linksTitle')}</h2>
-      <ul role="list">
-        {
-          links.map((key) => (
-            <li>
-              <a href={localePath(lang, `${key}/`)}>{t(`nav.${key}`)}</a>
-            </li>
-          ))
-        }
-        {
-          (['impressum', 'privacy', 'terms'] as const).map((id) => (
-            <li>
-              <a href={localePath(lang, `legal/#${id}`)}>{t(`legal.toc.${id}`)}</a>
-            </li>
-          ))
-        }
-      </ul>
+      <!-- Two short lists side by side: the pages, then the legal texts. -->
+      <div class="footer__lists">
+        <ul role="list">
+          {
+            links.map((key) => (
+              <li>
+                <a href={localePath(lang, `${key}/`)}>{t(`nav.${key}`)}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <ul role="list">
+          {
+            (['impressum', 'privacy', 'terms'] as const).map((id) => (
+              <li>
+                <a href={localePath(lang, `legal/#${id}`)}>{t(`legal.toc.${id}`)}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </nav>
 
     <div class="footer__col">
@@ -89,17 +96,19 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
     </div>
   </div>
 
-  <div class="container footer__bottom">
-    <p>{t('footer.yes')}</p>
-    <p>{t('footer.copyright', { year })}</p>
-    <p>{t('footer.privacyNote')}</p>
+  <div class="container">
+    <div class="footer__bottom">
+      <p>{t('footer.yes')}</p>
+      <p>{t('footer.copyright', { year })}</p>
+      <p>{t('footer.privacyNote')}</p>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
     margin-top: auto;
-    padding-top: var(--s-8);
+    padding-top: var(--s-7);
     padding-bottom: max(var(--s-6), env(safe-area-inset-bottom));
     background: var(--c-plum);
     color: var(--c-ivory);
@@ -121,8 +130,8 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
   .footer__nl {
     display: grid;
     gap: var(--s-5);
-    padding-bottom: var(--s-7);
-    margin-bottom: var(--s-7);
+    padding-bottom: var(--s-6);
+    margin-bottom: var(--s-6);
     border-bottom: 1px solid color-mix(in srgb, var(--c-ivory) 20%, transparent);
   }
 
@@ -143,7 +152,7 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
 
   .footer__grid {
     display: grid;
-    gap: var(--s-7);
+    gap: var(--s-6);
   }
 
   .footer__brand {
@@ -173,7 +182,18 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
 
   .footer__col ul {
     display: grid;
+    align-content: start;
+  }
+
+  .footer__col > ul,
+  .footer__lists {
     margin-top: var(--s-2);
+  }
+
+  .footer__lists {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--s-4);
   }
 
   .footer__col a {
@@ -181,6 +201,7 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
     align-items: center;
     min-width: var(--tap);
     min-height: var(--tap);
+    line-height: 1.3;
     text-decoration: none;
   }
 
@@ -201,7 +222,7 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
   .footer__bottom {
     display: grid;
     gap: var(--s-1);
-    margin-top: var(--s-7);
+    margin-top: var(--s-6);
     padding-top: var(--s-5);
     border-top: 1px solid color-mix(in srgb, var(--c-ivory) 20%, transparent);
     font-size: var(--fs-xs);
@@ -215,9 +236,14 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
       column-gap: var(--s-8);
     }
 
+    /* Tablets: the brand on its own row, then links and contacts side by side. */
     .footer__grid {
-      grid-template-columns: 1.4fr 1fr 1.2fr;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
       column-gap: var(--s-6);
+    }
+
+    .footer__brand {
+      grid-column: 1 / -1;
     }
 
     .footer__bottom {
@@ -227,6 +253,24 @@ const links = ['shop', 'about', 'process', 'team', 'info'] as const;
 
     .footer__bottom p:last-child {
       text-align: right;
+    }
+  }
+
+  /* Large screens: brand | links (two short lists) | contacts. */
+  @media (min-width: 64rem) {
+    .footer__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1.1fr);
+    }
+
+    .footer__brand {
+      grid-column: auto;
+    }
+  }
+
+  /* Mouse and trackpad: links can sit closer together (still well above the 24px minimum). */
+  @media (min-width: 64rem) and (pointer: fine) {
+    .footer__col a {
+      min-height: 2.25rem;
     }
   }
 </style>

@@ -140,7 +140,8 @@ export function renderNotConfigured(app, { error = '' } = {}) {
         { class: 'steps' },
         h('li', {}, 'Apri il Terminale nella cartella del sito.'),
         h('li', {}, 'Esegui ', h('code', {}, 'npm run admin:setup'), ' e inserisci e-mail, password e token GitHub.'),
-        h('li', {}, 'Ricarica questa pagina e accedi con e-mail e password.'),
+        // U+2011 (non-breaking hyphen): "e‑mail" never splits across two lines
+        h('li', {}, 'Ricarica questa pagina e accedi con e\u2011mail e password.'),
       ),
       h('p', { class: 'hint' }, 'Per usarlo anche dal telefono, pubblica il file creato (commit e push di ',
         h('code', {}, 'public/admin/auth.json'), ').'),

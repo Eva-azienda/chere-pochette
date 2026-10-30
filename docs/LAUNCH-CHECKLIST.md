@@ -79,6 +79,11 @@ Online payment can be switched on before or after the launch; until then the sho
 
 ## Go-live
 
+> **Decision (30.10.2026): launch only when online payments work.** The preview password stays on until the Zahls
+> verification is approved, a plan is chosen and the CHF test purchase + refund has passed. Then switch checkout on
+> and delete `SITE_PASSWORD` in the same session, so the public site starts with "Paga con Zahls".
+
+
 - [ ] Test on an iPhone and an Android phone: home, shop, product, order, info, team, language switch (team)
 - [ ] Accessibility and legal check by a coach (keyboard, contrast, legal pages) (CEO)
 - [ ] **Launch: delete `SITE_PASSWORD`** (Settings → Secrets and variables → Actions) → Actions → **Deploy** →

@@ -172,7 +172,7 @@ const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${produ
         )
       }
 
-      <div class="accordions">
+      <div class="accordion">
         <details open>
           <summary>{t('product.dimensions.title')}</summary>
           <div class="accordion__body">
@@ -396,43 +396,7 @@ const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${produ
     color: var(--c-plum);
   }
 
-  /* ---------- Accordions ---------- */
-  .accordions {
-    border-top: 1px solid var(--c-line);
-  }
-
-  details {
-    border-bottom: 1px solid var(--c-line);
-  }
-
-  summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 3.5rem;
-    font-weight: 600;
-    color: var(--c-plum);
-    cursor: pointer;
-    list-style: none;
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
-  }
-
-  summary::after {
-    content: '+';
-    font-family: var(--f-display);
-    font-size: 1.5rem;
-    font-weight: 400;
-    line-height: 1;
-    transition: transform var(--dur) var(--ease);
-  }
-
-  details[open] summary::after {
-    transform: rotate(45deg);
-  }
-
+  /* ---------- Accordions (.accordion in global.css) ---------- */
   .accordion__body {
     padding-bottom: var(--s-5);
     font-size: var(--fs-sm);

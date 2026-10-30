@@ -11,7 +11,6 @@ import Icon from '../../../components/Icon.astro';
 import ModelsShowcase from '../../../components/ModelsShowcase.astro';
 import PageHeader from '../../../components/PageHeader.astro';
 import ProductCard from '../../../components/ProductCard.astro';
-import ThreadDivider from '../../../components/ThreadDivider.astro';
 import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
 import { getAvailableProducts, models, site } from '../../../lib/catalog';
 
@@ -61,10 +60,10 @@ const filterCss = models
           <span id="all" class="shop-anchor" />
           {models.map((m) => <span id={m.id} class="shop-anchor" />)}
 
-          <nav class="shop-chips" aria-label={t('shop.filter.label')}>
-            <a href="#all" aria-current="true" data-filter="all">{t('shop.filter.all')}</a>
+          <nav class="chips shop-chips" aria-label={t('shop.filter.label')}>
+            <a class="chip" href="#all" aria-current="true" data-filter="all">{t('shop.filter.all')}</a>
             {models.map((m) => (
-              <a href={`#${m.id}`} data-filter={m.id}>
+              <a class="chip" href={`#${m.id}`} data-filter={m.id}>
                 {m.name}
               </a>
             ))}
@@ -92,9 +91,8 @@ const filterCss = models
     }
   </section>
 
-  <section class="section">
-    <div class="container container--narrow center unique">
-      <ThreadDivider />
+  <section class="section section--tight">
+    <div class="container container--narrow center-md unique">
       <h2 class="h3">{t('shop.unique.title')}</h2>
       <p>{t('shop.unique.text')}</p>
     </div>
@@ -159,53 +157,16 @@ const filterCss = models
     scroll-margin-top: calc(var(--header-h) + var(--s-4));
   }
 
-  .shop-chips {
-    display: flex;
-    gap: var(--s-2);
-    margin-inline: calc(var(--gutter) * -1);
-    padding: 0 var(--gutter) var(--s-2);
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .shop-chips::-webkit-scrollbar {
-    display: none;
-  }
-
-  .shop-chips a {
-    display: inline-flex;
-    align-items: center;
-    flex-shrink: 0;
-    min-height: var(--tap);
-    padding-inline: var(--s-5);
-    border: 1px solid var(--c-line-strong);
-    border-radius: var(--radius-pill);
-    font-size: var(--fs-sm);
-    font-weight: 500;
-    color: var(--c-plum);
-    text-decoration: none;
-    white-space: nowrap;
-    transition:
-      background-color var(--dur) var(--ease),
-      color var(--dur) var(--ease),
-      border-color var(--dur) var(--ease);
-  }
-
-  .shop-chips a:hover {
-    border-color: var(--c-plum);
-  }
-
-  .shop-chips a[aria-current='true'] {
-    background: var(--c-plum);
-    border-color: var(--c-plum);
-    color: var(--c-ivory);
-  }
-
-  /* With JavaScript the script manages the chips; the no-JS :target colours must not interfere. */
+  /* Chips: see .chips / .chip in global.css.
+     With JavaScript the script manages the chips; the no-JS :target colours must not interfere. */
   .shop.is-enhanced .shop-chips a:not([aria-current='true']) {
     background: transparent !important;
     color: var(--c-plum) !important;
     border-color: var(--c-line-strong) !important;
+  }
+
+  .shop.is-enhanced .shop-chips a:not([aria-current='true']):hover {
+    border-color: var(--c-plum) !important;
   }
 
   .shop-count {
@@ -220,15 +181,12 @@ const filterCss = models
 
   .unique {
     display: grid;
-    justify-items: center;
-    gap: var(--s-4);
+    gap: var(--s-3);
   }
 
   @media (min-width: 48rem) {
-    .shop-chips {
-      flex-wrap: wrap;
-      margin-inline: 0;
-      padding-inline: 0;
+    .unique {
+      justify-items: center;
     }
 
     .product-grid {

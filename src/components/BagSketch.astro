@@ -9,16 +9,27 @@
  * the needle also has s-needle).
  * To move a note, edit NOTES below (coordinates in the SVG's viewBox).
  * With reduced motion the drawing is simply shown complete.
+ *
+ * variant="photo" (default): the real Jolie bag in rosa antico (assets/brand/hero-jolie.png, a transparent
+ * cut-out of model-jolie.png) replaces the drawn outline; circle, thread, needle and notes stay.
+ * variant="sketch": the original line drawing. Switch in src/pages/[...lang]/index.astro.
  */
+import { Image } from 'astro:assets';
 import sketch from '../assets/brand/bag-sketch.svg?raw';
+import jolie from '../assets/brand/hero-jolie.png';
+import taxonomy from '../data/taxonomy.json';
 import { useTranslations, type Lang } from '../lib/i18n';
 
 interface Props {
   lang: Lang;
+  variant?: 'photo' | 'sketch';
 }
 
-const { lang } = Astro.props;
+const { lang, variant = 'photo' } = Astro.props;
 const { t } = useTranslations(lang);
+const photo = variant === 'photo';
+const rosaAntico = taxonomy.colours.find((c) => c.id === 'rosa-antico');
+const label = photo ? `Jolie · ${rosaAntico?.[lang] ?? ''}` : t('images.bagSketch');
 
 const VIEWBOX = { width: 480, height: 520 };
 // x/y: the point on the drawing the note's hairline touches; side: where the text sits.
@@ -31,7 +42,20 @@ const NOTES: { key: 'yarn' | 'handle' | 'unique'; x: number; y: number; side: 't
 const svg = sketch.replace('<svg ', '<svg class="sketch__svg" aria-hidden="true" focusable="false" ');
 ---
 
-<figure class="sketch" role="img" aria-label={t('images.bagSketch')}>
+<figure class:list={['sketch', { 'sketch--photo': photo }]} role="img" aria-label={label}>
+  {
+    photo && (
+      <Image
+        class="sketch__photo"
+        src={jolie}
+        widths={[320, 480, 640, 960]}
+        sizes="(min-width: 64rem) 26rem, 62vw"
+        alt=""
+        loading="eager"
+        fetchpriority="high"
+      />
+    )
+  }
   <Fragment set:html={svg} />
   <ul role="list" class="sketch__notes" aria-hidden="true">
     {
@@ -85,6 +109,53 @@ const svg = sketch.replace('<svg ', '<svg class="sketch__svg" aria-hidden="true"
 
     .sketch :global(path.s-needle) {
       stroke-width: 4;
+    }
+  }
+
+  /* ---------- Photo variant ----------
+     The bag photo sits where the drawn outline was (viewBox x 85–395, bottom ≈ 340 of 480×520),
+     so the thread still leaves from its bottom-left corner and the notes point at handle, side and thread. */
+  .sketch :global(.sketch__photo) {
+    position: absolute;
+    left: 17.7%;
+    top: 18.5%;
+    width: 64.6%;
+    height: auto;
+    filter: drop-shadow(0 14px 18px rgba(84, 21, 44, 0.16));
+    opacity: 0;
+    translate: 0 10px;
+    animation: photo-in 0.9s var(--ease) 0.15s forwards;
+  }
+
+  .sketch--photo :global(.s-main) {
+    display: none;
+  }
+
+  /* the thread starts drawing once the bag is in place (extra class: beats the drawing rules below) */
+  .sketch.sketch--photo :global(.s-thread) {
+    animation-delay: 0.9s;
+  }
+
+  .sketch.sketch--photo :global(.s-needle) {
+    animation-delay: 2s;
+  }
+
+  .sketch--photo .note {
+    animation-delay: 2.3s;
+  }
+
+  @keyframes photo-in {
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sketch :global(.sketch__photo) {
+      opacity: 1;
+      translate: none;
+      animation: none;
     }
   }
 

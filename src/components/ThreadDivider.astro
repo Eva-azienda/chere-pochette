@@ -4,9 +4,10 @@
  * Use it sparingly (one per page section at most) – it is an accent, not a pattern.
  *   <ThreadDivider />                 centred, bordeaux
  *   <ThreadDivider align="start" />   left-aligned
+ *   <ThreadDivider align="responsive" /> left on phones, centred from 48rem (inside .center-md text)
  */
 interface Props {
-  align?: 'center' | 'start';
+  align?: 'center' | 'start' | 'responsive';
   class?: string;
 }
 const { align = 'center', class: className } = Astro.props;
@@ -36,8 +37,15 @@ const { align = 'center', class: className } = Astro.props;
     justify-content: center;
   }
 
-  .thread--start {
+  .thread--start,
+  .thread--responsive {
     justify-content: flex-start;
+  }
+
+  @media (min-width: 48rem) {
+    .thread--responsive {
+      justify-content: center;
+    }
   }
 
   .thread svg {

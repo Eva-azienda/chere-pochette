@@ -1,5 +1,5 @@
 /** Success screen after a save: "Fatto! La borsa sarà online tra circa 2 minuti". */
-import { h, icon, topbar, stickyBar, formatNumber } from '../ui.js';
+import { h, icon, stickyBar, formatNumber } from '../ui.js';
 
 const MESSAGES = {
   create: (n) => `La borsa ${n} sarà online tra circa 2 minuti.`,
@@ -20,15 +20,15 @@ export function renderDone(app, { product, action }) {
   const n = formatNumber(product.number);
   const message = (MESSAGES[action] || MESSAGES.edit)(n, product);
   const live = action !== 'delete' && product.status === 'available';
+  // No top bar: it only repeated "Fatto!" (the big title below is the page heading).
   const el = h(
     'div',
     { class: 'screen' },
-    topbar({ title: 'Fatto!', subtitle: 'Inventario' }),
     h(
       'main',
       { class: 'content done' },
       h('div', { class: 'done-check', 'aria-hidden': 'true' }, icon('check')),
-      h('h2', { class: 'done-title' }, 'Fatto!'),
+      h('h1', { class: 'done-title' }, 'Fatto!'),
       h('p', { class: 'done-text' }, message),
       live
         ? h(

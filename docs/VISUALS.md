@@ -40,7 +40,8 @@ it: both are in the original photos and were not painted out.
 |---|---|
 | `src/assets/brand/wordmark.svg` | **Header and menu**: one-line "Chère Pochette" in Bodoni Moda italic, converted to outlines (no font needed), coloured with `currentColor`. Not produced by the script: the master copies are `02_Branding/logo/wordmark-bordeaux.svg` and `wordmark-ivory.svg` |
 | `src/assets/brand/logo-bordeaux.png` (1306×685) | Spare full logo (no longer in the home hero, which now shows `bag-sketch.svg`) |
-| `src/assets/brand/bag-sketch.svg` | Home hero: animated line drawing of a bag (`BagSketch.astro`) |
+| `src/assets/brand/hero-jolie.png` | Home hero: Jolie rosa antico, transparent cut-out of `model-jolie.png` (background removed by flood-fill), shown on the powder circle with thread + notes (`BagSketch.astro`, default `variant="photo"`) |
+| `src/assets/brand/bag-sketch.svg` | Home hero alternative: line drawing of a bag (`<BagSketch variant="sketch" />`); thread/needle paths are also used by the photo variant |
 | `src/assets/team/group.jpg`, `src/assets/team/<slug>.jpg` | Team: group photo (home + team page) and 7 portraits 296×370, cut from the Instagram post of 26.10.2026 (originals in Drive `03_Media/originals/instagram-team-post-2026-10-26/`) |
 | `src/assets/brand/logo-ivory.png` | Footer (on the dark plum `#54152C` background) |
 | `public/brand/logo-bordeaux.png`, `logo-ivory.png` (800×420) | Admin login (`logo-bordeaux.png`); both available for e-mails or anything outside Astro |

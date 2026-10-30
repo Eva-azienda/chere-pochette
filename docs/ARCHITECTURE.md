@@ -45,8 +45,10 @@ GitHub Pages serves the site under the domain registered at Hostpoint, and Zahls
 
 - **Header**: one-line wordmark "Chère Pochette" (`src/assets/brand/wordmark.svg`, Bodoni Moda italic converted to
   outlines, coloured with `currentColor`) top-left; compact **IT/DE/EN** selector (`LanguageSwitcher.astro`).
-- **Home hero**: headline in the page's own language (`home.hero.subtitle`) + an animated line drawing of a bag with
-  handwritten notes (`src/components/BagSketch.astro`, `src/assets/brand/bag-sketch.svg`), then a scrolling marquee band;
+- **Home hero**: headline in the page's own language (`home.hero.subtitle`) + the Jolie bag in rosa antico on a powder
+  circle (transparent cut-out `src/assets/brand/hero-jolie.png`) with an animated thread, needle and handwritten notes
+  (`src/components/BagSketch.astro`; `variant="sketch"` in `index.astro` brings back the line drawing
+  `bag-sketch.svg`), then a scrolling marquee band;
   the English tagline appears as a quote on larger screens. The header wordmark is always visible.
 - **Team**: group photo on the home team section and the team page; round portraits in the org chart and a 4:5 portrait
   on each member page (`src/assets/team/`, `src/lib/team-photos.ts`, `TeamAvatar.astro`; initials as fallback).

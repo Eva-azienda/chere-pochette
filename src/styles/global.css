@@ -93,8 +93,8 @@ dd {
   display: none !important;
 }
 
-ul[role='list'],
-ol[role='list'] {
+/* :where() keeps this reset weak, so a class on the list (e.g. .chips) can set its own padding. */
+:where(ul, ol)[role='list'] {
   list-style: none;
   padding: 0;
 }
@@ -257,6 +257,32 @@ strong {
   justify-items: center;
 }
 
+/* Alignment rule for the whole site:
+   - page headers, the home hero and short call-to-action bands are centred at every size;
+   - section headings (.heading.center) and text chapters (.center-md) are centred from
+     tablets up, but on phones they read from the left edge like the text below them. */
+@media (max-width: 47.999rem) {
+  .heading.center {
+    justify-items: start;
+    text-align: left;
+  }
+
+  .heading.center p {
+    margin-inline: 0;
+  }
+}
+
+@media (min-width: 48rem) {
+  .center-md {
+    text-align: center;
+  }
+
+  .center-md > p,
+  .center-md .lead {
+    margin-inline: auto;
+  }
+}
+
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-flex;
@@ -323,6 +349,74 @@ strong {
 
 .center .btn-row {
   justify-content: center;
+}
+
+/* Phones: the buttons of a row are stacked, all the same width (like the hero button). */
+@media (max-width: 47.999rem) {
+  .btn-row {
+    flex-direction: column;
+    align-items: stretch;
+    width: min(100%, 20rem);
+  }
+
+  .center .btn-row {
+    margin-inline: auto;
+  }
+}
+
+/* ---------- Chips: filters and in-page navigation ----------
+   Phones: one row you can swipe; from 48rem they wrap. The current one is filled. */
+.chips {
+  display: flex;
+  gap: var(--s-2);
+  margin-inline: calc(var(--gutter) * -1);
+  padding: 0 var(--gutter) var(--s-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: var(--tap);
+  padding-inline: var(--s-5);
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-plum);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--c-plum);
+  color: var(--c-plum);
+}
+
+.chip[aria-current='true'] {
+  background: var(--c-plum);
+  border-color: var(--c-plum);
+  color: var(--c-ivory);
+}
+
+@media (min-width: 48rem) {
+  .chips {
+    flex-wrap: wrap;
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+  }
 }
 
 /* Text link with a small arrow, e.g. "Scopri il processo →" */
@@ -419,15 +513,23 @@ strong {
   max-width: 30rem;
 }
 
-/* ---------- Image + text features ---------- */
+/* ---------- Image + text features ----------
+   Phones: a landscape photo above the text, so one photo never fills the whole screen.
+   From 48rem: portrait photo and text side by side. */
 .feature {
   display: grid;
-  gap: var(--s-6);
+  gap: var(--s-5);
   align-items: center;
 }
 
 .feature__media {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
+}
+
+@media (min-width: 48rem) {
+  .feature__media {
+    aspect-ratio: 4 / 5;
+  }
 }
 
 .feature__media picture,
@@ -498,6 +600,55 @@ strong {
 }
 
 .prose li::marker {
+  color: var(--c-bordeaux);
+}
+
+/* ---------- Accordions (<details>): product page, FAQ ----------
+   <div class="accordion"><details><summary>…</summary>…</details></div>
+   A thin drawn plus that turns into a minus when open. */
+.accordion {
+  border-top: 1px solid var(--c-line);
+}
+
+.accordion details {
+  border-bottom: 1px solid var(--c-line);
+}
+
+.accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  min-height: 3.5rem;
+  padding-block: var(--s-3);
+  font-weight: 600;
+  color: var(--c-plum);
+  cursor: pointer;
+  list-style: none;
+  transition: color var(--dur) var(--ease);
+}
+
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion summary::after {
+  content: '';
+  flex-shrink: 0;
+  width: 0.875rem;
+  height: 0.875rem;
+  background:
+    linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+  transition: transform var(--dur) var(--ease);
+}
+
+.accordion details[open] > summary::after {
+  background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat;
+  transform: rotate(180deg);
+}
+
+.accordion summary:hover {
   color: var(--c-bordeaux);
 }
 

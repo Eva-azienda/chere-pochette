@@ -226,7 +226,8 @@ export function confirmSheet({ title, text, confirmLabel, cancelLabel = 'Annulla
     text,
     buttons: [
       { label: confirmLabel, value: true, className: danger ? 'btn-danger' : 'btn-primary' },
-      { label: cancelLabel, value: false, className: 'btn-ghost' },
+      // a real (neutral) button: in a destructive question "Annulla" must look as tappable as the confirm
+      { label: cancelLabel, value: false, className: 'btn-secondary' },
     ],
   });
 }

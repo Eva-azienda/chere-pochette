@@ -335,9 +335,10 @@ const allOnline = options.every((o) => o.online);
       box-shadow: 0 -8px 24px rgba(84, 21, 44, 0.06);
     }
 
-    /* Leave room at the end of the page so the bar never hides content. */
-    :global(body.has-buybar) {
-      padding-bottom: calc(var(--buybar-h) + env(safe-area-inset-bottom));
+    /* Leave room at the end of the page so the bar never hides content. The room is added
+       inside the footer, so the page ends in plum behind the bar instead of an ivory strip. */
+    :global(body.has-buybar .footer) {
+      padding-bottom: calc(var(--s-6) + var(--buybar-h) + env(safe-area-inset-bottom));
     }
   }
 
