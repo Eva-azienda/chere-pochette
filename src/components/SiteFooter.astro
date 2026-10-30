@@ -1,7 +1,8 @@
 ---
 /**
- * Footer on dark plum, kept light: logo + one line about us, the page links in one row,
- * e-mail / Instagram / languages, and a thin bottom bar with © · YES and the legal links.
+ * Footer on dark plum, kept light: logo + one line about us, e-mail / Instagram / languages,
+ * and a thin bottom bar with © · YES and the legal links. No page links: they are in the
+ * header menu (on phones they wrapped onto several lines).
  * (No newsletter for now — NewsletterForm.astro stays in the project for later.)
  */
 import { Image } from 'astro:assets';
@@ -20,31 +21,16 @@ interface Props {
 const { lang, path } = Astro.props;
 const { t } = useTranslations(lang);
 const year = new Date().getFullYear();
-const links = ['shop', 'about', 'process', 'team', 'info'] as const;
 const legal = ['impressum', 'privacy', 'terms'] as const;
 ---
 
 <footer class="footer on-dark">
   <div class="container footer__inner">
-    <div class="footer__top">
-      <div class="footer__brand">
-        <a href={localePath(lang)} class="footer__logo">
-          <Image src={logoIvory} widths={[136, 272, 408]} sizes="136px" alt={t('a11y.homeLink')} loading="lazy" />
-        </a>
-        <p>{t('footer.about')}</p>
-      </div>
-
-      <nav aria-label={t('footer.linksTitle')}>
-        <ul role="list" class="footer__nav">
-          {
-            links.map((key) => (
-              <li>
-                <a href={localePath(lang, `${key}/`)}>{t(`nav.${key}`)}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
+    <div class="footer__brand">
+      <a href={localePath(lang)} class="footer__logo">
+        <Image src={logoIvory} widths={[136, 272, 408]} sizes="136px" alt={t('a11y.homeLink')} loading="lazy" />
+      </a>
+      <p>{t('footer.about')}</p>
     </div>
 
     <div class="footer__meta">
@@ -108,12 +94,7 @@ const legal = ['impressum', 'privacy', 'terms'] as const;
     gap: var(--s-5);
   }
 
-  /* Logo + one sentence, then the page links */
-  .footer__top {
-    display: grid;
-    gap: var(--s-4);
-  }
-
+  /* Logo + one sentence */
   .footer__brand {
     display: grid;
     gap: var(--s-3);
@@ -130,7 +111,6 @@ const legal = ['impressum', 'privacy', 'terms'] as const;
   }
 
   /* One row of links that wraps; each link keeps a 48px tap height on touch screens. */
-  .footer__nav,
   .footer__contact,
   .footer__legal {
     display: flex;
@@ -138,7 +118,6 @@ const legal = ['impressum', 'privacy', 'terms'] as const;
     column-gap: var(--s-5);
   }
 
-  .footer__nav a,
   .footer__contact a,
   .footer__legal a {
     display: inline-flex;
@@ -185,18 +164,8 @@ const legal = ['impressum', 'privacy', 'terms'] as const;
     opacity: 0.85;
   }
 
-  /* Desktop: logo left, links right on the same line */
+  /* Desktop: languages flush right */
   @media (min-width: 64rem) {
-    .footer__top {
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: end;
-      column-gap: var(--s-7);
-    }
-
-    .footer__nav {
-      justify-content: flex-end;
-    }
-
     .footer :global(.footer__lang) {
       margin-left: 0;
       margin-right: calc(var(--s-3) * -1);
@@ -205,7 +174,6 @@ const legal = ['impressum', 'privacy', 'terms'] as const;
 
   /* Mouse and trackpad: links can sit closer together (still above the 24px minimum). */
   @media (pointer: fine) {
-    .footer__nav a,
     .footer__contact a,
     .footer__legal a {
       min-height: 2.25rem;
