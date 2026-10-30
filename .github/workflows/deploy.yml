@@ -75,6 +75,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Generating the ~300 optimized images (AVIF/WebP sizes of every photo) takes ~2 minutes;
+      # the pages themselves build in under a second, so the images are cached between runs
+      # (steps "… image cache" below). Astro names each one after the hash of its source photo and
+      # resize options, but not of the Astro/sharp versions or the image settings: the cache is
+      # therefore tied to package-lock.json + astro.config.mjs (a change = one full rebuild).
+      # Computed once, right after "npm ci", so restore and save always agree. Bump v1 to flush.
+      - name: Image cache key
+        id: image-prefix
+        run: echo "prefix=astro-images-v1-${{ hashFiles('package-lock.json', 'astro.config.mjs') }}-" >> "$GITHUB_OUTPUT"
+
       - name: Run tests
         run: npm test
 
@@ -137,12 +147,51 @@ jobs:
             echo "Scheduled check: nothing changed and the site is up to date – nothing to deploy."
           fi
 
+      # Restored after "npm ci" (which empties node_modules); the newest saved set wins. Runs that
+      # publish nothing only look the entry up (no download): that keeps it from expiring during
+      # quiet weeks (GitHub drops caches unused for 7 days).
+      - name: Restore image cache
+        id: image-cache
+        uses: actions/cache/restore@v6
+        with:
+          path: node_modules/.astro/assets
+          key: ${{ steps.image-prefix.outputs.prefix }}${{ github.run_id }}
+          restore-keys: ${{ steps.image-prefix.outputs.prefix }}
+          lookup-only: ${{ steps.decide.outputs.deploy != 'true' }}
+
       - name: Build site
         if: steps.decide.outputs.deploy == 'true'
         env:
           SITE_URL: ${{ steps.pages.outputs.origin }}
           BASE_PATH: ${{ steps.pages.outputs.base_path }}/
         run: npm run build
+
+      # Keeps only the images this build used (photos of deleted bags drop out, so the cache does
+      # not grow forever) and names the set after the hash of its file names. Saved again only when
+      # the set changed (new photos, new sizes); every save gets its own key (run id + attempt), so
+      # the newest entry is always the latest set, even after going back to an earlier one.
+      - name: Prune image cache
+        id: image-set
+        if: steps.decide.outputs.deploy == 'true'
+        working-directory: node_modules/.astro/assets
+        env:
+          PREFIX: ${{ steps.image-prefix.outputs.prefix }}
+        run: |
+          shopt -s nullglob
+          for file in *; do
+            [ -e "${GITHUB_WORKSPACE}/dist/_astro/${file%.json}" ] || rm -f -- "$file"
+          done
+          set_id="${PREFIX}$(ls | sha256sum | cut -c1-16)-"
+          echo "set=${set_id}" >> "$GITHUB_OUTPUT"
+          echo "key=${set_id}${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
+          echo "$(ls | wc -l) cached images"
+
+      - name: Save image cache
+        if: steps.decide.outputs.deploy == 'true' && !startsWith(steps.image-cache.outputs.cache-matched-key, steps.image-set.outputs.set)
+        uses: actions/cache/save@v6
+        with:
+          path: node_modules/.astro/assets
+          key: ${{ steps.image-set.outputs.key }}
 
       # Preview phase: while the repository secret SITE_PASSWORD exists, every page is encrypted
       # behind a password (scripts/protect-site.mjs). Launch = delete the secret and redeploy.
