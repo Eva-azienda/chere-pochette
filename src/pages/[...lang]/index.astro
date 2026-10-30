@@ -36,6 +36,8 @@ const { t, list, pageMeta } = useTranslations(lang);
 
 // "Una seconda vita. Una borsa unica." → two lines, the second in italic.
 const titleLines = t('home.hero.title').split(/(?<=[.!?])\s+/);
+// "Pezzi unici, pronti a partire" → two lines, broken after the comma.
+const featuredTitleLines = t('home.featured.title').split(/(?<=,)\s+/);
 
 // Up to 6 bags. From 64rem: 4 columns, or 3 when that fills the rows better (3, 5 or 6 bags).
 const featured = (await getAvailableProducts()).slice(0, 6);
@@ -83,7 +85,9 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     <div class="container">
       <div class="heading featured__heading">
         <p class="eyebrow">{t('home.featured.eyebrow')}</p>
-        <h2 id="featured-title">{t('home.featured.title')}</h2>
+        <h2 id="featured-title" class="featured__title">
+          {featuredTitleLines.map((line) => <span>{line}</span>)}
+        </h2>
         <p>{t('home.featured.text')}</p>
       </div>
 
@@ -372,6 +376,10 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
   .featured__heading {
     margin-bottom: var(--s-5);
+  }
+
+  .featured__title span {
+    display: block;
   }
 
   /* phones: a little less space between the rows of cards */
