@@ -12,14 +12,15 @@ with fabric from broken umbrellas, crocheted together with Ukrainian women. **Ev
 | **Payments** | Zahls instance `cherepochette` → https://cherepochette.zahls.ch |
 | **Contact** | chere.pochette@sccbellinzona.ch · website lead: Eva Dall'Acqua (CTO) |
 | **Handover (Italian)** | [docs/HANDOVER.md](docs/HANDOVER.md) — start here if you are new |
+| **Changes with ChatGPT or another AI** | give it the repository link; it should read [AGENTS.md](AGENTS.md) first (what not to touch, where everything is) |
 
-## Status (29 October 2026)
+## Status (30 October 2026)
 
 | Area | State |
 |---|---|
 | Hosting | **Live** on GitHub Pages with the custom domain, HTTPS enforced, DNS at Hostpoint |
 | Visibility | **Preview**: every page is behind a password (StatiCrypt) while the repository secret `SITE_PASSWORD` exists. **Launch = delete that secret and re-run Deploy** ([OPERATIONS.md §3](docs/OPERATIONS.md#3-preview-password-gate)) |
-| Shop | 4 bags for sale (`cp-001`…`cp-004`). Online payment is **off** (`"checkout": {"enabled": false}`): product pages show **"Ordina via e-mail"** |
+| Shop | 3 bags for sale (`cp-002`…`cp-004`). Online payment is **on** (`"checkout": {"enabled": true}`, since 30.10.2026): every bag has its Zahls links, but the Zahls payment page stays offline until the account verification is approved |
 | Zahls | Instance, company profile and payment-page design done; connection check green. **Account verification (KYC) still open** (CFO); 30-day trial since 29.10.2026 → choose a plan before ~28.11.2026 |
 | Admin | Set up; access token valid until **29.10.2027** |
 | Tests | `npm test` → 94/94 passing |
@@ -109,7 +110,8 @@ npm test            # sync, admin and setup tests (no network)
 
 Code rules: read [CONTRACTS.md](CONTRACTS.md) and [src/README.md](src/README.md); build every internal link with
 `localePath()` / `assetPath()`; colours only from `src/styles/tokens.css`; design at 375 px first; never commit
-secrets or customer data (the repository is public). Every push to `main` is live in ≈ 3–5 minutes.
+secrets or customer data (the repository is public). Every push to `main` is live in ≈ 1–2 minutes.
+AI assistants: see [AGENTS.md](AGENTS.md).
 
 ## Editing content
 

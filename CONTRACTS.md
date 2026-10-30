@@ -98,6 +98,9 @@ Brand voice: elegant, feminine, positive, authentic, close to the customer; simp
 craftsmanship, sustainability, reuse, collaboration between women.
 
 ## File ownership (parallel agents — never edit files you don't own)
+
+> Historical: this table organised the agents that built the site in October 2026. It no longer applies;
+> for current rules see [AGENTS.md](AGENTS.md).
 | Area | Owner |
 |---|---|
 | `src/assets/brand/**`, `public/media/**`, `public/brand/**`, `public/favicon*`, `public/apple-touch-icon.png`, `public/og-image.jpg` | visuals |
