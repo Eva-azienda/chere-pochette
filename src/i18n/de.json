@@ -136,11 +136,9 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Häkeltaschen · Unikate",
-      "title": "Made to carry on",
-      "subtitle": "Von Hand gehäkelte Taschen aus geretteten Kleidern und Regenschirmen. Jede ist einzigartig – genau wie du.",
+      "title": "Jede ist einzigartig. Wie die Person, die sie trägt.",
+      "lead": "Von Hand gehäkelte Taschen aus dem Tessin, aus geretteten Kleidern und Regenschirmen.",
       "cta": "Taschen entdecken",
-      "ctaSecondary": "Unsere Geschichte",
       "notes": {
         "yarn": "Fettuccia aus geretteten Kleidern",
         "handle": "gehäkelter Henkel",
@@ -153,31 +151,6 @@
         "Made in Bellinzona"
       ]
     },
-    "intro": {
-      "eyebrow": "Die Idee",
-      "title": "Ein zweites Leben, Masche für Masche",
-      "text": "Kleider, die niemand mehr trägt, und kaputte Regenschirme werden zu eleganten, femininen Taschen. Wir fertigen sie von Hand, gemeinsam, eine nach der anderen."
-    },
-    "pillars": {
-      "title": "Drei Ideen, ein Faden",
-      "items": [
-        {
-          "id": "reuse",
-          "title": "Ein zweites Leben für Materialien",
-          "text": "Alte Kleider werden zu T-Shirt-Garn, kaputte Regenschirme zu Futter. Vergessene Materialien, bereit für einen Neuanfang."
-        },
-        {
-          "id": "handmade",
-          "title": "Von Hand gehäkelt",
-          "text": "Jede Tasche entsteht Masche für Masche, mit Geduld und Sorgfalt. Darum gleicht keine der anderen."
-        },
-        {
-          "id": "together",
-          "title": "Gemeinsam, unter Frauen",
-          "text": "Wir häkeln zusammen mit ukrainischen Frauen. Ein Faden, der Hände, Geschichten und Freundschaften verbindet."
-        }
-      ]
-    },
     "featured": {
       "eyebrow": "Im Shop",
       "title": "Unikate, bereit für ein neues Zuhause",
@@ -185,22 +158,10 @@
       "cta": "Alle Taschen ansehen",
       "empty": "Die nächsten Taschen entstehen gerade. Folge uns auf Instagram, um keine zu verpassen."
     },
-    "models": {
-      "eyebrow": "Die Modelle",
-      "title": "Jolie, Belle und Coquette",
-      "text": "Drei Formen, ein Stil. Farben und Futter sind bei jeder Tasche anders.",
-      "cta": "Wähle dein Modell"
-    },
-    "process": {
-      "eyebrow": "Vom Regenschirm zur Tasche",
-      "title": "So entsteht eine Chère Pochette",
-      "text": "Vom Sammeln der Materialien bis zur letzten Masche: fünf Schritte, die aus Weggeworfenem eine Tasche zum Weitertragen machen.",
-      "cta": "Den Prozess entdecken"
-    },
     "story": {
       "eyebrow": "Von vielen Händen gemacht",
-      "title": "Gemeinsam mit ukrainischen Frauen",
-      "text": "Unsere Taschen entstehen in Zusammenarbeit mit einer Gruppe ukrainischer Frauen, die mit uns häkeln. Wir teilen Technik, Ideen und Zeit.",
+      "title": "Ein zweites Leben, Masche für Masche",
+      "text": "Kleider, die niemand mehr trägt, werden zu T-Shirt-Garn, kaputte Regenschirme zum Futter. Wir häkeln gemeinsam mit einer Gruppe ukrainischer Frauen und teilen Technik, Ideen und Zeit.",
       "cta": "Unsere Geschichte"
     },
     "team": {
@@ -214,9 +175,8 @@
       "text": "Melde dich für den Newsletter an: Wir schreiben dir, wenn neue Unikate da sind."
     },
     "social": {
-      "title": "Folge uns auf Instagram",
-      "text": "Neue Taschen, Blicke hinter die Kulissen und kleine Geschichten aus unserem Projekt.",
-      "cta": "Zu Instagram"
+      "eyebrow": "Du findest uns auf Instagram",
+      "text": "Neue Taschen, Blicke hinter die Kulissen und kleine Geschichten aus unserem Projekt."
     }
   },
   "shop": {
@@ -297,6 +257,7 @@
       }
     },
     "total": "Total",
+    "availableNote": "Unikat · verfügbar",
     "buyButton": "Kaufen · CHF {price}",
     "paymentNote": "Sichere Zahlung mit TWINT, Karte oder PostFinance über Zahls.ch.",
     "redirectNote": "Die Zahlung erfolgt auf der sicheren Seite von Zahls.ch.",

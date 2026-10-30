@@ -136,11 +136,9 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Borse all'uncinetto · Pezzi unici",
-      "title": "Made to carry on",
-      "subtitle": "Borse fatte a mano all'uncinetto con vestiti e ombrelli recuperati. Ognuna è unica, come chi la porta.",
+      "title": "Ognuna è unica. Come chi la porta.",
+      "lead": "Borse all'uncinetto fatte a mano in Ticino, con vestiti e ombrelli recuperati.",
       "cta": "Scopri le borse",
-      "ctaSecondary": "La nostra storia",
       "notes": {
         "yarn": "fettuccia da vestiti recuperati",
         "handle": "manico all’uncinetto",
@@ -153,31 +151,6 @@
         "Made in Bellinzona"
       ]
     },
-    "intro": {
-      "eyebrow": "Il concetto",
-      "title": "Una seconda vita, punto dopo punto",
-      "text": "Vestiti che nessuno indossa più e ombrelli rotti diventano borse eleganti e femminili. Le realizziamo a mano, insieme, una alla volta."
-    },
-    "pillars": {
-      "title": "Tre idee, un unico filo",
-      "items": [
-        {
-          "id": "reuse",
-          "title": "Seconda vita ai materiali",
-          "text": "I vestiti usati diventano fettuccia, gli ombrelli rotti diventano fodera. Materiali dimenticati, pronti a ripartire."
-        },
-        {
-          "id": "handmade",
-          "title": "Fatte a mano all'uncinetto",
-          "text": "Ogni borsa nasce punto dopo punto, con pazienza e cura. Per questo non ne esistono due uguali."
-        },
-        {
-          "id": "together",
-          "title": "Create insieme, tra donne",
-          "text": "Lavoriamo all'uncinetto con donne ucraine. Un filo che lega mani, storie e amicizie."
-        }
-      ]
-    },
     "featured": {
       "eyebrow": "Nello shop",
       "title": "Pezzi unici, pronti a partire",
@@ -185,22 +158,10 @@
       "cta": "Vedi tutte le borse",
       "empty": "Le prossime borse sono in lavorazione. Seguici su Instagram per non perderle."
     },
-    "models": {
-      "eyebrow": "I modelli",
-      "title": "Jolie, Belle e Coquette",
-      "text": "Tre forme, un solo stile. Colori e fodere cambiano a ogni borsa.",
-      "cta": "Scegli il tuo modello"
-    },
-    "process": {
-      "eyebrow": "Dall'ombrello alla borsa",
-      "title": "Come nasce una Chère Pochette",
-      "text": "Dal recupero dei materiali all'ultimo punto: cinque passi per trasformare ciò che sarebbe stato buttato in una borsa da portare con sé.",
-      "cta": "Scopri il processo"
-    },
     "story": {
       "eyebrow": "Fatte a più mani",
-      "title": "Insieme alle donne ucraine",
-      "text": "Le nostre borse nascono dalla collaborazione con un gruppo di donne ucraine che lavorano all'uncinetto con noi. Condividiamo tecnica, idee e tempo.",
+      "title": "Una seconda vita, punto dopo punto",
+      "text": "I vestiti che nessuno indossa più diventano fettuccia, gli ombrelli rotti diventano la fodera. Lavoriamo all'uncinetto insieme a un gruppo di donne ucraine e condividiamo tecnica, idee e tempo.",
       "cta": "La nostra storia"
     },
     "team": {
@@ -214,9 +175,8 @@
       "text": "Iscriviti alla newsletter: ti scriviamo quando arrivano nuovi pezzi unici."
     },
     "social": {
-      "title": "Seguici su Instagram",
-      "text": "Nuove borse, dietro le quinte e piccole storie del nostro progetto.",
-      "cta": "Vai su Instagram"
+      "eyebrow": "Ci trovi su Instagram",
+      "text": "Nuove borse, dietro le quinte e piccole storie del nostro progetto."
     }
   },
   "shop": {
@@ -297,6 +257,7 @@
       }
     },
     "total": "Totale",
+    "availableNote": "Pezzo unico · disponibile",
     "buyButton": "Acquista · CHF {price}",
     "paymentNote": "Pagamento sicuro con TWINT, carta o PostFinance tramite Zahls.ch.",
     "redirectNote": "Il pagamento avviene sulla pagina sicura di Zahls.ch.",

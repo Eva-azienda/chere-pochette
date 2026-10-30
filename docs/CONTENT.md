@@ -66,8 +66,10 @@ fee. With online payment on, the next Deploy run also re-creates the shipping li
 **Instagram** → `src/data/site.json` → `"instagram"` = `https://www.instagram.com/chere.pochette/` (used by the footer,
 header menu, home and shop).
 
-**Home hero** → `src/i18n/*.json`: `home.hero.subtitle` (headline), `home.hero.notes` (sketch notes),
-`home.hero.marquee` (words in the scrolling band); team section → `home.team.*`.
+**Home hero** → `src/i18n/*.json`: `home.hero.title` (headline), `home.hero.lead` (the sentence under it),
+`home.hero.notes` (sketch notes, larger screens only), `home.hero.marquee` (words in the scrolling band);
+bags → `home.featured.*`; story block → `home.story.*`; team strip → `home.team.*`; Instagram → `home.social.*`
+(the handle comes from `site.json` → `"instagram"`).
 
 **Contact e-mail** → `src/data/site.json` → `"email"`, and also in the three legal files.
 

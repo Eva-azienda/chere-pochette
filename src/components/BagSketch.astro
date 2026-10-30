@@ -8,6 +8,8 @@
  * Its paths carry pathLength="1" and a class: s-main (outline, handle) or s-thread (thread;
  * the needle also has s-needle).
  * To move a note, edit NOTES below (coordinates in the SVG's viewBox).
+ * Phones (< 48rem): the bag is large and the notes would be too small to read, so they are hidden;
+ * the thread and needle stay as a thin, soft detail.
  * With reduced motion the drawing is simply shown complete.
  *
  * variant="photo" (default): the real Jolie bag in rosa antico (assets/brand/hero-jolie.png, a transparent
@@ -49,7 +51,7 @@ const svg = sketch.replace('<svg ', '<svg class="sketch__svg" aria-hidden="true"
         class="sketch__photo"
         src={jolie}
         widths={[320, 480, 640, 960]}
-        sizes="(min-width: 64rem) 26rem, 62vw"
+        sizes="(min-width: 64rem) 22rem, (min-width: 48rem) 17rem, 62vw"
         alt=""
         loading="eager"
         fetchpriority="high"
@@ -109,6 +111,22 @@ const svg = sketch.replace('<svg ', '<svg class="sketch__svg" aria-hidden="true"
 
     .sketch :global(path.s-needle) {
       stroke-width: 4;
+    }
+  }
+
+  /* Phones: a fine, soft thread and needle (a detail, not a second subject) and no notes. */
+  @media (max-width: 47.999rem) {
+    .sketch :global(.s-thread) {
+      stroke-width: 1.3;
+      opacity: 0.55;
+    }
+
+    .sketch :global(path.s-needle) {
+      stroke-width: 2.2;
+    }
+
+    .sketch__notes {
+      display: none;
     }
   }
 

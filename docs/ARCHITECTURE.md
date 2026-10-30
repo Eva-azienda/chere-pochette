@@ -45,17 +45,21 @@ GitHub Pages serves the site under the domain registered at Hostpoint, and Zahls
 
 - **Header**: one-line wordmark "Chère Pochette" (`src/assets/brand/wordmark.svg`, Bodoni Moda italic converted to
   outlines, coloured with `currentColor`) top-left; compact **IT/DE/EN** selector (`LanguageSwitcher.astro`).
-- **Home hero**: headline in the page's own language (`home.hero.subtitle`) + the Jolie bag in rosa antico on a powder
-  circle (transparent cut-out `src/assets/brand/hero-jolie.png`) with an animated thread, needle and handwritten notes
-  (`src/components/BagSketch.astro`; `variant="sketch"` in `index.astro` brings back the line drawing
-  `bag-sketch.svg`), then a scrolling marquee band;
-  the English tagline appears as a quote on larger screens. The header wordmark is always visible.
+- **Home**: short and shop-first. Hero = short headline (`home.hero.title`), one sentence (`home.hero.lead`) and one
+  button to the shop, next to the Jolie bag in rosa antico on a powder circle (transparent cut-out
+  `src/assets/brand/hero-jolie.png`) with an animated thread, needle and handwritten notes
+  (`src/components/BagSketch.astro`; `variant="sketch"` in `index.astro` brings back the line drawing `bag-sketch.svg`).
+  On phones the bag, headline, sentence and button fit on the first screen (the drawing's size follows the screen
+  height; the notes are hidden, the thread is thin). Then: the bags on sale (grid, 2 columns on phones, up to 6 bags,
+  with prices), the scrolling marquee band, one story block (bag held by a woman, materials + the Ukrainian women →
+  `/about/`), a compact team strip and an Instagram block (a plain link, no embedded feed). Process, models and values
+  are on their own pages. The header wordmark is always visible.
 - **Team**: group photo on the home team section and the team page; round portraits in the org chart and a 4:5 portrait
   on each member page (`src/assets/team/`, `src/lib/team-photos.ts`, `TeamAvatar.astro`; initials as fallback).
 - **SEO**: hreflang/x-default sitemap (`astro.config.mjs`), JSON-LD (`src/lib/structured-data.ts`), `npm run seo:check`
   (also as warn-only `postbuild`).
-- **Icons**: thin "thread" line icons (`Icon.astro`), e.g. the three pillars reuse / needle-and-thread (handmade) /
-  thread heart (together).
+- **Icons**: thin "thread" line icons (`Icon.astro`), e.g. reuse / needle-and-thread (handmade) / thread heart
+  (together).
 - **Prices**: firm prices, Swiss format — `CHF 40.–` on bag cards and pages. The "I modelli" section shows no price; the model price in `models.json` is only the default the admin fills in for a new bag.
 - Design tokens: `src/styles/tokens.css` (bordeaux `#82001F`, ivory `#FAF7F2`, powder `#E8D1D8`…; Bodoni Moda + Red Hat
   Display, self-hosted). Mobile-first: 375 px, 16 px gutters, 48 px tap targets.

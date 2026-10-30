@@ -7,7 +7,8 @@
  *   If a link doesn't exist yet → "order by e-mail" (mailto: with subject and a prefilled body).
  * - Switching is done in CSS only (:has(), no JavaScript): both buttons are in the HTML and
  *   the one that doesn't match the checked radio is hidden.
- * - On phones the bar with total + button is fixed at the bottom of the screen.
+ * - Phones and tablets: the bar is fixed at the bottom of the screen, made for the thumb – one line
+ *   with the total (+ the chosen delivery) and "Pezzo unico · disponibile", and a full-width button below.
  */
 import Icon from './Icon.astro';
 import { type Lang, useTranslations } from '../lib/i18n';
@@ -79,22 +80,25 @@ const allOnline = options.every((o) => o.online);
 
   <div class="buy__bar">
     <div class="buy__summary">
-      <span class="buy__total-label">{t('product.total')}</span>
-      {
-        options.map((o) => (
-          <span class="buy__total" data-for={o.delivery}>
-            {t('common.priceTag', { price: o.total })}
-          </span>
-        ))
-      }
-      {
-        options.map((o) => (
-          <a class="buy__change" href="#delivery" data-for={o.delivery}>
-            {o.deliveryLabel}
-            <span class="visually-hidden"> – {t('product.changeDelivery')}</span>
-          </a>
-        ))
-      }
+      <div class="buy__price">
+        <span class="buy__total-label">{t('product.total')}</span>
+        {
+          options.map((o) => (
+            <span class="buy__total" data-for={o.delivery}>
+              {t('common.priceTag', { price: o.total })}
+            </span>
+          ))
+        }
+        {
+          options.map((o) => (
+            <a class="buy__change" href="#delivery" data-for={o.delivery}>
+              {o.deliveryLabel}
+              <span class="visually-hidden"> – {t('product.changeDelivery')}</span>
+            </a>
+          ))
+        }
+      </div>
+      <p class="buy__status">{t('product.availableNote')}</p>
     </div>
     {
       options.map((o) => (
@@ -246,18 +250,51 @@ const allOnline = options.every((o) => o.online);
     display: none;
   }
 
-  /* ---------- Total + button ---------- */
+  /* ---------- Total + availability + button ----------
+     Phones and tablets: [total · delivery … availability] on one line, the full-width button below.
+     Desktop: the total (with its label) and the availability, then the full-width button. */
   .buy__bar {
-    display: flex;
-    align-items: center;
-    gap: var(--s-4);
+    display: grid;
+    gap: var(--s-2);
   }
 
   .buy__summary {
-    display: grid;
-    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
     min-width: 0;
     line-height: 1.25;
+  }
+
+  /* price and delivery side by side; a long delivery name ("Ritiro a Bellinzona") moves under the price */
+  .buy__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: var(--s-2);
+    min-width: 0;
+  }
+
+  /* availability: a small green dot + "Pezzo unico · disponibile" */
+  .buy__status {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--c-anthracite);
+    white-space: nowrap;
+  }
+
+  .buy__status::before {
+    content: '';
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--c-success);
   }
 
   .buy__total-label {
@@ -291,8 +328,10 @@ const allOnline = options.every((o) => o.online);
   }
 
   .buy__btn {
-    flex-shrink: 0;
+    width: 100%;
+    min-height: 3.25rem;
     padding-inline: var(--s-5);
+    font-size: var(--fs-base);
   }
 
   .buy__note {
@@ -328,11 +367,28 @@ const allOnline = options.every((o) => o.online);
       position: fixed;
       inset: auto 0 0 0;
       z-index: 40;
-      min-height: var(--buybar-h);
       padding: var(--s-3) var(--gutter) calc(var(--s-3) + env(safe-area-inset-bottom));
       background: var(--c-ivory);
       border-top: 1px solid var(--c-line);
       box-shadow: 0 -8px 24px rgba(84, 21, 44, 0.06);
+    }
+
+    /* the "Totale" label is read by screen readers only: price and button already say it */
+    .buy__total-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    /* tablets: the bar's content keeps a comfortable width */
+    .buy__summary,
+    .buy__btn {
+      width: 100%;
+      max-width: 40rem;
+      margin-inline: auto;
     }
 
     /* Leave room at the end of the page so the bar never hides content. The room is added
@@ -344,9 +400,13 @@ const allOnline = options.every((o) => o.online);
 
   @media (min-width: 64rem) {
     .buy__bar {
-      flex-wrap: wrap;
+      gap: var(--s-4);
       padding-top: var(--s-4);
       border-top: 1px solid var(--c-line);
+    }
+
+    .buy__price {
+      display: grid;
     }
 
     .buy__change {
@@ -354,13 +414,13 @@ const allOnline = options.every((o) => o.online);
     }
 
     .buy__btn {
-      width: 100%;
       min-height: 3.5rem;
-      font-size: var(--fs-base);
     }
   }
 
+  /* Height of the fixed bar (phones: one line + the button + padding), used for the footer room above.
+     A little more than the usual 108px, for a delivery name that wraps under the price. */
   :global(:root) {
-    --buybar-h: 4.75rem;
+    --buybar-h: 7.25rem;
   }
 </style>

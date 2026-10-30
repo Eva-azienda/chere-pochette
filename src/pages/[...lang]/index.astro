@@ -1,20 +1,18 @@
 ---
 /**
  * Home page – one file for all languages: / (it), /de/, /en/.
- * Sections: hero, concept + 3 pillars, bags in the shop, the 3 models, process teaser,
- * story teaser (the Ukrainian women), the team (group photo), Instagram.
+ * Sections, in this order: hero (bag + short headline + one button), the bags on sale (grid with
+ * prices), the marquee band, one short story block (materials + the Ukrainian women → /about/),
+ * the team strip (group photo → /team/), Instagram.
+ * The detail (process, models, values) lives on the dedicated pages, not here.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ArtPicture from '../../components/ArtPicture.astro';
 import BagSketch from '../../components/BagSketch.astro';
 import BrandPicture from '../../components/BrandPicture.astro';
 import Icon from '../../components/Icon.astro';
-import ModelsShowcase from '../../components/ModelsShowcase.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import ThreadDivider from '../../components/ThreadDivider.astro';
-import umbrellaFabrics from '../../assets/brand/umbrellas-fabrics.jpg';
-import womenLandscape from '../../assets/brand/women-crochet.jpg';
-import womenPortrait from '../../assets/brand/women-crochet-45.jpg';
+import bagHands from '../../assets/brand/hero-bag-hands.jpg';
 import { localeStaticPaths, useTranslations, type Lang } from '../../lib/i18n';
 import { localePath } from '../../lib/urls';
 import { getAvailableProducts, site } from '../../lib/catalog';
@@ -26,36 +24,76 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props as { lang: Lang };
 const { t, list, pageMeta } = useTranslations(lang);
-const featured = (await getAvailableProducts()).slice(0, 4);
-const pillars = list<{ id: 'reuse' | 'handmade' | 'together'; title: string; text: string }>('home.pillars.items');
-const steps = list<{ id: string; title: string }>('process.steps');
+
+// Up to 6 bags. From 64rem: 4 columns, or 3 when that fills the rows better (3, 5 or 6 bags).
+const featured = (await getAvailableProducts()).slice(0, 6);
+const threeColumns = featured.length === 3 || featured.length >= 5;
+const cardSizes = threeColumns
+  ? '(min-width: 72rem) 22rem, (min-width: 64rem) 30vw, 46vw'
+  : '(min-width: 72rem) 16rem, (min-width: 64rem) 22vw, 46vw';
+
 const marquee = list('home.hero.marquee');
+// "https://www.instagram.com/chere.pochette/" → "@chere.pochette"
+const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[1] ?? 'chere.pochette'}`;
 ---
 
 <BaseLayout lang={lang} path="" {...pageMeta('home')}>
   <!-- ========== Hero ==========
-       Phones: the annotated sketch, the headline (in the page's language) and one button.
-       From 64rem: text on the left, the large annotated sketch on the right. -->
+       Phones: the bag on its powder circle, the headline, one sentence and one button – all
+       above the fold (the drawing's size follows the screen height, the notes are hidden).
+       From 64rem: text on the left, the large bag with its notes on the right. -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero__inner container">
       <div class="hero__art">
         <BagSketch lang={lang} />
       </div>
       <div class="hero__text">
-        <h1 id="hero-title" class="hero__title">{t('home.hero.subtitle')}</h1>
-        <!-- The English tagline as a small quote. -->
-        <blockquote class="hero__quote" lang={lang === 'en' ? undefined : 'en'}>
-          <p>{t('brand.tagline')}</p>
-        </blockquote>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href={localePath(lang, 'shop/')}>{t('home.hero.cta')}</a>
-          <a class="link-arrow hero__secondary" href={localePath(lang, 'about/')}>{t('home.hero.ctaSecondary')}</a>
-        </div>
+        <h1 id="hero-title" class="hero__title">{t('home.hero.title')}</h1>
+        <p class="hero__lead">{t('home.hero.lead')}</p>
+        <a class="btn btn--primary hero__cta" href={localePath(lang, 'shop/')}>{t('home.hero.cta')}</a>
       </div>
     </div>
   </section>
 
-  <!-- A slow band of the four promises, between the hero and the concept. Decorative: the same
+  <!-- ========== Bags on sale ==========
+       A grid (never a carousel): 2 columns on phones, 3–4 from 64rem. Photo, name and price on every card. -->
+  <section class="section featured" aria-labelledby="featured-title">
+    <div class="container">
+      <div class="heading featured__heading">
+        <p class="eyebrow">{t('home.featured.eyebrow')}</p>
+        <h2 id="featured-title">{t('home.featured.title')}</h2>
+        <p>{t('home.featured.text')}</p>
+      </div>
+
+      {
+        featured.length > 0 ? (
+          <>
+            <ul role="list" class:list={['product-grid', { 'featured__grid--3': threeColumns }]}>
+              {featured.map((product) => (
+                <li>
+                  <ProductCard product={product} lang={lang} sizes={cardSizes} />
+                </li>
+              ))}
+            </ul>
+            <div class="featured__more">
+              <a class="btn btn--outline" href={localePath(lang, 'shop/')}>{t('home.featured.cta')}</a>
+            </div>
+          </>
+        ) : (
+          <div class="empty">
+            <ThreadDivider />
+            <p class="lead">{t('home.featured.empty')}</p>
+            <a class="btn btn--outline" href={site.instagram} rel="noopener">
+              <Icon name="instagram" size={20} />
+              {t('common.followInstagram')}
+            </a>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- A slow band of the four promises, between the bags and the story. Decorative: the same
        words are on the page as text, so screen readers skip it. -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
@@ -71,284 +109,158 @@ const marquee = list('home.hero.marquee');
     </div>
   </div>
 
-  <!-- ========== Concept + 3 pillars ========== -->
-  <section class="section section--alt" aria-labelledby="intro-title">
-    <div class="container">
-      <div class="heading center">
-        <p class="eyebrow">{t('home.intro.eyebrow')}</p>
-        <h2 id="intro-title">{t('home.intro.title')}</h2>
-        <p class="lead">{t('home.intro.text')}</p>
-      </div>
-      <h3 class="pillars__title tagline center">{t('home.pillars.title')}</h3>
-      <ul role="list" class="pillars">
-        {
-          pillars.map((pillar) => (
-            <li class="pillar">
-              <span class="pillar__icon">
-                <Icon name={pillar.id} size={52} />
-              </span>
-              <h4 class="pillar__title">{pillar.title}</h4>
-              <p>{pillar.text}</p>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <!-- ========== Bags in the shop ========== -->
-  <section class="section" aria-labelledby="featured-title">
-    <div class="container">
-      <div class="split-heading">
-        <div class="heading">
-          <p class="eyebrow">{t('home.featured.eyebrow')}</p>
-          <h2 id="featured-title">{t('home.featured.title')}</h2>
-          <p>{t('home.featured.text')}</p>
-        </div>
-        {featured.length > 0 && <a class="link-arrow" href={localePath(lang, 'shop/')}>{t('home.featured.cta')}</a>}
-      </div>
-
-      {
-        featured.length > 0 ? (
-          <ul role="list" class="product-grid">
-            {featured.map((product) => (
-              <li>
-                <ProductCard product={product} lang={lang} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div class="empty">
-            <ThreadDivider />
-            <p class="lead">{t('home.featured.empty')}</p>
-            <a class="btn btn--outline" href={site.instagram} rel="noopener">
-              <Icon name="instagram" size={20} />
-              {t('common.followInstagram')}
-            </a>
-          </div>
-        )
-      }
-    </div>
-  </section>
-
-  <!-- ========== The three models ========== -->
-  <section class="section section--tight" aria-labelledby="models-title">
-    <div class="container">
-      <div class="heading center">
-        <p class="eyebrow">{t('home.models.eyebrow')}</p>
-        <h2 id="models-title">{t('home.models.title')}</h2>
-        <p>{t('home.models.text')}</p>
-      </div>
-      <ModelsShowcase lang={lang} />
-    </div>
-  </section>
-
-  <!-- ========== Process teaser ========== -->
-  <section class="section section--alt" aria-labelledby="process-title">
-    <div class="container feature">
-      <div class="feature__media media">
-        <BrandPicture
-          src={umbrellaFabrics}
-          alt={t('images.umbrellasFabrics')}
-          sizes="(min-width: 48rem) 45vw, 100vw"
-          widths={[480, 768, 1080, 1440]}
-        />
-      </div>
-      <div class="feature__text stack">
-        <p class="eyebrow">{t('home.process.eyebrow')}</p>
-        <h2 id="process-title">{t('home.process.title')}</h2>
-        <p>{t('home.process.text')}</p>
-        <ol class="steps-inline" role="list">
-          {
-            steps.map((step, i) => (
-              <li>
-                <span class="steps-inline__n">{String(i + 1).padStart(2, '0')}</span>
-                {step.title}
-              </li>
-            ))
-          }
-        </ol>
-        <div>
-          <a class="btn btn--outline" href={localePath(lang, 'process/')}>{t('home.process.cta')}</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== Story teaser ========== -->
-  <section class="section" aria-labelledby="story-title">
+  <!-- ========== Story: recovered materials + the women who crochet with us ==========
+       The photo of a bag held against the body also shows its size.
+       Phones: photo above the text. From 48rem: text left, photo right. -->
+  <section class="section story" aria-labelledby="story-title">
     <div class="container feature feature--reverse">
       <div class="feature__media media story__media">
-        <ArtPicture
-          mobile={womenPortrait}
-          desktop={womenLandscape}
-          alt={t('images.womenCrochet')}
-          mobileSizes="100vw"
-          desktopSizes="50vw"
-          mobilePosition="50% 40%"
-          desktopPosition="50% 45%"
+        <BrandPicture
+          src={bagHands}
+          alt={t('images.heroBagHands')}
+          sizes="(min-width: 72rem) 34rem, (min-width: 48rem) 45vw, 100vw"
+          widths={[480, 768, 1080, 1440]}
+          position="45% 55%"
         />
       </div>
-      <div class="feature__text stack">
+      <div class="feature__text stack story__text">
         <p class="eyebrow">{t('home.story.eyebrow')}</p>
         <h2 id="story-title">{t('home.story.title')}</h2>
         <p>{t('home.story.text')}</p>
-        <div>
-          <a class="btn btn--outline" href={localePath(lang, 'about/')}>{t('home.story.cta')}</a>
-        </div>
+        <a class="link-arrow" href={localePath(lang, 'about/')}>{t('home.story.cta')}</a>
       </div>
     </div>
   </section>
 
-  <!-- ========== The team ==========
-       Phones: the group photo (full width, rounded corners), then the text.
-       From 48rem: photo left, text right. Photo: src/assets/team/group.jpg -->
-  <section class="section section--alt" aria-labelledby="team-title">
-    <div class="container feature">
+  <!-- ========== The team (compact strip) ==========
+       Phones: the group photo, then the text. From 48rem: photo left, text right.
+       Photo: src/assets/team/group.jpg -->
+  <section class="section section--alt team-strip" aria-labelledby="team-title">
+    <div class="container team-strip__inner">
       {
         teamGroupPhoto && (
-          <div class="feature__media media team__media">
+          <div class="media team-strip__media">
             <BrandPicture
               src={teamGroupPhoto}
               alt={t('images.teamGroup')}
-              sizes="(min-width: 72rem) 34rem, (min-width: 48rem) 45vw, 100vw"
+              sizes="(min-width: 48rem) 26rem, 100vw"
               widths={[480, 768, 900]}
             />
           </div>
         )
       }
-      <div class="feature__text stack">
+      <div class="team-strip__text">
         <p class="eyebrow">{t('home.team.eyebrow')}</p>
-        <h2 id="team-title">{t('home.team.title')}</h2>
+        <h2 id="team-title" class="h3">{t('home.team.title')}</h2>
         <p>{t('home.team.text')}</p>
-        <div>
-          <a class="btn btn--outline" href={localePath(lang, 'team/')}>{t('home.team.cta')}</a>
-        </div>
+        <a class="link-arrow" href={localePath(lang, 'team/')}>{t('home.team.cta')}</a>
       </div>
     </div>
   </section>
 
-  <!-- ========== Instagram (no newsletter for now) ========== -->
-  <section class="section" aria-labelledby="social-title">
-    <div class="container container--narrow social center">
-      <ThreadDivider />
-      <h2 id="social-title">{t('home.social.title')}</h2>
-      <p>{t('home.social.text')}</p>
-      <a class="btn btn--outline" href={site.instagram} rel="noopener">{t('home.social.cta')}</a>
+  <!-- ========== Instagram ==========
+       A plain link to the profile: no embedded feed and no third-party script (privacy). -->
+  <section class="section section--powder social" aria-labelledby="social-title">
+    <div class="container container--narrow social__inner">
+      <span class="social__icon"><Icon name="instagram" size={28} /></span>
+      <p class="eyebrow">{t('home.social.eyebrow')}</p>
+      <h2 id="social-title" class="social__handle">{instagramHandle}</h2>
+      <p class="social__text">{t('home.social.text')}</p>
+      <a class="btn btn--primary" href={site.instagram} rel="noopener">
+        <Icon name="instagram" size={20} />
+        {t('common.followInstagram')}
+      </a>
     </div>
   </section>
 </BaseLayout>
 
 <style>
   /* ---------- Hero ----------
-     Phones: sketch, title, one sentence, one button, centred, with plenty of air.
-     From 64rem: two columns, text left, the sketch (with its notes) right. */
+     Phones: bag, headline, one sentence, one button – centred and tight, so all four fit on the
+     first screen. The drawing's width follows the screen height (svh): on short phones it gets a
+     little smaller instead of pushing the button below the fold.
+     From 48rem: more air and the notes; from 64rem: two columns. */
   .hero {
-    padding-block: var(--s-6) var(--s-8);
+    /* 96vw at most (powder circle ≈ 73% of the width); the rest of the screen height is kept for
+       header (62px), headline, sentence and button (≈ 20.5rem in the longest language). */
+    --art-w: clamp(13rem, (100svh - 20.5rem) * 1.04, min(96vw, 26rem));
+    padding-block: var(--s-2) var(--s-6);
   }
 
   .hero__inner {
     display: grid;
     justify-items: center;
-    gap: var(--s-6);
+    gap: var(--s-3);
   }
 
-  /* Phones: the drawing gets most of the width; it sits a little left of centre so the side
-     note has room on the right, and leaves space below for the bottom note. */
   .hero__art {
-    width: min(80vw, 20rem);
-    margin-top: var(--s-4);
-    margin-bottom: var(--s-2);
-    translate: calc(var(--s-4) * -1) 0;
+    width: var(--art-w);
+    /* may be a little wider than the text column: equal negative margins keep it centred */
+    margin-inline: calc((100% - var(--art-w)) / 2);
+    /* the strip under the needle is only for the bottom note, hidden on phones */
+    margin-bottom: calc(var(--art-w) * -0.1);
   }
 
   .hero__text {
     display: grid;
     justify-items: center;
-    gap: var(--s-5);
+    gap: var(--s-2);
     max-width: 34rem;
     text-align: center;
   }
 
   .hero__title {
-    max-width: 17em;
-    font-size: clamp(1.375rem, 1rem + 1.9vw, 2.5rem);
-    line-height: 1.18;
+    max-width: 15em;
+    font-size: clamp(1.625rem, 1.1rem + 2.6vw, 3.5rem);
+    line-height: 1.12;
     letter-spacing: -0.01em;
   }
 
-  /* The English tagline: small italic Bodoni (no quote mark). */
-  .hero__quote {
-    max-width: 17em;
-    margin: 0;
-    font-family: var(--f-display);
-    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.3125rem);
-    font-style: italic;
-    line-height: 1.25;
-    color: var(--c-plum);
-    text-wrap: balance;
+  .hero__lead {
+    max-width: 30em;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--c-anthracite);
   }
 
-  /* Phones: the drawing gets the space instead. */
-  @media (max-width: 47.999rem) {
-    .hero__quote {
-      display: none;
-    }
-  }
-
-  .hero__actions {
-    display: grid;
-    justify-items: center;
-    gap: var(--s-1);
+  .hero__cta {
     width: min(100%, 20rem);
-  }
-
-  .hero__actions .btn {
-    width: 100%;
-  }
-
-  .hero__actions a {
+    margin-top: var(--s-2);
     white-space: nowrap;
-  }
-
-  /* Phones: one clear action. The story is one tap away in the menu and further down. */
-  .hero__secondary {
-    display: none;
   }
 
   @media (min-width: 48rem) {
     .hero {
-      padding-block: var(--s-7) var(--s-9);
+      padding-block: var(--s-6) var(--s-7);
     }
 
+    .hero__inner {
+      gap: var(--s-5);
+    }
+
+    /* the notes are back: room above for the top one, below for the bottom one */
     .hero__art {
       width: min(56vw, 26rem);
-      margin-block: var(--s-6) var(--s-5);
-      translate: none;
+      margin: var(--s-6) 0 var(--s-7);
     }
 
-    .hero__actions {
-      display: flex;
-      align-items: center;
-      gap: var(--s-6);
+    .hero__text {
+      gap: var(--s-4);
+    }
+
+    .hero__lead {
+      font-size: var(--fs-lg);
+      line-height: 1.5;
+    }
+
+    .hero__cta {
       width: auto;
-    }
-
-    .hero__actions .btn {
-      width: auto;
-    }
-
-    .hero__secondary {
-      display: inline-flex;
     }
   }
 
   @media (min-width: 64rem) {
     .hero {
-      display: flex;
-      align-items: center;
-      min-height: min(calc(100svh - var(--header-h) - 3.25rem), 50rem);
-      padding-block: var(--s-7);
+      padding-block: var(--s-6);
     }
 
     .hero__inner {
@@ -360,7 +272,7 @@ const marquee = list('home.hero.marquee');
     /* left-aligned in its column, so the notes on the right of the drawing have room */
     .hero__art {
       order: 2;
-      width: min(78%, 40rem, 70svh);
+      width: min(78%, 34rem, 60svh);
       margin-block: 0;
       justify-self: start;
     }
@@ -368,8 +280,12 @@ const marquee = list('home.hero.marquee');
     .hero__text {
       justify-items: start;
       gap: var(--s-5);
-      max-width: 28rem;
+      max-width: 30rem;
       text-align: left;
+    }
+
+    .hero__cta {
+      margin-top: 0;
     }
   }
 
@@ -380,8 +296,46 @@ const marquee = list('home.hero.marquee');
     }
 
     .hero__art {
-      width: min(82%, 40rem, 70svh);
+      width: min(82%, 34rem, 60svh);
     }
+  }
+
+  /* ---------- Bags on sale ---------- */
+  .featured {
+    padding-top: var(--s-6);
+  }
+
+  .featured__heading {
+    margin-bottom: var(--s-5);
+  }
+
+  /* phones: a little less space between the rows of cards */
+  .featured .product-grid {
+    row-gap: var(--s-5);
+  }
+
+  @media (min-width: 64rem) {
+    .featured {
+      padding-top: var(--s-7);
+    }
+
+    .featured .product-grid {
+      row-gap: var(--s-7);
+    }
+
+    .featured .featured__grid--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .featured__more {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--s-6);
+  }
+
+  .featured__more .btn {
+    width: min(100%, 20rem);
   }
 
   /* ---------- Marquee band ---------- */
@@ -436,150 +390,106 @@ const marquee = list('home.hero.marquee');
     }
   }
 
-  /* ---------- Pillars ----------
-     Phones: compact rows (small icon left, text right) separated by hairlines.
-     From 48rem: three equal centred columns; subgrid lines up icon, title and text. */
-  .pillars__title {
-    margin-top: var(--s-5);
-    margin-bottom: var(--s-5);
+  /* ---------- Story ----------
+     Phones: a compact landscape photo (3:2) above the text. From 48rem: 4:3 next to the text. */
+  .feature__media.story__media {
+    aspect-ratio: 3 / 2;
   }
 
-  .pillars {
+  @media (min-width: 48rem) {
+    .feature__media.story__media {
+      aspect-ratio: 4 / 3;
+    }
+
+    .story__text {
+      max-width: 30rem;
+    }
+  }
+
+  /* ---------- Team strip ---------- */
+  .team-strip {
+    padding-block: var(--s-7);
+  }
+
+  .team-strip__inner {
     display: grid;
-    max-width: 62rem;
-    margin-inline: auto;
-    border-top: 1px solid var(--c-line);
+    gap: var(--s-5);
+    align-items: center;
   }
 
-  .pillar {
+  /* Phones: a wide 16:9 crop (the faces are in the upper part), so the strip stays short.
+     From 48rem: the group photo's own shape (900 × 630). */
+  .team-strip__media {
+    aspect-ratio: 16 / 9;
+  }
+
+  .team-strip__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+  }
+
+  .team-strip__text {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    column-gap: var(--s-4);
-    row-gap: var(--s-1);
-    padding-block: var(--s-5);
-    border-bottom: 1px solid var(--c-line);
+    justify-items: start;
+    gap: var(--s-2);
+    max-width: 32rem;
   }
 
-  .pillar__icon {
-    grid-row: span 2;
+  .team-strip__text .link-arrow {
+    margin-top: calc(var(--s-1) * -1);
+  }
+
+  @media (min-width: 48rem) {
+    .team-strip__inner {
+      grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
+      gap: var(--s-7);
+    }
+
+    .team-strip__media {
+      aspect-ratio: 900 / 630;
+    }
+  }
+
+  /* ---------- Instagram ---------- */
+  .social__inner {
+    display: grid;
+    justify-items: center;
+    gap: var(--s-3);
+    text-align: center;
+  }
+
+  .social__icon {
     display: grid;
     place-items: center;
-    width: 3.25rem;
-    height: 3.25rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: var(--s-1);
     border-radius: 50%;
     background: var(--c-ivory);
     color: var(--c-bordeaux);
   }
 
-  .pillar__icon :global(svg) {
-    width: 32px;
-    height: 32px;
+  .social__handle {
+    font-size: var(--fs-2xl);
+    font-style: italic;
+    overflow-wrap: anywhere;
   }
 
-  .pillar__title {
-    font-size: var(--fs-lg);
-  }
-
-  .pillar p {
-    font-size: var(--fs-sm);
+  .social__text {
+    max-width: 28rem;
     color: var(--c-anthracite);
   }
 
-  @media (min-width: 48rem) {
-    .pillars__title {
-      margin-top: var(--s-6);
-      margin-bottom: var(--s-7);
-    }
-
-    .pillars {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      grid-template-rows: repeat(3, auto);
-      align-items: start;
-      column-gap: var(--s-6);
-      row-gap: 0;
-      border-top: 0;
-    }
-
-    .pillar {
-      grid-row: span 3;
-      grid-template-columns: none;
-      grid-template-rows: subgrid;
-      justify-items: center;
-      row-gap: var(--s-4);
-      padding-block: 0;
-      border-bottom: 0;
-      text-align: center;
-    }
-
-    .pillar__icon {
-      grid-row: auto;
-      width: 5.5rem;
-      height: 5.5rem;
-      margin-bottom: var(--s-1);
-    }
-
-    .pillar__icon :global(svg) {
-      width: 52px;
-      height: 52px;
-    }
-
-    .pillar p {
-      max-width: 22rem;
-      font-size: var(--fs-base);
-    }
-  }
-
-  /* Phones: the pillars title follows the section heading (left-aligned, see global.css). */
-  @media (max-width: 47.999rem) {
-    .pillars__title {
-      text-align: left;
-    }
+  .social .btn {
+    width: min(100%, 20rem);
+    margin-top: var(--s-3);
   }
 
   @media (min-width: 48rem) {
-    .story__media {
-      aspect-ratio: 3 / 2;
+    .social .btn {
+      width: auto;
     }
-  }
-
-  /* the group photo keeps its own landscape shape (900 × 630) at every size */
-  .feature__media.team__media {
-    aspect-ratio: 900 / 630;
-  }
-
-  .steps-inline {
-    display: grid;
-    gap: 0;
-    border-top: 1px solid var(--c-line);
-  }
-
-  .steps-inline li {
-    display: flex;
-    align-items: baseline;
-    gap: var(--s-4);
-    padding-block: var(--s-3);
-    border-bottom: 1px solid var(--c-line);
-    font-family: var(--f-display);
-    font-size: var(--fs-lg);
-    color: var(--c-plum);
-  }
-
-  .steps-inline__n {
-    font-family: var(--f-body);
-    font-size: var(--fs-xs);
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: var(--c-bordeaux);
-  }
-
-  /* ---------- Instagram ---------- */
-  .social {
-    display: grid;
-    justify-items: center;
-    gap: var(--s-4);
-  }
-
-  .social p {
-    color: var(--c-muted);
   }
 </style>

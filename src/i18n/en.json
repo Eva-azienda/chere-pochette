@@ -136,11 +136,9 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Crochet bags · One of a kind",
-      "title": "Made to carry on",
-      "subtitle": "Handmade crochet bags from recovered clothes and umbrellas. Each one is unique – just like you.",
+      "title": "Each one is unique. Like the person who carries it.",
+      "lead": "Crochet bags handmade in Ticino from rescued clothes and umbrellas.",
       "cta": "Discover the bags",
-      "ctaSecondary": "Our story",
       "notes": {
         "yarn": "yarn from recovered clothes",
         "handle": "crocheted handle",
@@ -153,31 +151,6 @@
         "Made in Bellinzona"
       ]
     },
-    "intro": {
-      "eyebrow": "The idea",
-      "title": "A second life, stitch by stitch",
-      "text": "Clothes no one wears anymore and broken umbrellas become elegant, feminine bags. We make them by hand, together, one at a time."
-    },
-    "pillars": {
-      "title": "Three ideas, one thread",
-      "items": [
-        {
-          "id": "reuse",
-          "title": "A second life for materials",
-          "text": "Old clothes become t-shirt yarn, broken umbrellas become lining. Forgotten materials, ready for a fresh start."
-        },
-        {
-          "id": "handmade",
-          "title": "Crocheted by hand",
-          "text": "Every bag grows stitch by stitch, with patience and care. That's why no two are alike."
-        },
-        {
-          "id": "together",
-          "title": "Made together, by women",
-          "text": "We crochet with Ukrainian women. A thread that connects hands, stories and friendships."
-        }
-      ]
-    },
     "featured": {
       "eyebrow": "In the shop",
       "title": "One of a kind, ready for a new home",
@@ -185,22 +158,10 @@
       "cta": "See all bags",
       "empty": "Our next bags are in the making. Follow us on Instagram so you don't miss them."
     },
-    "models": {
-      "eyebrow": "The models",
-      "title": "Jolie, Belle and Coquette",
-      "text": "Three shapes, one style. Colours and linings change with every bag.",
-      "cta": "Choose your model"
-    },
-    "process": {
-      "eyebrow": "From umbrella to bag",
-      "title": "How a Chère Pochette is made",
-      "text": "From collecting materials to the very last stitch: five steps that turn what would have been thrown away into a bag worth carrying on.",
-      "cta": "Discover the process"
-    },
     "story": {
       "eyebrow": "Made by many hands",
-      "title": "Together with Ukrainian women",
-      "text": "Our bags are made in collaboration with a group of Ukrainian women who crochet with us. We share technique, ideas and time.",
+      "title": "A second life, stitch by stitch",
+      "text": "Clothes no one wears anymore become t-shirt yarn, and broken umbrellas become the lining. We crochet together with a group of Ukrainian women, sharing technique, ideas and time.",
       "cta": "Our story"
     },
     "team": {
@@ -214,9 +175,8 @@
       "text": "Sign up for our newsletter: we'll write to you when new one-of-a-kind pieces arrive."
     },
     "social": {
-      "title": "Follow us on Instagram",
-      "text": "New bags, behind the scenes and little stories from our project.",
-      "cta": "Go to Instagram"
+      "eyebrow": "Find us on Instagram",
+      "text": "New bags, behind the scenes and little stories from our project."
     }
   },
   "shop": {
@@ -297,6 +257,7 @@
       }
     },
     "total": "Total",
+    "availableNote": "One of a kind · available",
     "buyButton": "Buy · CHF {price}",
     "paymentNote": "Secure payment with TWINT, card or PostFinance via Zahls.ch.",
     "redirectNote": "Payment takes place on the secure Zahls.ch page.",

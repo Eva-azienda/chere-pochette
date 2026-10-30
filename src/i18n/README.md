@@ -31,9 +31,9 @@ Keys are written in `camelCase` and grouped by page or component.
 | `common` | Shared buttons and labels: buy, order by e-mail, "Pezzo unico N° {number}", sold, available, back, close, menu, price… |
 | `a11y` | Screen-reader texts: skip link, menu buttons, gallery, breadcrumb, language switcher… |
 | `images` | Alt texts for the brand photos in `src/assets/brand/` (key = file name in camelCase, e.g. `hero-bag-hands.jpg` → `heroBagHands`), plus `teamGroup` for `src/assets/team/group.jpg` |
-| `home` | `hero`, `intro`, `pillars` (3 items), `featured`, `models`, `process`, `story`, `team`, `newsletter`, `social` |
+| `home` | `hero` (`title` = headline, `lead`, `cta`, `notes`, `marquee`), `featured`, `story`, `team`, `newsletter`, `social` |
 | `shop` | Title, intro, `filter`, `count` (plural), `empty`, `emptyFiltered`, `unique` ("every bag is unique"), `models`, `card` |
-| `product` | `eyebrow` ("handmade crochet bag" above the title), labels, `dimensions`, `materials` (`schema` = one-line version for search engines), `unique`, `delivery` (shipping / pickup), buy button, payment notes, `orderByEmail` (fallback), `legalNote` (terms + returns links under the buy button), `sold`, `care`, `question`, `related` |
+| `product` | `eyebrow` ("handmade crochet bag" above the title), labels, `dimensions`, `materials` (`schema` = one-line version for search engines), `unique`, `delivery` (shipping / pickup), `availableNote` ("Pezzo unico · disponibile" in the sticky buy bar), buy button, payment notes, `orderByEmail` (fallback), `legalNote` (terms + returns links under the buy button), `sold`, `care`, `question`, `related` |
 | `about` | Sections `born`, `idea`, `materials`, `women`, `slogan`, `thread`, `values`, `cta` |
 | `process` | Intro, `stepLabel`, `steps` (exactly 5), `closing` |
 | `team` | Org chart texts (`hint`, `levels`…) and `member` = labels of the personal pages |
@@ -51,9 +51,8 @@ Keys are written in `camelCase` and grouped by page or component.
 - `text` = **one** short paragraph (a string).
 - `paragraphs` = an **array** of short paragraphs (1–3 sentences each). Render one `<p>` per entry.
 - `items` = an array of objects (`{ title, text }`, FAQ uses `{ q, a }`). `tips` = an array of strings.
-- `id` inside `home.pillars.items` and `process.steps` is a **technical key, never translate it**.
+- `id` inside `process.steps` is a **technical key, never translate it**.
   It is the same in all languages and lets the site pick the right image or icon:
-  - pillars: `reuse`, `handmade`, `together`
   - steps: `recovery`, `selection`, `creation`, `lining`, `final`
 - Arrays must have the **same length** in all three languages (same number of paragraphs, FAQ items…).
 
