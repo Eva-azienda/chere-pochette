@@ -248,7 +248,6 @@
     "models": {
       "title": "Unsere Modelle",
       "intro": "Drei gehäkelte Formen. Farben und Futter sind jedes Mal anders.",
-      "typicalPrice": "Preis: CHF {price}",
       "viewModel": "Taschen {model} ansehen"
     },
     "card": {

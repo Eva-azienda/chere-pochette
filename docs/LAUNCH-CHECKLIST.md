@@ -23,7 +23,7 @@ Online payment can be switched on before or after the launch; until then the sho
 - [x] Variable `ZAHLS_INSTANCE` + secret `ZAHLS_API_KEY` set; connection check OK in the Deploy run's *Zahls sync*
       step (the manual **Zahls check** workflow has not been run yet — optional)
 - [x] Design: one-line wordmark header; home hero with the headline in the page's language, animated bag line-drawing
-      (`BagSketch.astro`) and marquee band; compact IT/DE/EN selector; needle/thread icons; firm prices ("Prezzo: CHF 45.–")
+      (`BagSketch.astro`) and marquee band; compact IT/DE/EN selector; needle/thread icons; firm prices on shop cards and bag pages ("CHF 45.–"); no prices in "I modelli"
 - [x] Team photos from the Instagram post of 26.10.2026: group photo (home + team page), 7 portraits (org chart +
       member pages, `src/assets/team/`); bios = the members' own texts; Romina = CPO, Chief Product Officer
 - [x] Instagram links → profile https://www.instagram.com/chere.pochette/

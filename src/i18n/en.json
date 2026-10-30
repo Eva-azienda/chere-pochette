@@ -248,7 +248,6 @@
     "models": {
       "title": "Our models",
       "intro": "Three crocheted shapes. Colours and linings are different every time.",
-      "typicalPrice": "Price: CHF {price}",
       "viewModel": "See {model} bags"
     },
     "card": {

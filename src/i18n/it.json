@@ -248,7 +248,6 @@
     "models": {
       "title": "I nostri modelli",
       "intro": "Tre forme lavorate all'uncinetto. Colori e fodere cambiano ogni volta.",
-      "typicalPrice": "Prezzo: CHF {price}",
       "viewModel": "Vedi le borse {model}"
     },
     "card": {

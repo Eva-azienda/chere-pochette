@@ -11,7 +11,6 @@ import belle from '../assets/brand/model-belle.png';
 import coquette from '../assets/brand/model-coquette.png';
 import { type Lang, useTranslations } from '../lib/i18n';
 import { localePath } from '../lib/urls';
-import { formatPrice } from '../lib/format';
 import { models } from '../lib/catalog';
 
 interface Props {
@@ -56,7 +55,6 @@ const altKeys: Record<string, string> = {
           </div>
           <Heading class="model__name">{model.name}</Heading>
           <p class="model__type">{model.type[lang]}</p>
-          <p class="model__price">{t('shop.models.typicalPrice', { price: formatPrice(model.price) })}</p>
           <span class="model__cta">{t('shop.models.viewModel', { model: model.name })}</span>
         </a>
       </li>
@@ -128,10 +126,6 @@ const altKeys: Record<string, string> = {
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     color: var(--c-muted);
-  }
-
-  .model__price {
-    font-size: var(--fs-sm);
   }
 
   .model__cta {
