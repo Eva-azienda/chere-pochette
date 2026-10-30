@@ -17,7 +17,8 @@ Online payment can be switched on before or after the launch; until then the sho
 - [x] Admin at https://cherepochette.ch/admin/: one login (shop e-mail + password), `auth.json` v2 committed,
       demo mode removed, CSV export per tab + "Esporta tutto"
 - [x] Admin token: fine-grained, only `chere-pochette`, Contents + Actions read/write, **expires 29.10.2027**
-- [x] Checkout switch **off** (`checkout.enabled: false`) → "Ordina via e-mail"; admin shows "Pagamenti online: non ancora attivi"
+- [x] Checkout switch **on since 30.10.2026** (`checkout.enabled: true`, site still behind the password): the sync creates the
+      Zahls links and bag pages show "Paga con Zahls"; payments go through once the Zahls verification is approved
 - [x] Zahls instance `cherepochette`: company profile filled; Look & Feel "Chère Pochette" (logo, `#FAF7F2`,
       `#E8D1D8`, `#82001F`, Lato) set as default; 30-day trial started 29.10.2026
 - [x] Variable `ZAHLS_INSTANCE` + secret `ZAHLS_API_KEY` set; connection check OK in the Deploy run's *Zahls sync*
@@ -52,8 +53,7 @@ Online payment can be switched on before or after the launch; until then the sho
       (website, terms of sale), IBAN (CFO) — [SETUP.md §7](SETUP.md#7-zahls)
 - [ ] **Choose a Zahls plan before the trial ends (~28.11.2026)** (CFO)
 - [ ] After KYC: Payrexx Pay active (TWINT, cards, PostFinance, Apple/Google Pay); order notifications to the shop mailbox (CFO)
-- [ ] **Turn checkout on**: `checkout.enabled: true` → Deploy green → links created → **CHF test purchase on a phone
-      + refund** in Zahls → bag shown as sold ([OPERATIONS.md §6](OPERATIONS.md#6-going-live-with-payments)) (CTO + CFO)
+- [ ] **After KYC: CHF test purchase on a phone + refund** in Zahls → bag shown as sold ([OPERATIONS.md §6](OPERATIONS.md#6-going-live-with-payments)) (CTO + CFO)
 - [ ] Confirm the sync's assumptions with that purchase ([OPERATIONS.md §13](OPERATIONS.md#13-assumptions-to-confirm-with-the-first-real-payment)) (CTO)
 - [ ] Decide who reads the order e-mails and ships within 5 working days (as promised on the info page) (team)
 
@@ -80,8 +80,8 @@ Online payment can be switched on before or after the launch; until then the sho
 ## Go-live
 
 > **Decision (30.10.2026): launch only when online payments work.** The preview password stays on until the Zahls
-> verification is approved, a plan is chosen and the CHF test purchase + refund has passed. Then switch checkout on
-> and delete `SITE_PASSWORD` in the same session, so the public site starts with "Paga con Zahls".
+> verification is approved, a plan is chosen and the CHF test purchase + refund has passed. Checkout is already on
+> (since 30.10.2026), so launching = deleting `SITE_PASSWORD`; the public site starts with "Paga con Zahls".
 
 
 - [ ] Test on an iPhone and an Android phone: home, shop, product, order, info, team, language switch (team)
