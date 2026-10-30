@@ -47,9 +47,10 @@ GitHub Pages serves the site under the domain registered at Hostpoint, and Zahls
   outlines, coloured with `currentColor`) top-left, navigation on desktop, menu button on phones. No language selector
   in the header bar: **IT · DE · EN** is in the footer and at the bottom of the menu drawer (`LanguageSwitcher.astro`).
 - **Home**: shop-first, one message per section. Hero = headline in two lines (`home.hero.title`), one sentence
-  (`home.hero.lead`) and one button to the shop, then the lifestyle photo `src/assets/brand/hero-lifestyle.jpg` (4:5,
-  the whole frame, so the bag is always fully visible). Phones: text and button first, photo below; from 48rem a compact
-  split (text left, photo right, its height follows the screen height). Then: the bags on sale (real photos, prices,
+  (`home.hero.lead`) and one button to the shop, with the lifestyle photo `src/assets/brand/hero-lifestyle.jpg`.
+  Phones: the photo fills the screen under the header, headline + sentence on top of it (ivory veil), button at the
+  bottom; only the sides of the photo are cropped, so the bag stays whole. From 48rem: text left, the whole 4:5 photo
+  right (its height follows the screen height), with generous spacing on desktop. Then: the bags on sale (real photos, prices,
   grid with 2 columns on phones), the concept (two sentences, no photo), the three models (Belle on the oak chair
   `belle-oak-chair.jpg`; each model name links to `shop/#<model>`), how a bag is made (real photo of a bag on umbrella
   fabric + the 5 steps → `/process/`), the Ukrainian women (real photo → `/about/`), a compact team strip (real group

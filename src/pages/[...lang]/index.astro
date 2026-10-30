@@ -53,10 +53,11 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
 <BaseLayout lang={lang} path="" {...pageMeta('home')}>
   <!-- ========== Hero ==========
-       Phones: headline, one sentence and the shop button first, then the 4:5 photo (whole frame,
-       so the bag is always fully visible).
-       From 48rem: a compact split, text left and photo right; the photo's height follows the
-       screen height, so text and photo fit on the first screen. -->
+       Phones: the lifestyle photo fills the screen under the header, edge to edge. Headline and
+       sentence sit on top of it (on a soft ivory veil), the shop button at the bottom within
+       thumb reach; the bag stays fully visible between them.
+       From 48rem: text and button left, the 4:5 photo right (whole frame); the photo's height
+       follows the screen height, so text and photo fit on the first screen. -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero__inner container">
       <div class="hero__text">
@@ -64,13 +65,15 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
           {titleLines.map((line) => <span>{line}</span>)}
         </h1>
         <p class="hero__lead">{t('home.hero.lead')}</p>
+      </div>
+      <div class="hero__action">
         <a class="btn btn--primary hero__cta" href={localePath(lang, 'shop/')}>{t('home.hero.cta')}</a>
       </div>
       <div class="hero__media media">
         <BrandPicture
           src={heroLifestyle}
           alt={t('images.heroLifestyle')}
-          sizes="(min-width: 64rem) 28rem, (min-width: 48rem) 40vw, calc(100vw - 2rem)"
+          sizes="(min-width: 64rem) 28rem, (min-width: 48rem) 40vw, 160vw"
           widths={[400, 560, 720, 900, 1120]}
           loading="eager"
         />
@@ -266,27 +269,51 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
 <style>
   /* ---------- Hero ----------
-     Phones: text centred, then the photo at full width in 4:5 (the photo's own shape, nothing
-     is cut off). From 48rem: two columns, text left; the photo is as tall as the screen allows
-     (minus header and padding), never taller than 35rem. */
-  .hero {
-    padding-block: var(--s-4) var(--s-6);
-  }
-
+     Phones (< 48rem): text, button and photo share one grid cell, as tall as the screen under
+     the header (and at least 5:4 of the width, so in landscape the photo is never cut at top or
+     bottom). The photo covers the cell edge to edge: only its sides are cropped, and the bag
+     (the middle half of the frame, between 42% and 75% of its height) stays whole. The text sits
+     on the shirt and wall above the bag, the button on the pavement below it.
+     From 48rem: two columns, text + button left, photo right (4:5, nothing cut off), as tall as
+     the screen allows (minus header and padding), never wider than 28rem.
+     From 64rem: more space around the hero and between text and photo. */
   .hero__inner {
     display: grid;
-    gap: var(--s-5);
+    grid-template-areas: 'stack';
+    min-height: max(calc(100svh - var(--header-h)), 125vw);
+    padding-inline: 0;
+  }
+
+  .hero__text,
+  .hero__action,
+  .hero__media {
+    grid-area: stack;
+  }
+
+  .hero__text,
+  .hero__action {
+    position: relative;
+    z-index: 1;
   }
 
   .hero__text {
+    align-self: start;
     display: grid;
     justify-items: center;
     gap: var(--s-3);
+    padding: var(--s-5) var(--gutter) 0;
     text-align: center;
   }
 
+  .hero__action {
+    align-self: end;
+    display: flex;
+    justify-content: center;
+    padding: 0 var(--gutter) max(var(--s-5), env(safe-area-inset-bottom));
+  }
+
   .hero__title {
-    font-size: clamp(1.875rem, 1.2rem + 3vw, 3.75rem);
+    font-size: clamp(2rem, 1.2rem + 3vw, 3.75rem);
     line-height: 1.1;
     letter-spacing: -0.01em;
     text-wrap: balance;
@@ -310,13 +337,13 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
   .hero__cta {
     width: min(100%, 20rem);
-    margin-top: var(--s-2);
     white-space: nowrap;
+    box-shadow: 0 8px 24px rgb(84 21 44 / 0.3);
   }
 
   .hero__media {
-    aspect-ratio: 4 / 5;
-    border-radius: var(--radius);
+    position: relative;
+    border-radius: 0;
   }
 
   .hero__media :global(picture),
@@ -327,21 +354,49 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     object-fit: cover;
   }
 
+  /* phones: a soft ivory veil at the top, so the text reads on the light shirt and wall */
+  .hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--c-ivory) 90%, transparent) 0%,
+      color-mix(in srgb, var(--c-ivory) 70%, transparent) 24%,
+      transparent 42%
+    );
+    pointer-events: none;
+  }
+
   @media (min-width: 48rem) {
     .hero {
-      padding-block: var(--s-6) var(--s-7);
+      padding-block: var(--s-7);
     }
 
+    /* text and button in the middle of the photo's height */
     .hero__inner {
+      grid-template-areas: '. media' 'text media' 'action media' '. media';
       grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
+      grid-template-rows: 1fr auto auto 1fr;
       column-gap: var(--s-7);
+      min-height: 0;
+      padding-inline: var(--gutter);
     }
 
     .hero__text {
+      grid-area: text;
+      align-self: auto;
       justify-items: start;
       gap: var(--s-4);
+      padding: 0;
       text-align: left;
+    }
+
+    .hero__action {
+      grid-area: action;
+      align-self: auto;
+      justify-content: flex-start;
+      padding: var(--s-5) 0 0;
     }
 
     .hero__lead {
@@ -350,22 +405,43 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
     .hero__cta {
       width: auto;
+      box-shadow: none;
     }
 
     /* at most 40% of the width, so "Una seconda vita." stays on one line on tablets */
     .hero__media {
+      grid-area: media;
       width: clamp(17rem, (100svh - 13rem) * 0.8, 28rem);
       max-width: 40vw;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius);
+    }
+
+    .hero__media::after {
+      display: none;
     }
   }
 
   @media (min-width: 64rem) {
+    .hero {
+      padding-block: var(--s-8);
+    }
+
     .hero__inner {
-      column-gap: var(--s-8);
+      column-gap: var(--s-9);
     }
 
     .hero__text {
       gap: var(--s-5);
+    }
+
+    .hero__action {
+      padding-top: var(--s-6);
+    }
+
+    /* header (74px) + top padding (64px) + a margin: the photo ends above the fold */
+    .hero__media {
+      width: clamp(17rem, (100svh - 12rem) * 0.8, 28rem);
     }
   }
 
@@ -389,7 +465,7 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
   @media (min-width: 64rem) {
     .featured {
-      padding-top: var(--s-7);
+      padding-top: var(--s-8);
     }
 
     .featured .product-grid {
