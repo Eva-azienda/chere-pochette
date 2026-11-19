@@ -1,60 +1,54 @@
 ---
 /**
- * Interactive org chart: the CEO on top, the six heads of department below, joined by thin
- * "threads" (CSS lines). Every card is a link to the member's personal page.
- * Phones/tablets: 2 columns with a central thread; desktop: one row of six.
- * Order and hierarchy come from src/data/team.json (level / reportsTo).
- * Each card shows the member's round portrait (src/assets/team/) or her initials if there is none.
- * The portrait has an empty alt on purpose: the card (a link) already says the name and the role,
- * so a screen reader would otherwise read them twice.
+ * Interactive team chart. The CEO sits above the CAO; the five other areas are
+ * displayed beneath. Each card opens only that person's curriculum page.
+ * The original portrait files in src/assets/team/ are never edited here.
  */
 import TeamAvatar from './TeamAvatar.astro';
 import { type Lang, useTranslations } from '../lib/i18n';
 import { localePath } from '../lib/urls';
 import { roleDescription, team } from '../lib/catalog';
 
-interface Props {
-  lang: Lang;
-}
-
+interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const { t } = useTranslations(lang);
-
-const leaders = team.filter((m) => m.level === 1);
-const heads = team.filter((m) => m.level !== 1);
+const ceo = team.find((m) => m.roleCode === 'CEO');
+const cao = team.find((m) => m.roleCode === 'CAO');
+const remaining = team.filter((m) => m.roleCode !== 'CEO' && m.roleCode !== 'CAO');
+if (!ceo || !cao || remaining.length !== 5) throw new Error('Team organigram: expected one CEO, one CAO and five other members');
 ---
 
 <div class="org" role="group" aria-label={t('a11y.orgChart')}>
-  <p class="org__level"><span>{t('team.levels.level1')}</span></p>
-  <ul role="list" class="org__top">
+  <p class="org__level">{t('team.levels.level1')}</p>
+  <a class="member member--chief" href={localePath(lang, 'team/' + ceo.slug + '/')}>
+    <TeamAvatar member={ceo} lead />
+    <span class="member__code">{ceo.roleCode}</span>
+    <span class="member__name">{ceo.name}</span>
+    <span class="member__role">{roleDescription(ceo, lang)}</span>
+    <span class="member__more" aria-hidden="true">→</span>
+  </a>
+
+  <div class="org__thread" aria-hidden="true"></div>
+  <a class="member member--admin" href={localePath(lang, 'team/' + cao.slug + '/')}>
+    <TeamAvatar member={cao} />
+    <span class="member__code">{cao.roleCode}</span>
+    <span class="member__name">{cao.name}</span>
+    <span class="member__role">{roleDescription(cao, lang)}</span>
+    <span class="member__more" aria-hidden="true">→</span>
+  </a>
+
+  <div class="org__thread" aria-hidden="true"></div>
+  <p class="org__level org__level--others">{t('team.levels.level2')}</p>
+  <div class="org__thread org__thread--short" aria-hidden="true"></div>
+  <ul role="list" class="org__remaining">
     {
-      leaders.map((m) => (
+      remaining.map((member) => (
         <li>
-          <a class="member member--lead" href={localePath(lang, `team/${m.slug}/`)}>
-            <TeamAvatar member={m} lead />
-            <span class="member__code">{m.roleCode}</span>
-            <span class="member__name">{m.name}</span>
-            <span class="member__role">{roleDescription(m, lang)}</span>
-            <span class="member__more" aria-hidden="true">→</span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-
-  <div class="org__stem" aria-hidden="true"></div>
-  <p class="org__level"><span>{t('team.levels.level2')}</span></p>
-  <div class="org__stem org__stem--short" aria-hidden="true"></div>
-
-  <ul role="list" class="org__grid">
-    {
-      heads.map((m) => (
-        <li class="org__node">
-          <a class="member" href={localePath(lang, `team/${m.slug}/`)}>
-            <TeamAvatar member={m} />
-            <span class="member__code">{m.roleCode}</span>
-            <span class="member__name">{m.name}</span>
-            <span class="member__role">{roleDescription(m, lang)}</span>
+          <a class="member" href={localePath(lang, 'team/' + member.slug + '/')}>
+            <TeamAvatar member={member} />
+            <span class="member__code">{member.roleCode}</span>
+            <span class="member__name">{member.name}</span>
+            <span class="member__role">{roleDescription(member, lang)}</span>
             <span class="member__more" aria-hidden="true">→</span>
           </a>
         </li>
@@ -66,57 +60,48 @@ const heads = team.filter((m) => m.level !== 1);
 <style>
   .org {
     --thread: var(--c-line-strong);
-    --thread-active: var(--c-bordeaux);
-    --col-gap: 1.75rem;
-    --row-gap: 1.5rem;
-    display: grid;
-    justify-items: center;
-  }
-
-  .org__level {
-    font-size: var(--fs-xs);
-    font-weight: 600;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--c-muted);
-    text-align: center;
-    margin-bottom: var(--s-3);
-  }
-
-  .org__stem + .org__level {
-    margin: 0;
-    padding: var(--s-2) var(--s-3);
-  }
-
-  .org__top {
+    --gap: 1rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
   }
 
-  .org__top li {
-    width: min(100%, 17rem);
+  .org__level {
+    font-family: var(--f-body);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--c-muted);
+    margin-bottom: var(--s-4);
   }
 
-  /* vertical thread between the levels */
-  .org__stem {
+  .org__level--others {
+    margin: 0;
+    padding: var(--s-2) 0;
+  }
+
+  .org__thread {
+    height: clamp(1.5rem, 3.5vw, 2.5rem);
     width: 1px;
-    height: 2rem;
     background: var(--thread);
   }
 
-  .org__stem--short {
-    height: 1rem;
+  .org__thread--short {
+    height: 1.5rem;
   }
 
-  /* ---------- Cards ---------- */
   .member {
     position: relative;
     display: grid;
-    justify-items: center;
     align-content: start;
+    justify-items: center;
     gap: var(--s-1);
+    width: 100%;
     height: 100%;
+    min-width: 0;
     padding: var(--s-5) var(--s-3) var(--s-6);
     border: 1px solid var(--c-line);
     border-radius: var(--radius);
@@ -124,31 +109,38 @@ const heads = team.filter((m) => m.level !== 1);
     color: inherit;
     text-align: center;
     text-decoration: none;
-    transition:
-      border-color var(--dur) var(--ease),
-      box-shadow var(--dur) var(--ease),
-      transform var(--dur) var(--ease);
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
   }
 
-  .member :global(.monogram),
-  .member :global(.avatar) {
+  .member--chief {
+    max-width: 18rem;
+    background: var(--c-powder-2);
+  }
+
+  .member--admin {
+    max-width: 16rem;
+  }
+
+  .member :global(.avatar),
+  .member :global(.monogram) {
     margin-bottom: var(--s-3);
   }
 
-  .member:hover {
+  .member:hover,
+  .member:focus-visible {
     border-color: var(--c-bordeaux);
     box-shadow: var(--shadow-soft);
     transform: translateY(-2px);
     color: inherit;
   }
 
-  .member--lead {
-    padding-inline: var(--s-5);
-    background: var(--c-powder-2);
+  .member:focus-visible {
+    outline: 2px solid var(--c-bordeaux);
+    outline-offset: 3px;
   }
 
   .member__code {
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
     font-weight: 600;
     letter-spacing: var(--tracking-wide);
     color: var(--c-bordeaux);
@@ -156,13 +148,13 @@ const heads = team.filter((m) => m.level !== 1);
 
   .member__name {
     font-family: var(--f-display);
-    font-size: 1.1875rem;
+    font-size: 1.125rem;
     line-height: 1.2;
-    color: var(--c-plum);
     text-wrap: balance;
+    color: var(--c-plum);
   }
 
-  .member--lead .member__name {
+  .member--chief .member__name {
     font-size: var(--fs-xl);
   }
 
@@ -179,116 +171,40 @@ const heads = team.filter((m) => m.level !== 1);
     bottom: var(--s-2);
     font-size: var(--fs-sm);
     color: var(--c-bordeaux);
-    opacity: 0.6;
-    transition:
-      transform var(--dur) var(--ease),
-      opacity var(--dur) var(--ease);
   }
 
-  .member:hover .member__more {
-    opacity: 1;
-    transform: translateX(3px);
-  }
-
-  /* ---------- Grid with thread connectors (phones/tablets: 2 columns) ---------- */
-  .org__grid {
+  .org__remaining {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--col-gap);
-    row-gap: var(--row-gap);
+    gap: var(--gap);
     width: 100%;
-    max-width: 36rem;
+    max-width: 39rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
 
-  .org__node {
-    position: relative;
+  .org__remaining li {
+    min-width: 0;
+    list-style: none;
   }
 
-  /* horizontal stub from each card to the central thread */
-  .org__node::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: calc(var(--col-gap) / 2);
-    height: 1px;
-    background: var(--thread);
-    transition: background-color var(--dur) var(--ease);
+  .org__remaining li:last-child {
+    grid-column: 1 / -1;
+    width: calc((100% - var(--gap)) / 2);
+    justify-self: center;
   }
 
-  .org__node:nth-child(odd)::after {
-    left: 100%;
-  }
-
-  .org__node:nth-child(even)::after {
-    right: 100%;
-  }
-
-  /* central vertical thread, drawn piece by piece by the left-column cards */
-  .org__node:nth-child(odd)::before {
-    content: '';
-    position: absolute;
-    left: calc(100% + var(--col-gap) / 2);
-    top: calc(var(--row-gap) * -1);
-    bottom: 0;
-    width: 1px;
-    background: var(--thread);
-  }
-
-  .org__node:first-child::before {
-    top: 0;
-  }
-
-  .org__node:nth-child(odd):is(:nth-last-child(1), :nth-last-child(2))::before {
-    bottom: 50%;
-  }
-
-  .org__node:hover::after,
-  .org__node:focus-within::after {
-    background: var(--thread-active);
-  }
-
-  /* ---------- Desktop: one row of six, joined by a horizontal thread ---------- */
   @media (min-width: 64rem) {
-    .org {
-      --col-gap: 1rem;
-    }
-
-    .org__grid {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+    .org__remaining {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: var(--s-4);
       max-width: none;
-      padding-top: 1.5rem;
     }
 
-    .org__node::before,
-    .org__node:nth-child(odd)::before {
-      content: '';
-      position: absolute;
-      top: -1.5rem;
-      bottom: auto;
-      left: calc(var(--col-gap) / -2);
-      right: calc(var(--col-gap) / -2);
+    .org__remaining li:last-child {
+      grid-column: auto;
       width: auto;
-      height: 1px;
-      background: var(--thread);
-    }
-
-    .org__node:first-child::before {
-      left: 50%;
-      top: -1.5rem;
-    }
-
-    .org__node:last-child::before {
-      right: 50%;
-    }
-
-    .org__node::after,
-    .org__node:nth-child(odd)::after,
-    .org__node:nth-child(even)::after {
-      top: -1.5rem;
-      left: 50%;
-      right: auto;
-      width: 1px;
-      height: 1.5rem;
     }
 
     .member {
