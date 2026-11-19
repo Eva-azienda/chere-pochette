@@ -8,7 +8,7 @@ import BrandPicture from '../../../components/BrandPicture.astro';
 import OrgChart from '../../../components/OrgChart.astro';
 import PageHeader from '../../../components/PageHeader.astro';
 import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
-import { localePath } from '../../../lib/urls';
+import { localePath, assetPath } from '../../../lib/urls';
 import { teamGroupPhoto } from '../../../lib/team-photos';
 
 export function getStaticPaths() {
@@ -20,7 +20,18 @@ const { t, pageMeta } = useTranslations(lang);
 ---
 
 <BaseLayout lang={lang} path="team/" {...pageMeta('team')}>
-  <PageHeader eyebrow={t('team.eyebrow')} title={t('team.title')} intro={t('team.intro')} />
+  <PageHeader eyebrow={t('team.eyebrow')} title={t('team.title')} intro={t('team.intro')} thread={false}>
+    <!-- Original logo motif, not the hand-drawn ThreadDivider component. -->
+    <img
+      class="team__official-needle"
+      src={assetPath('brand/needle-from-official-logo.svg')}
+      alt=""
+      width="532"
+      height="174"
+      aria-hidden="true"
+      loading="eager"
+    />
+  </PageHeader>
 
   {
     teamGroupPhoto && (
@@ -58,6 +69,14 @@ const { t, pageMeta } = useTranslations(lang);
 </BaseLayout>
 
 <style>
+  :global(.team__official-needle) {
+    display: block;
+    width: min(100%, 17rem);
+    height: auto;
+    margin-inline: auto;
+    margin-top: var(--s-2);
+  }
+
   .hint {
     font-size: var(--fs-sm);
     color: var(--c-muted);
