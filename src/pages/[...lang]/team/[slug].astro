@@ -1,21 +1,21 @@
 ---
 /**
- * Personal page of a team member: /team/<slug>/.
- * Portrait (src/assets/team/<photo>.jpg, initials if there is none), name, role and her own words;
- * skills and experience are shown only when filled in (src/data/team.json).
- * Phones: portrait on top, then the text. From 48rem: portrait left, name + role + bio right.
+ * Original curriculum text transcribed from the seven-page CV.pdf provided by
+ * the team. Every visitor sees exactly one person's CV and can return to the
+ * organigram. Existing photographs in src/assets/team/ remain untouched.
+ * All original CV text is retained in Italian, as provided.
  */
 import { Picture } from 'astro:assets';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import Monogram from '../../../components/Monogram.astro';
-import ThreadDivider from '../../../components/ThreadDivider.astro';
 import { LOCALES, langParam, useTranslations, type Lang } from '../../../lib/i18n';
 import { localePath } from '../../../lib/urls';
-import { roleDescription, team, type TeamMember } from '../../../lib/catalog';
+import { team, type TeamMember } from '../../../lib/catalog';
 import { teamPhoto } from '../../../lib/team-photos';
 import { breadcrumbJsonLd } from '../../../lib/structured-data';
 import { metaDescription } from '../../../lib/format';
+import originalCvs from '../../../data/cv-original.json';
 
 export function getStaticPaths() {
   return LOCALES.flatMap((lang) =>
@@ -28,284 +28,249 @@ export function getStaticPaths() {
 
 const { lang, member } = Astro.props as { lang: Lang; member: TeamMember };
 const { t } = useTranslations(lang);
-
+const cv = originalCvs[member.slug as keyof typeof originalCvs];
+if (!cv) throw new Error('Missing original CV for ' + member.slug);
 const photo = teamPhoto(member);
-// 240px wide on phones, 296px (the size of the file) from 48rem.
 const photoWidths = [240, 296, 480].filter((w) => photo && w <= photo.width);
 const meta = {
   title: t('meta.titleTemplate', { title: t('meta.pages.teamMember.title', { name: member.name, role: member.roleCode }) }),
-  // The bio is unique per person and exists in all three languages (shortened for search results).
   description: metaDescription(member.bio[lang]),
 };
-// Profiles without CV data (skills / experience in src/data/team.json) stay out of search engines
-// until they are filled in; astro.config.mjs keeps them out of the sitemap with the same rule.
 const profileDraft = LOCALES.some((l) => member.skills[l].length === 0 || member.experience[l].length === 0);
 const jsonLd = breadcrumbJsonLd(lang, [
   { name: t('nav.home'), path: '' },
   { name: t('nav.team'), path: 'team/' },
-  { name: member.name, path: `team/${member.slug}/` },
+  { name: member.name, path: 'team/' + member.slug + '/' },
 ]);
-
-const sections = [
-  { key: 'responsibilities', items: member.responsibilities[lang] },
-  { key: 'education', items: member.education[lang] },
-  { key: 'skills', items: member.skills[lang] },
-  { key: 'experience', items: member.experience[lang] },
-].filter((s) => s.items.length > 0);
-
-// Previous / next profile (in org-chart order, looping around).
-const index = team.findIndex((m) => m.slug === member.slug);
-const prev = team[(index - 1 + team.length) % team.length];
-const next = team[(index + 1) % team.length];
+const backHref = localePath(lang, 'team/');
 ---
 
-<BaseLayout lang={lang} path={`team/${member.slug}/`} {...meta} noindex={profileDraft} jsonLd={jsonLd}>
-  <nav class="container back" aria-label={t('a11y.breadcrumb')}>
-    <a href={localePath(lang, 'team/')} class="back__link">
+<BaseLayout lang={lang} path={'team/' + member.slug + '/'} {...meta} noindex={profileDraft} jsonLd={jsonLd}>
+  <div class="container cv__nav">
+    <a class="cv__back" href={backHref}>
       <Icon name="arrow-left" size={18} />
       {t('team.member.backToTeam')}
     </a>
-  </nav>
+  </div>
 
-  <article class="container profile">
-    <div class="profile__top">
-      <div class="profile__photo">
-        {
-          photo ? (
-            <Picture
-              src={photo}
-              alt={t('team.member.photoAlt', { name: member.name })}
-              formats={['avif', 'webp']}
-              widths={photoWidths}
-              sizes="(min-width: 48rem) 296px, 240px"
-              class="portrait"
-              loading="eager"
-              fetchpriority="high"
-            />
-          ) : (
-            <Monogram name={member.name} size="lg" />
-          )
-        }
-      </div>
-
-      <header class="profile__head">
-        <p class="eyebrow">{member.roleCode}</p>
-        <h1>{member.name}</h1>
-        <p class="profile__role">{roleDescription(member, lang)}</p>
+  <article class="container cv">
+    <div class="cv__paper">
+      <header class="cv__hero">
+        <div class="cv__intro">
+          <p class="cv__code">{cv.code}</p>
+          <h1>{member.name}</h1>
+          <p class="cv__position">{cv.title}</p>
+          <p class="cv__description">{cv.introduction}</p>
+        </div>
+        <div class="cv__portrait">
+          {
+            photo ? (
+              <Picture
+                src={photo}
+                alt={t('team.member.photoAlt', { name: member.name })}
+                formats={['avif', 'webp']}
+                widths={photoWidths}
+                sizes="(min-width: 48rem) 296px, 240px"
+                class="portrait"
+                loading="eager"
+              />
+            ) : (
+              <Monogram name={member.name} size="lg" />
+            )
+          }
+        </div>
       </header>
 
-      <section class="profile__section profile__about" aria-labelledby="about-title">
-        <h2 id="about-title">{t('team.member.about')}</h2>
-        <p class="lead">{member.bio[lang]}</p>
-      </section>
+      <div class="cv__content">
+        <div class="cv__column">
+          <section class="cv__section" aria-labelledby="cv-education">
+            <h2 id="cv-education">FORMAZIONE</h2>
+            <ul>
+              {cv.education.map((school) => (
+                <li>
+                  <strong>{school.school}</strong>
+                  <span class="cv__course">{school.course}</span>
+                  <span class="cv__period">{school.period}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section class="cv__section" aria-labelledby="cv-languages">
+            <h2 id="cv-languages">LINGUE</h2>
+            <ul>{cv.languages.map((item) => <li>{item}</li>)}</ul>
+          </section>
+        </div>
+
+        <div class="cv__column">
+          <section class="cv__section" aria-labelledby="cv-skills">
+            <h2 id="cv-skills">COMPETENZE PROFESSIONALI</h2>
+            <ul>{cv.skills.map((item) => <li>{item}</li>)}</ul>
+          </section>
+
+          <section class="cv__section" aria-labelledby="cv-interests">
+            <h2 id="cv-interests">INTERESSI PROFESSIONALI</h2>
+            <ul>{cv.interests.map((item) => <li>{item}</li>)}</ul>
+          </section>
+        </div>
+      </div>
     </div>
-
-    <ThreadDivider class="profile__thread" />
-
-    {
-      sections.map((section) => (
-        <section class="profile__section" aria-labelledby={`${section.key}-title`}>
-          <h2 id={`${section.key}-title`}>{t(`team.member.${section.key}`)}</h2>
-          <ul class="profile__list">
-            {section.items.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        </section>
-      ))
-    }
-
-    <nav class="pager" aria-label={t('a11y.orgChart')}>
-      <a href={localePath(lang, `team/${prev.slug}/`)} rel="prev" class="pager__link">
-        <span class="pager__label"><Icon name="arrow-left" size={16} /> {t('team.member.previous')}</span>
-        <span class="pager__name">{prev.name}</span>
+    <div class="cv__footer">
+      <a class="btn btn--outline" href={backHref}>
+        <Icon name="arrow-left" size={18} />
+        {t('team.member.backToTeam')}
       </a>
-      <a href={localePath(lang, `team/${next.slug}/`)} rel="next" class="pager__link pager__link--next">
-        <span class="pager__label">{t('team.member.next')} <Icon name="arrow-right" size={16} /></span>
-        <span class="pager__name">{next.name}</span>
-      </a>
-    </nav>
+    </div>
   </article>
 </BaseLayout>
 
 <style>
-  .back {
-    padding-block: var(--s-2);
+  .cv__nav {
+    padding-block: var(--s-3);
   }
-
-  .back__link {
+  .cv__back {
     display: inline-flex;
     align-items: center;
     gap: var(--s-2);
     min-height: var(--tap);
     font-size: var(--fs-sm);
-    font-weight: 500;
+    font-weight: 600;
     color: var(--c-plum);
     text-decoration: none;
   }
-
-  .profile {
-    display: grid;
-    gap: var(--s-7);
-    max-width: calc(var(--container-narrow) + 2 * var(--gutter));
+  .cv {
+    max-width: calc(64rem + 2 * var(--gutter));
     padding-bottom: var(--section-y);
   }
-
-  /* ---------- Portrait + name + role + bio ---------- */
-  .profile__top {
+  .cv__paper {
+    overflow: hidden;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    background: var(--c-white);
+  }
+  .cv__hero {
     display: grid;
-    grid-template-areas: 'photo' 'head' 'about';
-    gap: var(--s-6);
-    padding-top: var(--s-4);
+    align-items: center;
+    gap: var(--s-5);
+    padding: var(--s-6);
+    background: var(--c-powder);
   }
-
-  .profile__photo {
-    grid-area: photo;
+  .cv__intro {
+    min-width: 0;
+  }
+  .cv__code {
+    font-family: var(--f-display);
+    font-size: clamp(2.1rem, 5vw, 3.7rem);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--c-bordeaux);
+  }
+  .cv__intro h1 {
+    font-family: var(--f-display);
+    font-size: clamp(1.45rem, 3vw, 2.5rem);
+    color: var(--c-plum);
+    margin-top: var(--s-2);
+    line-height: 1.2;
+  }
+  .cv__position {
+    margin-top: var(--s-1);
+    font-weight: 600;
+    color: var(--c-bordeaux);
+  }
+  .cv__description {
+    margin-top: var(--s-4);
+    line-height: 1.75;
+    color: var(--c-plum);
+  }
+  .cv__portrait {
     justify-self: center;
+    display: grid;
+    align-items: end;
+    width: min(100%, 15rem);
+    min-height: 0;
   }
-
-  /* An arch (rounded top, like the circle on our Instagram cards) on powder pink, with a thin
-     bordeaux "thread" around it. The photos are 296 × 370 px, so never show them wider. */
-  .profile__photo :global(.portrait) {
+  .cv__portrait :global(.portrait) {
     display: block;
-    width: 15rem;
+    width: 100%;
     height: auto;
     aspect-ratio: 4 / 5;
     object-fit: cover;
     object-position: center 20%;
-    border-radius: 50% 50% var(--radius) var(--radius) / 40% 40% var(--radius) var(--radius);
-    background: var(--c-powder);
-    outline: 1px solid color-mix(in srgb, var(--c-bordeaux) 28%, transparent);
-    outline-offset: 7px;
+    border-radius: var(--radius);
   }
-
-  .profile__head {
-    grid-area: head;
+  .cv__content {
     display: grid;
-    justify-items: center;
-    gap: var(--s-2);
-    text-align: center;
+    gap: var(--s-7);
+    padding: var(--s-6);
   }
-
-  .profile__role {
-    max-width: 28rem;
-    color: var(--c-muted);
+  .cv__column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-7);
+    min-width: 0;
   }
-
-  .profile__about {
-    grid-area: about;
+  .cv__section h2 {
+    font-family: var(--f-display);
+    font-size: clamp(1.05rem, 2.2vw, 1.45rem);
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+    color: var(--c-bordeaux);
+    padding-bottom: var(--s-2);
+    border-bottom: 1px solid var(--c-line-strong);
+    margin-bottom: var(--s-4);
   }
-
-  .profile :global(.profile__thread) {
-    width: 100%;
-  }
-
-  @media (min-width: 48rem) {
-    .profile {
-      max-width: calc(54rem + 2 * var(--gutter));
-    }
-
-    .profile__top {
-      grid-template-columns: auto minmax(0, 1fr);
-      grid-template-rows: auto 1fr;
-      grid-template-areas: 'photo head' 'photo about';
-      column-gap: var(--s-8);
-      row-gap: var(--s-5);
-      padding-top: var(--s-6);
-    }
-
-    .profile__photo {
-      justify-self: start;
-      padding: 8px; /* room for the outline */
-    }
-
-    .profile__photo :global(.portrait) {
-      width: 18.5rem;
-    }
-
-    .profile__head {
-      justify-items: start;
-      padding-top: var(--s-5);
-      text-align: left;
-    }
-  }
-
-  .profile__section {
+  .cv__section ul {
+    padding-left: 1.35rem;
     display: grid;
     gap: var(--s-3);
+    list-style: disc;
   }
-
-  .profile__section h2 {
-    font-size: var(--fs-xs);
-    font-family: var(--f-body);
-    font-weight: 600;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
+  .cv__section li {
+    padding-left: var(--s-1);
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+  .cv__section li::marker {
     color: var(--c-bordeaux);
   }
-
-  .profile__list {
-    display: grid;
-    gap: var(--s-2);
-    padding: 0;
-    list-style: none;
-  }
-
-  .profile__list li {
-    position: relative;
-    padding-left: var(--s-5);
-  }
-
-  .profile__list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.8em;
-    width: 0.75rem;
-    height: 1px;
-    background: var(--c-bordeaux);
-  }
-
-  .pager {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-4);
-    padding-top: var(--s-5);
-    border-top: 1px solid var(--c-line);
-  }
-
-  .pager__link {
-    display: grid;
-    gap: var(--s-1);
-    min-height: var(--tap);
-    padding-block: var(--s-2);
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .pager__link--next {
-    justify-items: end;
-    text-align: right;
-  }
-
-  .pager__label {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s-1);
-    font-size: var(--fs-xs);
+  .cv__section li strong {
+    display: block;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  }
+  .cv__course,
+  .cv__period {
+    display: block;
+  }
+  .cv__course {
+    font-style: italic;
+  }
+  .cv__period {
+    font-size: var(--fs-xs);
     color: var(--c-muted);
   }
-
-  .pager__name {
-    font-family: var(--f-display);
-    font-size: var(--fs-lg);
-    color: var(--c-plum);
+  .cv__footer {
+    text-align: center;
+    padding-top: var(--s-6);
   }
-
-  .pager__link:hover .pager__name {
-    color: var(--c-bordeaux);
+  .cv__footer :global(.btn) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    min-height: var(--tap);
+  }
+  @media (min-width: 48rem) {
+    .cv__hero {
+      grid-template-columns: minmax(0, 1fr) minmax(11rem, 18rem);
+      padding: var(--s-7);
+    }
+    .cv__portrait {
+      justify-self: end;
+      width: 100%;
+    }
+    .cv__content {
+      grid-template-columns: 0.9fr 1.1fr;
+      padding: var(--s-7);
+      gap: var(--s-8);
+    }
   }
 </style>

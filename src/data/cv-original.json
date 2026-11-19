@@ -1,0 +1,229 @@
+{
+  "masha-sargenti": {
+    "code": "CEO",
+    "title": "Chief Executive Officer",
+    "introduction": "In quanto CEO di Chère Pochette, mi occupo di dirigere la mini-impresa, assicurandomi che tutte le attività vengano svolte correttamente. Inoltre, motivo e aiuto i membri del team nel loro lavoro e rappresento l’azienda nelle occasioni pubbliche.",
+    "education": [
+      {
+        "school": "Scuola cantonale di commmercio",
+        "course": "Economia aziendale",
+        "period": "2024-2026"
+      }
+    ],
+    "languages": [
+      "Italiano: madrelingua",
+      "Russo: madrelingua",
+      "Inglese (B2)",
+      "Tedesco (B2)",
+      "Francese (A2)"
+    ],
+    "skills": [
+      "Leadership e coordinamento del team",
+      "Organizzazione e pianificazione",
+      "People management",
+      "Problem solving",
+      "Gestione dei progetti",
+      "Public speaking"
+    ],
+    "interests": [
+      "Imprenditoria e gestione aziendale",
+      "Fashion Business",
+      "Graphic Design",
+      "Social Media Strategy",
+      "Comunicazione persuasiva"
+    ]
+  },
+  "julia-ronchetto": {
+    "code": "CAO",
+    "title": "Chief Administrative Officer",
+    "introduction": "In qualità di CAO di Chère Pochette, mi occupo della gestione della documentazione aziendale e del coordinamento delle attività amministrative per garantire un’organizzazione e una comunicazione interna efficace.",
+    "education": [
+      {
+        "school": "Scuola cantonale di commmercio",
+        "course": "Economia aziendale",
+        "period": "2024-2026"
+      },
+      {
+        "school": "Suncoast Polytechnical High School (FL, USA)",
+        "course": "Diploma di Scuola Superiore",
+        "period": "2021-2023"
+      }
+    ],
+    "languages": [
+      "Italiano: madrelingua",
+      "Inglese: madrelingua",
+      "Tedesco (B2)",
+      "Francese (A2)"
+    ],
+    "skills": [
+      "Leadership",
+      "Problem solving",
+      "Organizzazione e precisione",
+      "Lavoro in team",
+      "Informatiche: Banana contabilità, Canva, Office Specialist Associate (Word, Excell, Powerpoint), Business Management and Analysis Package"
+    ],
+    "interests": [
+      "Imprenditoria e gestione aziendale",
+      "Branding e identità visiva",
+      "Sostenibilità e moda circolare",
+      "Creatività e comunicazione aziendale"
+    ]
+  },
+  "selina-castelli": {
+    "code": "CFO",
+    "title": "Chief Financial Officer",
+    "introduction": "In quanto CFO di Chère Pochette, mi occupo della contabilità e della gestione finanziaria, monitorando le entrate e le uscite per gestire al meglio le risorse economiche. Calcolo il punto di pareggio (break-even point) e mi occupo della chiusura finanziaria.",
+    "education": [
+      {
+        "school": "Scuola cantonale di commmercio",
+        "course": "Economia aziendale",
+        "period": "2024-2026"
+      }
+    ],
+    "languages": [
+      "Italiano: madrelingua",
+      "Tedesco (B2)",
+      "Inglese (A2)",
+      "Francese (A2)"
+    ],
+    "skills": [
+      "Contabilità e gestione finanziaria",
+      "Lavoro in team e in autonomia",
+      "Organizzazione e pianificazione",
+      "Informatiche: Banana e Microsoft Office",
+      "Problem solving"
+    ],
+    "interests": [
+      "Economia e businnes",
+      "Sostenibilità e ambiente",
+      "Creatività",
+      "Solidarietà e aiuto"
+    ]
+  },
+  "romina-fumi": {
+    "code": "CPO",
+    "title": "Chief Product Officer",
+    "introduction": "In quanto CPO di Chère Pochette, mi occupo dello sviluppo dei prodotti, della ricerca e dell’acquisto dei materiali necessari e della gestione del magazzino. Collaboro inoltre con il CFO per calcolare e definire i prezzi dei nostri prodotti.",
+    "education": [
+      {
+        "school": "Scuola cantonale di commmercio",
+        "course": "Economia aziendale",
+        "period": "2024-2026"
+      }
+    ],
+    "languages": [
+      "Italiano (madrelingua)",
+      "Inglese (B1)",
+      "Tedesco (B2)",
+      "Francese (A2)"
+    ],
+    "skills": [
+      "Gestione dei prodotti",
+      "Ricerca e selezione dei fornitori",
+      "Ricerca e selezione dei materiali",
+      "Valutazione dei materiali e della sostenibilità"
+    ],
+    "interests": [
+      "Design prodotti",
+      "Gestione della produzione",
+      "Creatività e innovazione",
+      "Sostenibilità ambientale e sociale"
+    ]
+  },
+  "michelle-salvi": {
+    "code": "CMO",
+    "title": "Chief Marketing Officer",
+    "introduction": "In quanto CMO di Chère Pochette, mi occupo di attuare il piano di marketing attraverso ricerche di mercato, analizzando il nostro target e i concorrenti. Pianifico strategie di comunicazione e pubblicità per promuovere i nostri prodotti e distinguerci dalle altre mini-imprese.",
+    "education": [
+      {
+        "school": "Scuola cantonale di commmercio",
+        "course": "Economia aziendale",
+        "period": "2024-2026"
+      }
+    ],
+    "languages": [
+      "Italiano (madrelingua)",
+      "Inglese (B1)",
+      "Tedesco (B2)",
+      "Francese (A2)"
+    ],
+    "skills": [
+      "Gestione dei social media",
+      "Creatività e comunicazione",
+      "Pianificazione di campagne marketing",
+      "Creazione di contenuti digitali",
+      "Lavoro di squadra",
+      "Organizzazione e problem solving"
+    ],
+    "interests": [
+      "Marketing e comunicazione",
+      "Moda e accessori",
+      "Social media e tendenze digitali",
+      "Branding e immagine aziendale",
+      "Sostenibilità e innovazione"
+    ]
+  },
+  "lara-fieschi": {
+    "code": "CMO",
+    "title": "Chief Marketing Officer",
+    "introduction": "In quanto CMO di Chère Pochette, mi occupo di attuare il piano di marketing attraverso ricerche di mercato, analizzando il nostro target e i concorrenti. Pianifico strategie di comunicazione e pubblicità per promuovere i nostri prodotti e distinguerci dalle altre mini-imprese.",
+    "education": [
+      {
+        "school": "Scuola cantonale di commmercio",
+        "course": "Economia aziendale",
+        "period": "2024-2026"
+      }
+    ],
+    "languages": [
+      "Italiano: madrelingua",
+      "Inglese (B2)",
+      "Tedesco (B1)",
+      "Francese (A2)"
+    ],
+    "skills": [
+      "Creatività e senso estetico",
+      "Comunicazione e promozione sui social media",
+      "Collaborazione e lavoro di squadra",
+      "Organizzazione e gestione dei contenutii"
+    ],
+    "interests": [
+      "Marketing digitale e social media",
+      "Creatività e design",
+      "Comunicazione e pubblicità"
+    ]
+  },
+  "eva-dallacqua": {
+    "code": "CTO",
+    "title": "Chief Technology Officer",
+    "introduction": "In quanto CTO di Chère Pochette, mi occupo di gestire i social media, assicurandomi che i nostri canali siano chiari, comprensibili e costantemente aggiornati. Mi occuperò inoltre dello sviluppo e della gestione del futuro sito web e shop online.",
+    "education": [
+      {
+        "school": "Scuola cantonale di commmercio",
+        "course": "Economia aziendale",
+        "period": "2024-2026"
+      }
+    ],
+    "languages": [
+      "Italiano: madrelingua",
+      "Inglese (B2)",
+      "Tedesco (B1)",
+      "Francese (A2)"
+    ],
+    "skills": [
+      "Gestione e aggiornamento canali social",
+      "Organizzazione e coordinamento lavori di gruppo",
+      "Creazione di contenuti digitali e visivi",
+      "Pianficazione e gestione delle attività",
+      "Capacità di problem solving",
+      "Utilizzo si strumenti e piattaforme digitali"
+    ],
+    "interests": [
+      "Marketing digitale e social media",
+      "Sviluppo e gestione di siti web ed e-commerce",
+      "Graphic design e comunicazione visiva",
+      "Branding e identità aziendale",
+      "Innovazione e nuove tecnologie",
+      "Strategie di comunicazione e promozione"
+    ]
+  }
+}
