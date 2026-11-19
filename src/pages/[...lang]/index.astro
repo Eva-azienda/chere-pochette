@@ -16,7 +16,7 @@ import BrandPicture from '../../components/BrandPicture.astro';
 import Icon from '../../components/Icon.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import ThreadDivider from '../../components/ThreadDivider.astro';
-import heroLogo from '../../assets/brand/logo-bordeaux.png';
+import heroLogo from '../../assets/brand/logo-home-ufficiale.png';
 import belleChair from '../../assets/brand/belle-oak-chair.jpg';
 import bagUmbrella from '../../assets/brand/hero-bag-umbrella-45.jpg';
 import womenLandscape from '../../assets/brand/women-crochet.jpg';
@@ -59,7 +59,7 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
       <img
         class="hero__logo"
         src={heroLogo.src}
-        alt={t('images.brandLogo')}
+        alt="Chère Pochette — Made to carry on"
         width={heroLogo.width}
         height={heroLogo.height}
         loading="eager"
@@ -278,7 +278,7 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
   .hero__logo {
     display: block;
-    width: min(100%, 42rem);
+    width: min(100%, 38rem);
     height: auto;
   }
 
@@ -289,7 +289,7 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
   @media (min-width: 48rem) {
     .hero__logo {
-      width: min(100%, 52rem);
+      width: min(100%, 38rem);
     }
 
     .hero__cta {
