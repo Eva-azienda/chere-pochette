@@ -49,8 +49,10 @@ const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) =
     aspect-ratio: 1;
     border-radius: 50%;
     object-fit: cover;
-    /* portraits are 4:5 with the face in the upper part */
-    object-position: center 20%;
+    /* Center the ORIGINAL photo visually inside its circular CSS frame.
+       This never edits, regenerates, retouches or replaces the underlying portrait. */
+    object-position: center center;
+    margin-inline: auto;
     background: var(--c-powder);
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--c-plum) 12%, transparent),
