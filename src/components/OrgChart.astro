@@ -112,6 +112,18 @@ if (!ceo || !cao || remaining.length !== 5) throw new Error('Team organigram: ex
     transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
   }
 
+  /* Keep CEO and CAO on the exact same vertical axis, even on narrow phones. */
+  .member--chief,
+  .member--admin {
+    box-sizing: border-box;
+    align-self: center;
+    justify-self: center;
+    margin-inline: auto;
+    position: relative;
+    left: 0;
+    right: 0;
+  }
+
   .member--chief {
     max-width: 18rem;
     background: var(--c-powder-2);
