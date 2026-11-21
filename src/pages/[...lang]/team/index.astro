@@ -101,8 +101,28 @@ const { t, pageMeta } = useTranslations(lang);
     margin-bottom: var(--s-7);
   }
 
+  /* Show the original 900x630 group photograph COMPLETELY.
+     The shared .media class normally forces object-fit: cover inside a
+     fixed-ratio frame; this gallery photo must never be cropped. */
   .group__frame {
-    aspect-ratio: 900 / 630;
+    aspect-ratio: auto;
+    height: auto;
+    overflow: visible;
+    background: transparent;
+  }
+
+  .group__frame :global(picture),
+  .group__frame :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .group__frame :global(img) {
+    border-radius: var(--radius-sm);
   }
 
   .hint {
