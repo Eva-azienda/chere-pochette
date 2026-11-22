@@ -1,7 +1,7 @@
 ---
 /**
  * Home page – one file for all languages: / (it), /de/, /en/.
- * Sections, in this order: hero (official brand logo and shop button, no photo), the bags
+ * Sections, in this order: hero (official logo, product description, brochure values and shop button; no photo), the bags
  * on sale (grid with prices), the concept (two sentences), the three models (Belle on the oak chair),
  * how a bag is made (5 steps → /process/), the Ukrainian women (→ /about/), the team strip
  * (group photo → /team/), Instagram.
@@ -66,6 +66,13 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
         fetchpriority="high"
         decoding="async"
       />
+      <div class="hero__product">
+        <p>{t('home.hero.product')}</p>
+      </div>
+      <div class="hero__values" aria-labelledby="hero-values-title">
+        <h2 id="hero-values-title">{t('home.hero.values.title')}</h2>
+        <p>{t('home.hero.values.text')}</p>
+      </div>
       <a class="btn btn--primary hero__cta" href={localePath(lang, 'shop/')}>{t('home.hero.cta')}</a>
     </div>
   </section>
@@ -258,9 +265,10 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
 <style>
   /* ---------- Hero ----------
-     The first screen introduces the brand: original full logo + shop CTA.
-     No photo; all content remains centered below the unchanged sticky header.
-     The image is used directly so its lettering, thread and slogan stay intact. */
+     Original logo (untouched), product description, then brochure's values.
+     The logo's background is #FAF7F2; new lettering uses its ink colour.
+     Bodoni LF is preferred when installed; the site's self-hosted Bodoni Moda
+     serves as a close substitute where the proprietary face isn't available. */
   .hero {
     background: var(--c-ivory);
   }
@@ -270,9 +278,9 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: clamp(2rem, 7svh, 4rem);
+    gap: clamp(1.25rem, 2.3svh, 1.875rem);
     min-height: max(30rem, calc(100svh - var(--header-h)));
-    padding-block: var(--s-7);
+    padding-block: clamp(1.5rem, 4svh, 3rem);
     text-align: center;
   }
 
@@ -280,6 +288,50 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     display: block;
     width: min(100%, 38rem);
     height: auto;
+  }
+
+  /* The product is introduced directly below the original brand logo. */
+  .hero__product {
+    width: min(100%, 48rem);
+  }
+
+  .hero__product p {
+    max-width: 45rem;
+    margin-inline: auto;
+    font-family: 'Bodoni LF', 'Bodoni FLF', var(--f-display);
+    font-weight: 400;
+    font-size: clamp(1.1875rem, 1.01rem + 0.52vw, 1.5rem);
+    line-height: 1.43;
+    text-wrap: pretty;
+    color: var(--c-logo-ink);
+  }
+
+  /* Separate the values section visually from the product introduction. */
+  .hero__values {
+    width: min(100%, 48rem);
+    margin-top: clamp(2.5rem, 6svh, 5rem);
+    color: var(--c-logo-ink);
+  }
+
+  .hero__values h2 {
+    font-family: 'Bodoni LF', 'Bodoni FLF', var(--f-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 1.65rem + 1.45vw, 2.8rem);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: inherit;
+  }
+
+  .hero__values p {
+    max-width: 47rem;
+    margin: var(--s-3) auto 0;
+    font-family: 'Bodoni LF', 'Bodoni FLF', var(--f-display);
+    font-weight: 400;
+    font-size: clamp(1.125rem, 1rem + 0.45vw, 1.375rem);
+    line-height: 1.42;
+    letter-spacing: 0;
+    color: inherit;
+    text-wrap: pretty;
   }
 
   .hero__cta {

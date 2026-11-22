@@ -3,6 +3,7 @@
 :root {
   /* Brand palette */
   --c-bordeaux: #82001f;      /* primary: logo, buttons, key accents */
+  --c-logo-ink: #8b0629;      /* sampled dominant ink from the original home logo PNG */
   --c-bordeaux-2: #761f26;    /* secondary bordeaux: hover / pressed */
   --c-plum: #54152c;          /* dark plum: footer, deep accents */
   --c-powder: #e8d1d8;        /* powder pink: soft surfaces, badges */
