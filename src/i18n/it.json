@@ -145,6 +145,10 @@
         "yarn": "fettuccia da vestiti recuperati",
         "handle": "manico all’uncinetto",
         "unique": "pezzo unico, numerato"
+      },
+      "values": {
+        "title": "I nostri valori",
+        "text": "Chère Pochette promuove una moda sostenibile, sia a livello ambientale che sociale. Attraverso creazioni artigianali, valorizziamo creatività, unicità ed eleganza, mettendo al centro il talento delle donne. Vogliamo dimostrare che eleganza e sostenibilità possono convivere, dando vita ad accessori unici che raccontano una storia."
       }
     },
     "featured": {
