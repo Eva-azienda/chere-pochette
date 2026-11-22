@@ -1,7 +1,7 @@
 ---
 /**
  * Home page – one file for all languages: / (it), /de/, /en/.
- * Sections, in this order: hero (official logo, brochure values, shop button; no photo), the bags
+ * Sections, in this order: hero (official logo, product description, brochure values and shop button; no photo), the bags
  * on sale (grid with prices), the concept (two sentences), the three models (Belle on the oak chair),
  * how a bag is made (5 steps → /process/), the Ukrainian women (→ /about/), the team strip
  * (group photo → /team/), Instagram.
@@ -66,6 +66,9 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
         fetchpriority="high"
         decoding="async"
       />
+      <div class="hero__product">
+        <p>{t('home.hero.product')}</p>
+      </div>
       <div class="hero__values" aria-labelledby="hero-values-title">
         <h2 id="hero-values-title">{t('home.hero.values.title')}</h2>
         <p>{t('home.hero.values.text')}</p>
@@ -262,7 +265,7 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
 <style>
   /* ---------- Hero ----------
-     Original logo (untouched), immediately followed by the brochure's values.
+     Original logo (untouched), product description, then brochure's values.
      The logo's background is #FAF7F2; new lettering uses its ink colour.
      Bodoni LF is preferred when installed; the site's self-hosted Bodoni Moda
      serves as a close substitute where the proprietary face isn't available. */
@@ -287,8 +290,26 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     height: auto;
   }
 
+  /* The product is introduced directly below the original brand logo. */
+  .hero__product {
+    width: min(100%, 48rem);
+  }
+
+  .hero__product p {
+    max-width: 45rem;
+    margin-inline: auto;
+    font-family: 'Bodoni LF', 'Bodoni FLF', var(--f-display);
+    font-weight: 400;
+    font-size: clamp(1.1875rem, 1.01rem + 0.52vw, 1.5rem);
+    line-height: 1.43;
+    text-wrap: pretty;
+    color: var(--c-logo-ink);
+  }
+
+  /* Separate the values section visually from the product introduction. */
   .hero__values {
     width: min(100%, 48rem);
+    margin-top: clamp(2.5rem, 6svh, 5rem);
     color: var(--c-logo-ink);
   }
 
