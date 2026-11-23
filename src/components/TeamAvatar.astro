@@ -4,7 +4,6 @@
  * cropped to a circle with the face in the middle) or, when there is no photo, the initials
  * (Monogram). Size: 96px on phones, 120px from 64rem; `lead` is a little larger (CEO).
  */
-import { Picture } from 'astro:assets';
 import Monogram from './Monogram.astro';
 import { teamPhoto } from '../lib/team-photos';
 import type { TeamMember } from '../lib/catalog';
@@ -18,20 +17,17 @@ interface Props {
 
 const { member, alt = '', lead = false } = Astro.props;
 const photo = teamPhoto(member);
-const sizes = lead ? '(min-width: 64rem) 136px, 112px' : '(min-width: 64rem) 120px, 96px';
-// Enough for 1×, 2× and 3× screens; never larger than the file (Astro doesn't upscale).
-const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) => !photo || w <= photo.width);
 ---
 
 {
   photo ? (
     <span class:list={['avatar', { 'avatar--lead': lead }]}>
-      <Picture
-        src={photo}
+      <!-- Use the ORIGINAL JPEG directly, without generating recompressed copies. -->
+      <img
+        src={photo.src}
         alt={alt}
-        formats={['avif', 'webp']}
-        widths={widths}
-        sizes={sizes}
+        width={photo.width}
+        height={photo.height}
         loading="lazy"
         decoding="async"
       />
@@ -43,13 +39,9 @@ const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) =
 
 <style>
   /*
-   * The original 4:5 JPEG stays completely unchanged. Astro <Picture> can
-   * render a <picture> wrapper around the <img>; applying a 1:1 aspect-ratio
-   * only to that wrapper used to leave the actual image at its natural 4:5
-   * size, making the portraits appear crooked/stretched on small screens.
-   *
-   * Clip a normal, proportionally scaled IMG inside a separate circular
-   * frame instead. No rotations, filters, warped dimensions, or new photos.
+   * The original 4:5 JPEG is served unchanged, in its original quality.
+   * A separate square CSS frame provides the round crop; the image itself
+   * keeps its native proportions. No rotation, filters or retouching.
    */
   .avatar {
     display: block;
@@ -65,12 +57,6 @@ const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) =
       0 0 0 1px color-mix(in srgb, var(--c-plum) 12%, transparent),
       0 0 0 5px var(--c-white),
       0 0 0 6px color-mix(in srgb, var(--c-bordeaux) 22%, transparent);
-  }
-
-  .avatar :global(picture) {
-    display: block;
-    width: 100%;
-    height: 100%;
   }
 
   .avatar :global(img) {
