@@ -2,7 +2,7 @@
   "id": "cp-004",
   "number": 4,
   "model": "belle",
-  "status": "available",
+  "status": "hidden",
   "price": 40,
   "colour": "grigio-perla",
   "lining": "pois",
@@ -15,7 +15,7 @@
     }
   ],
   "createdAt": "2026-10-29T15:00:00Z",
-  "updatedAt": "2026-10-30T09:30:53Z",
+  "updatedAt": "2026-11-23T09:40:24Z",
   "soldAt": null,
   "soldChannel": null,
   "zahls": {

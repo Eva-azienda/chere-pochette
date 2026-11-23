@@ -152,23 +152,10 @@
       },
       "product": "Realizziamo borse fatte all’uncinetto da donne con storie diverse. Ogni creazione è foderata all’interno con la stoffa di ombrelli rotti o inutilizzati. Proponiamo 4 modelli diversi, pensati per stili diversi."
     },
-    "featured": {
-      "eyebrow": "Nello shop",
-      "title": "Pezzi unici, pronti a partire",
-      "text": "Ogni borsa esiste una sola volta. Quando trova casa, lascia il posto alla prossima.",
-      "cta": "Vedi tutte le borse",
-      "empty": "Le prossime borse sono in lavorazione. Seguici su Instagram per non perderle."
-    },
     "concept": {
       "eyebrow": "Il concetto",
       "title": "Da ombrello a borsa",
       "text": "La stoffa di un ombrello inutilizzato passa a una fodera comoda e pratica di una borsa. Così ogni borsa racconta due storie: una fuori e una dentro."
-    },
-    "models": {
-      "eyebrow": "I modelli",
-      "title": "Jolie, Belle, Coquette ed Essentielle",
-      "text": "4 forme, 4 modelli.",
-      "cta": "Scegli il tuo modello"
     },
     "process": {
       "eyebrow": "Dall'ombrello alla borsa",
@@ -210,7 +197,7 @@
       "other": "{count} borse disponibili"
     },
     "empty": {
-      "title": "Tutte le borse hanno trovato casa",
+      "title": "Al momento non ci sono borse acquistabili online.",
       "text": "Stiamo già lavorando alle prossime. Seguici su Instagram per scoprirle appena sono pronte.",
       "cta": "Seguici su Instagram"
     },
@@ -224,9 +211,12 @@
       "text": "Usiamo materiali recuperati: vestiti e ombrelli che avevano già una storia. Per questo colori, fantasie e piccoli dettagli cambiano sempre, e ogni borsa ha il suo carattere."
     },
     "models": {
-      "title": "I nostri modelli",
-      "intro": "Tre forme lavorate all'uncinetto. Colori e fodere cambiano ogni volta.",
-      "viewModel": "Vedi le borse {model}"
+      "eyebrow": "La nostra collezione",
+      "title": "Quattro modelli, quattro storie",
+      "intro": "Borse fatte a mano, con fodere ricavate da ombrelli inutilizzati. Scorri le immagini per scoprire l’interno.",
+      "strap": "Dotata di una tracolla oro rimovibile",
+      "front": "{model}, vista frontale",
+      "interior": "{model}, vista dell’interno e della fodera"
     },
     "card": {
       "view": "Scopri",

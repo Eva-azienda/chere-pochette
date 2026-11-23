@@ -152,23 +152,10 @@
       },
       "product": "We create crocheted bags made by women with different life stories. Each bag is lined with fabric from broken or unused umbrellas. We offer four different models to suit different styles."
     },
-    "featured": {
-      "eyebrow": "In the shop",
-      "title": "One of a kind, ready for a new home",
-      "text": "Each bag exists only once. When it finds a home, it makes room for the next one.",
-      "cta": "See all bags",
-      "empty": "Our next bags are in the making. Follow us on Instagram so you don't miss them."
-    },
     "concept": {
       "eyebrow": "The idea",
       "title": "From umbrella to bag",
       "text": "The fabric of an unused umbrella becomes the comfortable, practical lining of a bag. So every bag tells two stories: one on the outside and one on the inside."
-    },
-    "models": {
-      "eyebrow": "The models",
-      "title": "Jolie, Belle, Coquette and Essentielle",
-      "text": "4 shapes, 4 models.",
-      "cta": "Choose your model"
     },
     "process": {
       "eyebrow": "From umbrella to bag",
@@ -210,7 +197,7 @@
       "other": "{count} bags available"
     },
     "empty": {
-      "title": "Every bag has found a home",
+      "title": "No bags are currently available to buy online.",
       "text": "We're already working on the next ones. Follow us on Instagram to see them as soon as they're ready.",
       "cta": "Follow us on Instagram"
     },
@@ -224,9 +211,12 @@
       "text": "We use recovered materials: clothes and umbrellas that already have a story. That's why colours, patterns and small details always vary – and every bag has its own character."
     },
     "models": {
-      "title": "Our models",
-      "intro": "Three crocheted shapes. Colours and linings are different every time.",
-      "viewModel": "See {model} bags"
+      "eyebrow": "Our collection",
+      "title": "Four designs, four stories",
+      "intro": "Handmade bags with linings made from unused umbrellas. Scroll through the photos to see inside.",
+      "strap": "With a detachable gold-coloured shoulder strap",
+      "front": "{model}, front view",
+      "interior": "{model}, inside view showing the lining"
     },
     "card": {
       "view": "View",

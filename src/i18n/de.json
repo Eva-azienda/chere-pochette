@@ -152,23 +152,10 @@
       },
       "product": "Wir fertigen gehäkelte Taschen, die von Frauen mit unterschiedlichen Lebensgeschichten hergestellt werden. Jede Tasche ist innen mit Stoff aus kaputten oder nicht mehr verwendeten Regenschirmen gefüttert. Wir bieten vier verschiedene Modelle für unterschiedliche Stile an."
     },
-    "featured": {
-      "eyebrow": "Im Shop",
-      "title": "Unikate, bereit für ein neues Zuhause",
-      "text": "Jede Tasche gibt es nur einmal. Hat sie ein Zuhause gefunden, macht sie Platz für die nächste.",
-      "cta": "Alle Taschen ansehen",
-      "empty": "Die nächsten Taschen entstehen gerade. Folge uns auf Instagram, um keine zu verpassen."
-    },
     "concept": {
       "eyebrow": "Die Idee",
       "title": "Vom Regenschirm zur Tasche",
       "text": "Der Stoff eines nicht mehr benutzten Regenschirms wird zum bequemen und praktischen Futter einer Tasche. So erzählt jede Tasche zwei Geschichten: eine aussen und eine innen."
-    },
-    "models": {
-      "eyebrow": "Die Modelle",
-      "title": "Jolie, Belle, Coquette und Essentielle",
-      "text": "4 Formen, 4 Modelle.",
-      "cta": "Wähle dein Modell"
     },
     "process": {
       "eyebrow": "Vom Regenschirm zur Tasche",
@@ -210,7 +197,7 @@
       "other": "{count} Taschen verfügbar"
     },
     "empty": {
-      "title": "Alle Taschen haben ein Zuhause gefunden",
+      "title": "Zurzeit sind online keine Taschen erhältlich.",
       "text": "Wir arbeiten schon an den nächsten. Folge uns auf Instagram, um sie zu sehen, sobald sie fertig sind.",
       "cta": "Folge uns auf Instagram"
     },
@@ -224,9 +211,12 @@
       "text": "Wir verwenden wiederverwertete Materialien: Kleider und Regenschirme, die schon eine Geschichte haben. Darum unterscheiden sich Farben, Muster und kleine Details immer – und jede Tasche hat ihren eigenen Charakter."
     },
     "models": {
-      "title": "Unsere Modelle",
-      "intro": "Drei gehäkelte Formen. Farben und Futter sind jedes Mal anders.",
-      "viewModel": "Taschen {model} ansehen"
+      "eyebrow": "Unsere Kollektion",
+      "title": "Vier Modelle, vier Geschichten",
+      "intro": "Handgefertigte Taschen mit einem Futter aus ungenutzten Regenschirmen. Wische durch die Bilder, um das Innenfutter zu entdecken.",
+      "strap": "Mit abnehmbarem goldfarbenem Schulterriemen",
+      "front": "{model}, Vorderansicht",
+      "interior": "{model}, Innenansicht mit Futter"
     },
     "card": {
       "view": "Ansehen",

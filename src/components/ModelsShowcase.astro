@@ -1,157 +1,100 @@
 ---
-/**
- * The three official models (Jolie, Belle, Coquette) with their cut-out photos.
- * Each card links to the shop filtered on that model (/shop/#belle).
- * Phones: a horizontal row you can swipe; larger screens: three columns.
- */
-import { Picture } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-import jolie from '../assets/brand/model-jolie.png';
-import belle from '../assets/brand/model-belle.png';
-import coquette from '../assets/brand/model-coquette.png';
+import ProductGallery from './ProductGallery.astro';
+import essentielleFront from '../assets/brand/collection/essentielle-front.jpg';
+import essentielleInside from '../assets/brand/collection/essentielle-inside.jpg';
+import jolieFront from '../assets/brand/collection/jolie-front.jpg';
+import jolieInside from '../assets/brand/collection/jolie-inside.jpg';
+import belleFront from '../assets/brand/collection/belle-front.jpg';
+import belleInside from '../assets/brand/collection/belle-inside.jpg';
+import coquetteFront from '../assets/brand/collection/coquette-front.jpg';
+import coquetteInside from '../assets/brand/collection/coquette-inside.jpg';
 import { type Lang, useTranslations } from '../lib/i18n';
-import { localePath } from '../lib/urls';
-import { models } from '../lib/catalog';
+import { formatPrice } from '../lib/format';
 
 interface Props {
   lang: Lang;
-  headingLevel?: 3 | 4;
+  headingLevel?: 1 | 2;
 }
 
-const { lang, headingLevel = 3 } = Astro.props;
+const { lang, headingLevel = 2 } = Astro.props;
 const { t } = useTranslations(lang);
-const Heading = `h${headingLevel}` as 'h3' | 'h4';
-
-// models.json → "image": "model-belle" → the cut-out file in src/assets/brand/
-const images: Record<string, ImageMetadata> = {
-  'model-jolie': jolie,
-  'model-belle': belle,
-  'model-coquette': coquette,
-};
-const altKeys: Record<string, string> = {
-  'model-jolie': 'images.modelJolie',
-  'model-belle': 'images.modelBelle',
-  'model-coquette': 'images.modelCoquette',
-};
+const Heading = headingLevel === 1 ? 'h1' : 'h2';
+const ModelHeading = headingLevel === 1 ? 'h2' : 'h3';
+const collection = [
+  { id: 'essentielle', name: 'Essentielle', photos: [essentielleFront, essentielleInside], strap: false },
+  { id: 'jolie', name: 'Jolie', photos: [jolieFront, jolieInside], strap: true },
+  { id: 'belle', name: 'Belle', photos: [belleFront, belleInside], strap: true },
+  { id: 'coquette', name: 'Coquette', photos: [coquetteFront, coquetteInside], strap: true },
+];
 ---
 
-<ul role="list" class="models">
-  {
-    models.map((model) => (
-      <li class="model">
-        <a class="model__link" href={localePath(lang, `shop/#${model.id}`)}>
-          <div class="model__media">
-            {images[model.image] && (
-              <Picture
-                src={images[model.image]}
-                formats={['avif', 'webp']}
-                fallbackFormat="jpg"
-                widths={[320, 480, 720]}
-                sizes="(min-width: 48rem) 30vw, 70vw"
-                alt={altKeys[model.image] ? t(altKeys[model.image]) : model.name}
-                loading="lazy"
-              />
-            )}
-          </div>
-          <Heading class="model__name">{model.name}</Heading>
-          <p class="model__type">{model.type[lang]}</p>
-          <span class="model__cta">{t('shop.models.viewModel', { model: model.name })}</span>
-        </a>
-      </li>
-    ))
-  }
-</ul>
+<section class="section collection" id="collection" aria-labelledby="collection-title">
+  <div class="container">
+    <div class="heading">
+      <p class="eyebrow">{t('shop.models.eyebrow')}</p>
+      <Heading id="collection-title">{t('shop.models.title')}</Heading>
+      <p>{t('shop.models.intro')}</p>
+    </div>
+    <ul class="collection__grid" role="list">
+      {collection.map(({ id, name, photos, strap }) => (
+        <li class="collection__model">
+          <ProductGallery
+            lang={lang}
+            layout="collection"
+            idPrefix={`collection-${id}`}
+            photos={photos}
+            altFor={(n) => t(n === 1 ? 'shop.models.front' : 'shop.models.interior', { model: name })}
+          />
+          <ModelHeading class="collection__name">{name}</ModelHeading>
+          {strap && <p class="collection__strap">{t('shop.models.strap')}</p>}
+          <p class="collection__price">CHF {formatPrice(55)}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
 
 <style>
-  .models {
+  .collection {
+    scroll-margin-top: var(--header-h);
+  }
+
+  .collection__grid {
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 72%;
-    gap: var(--s-4);
-    margin-inline: calc(var(--gutter) * -1);
-    padding-inline: var(--gutter);
-    padding-bottom: var(--s-2);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--gutter);
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-6) var(--s-4);
   }
 
-  .models::-webkit-scrollbar {
-    display: none;
-  }
-
-  .model {
-    scroll-snap-align: start;
-  }
-
-  .model__link {
+  .collection__model {
     display: grid;
-    justify-items: center;
-    gap: var(--s-1);
-    text-align: center;
-    color: inherit;
-    text-decoration: none;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    row-gap: var(--s-2);
+    min-width: 0;
   }
 
-  .model__media {
-    width: 100%;
-    aspect-ratio: 1;
-    margin-bottom: var(--s-3);
-    overflow: hidden;
-    border-radius: var(--radius-sm);
-    /* Soft placeholder while the photo loads; the cut-outs are on the page ivory and cover it. */
-    background: var(--placeholder);
+  .collection__name {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    grid-row: 2;
   }
 
-  .model__media :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform 600ms var(--ease);
-  }
-
-  .model__link:hover .model__media :global(img) {
-    transform: scale(1.04) rotate(-1deg);
-  }
-
-  .model__name {
-    font-size: var(--fs-xl);
-  }
-
-  .model__type {
-    font-size: var(--fs-xs);
-    font-weight: 600;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
+  .collection__strap {
+    grid-row: 3;
+    font-size: var(--fs-sm);
     color: var(--c-muted);
   }
 
-  .model__cta {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--tap);
-    font-size: var(--fs-sm);
-    font-weight: 600;
+  .collection__price {
+    grid-row: 4;
     color: var(--c-plum);
-    text-decoration: underline;
-    text-decoration-color: var(--c-line-strong);
-    text-underline-offset: 0.25em;
+    font-weight: 700;
   }
 
-  .model__link:hover .model__cta {
-    color: var(--c-bordeaux);
-    text-decoration-color: currentColor;
-  }
-
-  @media (min-width: 48rem) {
-    .models {
-      grid-auto-flow: row;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-inline: 0;
-      padding-inline: 0;
-      overflow: visible;
+  @media (min-width: 64rem) {
+    .collection__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: var(--s-5);
     }
   }
 </style>

@@ -2,7 +2,7 @@
   "id": "cp-003",
   "number": 3,
   "model": "coquette",
-  "status": "available",
+  "status": "hidden",
   "price": 45,
   "colour": "giallo",
   "lining": "tinta-unita",
@@ -15,7 +15,7 @@
     }
   ],
   "createdAt": "2026-10-29T15:00:00Z",
-  "updatedAt": "2026-10-30T09:30:53Z",
+  "updatedAt": "2026-11-23T09:40:24Z",
   "soldAt": null,
   "soldChannel": null,
   "zahls": {
