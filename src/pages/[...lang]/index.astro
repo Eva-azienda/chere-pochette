@@ -128,7 +128,7 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     </div>
   </section>
 
-  <!-- ========== The three models ==========
+  <!-- ========== The four models ==========
        The Belle on the oak chair introduces the models; each name links to the shop filtered by
        that model (shop/#belle). Phones: photo above the text. From 48rem: photo left. -->
   <section class="section models" aria-labelledby="models-title">
@@ -153,11 +153,16 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
               <li>
                 <a href={localePath(lang, `shop/#${model.id}`)}>
                   <span class="models__name">{model.name}</span>
-                  <span class="models__type">{model.type[lang]}</span>
                 </a>
               </li>
             ))
           }
+          <!-- Essentielle is presented here, without inventing a price or shop filter. -->
+          <li>
+            <a href={localePath(lang, 'shop/')}>
+              <span class="models__name">Essentielle</span>
+            </a>
+          </li>
         </ul>
         <a class="link-arrow" href={localePath(lang, 'shop/')}>{t('home.models.cta')}</a>
       </div>
@@ -421,7 +426,7 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     color: var(--c-plum);
   }
 
-  /* one row per model: name (Bodoni) + type, the whole row is a 48px link */
+  /* One row per model; names only, as in the approved four-model preview. */
   .models__list {
     border-top: 1px solid var(--c-line);
   }
@@ -442,12 +447,6 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     font-family: var(--f-display);
     font-size: var(--fs-lg);
     color: var(--c-plum);
-  }
-
-  .models__type {
-    font-size: var(--fs-sm);
-    color: var(--c-muted);
-    text-align: right;
   }
 
   .models__list a:hover .models__name {
