@@ -9,7 +9,6 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import ModelsShowcase from '../../../components/ModelsShowcase.astro';
-import PageHeader from '../../../components/PageHeader.astro';
 import ProductCard from '../../../components/ProductCard.astro';
 import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
 import { getAvailableProducts, models, site } from '../../../lib/catalog';
@@ -40,7 +39,7 @@ const filterCss = models
 ---
 
 <BaseLayout lang={lang} path="shop/" {...pageMeta('shop')}>
-  <PageHeader eyebrow={t('shop.eyebrow')} title={t('shop.title')} intro={t('shop.intro')} />
+  <ModelsShowcase lang={lang} headingLevel={1} />
 
   <section class="container shop" data-shop data-count-one={countTexts.one} data-count-other={countTexts.other}>
     {
@@ -98,15 +97,6 @@ const filterCss = models
     </div>
   </section>
 
-  <section class="section section--alt" aria-labelledby="models-title">
-    <div class="container">
-      <div class="heading center">
-        <h2 id="models-title">{t('shop.models.title')}</h2>
-        <p>{t('shop.models.intro')}</p>
-      </div>
-      <ModelsShowcase lang={lang} />
-    </div>
-  </section>
 </BaseLayout>
 
 <script>

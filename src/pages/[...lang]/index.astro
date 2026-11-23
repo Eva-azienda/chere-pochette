@@ -1,29 +1,17 @@
 ---
-/**
- * Home page – one file for all languages: / (it), /de/, /en/.
- * Sections, in this order: hero (official logo, product description, brochure values and shop button; no photo), the bags
- * on sale (grid with prices), the concept (two sentences), the three models (Belle on the oak chair),
- * how a bag is made (5 steps → /process/), the Ukrainian women (→ /about/), the team strip
- * (group photo → /team/), Instagram.
- * Each section says one thing: the details live on the dedicated pages.
- *
- * The home hero shows the original logo with its slogan, not a text reconstruction.
- * Product cards always show the real photos of each bag; women and team sections use real photos.
- */
+/** Home page shared by the Italian, German and English routes. */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArtPicture from '../../components/ArtPicture.astro';
 import BrandPicture from '../../components/BrandPicture.astro';
 import Icon from '../../components/Icon.astro';
-import ProductCard from '../../components/ProductCard.astro';
-import ThreadDivider from '../../components/ThreadDivider.astro';
+import ModelsShowcase from '../../components/ModelsShowcase.astro';
 import heroLogo from '../../assets/brand/logo-home-ufficiale.png';
-import belleChair from '../../assets/brand/belle-oak-chair.jpg';
 import bagUmbrella from '../../assets/brand/hero-bag-umbrella-45.jpg';
 import womenLandscape from '../../assets/brand/women-crochet.jpg';
 import womenPortrait from '../../assets/brand/women-crochet-45.jpg';
 import { localeStaticPaths, useTranslations, type Lang } from '../../lib/i18n';
 import { localePath } from '../../lib/urls';
-import { getAvailableProducts, models, site } from '../../lib/catalog';
+import { site } from '../../lib/catalog';
 import { teamGroupPhoto } from '../../lib/team-photos';
 
 export function getStaticPaths() {
@@ -32,16 +20,6 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props as { lang: Lang };
 const { t, list, pageMeta } = useTranslations(lang);
-
-// "Pezzi unici, pronti a partire" → two lines, broken after the comma.
-const featuredTitleLines = t('home.featured.title').split(/(?<=,)\s+/);
-
-// Up to 6 bags. From 64rem: 4 columns, or 3 when that fills the rows better (3, 5 or 6 bags).
-const featured = (await getAvailableProducts()).slice(0, 6);
-const threeColumns = featured.length === 3 || featured.length >= 5;
-const cardSizes = threeColumns
-  ? '(min-width: 72rem) 22rem, (min-width: 64rem) 30vw, 46vw'
-  : '(min-width: 72rem) 16rem, (min-width: 64rem) 22vw, 46vw';
 
 const steps = list<{ title: string }>('process.steps');
 // "https://www.instagram.com/chere.pochette/" → "@chere.pochette"
@@ -77,46 +55,7 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     </div>
   </section>
 
-  <!-- ========== Bags on sale ==========
-       A grid (never a carousel): 2 columns on phones, 3–4 from 64rem. The real photo, name, price
-       and link of every bag. -->
-  <section class="section featured" aria-labelledby="featured-title">
-    <div class="container">
-      <div class="heading featured__heading">
-        <p class="eyebrow">{t('home.featured.eyebrow')}</p>
-        <h2 id="featured-title" class="featured__title">
-          {featuredTitleLines.map((line) => <span>{line}</span>)}
-        </h2>
-        <p>{t('home.featured.text')}</p>
-      </div>
-
-      {
-        featured.length > 0 ? (
-          <>
-            <ul role="list" class:list={['product-grid', { 'featured__grid--3': threeColumns }]}>
-              {featured.map((product) => (
-                <li>
-                  <ProductCard product={product} lang={lang} sizes={cardSizes} />
-                </li>
-              ))}
-            </ul>
-            <div class="featured__more">
-              <a class="btn btn--outline" href={localePath(lang, 'shop/')}>{t('home.featured.cta')}</a>
-            </div>
-          </>
-        ) : (
-          <div class="empty">
-            <ThreadDivider />
-            <p class="lead">{t('home.featured.empty')}</p>
-            <a class="btn btn--outline" href={site.instagram} rel="noopener">
-              <Icon name="instagram" size={20} />
-              {t('common.followInstagram')}
-            </a>
-          </div>
-        )
-      }
-    </div>
-  </section>
+  <ModelsShowcase lang={lang} />
 
   <!-- ========== The concept ==========
        Two sentences, no picture: outside a garment, inside an umbrella. -->
@@ -125,47 +64,6 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
       <p class="eyebrow">{t('home.concept.eyebrow')}</p>
       <h2 id="concept-title">{t('home.concept.title')}</h2>
       <p class="lead">{t('home.concept.text')}</p>
-    </div>
-  </section>
-
-  <!-- ========== The four models ==========
-       The Belle on the oak chair introduces the models; each name links to the shop filtered by
-       that model (shop/#belle). Phones: photo above the text. From 48rem: photo left. -->
-  <section class="section models" aria-labelledby="models-title">
-    <div class="container feature">
-      <figure class="feature__media media models__media">
-        <BrandPicture
-          src={belleChair}
-          alt={t('images.belleOakChair')}
-          sizes="(min-width: 72rem) 34rem, (min-width: 48rem) 45vw, calc(100vw - 2rem)"
-          widths={[480, 720, 960, 1120]}
-          position="50% 52%"
-        />
-        <figcaption class="models__caption">Belle</figcaption>
-      </figure>
-      <div class="feature__text stack">
-        <p class="eyebrow">{t('home.models.eyebrow')}</p>
-        <h2 id="models-title">{t('home.models.title')}</h2>
-        <p>{t('home.models.text')}</p>
-        <ul role="list" class="models__list">
-          {
-            models.map((model) => (
-              <li>
-                <a href={localePath(lang, `shop/#${model.id}`)}>
-                  <span class="models__name">{model.name}</span>
-                </a>
-              </li>
-            ))
-          }
-          <!-- Essentielle is presented here, without inventing a price or shop filter. -->
-          <li>
-            <a href={localePath(lang, 'shop/')}>
-              <span class="models__name">Essentielle</span>
-            </a>
-          </li>
-        </ul>
-        <a class="link-arrow" href={localePath(lang, 'shop/')}>{t('home.models.cta')}</a>
-      </div>
     </div>
   </section>
 
@@ -355,48 +253,6 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     }
   }
 
-  /* ---------- Bags on sale ---------- */
-  .featured {
-    padding-top: var(--s-6);
-  }
-
-  .featured__heading {
-    margin-bottom: var(--s-5);
-  }
-
-  .featured__title span {
-    display: block;
-  }
-
-  /* phones: a little less space between the rows of cards */
-  .featured .product-grid {
-    row-gap: var(--s-5);
-  }
-
-  @media (min-width: 64rem) {
-    .featured {
-      padding-top: var(--s-8);
-    }
-
-    .featured .product-grid {
-      row-gap: var(--s-7);
-    }
-
-    .featured .featured__grid--3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  .featured__more {
-    display: flex;
-    justify-content: center;
-    margin-top: var(--s-6);
-  }
-
-  .featured__more .btn {
-    width: min(100%, 20rem);
-  }
-
   /* ---------- Concept ---------- */
   .concept__inner {
     margin-bottom: 0;
@@ -404,53 +260,6 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
 
   .concept__inner .lead {
     max-width: 34rem;
-  }
-
-  /* ---------- Models ---------- */
-  .models__media {
-    position: relative;
-    margin: 0;
-  }
-
-  /* the model's name on the photo, like a small label */
-  .models__caption {
-    position: absolute;
-    left: var(--s-3);
-    bottom: var(--s-3);
-    padding: var(--s-1) var(--s-3);
-    border-radius: var(--radius-pill);
-    background: color-mix(in srgb, var(--c-ivory) 92%, transparent);
-    font-family: var(--f-display);
-    font-style: italic;
-    font-size: var(--fs-base);
-    color: var(--c-plum);
-  }
-
-  /* One row per model; names only, as in the approved four-model preview. */
-  .models__list {
-    border-top: 1px solid var(--c-line);
-  }
-
-  .models__list a {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--s-4);
-    min-height: var(--tap);
-    padding-block: var(--s-3);
-    border-bottom: 1px solid var(--c-line);
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .models__name {
-    font-family: var(--f-display);
-    font-size: var(--fs-lg);
-    color: var(--c-plum);
-  }
-
-  .models__list a:hover .models__name {
-    color: var(--c-bordeaux);
   }
 
   /* ---------- Process teaser ---------- */
