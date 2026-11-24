@@ -1,0 +1,27 @@
+{
+  "id": "cp-012",
+  "number": 12,
+  "model": "jolie",
+  "status": "available",
+  "price": 55,
+  "colour": "beige",
+  "lining": "tinta-unita",
+  "note": "",
+  "photos": [
+    {
+      "src": "media/products/cp-012/1",
+      "w": 864,
+      "h": 1080
+    },
+    {
+      "src": "media/products/cp-012/2",
+      "w": 864,
+      "h": 1080
+    }
+  ],
+  "createdAt": "2026-11-24T20:11:59.907Z",
+  "updatedAt": "2026-11-24T20:11:59.907Z",
+  "soldAt": null,
+  "soldChannel": null,
+  "zahls": null
+}

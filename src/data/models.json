@@ -3,7 +3,8 @@
     "id": "jolie",
     "name": "Jolie",
     "type": { "it": "Bauletto", "de": "Bauletto-Tasche", "en": "Barrel bag" },
-    "price": 45,
+    "price": 55,
+    "removableStrap": true,
     "dimensions": { "length": "20–30", "depth": "10–11", "height": "14–17", "handle": "2–3" },
     "image": "model-jolie"
   },
