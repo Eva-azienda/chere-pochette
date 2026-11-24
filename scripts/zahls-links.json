@@ -1,4 +1,13 @@
 {
   "about": "Written by scripts/zahls-sync.mjs - do not edit. Zahls payment links that are still open, so links of deleted bags can be closed too.",
-  "links": []
+  "links": [
+    {"product":"cp-005","kind":"pickup","id":39276959},
+    {"product":"cp-005","kind":"shipping","id":39276958},
+    {"product":"cp-006","kind":"pickup","id":39276962},
+    {"product":"cp-006","kind":"shipping","id":39276961},
+    {"product":"cp-007","kind":"pickup","id":39276964},
+    {"product":"cp-007","kind":"shipping","id":39276963},
+    {"product":"cp-008","kind":"pickup","id":39276968},
+    {"product":"cp-008","kind":"shipping","id":39276966}
+  ]
 }
