@@ -45,7 +45,8 @@ const description = t('meta.pages.product.description', metaVars);
 
 const related = (await getAvailableProducts()).filter((p) => p.id !== product.id).slice(0, 4);
 const cover = product.photos[0];
-const dimensions = ['length', 'depth', 'height', 'handle'] as const;
+const dimensions = (['length', 'depth', 'height', 'handle'] as const)
+  .filter((dimension) => info.model.dimensions[dimension]);
 
 // Structured data for search engines: Product + Offer (shipping, returns) and the breadcrumb trail.
 const jsonLd = [
@@ -173,25 +174,27 @@ const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${produ
       }
 
       <div class="accordion">
-        <details open>
-          <summary>{t('product.dimensions.title')}</summary>
-          <div class="accordion__body">
-            <table class="dims">
-              <caption class="visually-hidden">{t('product.dimensions.title')}</caption>
-              <tbody>
-                {
-                  dimensions.map((d) => (
-                    <tr>
-                      <th scope="row">{t(`product.dimensions.${d}`)}</th>
-                      <td>{t('product.dimensions.value', { value: info.model.dimensions[d] })}</td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </table>
-            <p class="small muted">{t('product.dimensions.note')}</p>
-          </div>
-        </details>
+        {dimensions.length > 0 && (
+          <details open>
+            <summary>{t('product.dimensions.title')}</summary>
+            <div class="accordion__body">
+              <table class="dims">
+                <caption class="visually-hidden">{t('product.dimensions.title')}</caption>
+                <tbody>
+                  {
+                    dimensions.map((d) => (
+                      <tr>
+                        <th scope="row">{t(`product.dimensions.${d}`)}</th>
+                        <td>{t('product.dimensions.value', { value: info.model.dimensions[d] })}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+              <p class="small muted">{t('product.dimensions.note')}</p>
+            </div>
+          </details>
+        )}
 
         <details>
           <summary>{t('product.materials.title')}</summary>

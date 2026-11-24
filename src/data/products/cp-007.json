@@ -1,0 +1,27 @@
+{
+  "id": "cp-007",
+  "number": 7,
+  "model": "essentielle",
+  "status": "available",
+  "price": 55,
+  "colour": "nero",
+  "lining": "pois",
+  "note": "",
+  "photos": [
+    {
+      "src": "media/products/cp-007/1",
+      "w": 864,
+      "h": 1080
+    },
+    {
+      "src": "media/products/cp-007/2",
+      "w": 1024,
+      "h": 1280
+    }
+  ],
+  "createdAt": "2026-11-24T19:53:23.309Z",
+  "updatedAt": "2026-11-24T19:53:23.309Z",
+  "soldAt": null,
+  "soldChannel": null,
+  "zahls": null
+}
