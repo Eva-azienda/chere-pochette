@@ -7,7 +7,7 @@ import PageHeader from '../../../components/PageHeader.astro';
 import ThreadDivider from '../../../components/ThreadDivider.astro';
 import umbrellasCollected from '../../../assets/brand/umbrellas-collected.jpg';
 import umbrellasFabrics from '../../../assets/brand/umbrellas-fabrics.jpg';
-import womenCrochet from '../../../assets/brand/women-crochet-45.jpg';
+import crochetProcess from '../../../assets/brand/crochet-process.jpg';
 import liningCut from '../../../assets/brand/lining-cut.jpg';
 import bagNameplate from '../../../assets/brand/bag-nameplate.jpg';
 import bagHands from '../../../assets/brand/hero-bag-hands-45.jpg';
@@ -27,7 +27,7 @@ const steps = list<{ id: string; title: string; text: string }>('process.steps')
 const photos: Record<string, { src: ImageMetadata; alt: string; position?: string }> = {
   recovery: { src: umbrellasCollected, alt: 'images.umbrellasCollected', position: '40% 50%' },
   selection: { src: umbrellasFabrics, alt: 'images.umbrellasFabrics' },
-  creation: { src: womenCrochet, alt: 'images.womenCrochet', position: '50% 40%' },
+  creation: { src: crochetProcess, alt: 'images.womenCrochet' },
   'lining-preparation': { src: liningCut, alt: 'images.liningCut' },
   nameplate: { src: bagNameplate, alt: 'images.bagNameplate' },
   final: { src: bagHands, alt: 'images.heroBagHands' },
