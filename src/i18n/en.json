@@ -13,7 +13,7 @@
       },
       "shop": {
         "title": "Shop – handmade crochet bags",
-        "description": "Jolie, Belle and Coquette crochet bags: numbered one-of-a-kind pieces, handmade from recovered materials. Shipping in Switzerland or free pickup in Bellinzona."
+        "description": "Jolie, Belle and Coquette crochet bags: numbered one-of-a-kind pieces, handmade from recovered materials. Shipping within Switzerland only or free pickup in Ticino by arrangement."
       },
       "product": {
         "title": "{model} – crochet bag No. {number}",
@@ -37,7 +37,7 @@
       },
       "info": {
         "title": "Info & FAQ: shipping, returns and care",
-        "description": "Shipping within Switzerland and Liechtenstein, free pickup in Bellinzona, returns within 14 days and care tips for your crochet bag."
+        "description": "Shipping within Switzerland only, free pickup in Ticino by arrangement, returns within 14 days and care tips for your crochet bag."
       },
       "legal": {
         "title": "Legal notice, privacy & terms of sale",
@@ -257,12 +257,12 @@
       "title": "How would you like to receive it?",
       "shipping": {
         "title": "Shipping",
-        "text": "With Swiss Post, within Switzerland and to Liechtenstein.",
+        "text": "Shipping with Swiss Post within Switzerland only.",
         "price": "+ CHF {fee}"
       },
       "pickup": {
-        "title": "Pickup in Bellinzona",
-        "text": "After your purchase, we'll contact you to arrange a time.",
+        "title": "Pickup in Ticino",
+        "text": "After your purchase, we’ll contact you to agree on a day, time and meeting place in Ticino.",
         "price": "Free"
       }
     },
@@ -290,7 +290,7 @@
     },
     "care": {
       "title": "Caring for your bag",
-      "text": "Hand wash in cold water, don't wring, and let it dry flat.",
+      "text": "You’ll find a label with washing instructions inside each bag.",
       "link": "All care tips"
     },
     "question": {
@@ -460,15 +460,15 @@
     "shipping": {
       "title": "Shipping",
       "paragraphs": [
-        "We ship with Swiss Post throughout Switzerland and to Liechtenstein.",
+        "We ship with Swiss Post within Switzerland only.",
         "Flat shipping fee: CHF {fee}",
         "We usually ship within 5 working days of payment. This is an estimate: we pack every parcel with care, in between school lessons."
       ]
     },
     "pickup": {
-      "title": "Pickup in Bellinzona",
+      "title": "Pickup in Ticino",
       "paragraphs": [
-        "You can also collect your bag in Bellinzona, free of charge.",
+        "You can collect your bag free of charge anywhere in Ticino by arrangement.",
         "After your purchase, we'll contact you to agree on a day, time and place."
       ]
     },
@@ -496,12 +496,7 @@
     },
     "care": {
       "title": "Caring for your bag",
-      "tips": [
-        "Hand wash in cold water with a mild detergent.",
-        "Don't wring or twist the bag.",
-        "Let it dry flat, away from heat sources.",
-        "No washing machine, no tumble dryer."
-      ]
+      "text": "You’ll find a label with washing instructions inside each bag."
     },
     "faq": {
       "title": "Frequently asked questions",
@@ -516,7 +511,7 @@
         },
         {
           "q": "How much does shipping cost?",
-          "a": "CHF {fee} within Switzerland and to Liechtenstein. Pickup in Bellinzona is free."
+          "a": "Shipping costs CHF {fee} and is available within Switzerland only. Pickup in Ticino is free by arrangement."
         },
         {
           "q": "How can I pay?",
@@ -529,11 +524,11 @@
         },
         {
           "q": "Who makes the bags?",
-          "a": "We do – seven students at SCC Bellinzona – together with Ukrainian women who crochet with us."
+          "a": "Mothers, friends and acquaintances crochet the bags by hand. Each of them has a story of her own."
         },
         {
           "q": "How do I hear about new bags?",
-          "a": "Follow us on Instagram and sign up for our newsletter: we'll let you know when new pieces arrive."
+          "a": "Follow us on Instagram to discover new bags."
         }
       ]
     },
@@ -561,7 +556,7 @@
     "lead": "Your payment went through. Your Chère Pochette is ready to start a new life with you.",
     "paragraphs": [
       "You'll soon receive a confirmation e-mail from Zahls.ch. If you can't find it, please check your spam folder.",
-      "We'll contact you to arrange shipping or your pickup in Bellinzona."
+      "We’ll contact you to arrange shipping or pickup in Ticino."
     ],
     "questions": "Any questions? Write to us at {email}.",
     "cta": "Back to the shop",

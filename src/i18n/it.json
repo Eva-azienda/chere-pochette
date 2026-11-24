@@ -13,7 +13,7 @@
       },
       "shop": {
         "title": "Shop – borse all'uncinetto fatte a mano",
-        "description": "Borse all'uncinetto Jolie, Belle e Coquette: pezzi unici numerati, fatti a mano con materiali recuperati. Spedizione in Svizzera o ritiro a Bellinzona."
+        "description": "Borse all'uncinetto Jolie, Belle e Coquette: pezzi unici numerati, fatti a mano con materiali recuperati. Spedizione solo in Svizzera o ritiro gratuito in Ticino su accordo."
       },
       "product": {
         "title": "{model} – borsa all'uncinetto N° {number}",
@@ -37,7 +37,7 @@
       },
       "info": {
         "title": "Info & FAQ: spedizione, resi e cura",
-        "description": "Spedizione in Svizzera e Liechtenstein, ritiro gratuito a Bellinzona, resi entro 14 giorni e consigli per lavare la tua borsa all'uncinetto."
+        "description": "Spedizione solo in Svizzera, ritiro gratuito in Ticino su accordo, resi entro 14 giorni e consigli per lavare la tua borsa all'uncinetto."
       },
       "legal": {
         "title": "Note legali, privacy e condizioni di vendita",
@@ -257,12 +257,12 @@
       "title": "Come vuoi riceverla?",
       "shipping": {
         "title": "Spedizione",
-        "text": "Con La Posta Svizzera, in Svizzera e nel Liechtenstein.",
+        "text": "Spedizione con la Posta Svizzera solo in Svizzera.",
         "price": "+ CHF {fee}"
       },
       "pickup": {
-        "title": "Ritiro a Bellinzona",
-        "text": "Dopo l'acquisto ti contattiamo per fissare un appuntamento.",
+        "title": "Ritiro in Ticino",
+        "text": "Dopo l’acquisto ti contattiamo per concordare giorno, ora e luogo del ritiro in Ticino.",
         "price": "Gratis"
       }
     },
@@ -290,7 +290,7 @@
     },
     "care": {
       "title": "Come prendersene cura",
-      "text": "Lava a mano in acqua fredda, senza strizzare, e lascia asciugare in piano.",
+      "text": "All’interno di ogni borsa troverai un’etichetta con le istruzioni di lavaggio.",
       "link": "Tutti i consigli"
     },
     "question": {
@@ -460,15 +460,15 @@
     "shipping": {
       "title": "Spedizione",
       "paragraphs": [
-        "Spediamo con La Posta Svizzera, in Svizzera e nel Liechtenstein.",
+        "Spediamo con la Posta Svizzera solo in Svizzera.",
         "Costo forfettario di spedizione: CHF {fee}",
         "Di solito spediamo entro 5 giorni lavorativi dal pagamento. È un tempo indicativo: prepariamo ogni pacco con cura, tra una lezione e l'altra."
       ]
     },
     "pickup": {
-      "title": "Ritiro a Bellinzona",
+      "title": "Ritiro in Ticino",
       "paragraphs": [
-        "Puoi anche ritirare la tua borsa a Bellinzona, gratuitamente.",
+        "Puoi ritirare gratuitamente la tua borsa ovunque in Ticino, previo accordo.",
         "Dopo l'acquisto ti contattiamo per fissare insieme giorno, ora e luogo."
       ]
     },
@@ -496,12 +496,7 @@
     },
     "care": {
       "title": "Cura della borsa",
-      "tips": [
-        "Lava a mano in acqua fredda, con un detergente delicato.",
-        "Non strizzare e non torcere la borsa.",
-        "Lasciala asciugare in piano, lontano da fonti di calore.",
-        "Niente lavatrice né asciugatrice."
-      ]
+      "text": "All’interno di ogni borsa troverai un’etichetta con le istruzioni di lavaggio."
     },
     "faq": {
       "title": "Domande frequenti",
@@ -516,7 +511,7 @@
         },
         {
           "q": "Quanto costa la spedizione?",
-          "a": "CHF {fee} in Svizzera e nel Liechtenstein. Il ritiro a Bellinzona è gratuito."
+          "a": "La spedizione costa CHF {fee} ed è disponibile solo in Svizzera. Il ritiro in Ticino è gratuito, previo accordo."
         },
         {
           "q": "Come posso pagare?",
@@ -529,11 +524,11 @@
         },
         {
           "q": "Chi realizza le borse?",
-          "a": "Noi, sette studentesse della SCC di Bellinzona, insieme a donne ucraine che lavorano all'uncinetto con noi."
+          "a": "Le borse sono realizzate a mano all’uncinetto da mamme, amiche e conoscenti, ognuna con una storia diversa."
         },
         {
           "q": "Come scopro le nuove borse?",
-          "a": "Seguici su Instagram e iscriviti alla newsletter: ti avvisiamo quando arrivano nuovi pezzi unici."
+          "a": "Seguici su Instagram per scoprire le nuove borse."
         }
       ]
     },
@@ -561,7 +556,7 @@
     "lead": "Il pagamento è andato a buon fine. La tua Chère Pochette è pronta a iniziare una nuova vita con te.",
     "paragraphs": [
       "A breve riceverai un'e-mail di conferma da Zahls.ch. Se non la trovi, controlla anche la cartella spam.",
-      "Ti contatteremo noi per la spedizione o per fissare il ritiro a Bellinzona."
+      "Ti contatteremo per organizzare la spedizione o concordare il ritiro in Ticino."
     ],
     "questions": "Hai una domanda? Scrivici a {email}.",
     "cta": "Torna allo shop",

@@ -20,7 +20,6 @@ const online = checkoutEnabled();
 // Sections with paragraphs; the id is also the #anchor (links like /info/#returns).
 const topics = ['shipping', 'pickup', 'payment', 'returns'] as const;
 const icons = { shipping: 'truck', pickup: 'pin', payment: 'check', returns: 'arrow-left' } as const;
-const tips = list<string>('info.care.tips');
 const faq = list<{ q: string; a: string; aEmail?: string }>('info.faq.items');
 const toc = [...topics, 'care', 'faq', 'contact'] as const;
 const tocLabel = (id: string) => (id === 'contact' ? t('nav.contact') : t(`info.${id}.title`));
@@ -66,9 +65,7 @@ const paragraphs = (id: string) =>
       </span>
       <div class="topic__body stack">
         <h2 id="care-title">{t('info.care.title')}</h2>
-        <ul class="tips">
-          {tips.map((tip) => <li>{tip}</li>)}
-        </ul>
+        <p>{t('info.care.text')}</p>
       </div>
     </section>
   </div>
@@ -149,16 +146,6 @@ const paragraphs = (id: string) =>
 
   .topic h2 {
     font-size: var(--fs-xl);
-  }
-
-  .tips {
-    display: grid;
-    gap: var(--s-2);
-    padding-left: 1.1em;
-  }
-
-  .tips li::marker {
-    color: var(--c-bordeaux);
   }
 
   #faq {

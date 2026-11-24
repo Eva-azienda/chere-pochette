@@ -13,7 +13,7 @@
       },
       "shop": {
         "title": "Shop – handgemachte Häkeltaschen",
-        "description": "Häkeltaschen Jolie, Belle und Coquette: nummerierte Unikate, von Hand gemacht aus geretteten Materialien. Versand in der Schweiz oder Abholung in Bellinzona."
+        "description": "Häkeltaschen Jolie, Belle und Coquette: nummerierte Unikate, von Hand gemacht aus geretteten Materialien. Versand nur in der Schweiz oder kostenlose Abholung im Tessin nach Absprache."
       },
       "product": {
         "title": "{model} – Häkeltasche Nr. {number}",
@@ -37,7 +37,7 @@
       },
       "info": {
         "title": "Info & FAQ: Versand, Rückgabe, Pflege",
-        "description": "Versand in der ganzen Schweiz und nach Liechtenstein, kostenlose Abholung in Bellinzona, Rückgabe innert 14 Tagen und Pflegetipps für deine Häkeltasche."
+        "description": "Versand nur in der Schweiz, kostenlose Abholung im Tessin nach Absprache, Rückgabe innert 14 Tagen und Pflegetipps für deine Häkeltasche."
       },
       "legal": {
         "title": "Impressum, Datenschutz & AGB",
@@ -257,12 +257,12 @@
       "title": "Wie möchtest du sie erhalten?",
       "shipping": {
         "title": "Versand",
-        "text": "Mit der Schweizerischen Post, innerhalb der Schweiz und nach Liechtenstein.",
+        "text": "Versand mit der Schweizerischen Post nur innerhalb der Schweiz.",
         "price": "+ CHF {fee}"
       },
       "pickup": {
-        "title": "Abholung in Bellinzona",
-        "text": "Nach dem Kauf melden wir uns bei dir, um einen Termin zu vereinbaren.",
+        "title": "Abholung im Tessin",
+        "text": "Nach dem Kauf vereinbaren wir mit dir Tag, Zeit und Ort der Abholung im Tessin.",
         "price": "Kostenlos"
       }
     },
@@ -290,7 +290,7 @@
     },
     "care": {
       "title": "Pflege",
-      "text": "Von Hand in kaltem Wasser waschen, nicht auswringen und flach liegend trocknen lassen.",
+      "text": "In jeder Tasche findest du ein Etikett mit den Waschanleitungen.",
       "link": "Alle Pflegetipps"
     },
     "question": {
@@ -460,15 +460,15 @@
     "shipping": {
       "title": "Versand",
       "paragraphs": [
-        "Wir versenden mit der Schweizerischen Post in die ganze Schweiz und nach Liechtenstein.",
+        "Wir versenden mit der Schweizerischen Post ausschliesslich innerhalb der Schweiz.",
         "Pauschale Versandkosten: CHF {fee}",
         "Normalerweise versenden wir innerhalb von 5 Arbeitstagen nach der Zahlung. Das ist ein Richtwert: Wir packen jedes Paket mit Sorgfalt, zwischen zwei Schulstunden."
       ]
     },
     "pickup": {
-      "title": "Abholung in Bellinzona",
+      "title": "Abholung im Tessin",
       "paragraphs": [
-        "Du kannst deine Tasche auch kostenlos in Bellinzona abholen.",
+        "Du kannst deine Tasche nach Absprache überall im Tessin kostenlos abholen.",
         "Nach dem Kauf melden wir uns bei dir, um Tag, Zeit und Ort zu vereinbaren."
       ]
     },
@@ -496,12 +496,7 @@
     },
     "care": {
       "title": "Pflege deiner Tasche",
-      "tips": [
-        "Von Hand in kaltem Wasser mit einem milden Waschmittel waschen.",
-        "Nicht auswringen und nicht verdrehen.",
-        "Flach liegend trocknen lassen, fern von Wärmequellen.",
-        "Nicht in die Waschmaschine und nicht in den Tumbler."
-      ]
+      "text": "In jeder Tasche findest du ein Etikett mit den Waschanleitungen."
     },
     "faq": {
       "title": "Häufige Fragen",
@@ -516,7 +511,7 @@
         },
         {
           "q": "Was kostet der Versand?",
-          "a": "CHF {fee} innerhalb der Schweiz und nach Liechtenstein. Die Abholung in Bellinzona ist kostenlos."
+          "a": "Der Versand kostet CHF {fee} und ist nur innerhalb der Schweiz möglich. Die Abholung im Tessin ist nach Absprache kostenlos."
         },
         {
           "q": "Wie kann ich bezahlen?",
@@ -529,11 +524,11 @@
         },
         {
           "q": "Wer macht die Taschen?",
-          "a": "Wir, sieben Schülerinnen der SCC Bellinzona, gemeinsam mit ukrainischen Frauen, die mit uns häkeln."
+          "a": "Mütter, Freundinnen und Bekannte häkeln die Taschen von Hand. Jede von ihnen hat ihre eigene Geschichte."
         },
         {
           "q": "Wie erfahre ich von neuen Taschen?",
-          "a": "Folge uns auf Instagram und melde dich für den Newsletter an: Wir sagen dir Bescheid, wenn neue Unikate da sind."
+          "a": "Folge uns auf Instagram, um neue Taschen zu entdecken."
         }
       ]
     },
@@ -561,7 +556,7 @@
     "lead": "Deine Zahlung war erfolgreich. Deine Chère Pochette ist bereit für ein neues Leben mit dir.",
     "paragraphs": [
       "Du erhältst in Kürze eine Bestätigung per E-Mail von Zahls.ch. Falls du sie nicht findest, schau auch im Spam-Ordner nach.",
-      "Wir melden uns bei dir für den Versand oder um die Abholung in Bellinzona zu vereinbaren."
+      "Wir melden uns bei dir, um den Versand oder die Abholung im Tessin zu vereinbaren."
     ],
     "questions": "Hast du eine Frage? Schreib uns an {email}.",
     "cta": "Zurück zum Shop",
