@@ -8,6 +8,16 @@
     {"product":"cp-007","kind":"pickup","id":39276964},
     {"product":"cp-007","kind":"shipping","id":39276963},
     {"product":"cp-008","kind":"pickup","id":39276968},
-    {"product":"cp-008","kind":"shipping","id":39276966}
+    {"product":"cp-008","kind":"shipping","id":39276966},
+    {"product":"cp-009","kind":"pickup","id":39277392},
+    {"product":"cp-009","kind":"shipping","id":39277390},
+    {"product":"cp-010","kind":"pickup","id":39277395},
+    {"product":"cp-010","kind":"shipping","id":39277393},
+    {"product":"cp-011","kind":"pickup","id":39277398},
+    {"product":"cp-011","kind":"shipping","id":39277397},
+    {"product":"cp-012","kind":"pickup","id":39277400},
+    {"product":"cp-012","kind":"shipping","id":39277399},
+    {"product":"cp-013","kind":"pickup","id":39277402},
+    {"product":"cp-013","kind":"shipping","id":39277401}
   ]
 }
