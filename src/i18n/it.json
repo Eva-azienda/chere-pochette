@@ -126,6 +126,7 @@
     "heroBagHands": "Mani che tengono una borsa Belle all'uncinetto color bordeaux",
     "heroBagUmbrella": "Borsa all'uncinetto bordeaux appoggiata su un ombrello rosso",
     "umbrellasCollected": "Ombrelli rotti raccolti in un cestino e in una cassetta",
+    "bagNameplate": "Targhetta dorata Chère Pochette sul davanti di una borsa color panna",
     "liningCut": "Una donna taglia la stoffa verde per la fodera accanto alla macchina da cucire",
     "umbrellasFabrics": "Tessuti di ombrelli recuperati: pois, fiori, animalier e colori vivaci",
     "yarnFettuccia": "Gomitoli di fettuccia in rosa, bordeaux, panna e nero",
@@ -404,9 +405,9 @@
         "text": "Tagliamo la stoffa degli ombrelli recuperati su misura per ogni modello. Poi inseriamo la fodera all’interno della borsa."
       },
       {
-        "id": "lining",
-        "title": "Fodera",
-        "text": "Aprendo la borsa si scoprono i colori e la fantasia dell’ombrello da cui proviene la fodera."
+        "id": "nameplate",
+        "title": "Applicazione della targhetta",
+        "text": "Fissiamo la targhetta dorata con il nome Chère Pochette sul davanti di ogni borsa."
       },
       {
         "id": "final",

@@ -126,6 +126,7 @@
     "heroBagHands": "Hands holding a burgundy crochet Belle bag",
     "heroBagUmbrella": "Burgundy crochet bag resting on a red umbrella",
     "umbrellasCollected": "Broken umbrellas collected in a bin and a crate",
+    "bagNameplate": "Gold-coloured Chère Pochette nameplate on the front of a cream-coloured bag",
     "liningCut": "A woman cuts green lining fabric beside a sewing machine",
     "umbrellasFabrics": "Fabrics from recovered umbrellas: polka dots, flowers, animal print and bright colours",
     "yarnFettuccia": "Balls of crochet yarn in pink, burgundy, cream and black",
@@ -404,9 +405,9 @@
         "text": "We cut the fabric from recovered umbrellas to fit each design. Then we fit the lining inside the bag."
       },
       {
-        "id": "lining",
-        "title": "Lining",
-        "text": "Open the bag to discover the colours and pattern of the umbrella used for the lining."
+        "id": "nameplate",
+        "title": "Attaching the nameplate",
+        "text": "We attach the gold-coloured Chère Pochette nameplate to the front of each bag."
       },
       {
         "id": "final",

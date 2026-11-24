@@ -126,6 +126,7 @@
     "heroBagHands": "Hände halten eine bordeauxrote gehäkelte Tasche Belle",
     "heroBagUmbrella": "Bordeauxrote Häkeltasche auf einem roten Regenschirm",
     "umbrellasCollected": "Gesammelte kaputte Regenschirme in einem Eimer und einer Kiste",
+    "bagNameplate": "Goldfarbenes Chère Pochette-Schild auf der Vorderseite einer cremefarbenen Tasche",
     "liningCut": "Eine Frau schneidet grünen Futterstoff neben der Nähmaschine zu",
     "umbrellasFabrics": "Stoffe aus geretteten Regenschirmen: Punkte, Blumen, Animal-Print und kräftige Farben",
     "yarnFettuccia": "Knäuel mit Häkelgarn in Rosa, Bordeaux, Creme und Schwarz",
@@ -404,9 +405,9 @@
         "text": "Wir schneiden den Stoff der gesammelten Regenschirme passend zu jedem Modell zu. Dann setzen wir das Futter in die Tasche ein."
       },
       {
-        "id": "lining",
-        "title": "Futter",
-        "text": "Beim Öffnen der Tasche kommen die Farben und das Muster des ursprünglichen Regenschirms zum Vorschein."
+        "id": "nameplate",
+        "title": "Das Markenschild anbringen",
+        "text": "Wir befestigen das goldfarbene Schild mit dem Namen Chère Pochette auf der Vorderseite jeder Tasche."
       },
       {
         "id": "final",
