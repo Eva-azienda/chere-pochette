@@ -89,6 +89,7 @@
     "close": "Schliessen",
     "menu": "Menü",
     "price": "Preis",
+    "removableStrapIncluded": "Abnehmbarer Schulterriemen inklusive",
     "priceTag": "CHF {price}",
     "priceNote": "Preis in CHF, ohne Versandkosten.",
     "free": "Kostenlos",

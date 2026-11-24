@@ -89,6 +89,7 @@
     "close": "Close",
     "menu": "Menu",
     "price": "Price",
+    "removableStrapIncluded": "Detachable shoulder strap included",
     "priceTag": "CHF {price}",
     "priceNote": "Price in CHF, shipping not included.",
     "free": "Free",

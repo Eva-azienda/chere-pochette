@@ -118,6 +118,7 @@ const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${produ
             <p class="product__sold-tag">{t('product.sold.badge')}</p>
           )
         }
+        {info.model.removableStrap && <p>{t('common.removableStrapIncluded')}</p>}
       </header>
 
       {

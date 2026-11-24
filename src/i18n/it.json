@@ -89,6 +89,7 @@
     "close": "Chiudi",
     "menu": "Menu",
     "price": "Prezzo",
+    "removableStrapIncluded": "Tracolla rimovibile inclusa",
     "priceTag": "CHF {price}",
     "priceNote": "Prezzo in CHF, spedizione esclusa.",
     "free": "Gratis",
