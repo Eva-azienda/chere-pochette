@@ -9,7 +9,7 @@
     "pages": {
       "home": {
         "title": "Chère Pochette · Handmade crochet bags from Ticino",
-        "description": "Handmade crochet bags from recovered clothes and broken umbrellas: upcycled, one-of-a-kind pieces by a YES student company in Bellinzona, Switzerland."
+        "description": "Handmade crochet bags from Ticino with linings made from recovered umbrellas. Each bag is unique, made by a YES student company in Bellinzona."
       },
       "shop": {
         "title": "Shop – handmade crochet bags",
@@ -17,15 +17,15 @@
       },
       "product": {
         "title": "{model} – crochet bag No. {number}",
-        "description": "{model}, one of a kind No. {number}: a handmade crochet bag from recovered clothes, lined with broken-umbrella fabric. CHF {price}"
+        "description": "{model}, one of a kind No. {number}, crocheted by hand and lined with fabric from broken umbrellas. CHF {price}"
       },
       "about": {
         "title": "Our story: crochet and upcycling",
-        "description": "Seven students from SCC Bellinzona and a group of Ukrainian women: how our crochet bags are made from recovered clothes and broken umbrellas."
+        "description": "Seven students from SCC Bellinzona share how they make their crochet bags with linings from recovered umbrellas."
       },
       "process": {
         "title": "From broken umbrella to crochet bag",
-        "description": "Collect, select, crochet, line: how forgotten clothes and broken umbrellas become a handmade, upcycled bag in five steps."
+        "description": "From collecting umbrellas to adding the lining, discover how a Chère Pochette is made in five steps."
       },
       "team": {
         "title": "Our team in Bellinzona",
@@ -76,7 +76,7 @@
     "slogan": "Made to carry on",
     "sloganMeaning": "Carrying your bag with you – and giving materials a new life.",
     "tagline": "From forgotten materials to something worth carrying on.",
-    "taglineSupport": "Clothes and umbrellas that were left behind, crocheted into something new."
+    "taglineSupport": "We give umbrellas a second life by turning them into linings for our bags."
   },
   "common": {
     "buy": "Buy",
@@ -127,7 +127,7 @@
     "heroBagUmbrella": "Burgundy crochet bag resting on a red umbrella",
     "umbrellasCollected": "Broken umbrellas collected in a bin and a crate",
     "umbrellasFabrics": "Fabrics from recovered umbrellas: polka dots, flowers, animal print and bright colours",
-    "yarnFettuccia": "Balls of t-shirt yarn in pink, burgundy, cream and black",
+    "yarnFettuccia": "Balls of crochet yarn in pink, burgundy, cream and black",
     "womenCrochet": "Women crocheting together around a wooden table",
     "modelJolie": "Jolie model, crochet barrel bag",
     "modelBelle": "Belle model, crochet bag without fringe",
@@ -139,10 +139,10 @@
   "home": {
     "hero": {
       "title": "A second life. A one-of-a-kind bag.",
-      "lead": "Crochet bags handmade in Ticino from rescued clothes and umbrellas.",
+      "lead": "Bags crocheted by hand in Ticino with linings made from recovered umbrellas.",
       "cta": "Discover the bags",
       "notes": {
-        "yarn": "yarn from recovered clothes",
+        "yarn": "crocheted by hand",
         "handle": "crocheted handle",
         "unique": "one of a kind, numbered"
       },
@@ -208,7 +208,7 @@
     },
     "unique": {
       "title": "Why every bag is unique",
-      "text": "We use recovered materials: clothes and umbrellas that already have a story. That's why colours, patterns and small details always vary – and every bag has its own character."
+      "text": "Each lining keeps the colour and pattern of the original umbrella, giving every bag a detail of its own."
     },
     "models": {
       "eyebrow": "Our collection",
@@ -243,9 +243,8 @@
     },
     "materials": {
       "title": "Materials",
-      "exterior": "Exterior: t-shirt yarn (fettuccia) made from recovered clothes, crocheted by hand.",
       "lining": "Lining: fabric recovered from broken umbrellas.",
-      "schema": "Fettuccia (t-shirt yarn) from recovered clothes; lining from umbrella fabric"
+      "schema": "Lining made from fabric recovered from broken umbrellas"
     },
     "unique": {
       "title": "One of a kind",
@@ -320,9 +319,8 @@
       ]
     },
     "materials": {
-      "title": "Clothes and umbrellas, given a second life",
+      "title": "A second life for umbrellas",
       "paragraphs": [
-        "The outside is crocheted with fettuccia, a yarn made from recycled clothes.",
         "Broken umbrellas, often thrown away after a single gust of wind, become the lining inside our bags."
       ]
     },
@@ -360,7 +358,7 @@
         },
         {
           "title": "Reuse",
-          "text": "Forgotten clothes and umbrellas become our raw material."
+          "text": "We turn fabric from recovered umbrellas into the linings for our bags."
         },
         {
           "title": "Collaboration between women",
@@ -381,7 +379,7 @@
   "process": {
     "eyebrow": "Our process",
     "title": "From umbrella to bag",
-    "intro": "A broken umbrella, a forgotten piece of clothing. Here's how they become a Chère Pochette, in five steps.",
+    "intro": "A broken umbrella becomes the lining of a handmade bag. Here’s how a Chère Pochette comes together in five steps.",
     "stepLabel": "Step {n}",
     "steps": [
       {
@@ -392,12 +390,12 @@
       {
         "id": "selection",
         "title": "Selection",
-        "text": "We choose colours, patterns and fabrics that go well together. Every combination is different."
+        "text": "We select fabric from the umbrellas we’ve collected and match the colours and patterns to the bags."
       },
       {
         "id": "creation",
         "title": "Creation",
-        "text": "Fettuccia, a yarn made from recycled clothes, takes shape stitch by stitch. We crochet together with the Ukrainian women."
+        "text": "A group of women from different cultures crochets each bag by hand, stitch by stitch."
       },
       {
         "id": "lining",

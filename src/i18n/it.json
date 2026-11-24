@@ -9,7 +9,7 @@
     "pages": {
       "home": {
         "title": "Chère Pochette · Borse all'uncinetto fatte a mano in Ticino",
-        "description": "Borse all'uncinetto fatte a mano con vestiti e ombrelli recuperati: upcycling dal Ticino, pezzi unici. Una mini-impresa YES della SCC di Bellinzona."
+        "description": "Borse all’uncinetto fatte a mano in Ticino, con fodere ricavate da ombrelli recuperati. Pezzi unici della mini-impresa YES della SCC di Bellinzona."
       },
       "shop": {
         "title": "Shop – borse all'uncinetto fatte a mano",
@@ -17,15 +17,15 @@
       },
       "product": {
         "title": "{model} – borsa all'uncinetto N° {number}",
-        "description": "{model}, pezzo unico N° {number}: borsa all'uncinetto fatta a mano con vestiti recuperati e fodera da ombrelli rotti. CHF {price}"
+        "description": "{model}, pezzo unico N° {number}, lavorato a mano all’uncinetto e foderato con stoffa di ombrelli rotti. CHF {price}"
       },
       "about": {
         "title": "La nostra storia: uncinetto e upcycling",
-        "description": "Sette studentesse della SCC di Bellinzona e un gruppo di donne ucraine: così nascono le nostre borse all'uncinetto, da vestiti e ombrelli recuperati."
+        "description": "Sette studentesse della SCC di Bellinzona raccontano come nascono le loro borse all’uncinetto con fodere ricavate da ombrelli recuperati."
       },
       "process": {
         "title": "Dall'ombrello alla borsa all'uncinetto",
-        "description": "Recupero, selezione, uncinetto, fodera: in cinque passi vestiti dimenticati e ombrelli rotti diventano una borsa fatta a mano. Ecco il nostro upcycling."
+        "description": "Dal recupero degli ombrelli alla fodera, scopri in cinque passi come nasce una Chère Pochette."
       },
       "team": {
         "title": "Il nostro team a Bellinzona",
@@ -76,7 +76,7 @@
     "slogan": "Made to carry on",
     "sloganMeaning": "Portare la borsa con sé, e dare ai materiali una nuova vita.",
     "tagline": "From forgotten materials to something worth carrying on.",
-    "taglineSupport": "Dai materiali dimenticati a qualcosa che vale la pena portare con sé."
+    "taglineSupport": "Diamo una seconda vita agli ombrelli, trasformandoli in fodere per le nostre borse."
   },
   "common": {
     "buy": "Acquista",
@@ -139,10 +139,10 @@
   "home": {
     "hero": {
       "title": "Una seconda vita. Una borsa unica.",
-      "lead": "Borse all'uncinetto fatte a mano in Ticino, con vestiti e ombrelli recuperati.",
+      "lead": "Borse all’uncinetto fatte a mano in Ticino, con fodere ricavate da ombrelli recuperati.",
       "cta": "Scopri le borse",
       "notes": {
-        "yarn": "fettuccia da vestiti recuperati",
+        "yarn": "lavorata a mano all’uncinetto",
         "handle": "manico all’uncinetto",
         "unique": "pezzo unico, numerato"
       },
@@ -208,7 +208,7 @@
     },
     "unique": {
       "title": "Perché ogni borsa è unica",
-      "text": "Usiamo materiali recuperati: vestiti e ombrelli che avevano già una storia. Per questo colori, fantasie e piccoli dettagli cambiano sempre, e ogni borsa ha il suo carattere."
+      "text": "Ogni fodera conserva il colore e la fantasia dell’ombrello da cui proviene. È un dettaglio che rende unica ogni borsa."
     },
     "models": {
       "eyebrow": "La nostra collezione",
@@ -243,9 +243,8 @@
     },
     "materials": {
       "title": "Materiali",
-      "exterior": "Esterno: fettuccia (filato da t-shirt) ricavata da vestiti recuperati, lavorata all'uncinetto.",
       "lining": "Fodera: tessuto recuperato da ombrelli rotti.",
-      "schema": "Fettuccia da vestiti recuperati; fodera in tessuto da ombrelli rotti"
+      "schema": "Fodera in tessuto recuperato da ombrelli rotti"
     },
     "unique": {
       "title": "Un pezzo unico",
@@ -320,9 +319,8 @@
       ]
     },
     "materials": {
-      "title": "Vestiti e ombrelli, una seconda vita",
+      "title": "Una seconda vita per gli ombrelli",
       "paragraphs": [
-        "L'esterno è lavorato con fettuccia, un filato ricavato da vestiti riciclati.",
         "Gli ombrelli rotti, spesso buttati dopo un colpo di vento, diventano la fodera interna delle nostre borse."
       ]
     },
@@ -360,7 +358,7 @@
         },
         {
           "title": "Riutilizzo",
-          "text": "Vestiti e ombrelli dimenticati diventano materia prima."
+          "text": "Trasformiamo il tessuto degli ombrelli recuperati nella fodera delle nostre borse."
         },
         {
           "title": "Collaborazione tra donne",
@@ -381,7 +379,7 @@
   "process": {
     "eyebrow": "Il nostro processo",
     "title": "Dall'ombrello alla borsa",
-    "intro": "Un ombrello rotto, un vestito dimenticato. Ecco come diventano una Chère Pochette, in cinque passi.",
+    "intro": "Da un ombrello rotto alla fodera di una borsa fatta a mano. Ecco come nasce una Chère Pochette, in cinque passi.",
     "stepLabel": "Passo {n}",
     "steps": [
       {
@@ -392,12 +390,12 @@
       {
         "id": "selection",
         "title": "Selezione",
-        "text": "Scegliamo colori, fantasie e tessuti che stanno bene insieme. Ogni combinazione è diversa."
+        "text": "Scegliamo i tessuti degli ombrelli recuperati e ne abbiniamo i colori e le fantasie alle borse."
       },
       {
         "id": "creation",
         "title": "Creazione",
-        "text": "La fettuccia, ricavata da vestiti riciclati, prende forma all'uncinetto, punto dopo punto. Lo facciamo insieme alle donne ucraine."
+        "text": "La borsa prende forma all’uncinetto, punto dopo punto, grazie al lavoro di un gruppo di donne di culture diverse."
       },
       {
         "id": "lining",

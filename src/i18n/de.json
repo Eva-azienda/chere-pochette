@@ -9,7 +9,7 @@
     "pages": {
       "home": {
         "title": "Chère Pochette · Handgemachte Häkeltaschen aus dem Tessin",
-        "description": "Handgemachte Häkeltaschen aus alten Kleidern und kaputten Regenschirmen: Upcycling-Unikate aus dem Tessin, vom YES-Miniunternehmen der SCC Bellinzona."
+        "description": "Handgehäkelte Taschen aus dem Tessin mit Futter aus wiederverwendeten Regenschirmen. Jedes Stück ist ein Unikat des YES-Miniunternehmens der SCC Bellinzona."
       },
       "shop": {
         "title": "Shop – handgemachte Häkeltaschen",
@@ -17,15 +17,15 @@
       },
       "product": {
         "title": "{model} – Häkeltasche Nr. {number}",
-        "description": "{model}, Unikat Nr. {number}: von Hand gehäkelte Tasche aus geretteten Kleidern, mit Futter aus kaputten Regenschirmen. CHF {price}"
+        "description": "{model}, Unikat Nr. {number}, von Hand gehäkelt und mit Stoff aus kaputten Regenschirmen gefüttert. CHF {price}"
       },
       "about": {
         "title": "Unsere Geschichte: Häkeln und Upcycling",
-        "description": "Sieben Schülerinnen der SCC Bellinzona und eine Gruppe ukrainischer Frauen: So entstehen unsere Häkeltaschen aus alten Kleidern und Regenschirmen."
+        "description": "Sieben Schülerinnen der SCC Bellinzona erzählen, wie ihre Häkeltaschen mit Futter aus wiederverwendeten Regenschirmen entstehen."
       },
       "process": {
         "title": "Vom Regenschirm zur Häkeltasche",
-        "description": "Sammeln, auswählen, häkeln, füttern: So werden alte Kleider und kaputte Regenschirme in fünf Schritten zu einer handgemachten Upcycling-Tasche."
+        "description": "Vom Sammeln der Regenschirme bis zum Einnähen des Futters. So entsteht eine Chère Pochette in fünf Schritten."
       },
       "team": {
         "title": "Unser Team aus Bellinzona",
@@ -76,7 +76,7 @@
     "slogan": "Made to carry on",
     "sloganMeaning": "Die Tasche bei sich tragen – und Materialien ein neues Leben schenken.",
     "tagline": "From forgotten materials to something worth carrying on.",
-    "taglineSupport": "Aus vergessenen Materialien wird etwas, das man gerne weiterträgt."
+    "taglineSupport": "Wir geben Regenschirmen ein zweites Leben als Futter für unsere Taschen."
   },
   "common": {
     "buy": "Kaufen",
@@ -127,7 +127,7 @@
     "heroBagUmbrella": "Bordeauxrote Häkeltasche auf einem roten Regenschirm",
     "umbrellasCollected": "Gesammelte kaputte Regenschirme in einem Eimer und einer Kiste",
     "umbrellasFabrics": "Stoffe aus geretteten Regenschirmen: Punkte, Blumen, Animal-Print und kräftige Farben",
-    "yarnFettuccia": "Knäuel aus T-Shirt-Garn in Rosa, Bordeaux, Creme und Schwarz",
+    "yarnFettuccia": "Knäuel mit Häkelgarn in Rosa, Bordeaux, Creme und Schwarz",
     "womenCrochet": "Frauen häkeln gemeinsam an einem Holztisch",
     "modelJolie": "Modell Jolie, gehäkelte Bauletto-Tasche",
     "modelBelle": "Modell Belle, gehäkelte Tasche ohne Fransen",
@@ -139,10 +139,10 @@
   "home": {
     "hero": {
       "title": "Ein zweites Leben. Eine einzigartige Tasche.",
-      "lead": "Von Hand gehäkelte Taschen aus dem Tessin, aus geretteten Kleidern und Regenschirmen.",
+      "lead": "Handgehäkelte Taschen aus dem Tessin mit Futter aus wiederverwendeten Regenschirmen.",
       "cta": "Taschen entdecken",
       "notes": {
-        "yarn": "Fettuccia aus geretteten Kleidern",
+        "yarn": "von Hand gehäkelt",
         "handle": "gehäkelter Henkel",
         "unique": "Unikat, nummeriert"
       },
@@ -208,7 +208,7 @@
     },
     "unique": {
       "title": "Warum jede Tasche einzigartig ist",
-      "text": "Wir verwenden wiederverwertete Materialien: Kleider und Regenschirme, die schon eine Geschichte haben. Darum unterscheiden sich Farben, Muster und kleine Details immer – und jede Tasche hat ihren eigenen Charakter."
+      "text": "Jedes Futter behält die Farbe und das Muster des ursprünglichen Regenschirms. Das macht jede Tasche einzigartig."
     },
     "models": {
       "eyebrow": "Unsere Kollektion",
@@ -243,9 +243,8 @@
     },
     "materials": {
       "title": "Materialien",
-      "exterior": "Aussen: T-Shirt-Garn (Fettuccia) aus wiederverwerteten Kleidern, von Hand gehäkelt.",
       "lining": "Futter: Stoff aus kaputten Regenschirmen.",
-      "schema": "Fettuccia (T-Shirt-Garn) aus geretteten Kleidern; Futter aus Regenschirmstoff"
+      "schema": "Futter aus wiederverwendetem Stoff kaputter Regenschirme"
     },
     "unique": {
       "title": "Ein Unikat",
@@ -320,9 +319,8 @@
       ]
     },
     "materials": {
-      "title": "Kleider und Regenschirme mit zweitem Leben",
+      "title": "Ein zweites Leben für Regenschirme",
       "paragraphs": [
-        "Aussen häkeln wir mit Fettuccia, einem Garn aus wiederverwerteten Kleidern.",
         "Kaputte Regenschirme, oft nach einem einzigen Windstoss weggeworfen, werden zum Innenfutter unserer Taschen."
       ]
     },
@@ -360,7 +358,7 @@
         },
         {
           "title": "Wiederverwendung",
-          "text": "Vergessene Kleider und Regenschirme werden zu Rohstoff."
+          "text": "Wir verwenden den Stoff gesammelter Regenschirme als Futter für unsere Taschen."
         },
         {
           "title": "Zusammenarbeit unter Frauen",
@@ -381,7 +379,7 @@
   "process": {
     "eyebrow": "Unser Prozess",
     "title": "Vom Regenschirm zur Tasche",
-    "intro": "Ein kaputter Regenschirm, ein vergessenes Kleidungsstück. So wird daraus in fünf Schritten eine Chère Pochette.",
+    "intro": "Vom kaputten Regenschirm zum Futter einer handgemachten Tasche. So entsteht eine Chère Pochette in fünf Schritten.",
     "stepLabel": "Schritt {n}",
     "steps": [
       {
@@ -392,12 +390,12 @@
       {
         "id": "selection",
         "title": "Auswahl",
-        "text": "Wir wählen Farben, Muster und Stoffe, die gut zusammenpassen. Jede Kombination ist anders."
+        "text": "Wir wählen Stoffe aus den gesammelten Regenschirmen aus und stimmen Farben und Muster auf die Taschen ab."
       },
       {
         "id": "creation",
         "title": "Kreation",
-        "text": "Das Garn aus wiederverwerteten Kleidern nimmt Masche für Masche Form an. Wir häkeln gemeinsam mit den ukrainischen Frauen."
+        "text": "Frauen aus verschiedenen Kulturen häkeln jede Tasche von Hand, Masche für Masche."
       },
       {
         "id": "lining",
