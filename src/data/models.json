@@ -21,7 +21,8 @@
     "id": "coquette",
     "name": "Coquette",
     "type": { "it": "Carolina con frange", "de": "Carolina mit Fransen", "en": "Carolina, with fringe" },
-    "price": 45,
+    "price": 55,
+    "removableStrap": true,
     "dimensions": { "length": "22–25", "depth": "6", "height": "16–18", "handle": "2–3" },
     "image": "model-coquette"
   },

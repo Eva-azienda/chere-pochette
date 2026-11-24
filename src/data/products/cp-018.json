@@ -1,0 +1,27 @@
+{
+  "id": "cp-018",
+  "number": 18,
+  "model": "coquette",
+  "status": "available",
+  "price": 55,
+  "colour": "viola",
+  "lining": "pois",
+  "note": "",
+  "photos": [
+    {
+      "src": "media/products/cp-018/1",
+      "w": 864,
+      "h": 1080
+    },
+    {
+      "src": "media/products/cp-018/2",
+      "w": 900,
+      "h": 1125
+    }
+  ],
+  "createdAt": "2026-11-24T20:40:59.417Z",
+  "updatedAt": "2026-11-24T20:40:59.417Z",
+  "soldAt": null,
+  "soldChannel": null,
+  "zahls": null
+}
