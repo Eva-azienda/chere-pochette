@@ -129,6 +129,7 @@
     "bagNameplate": "Goldfarbenes Chère Pochette-Schild auf der Vorderseite einer cremefarbenen Tasche",
     "bagLining": "Offene Tasche mit braunem Futter und Innentasche",
     "liningCut": "Eine Frau schneidet grünen Futterstoff neben der Nähmaschine zu",
+    "umbrellaLiningStory": "Offene weisse Häkeltasche mit bordeauxrotem Futter auf blauem Stoff",
     "umbrellasFabrics": "Stoffe aus geretteten Regenschirmen: Punkte, Blumen, Animal-Print und kräftige Farben",
     "yarnFettuccia": "Knäuel mit Häkelgarn in Rosa, Bordeaux, Creme und Schwarz",
     "womenCrochet": "Frauen häkeln gemeinsam an einem Holztisch",
@@ -318,7 +319,7 @@
       "title": "Die Idee: gehäkelte Taschen",
       "paragraphs": [
         "Wir haben uns fürs Häkeln entschieden: eine geduldige Handarbeit, die viel Raum für Kreativität lässt.",
-        "So sind unsere drei Modelle entstanden: Jolie, Belle und Coquette. Gleiche Formen – und doch ist jede Tasche anders."
+        "So sind unsere vier Modelle entstanden. Sie heissen Jolie, Belle, Coquette und Essentielle. Auch beim gleichen Modell ist jede Tasche anders."
       ]
     },
     "materials": {
@@ -328,10 +329,10 @@
       ]
     },
     "women": {
-      "title": "Gemeinsam mit ukrainischen Frauen",
+      "title": "Verwobene Geschichten",
       "paragraphs": [
-        "Unsere Taschen entstehen in Zusammenarbeit mit einer Gruppe ukrainischer Frauen, die mit uns häkeln.",
-        "Wir teilen Technik, Ideen und Zeit. Sie sind miteinander befreundet – genau wie wir sieben."
+        "Mütter, Freundinnen und Bekannte häkeln unsere Taschen von Hand. Jede von ihnen hat ihre eigene Geschichte.",
+        "Beim Häkeln tauschen sie Ideen und Tipps aus und lachen zusammen."
       ]
     },
     "slogan": {

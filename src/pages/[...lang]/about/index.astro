@@ -1,12 +1,12 @@
 ---
-/** Our story: YES, the idea, the materials, the Ukrainian women, the slogan, the logo's thread, values. */
+/** Our story: YES, the idea, the materials, the makers, the slogan, the logo's thread, values. */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ArtPicture from '../../../components/ArtPicture.astro';
 import BrandPicture from '../../../components/BrandPicture.astro';
 import PageHeader from '../../../components/PageHeader.astro';
 import ThreadDivider from '../../../components/ThreadDivider.astro';
 import yarn from '../../../assets/brand/yarn-fettuccia.jpg';
-import fabrics from '../../../assets/brand/umbrellas-fabrics.jpg';
+import umbrellaLiningStory from '../../../assets/brand/umbrella-lining-story.jpg';
 import umbrellaBag from '../../../assets/brand/hero-bag-umbrella-45.jpg';
 import womenLandscape from '../../../assets/brand/women-crochet.jpg';
 import womenPortrait from '../../../assets/brand/women-crochet-45.jpg';
@@ -53,7 +53,7 @@ const values = list<{ title: string; text: string }>('about.values.items');
   <section class="section section--alt" aria-labelledby="materials">
     <div class="container feature feature--reverse">
       <div class="feature__media media">
-        <BrandPicture src={fabrics} alt={t('images.umbrellasFabrics')} sizes="(min-width: 48rem) 45vw, 100vw" />
+        <BrandPicture src={umbrellaLiningStory} alt={t('images.umbrellaLiningStory')} sizes="(min-width: 48rem) 45vw, 100vw" />
       </div>
       <div class="feature__text stack">
         <p class="chapter">03</p>
@@ -63,7 +63,7 @@ const values = list<{ title: string; text: string }>('about.values.items');
     </div>
   </section>
 
-  <!-- Together with Ukrainian women -->
+  <!-- The makers -->
   <section class="section" aria-labelledby="women">
     <div class="container">
       <div class="women__media media">

@@ -129,6 +129,7 @@
     "bagNameplate": "Targhetta dorata Chère Pochette sul davanti di una borsa color panna",
     "bagLining": "Borsa aperta con fodera marrone e tasca interna",
     "liningCut": "Una donna taglia la stoffa verde per la fodera accanto alla macchina da cucire",
+    "umbrellaLiningStory": "Borsa bianca all’uncinetto aperta, con fodera bordeaux su stoffa blu",
     "umbrellasFabrics": "Tessuti di ombrelli recuperati: pois, fiori, animalier e colori vivaci",
     "yarnFettuccia": "Gomitoli di fettuccia in rosa, bordeaux, panna e nero",
     "womenCrochet": "Donne attorno a un tavolo di legno mentre lavorano all'uncinetto",
@@ -318,7 +319,7 @@
       "title": "L'idea: borse all'uncinetto",
       "paragraphs": [
         "Abbiamo scelto l'uncinetto: una tecnica paziente, fatta a mano, che lascia spazio alla creatività.",
-        "Così sono nati i nostri tre modelli, Jolie, Belle e Coquette. Stesse forme, ma ogni borsa è diversa."
+        "Così sono nati i nostri quattro modelli, Jolie, Belle, Coquette ed Essentielle. Ogni borsa è diversa, anche quando il modello è lo stesso."
       ]
     },
     "materials": {
@@ -328,10 +329,10 @@
       ]
     },
     "women": {
-      "title": "Insieme alle donne ucraine",
+      "title": "Intreccio di storie",
       "paragraphs": [
-        "Le nostre borse nascono dalla collaborazione con un gruppo di donne ucraine che lavorano all'uncinetto con noi.",
-        "Condividiamo tecnica, idee e tempo. Loro sono amiche fra loro, proprio come noi sette."
+        "Le nostre borse sono realizzate a mano all’uncinetto da mamme, amiche e conoscenti, ognuna con una storia diversa.",
+        "Mentre lavorano, si scambiano idee e consigli e condividono qualche risata."
       ]
     },
     "slogan": {
