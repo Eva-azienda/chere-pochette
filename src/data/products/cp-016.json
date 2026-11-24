@@ -1,0 +1,27 @@
+{
+  "id": "cp-016",
+  "number": 16,
+  "model": "belle",
+  "status": "available",
+  "price": 55,
+  "colour": "bianco",
+  "lining": "tinta-unita",
+  "note": "",
+  "photos": [
+    {
+      "src": "media/products/cp-016/1",
+      "w": 864,
+      "h": 1080
+    },
+    {
+      "src": "media/products/cp-016/2",
+      "w": 1086,
+      "h": 1358
+    }
+  ],
+  "createdAt": "2026-11-24T20:30:02.396Z",
+  "updatedAt": "2026-11-24T20:30:02.396Z",
+  "soldAt": null,
+  "soldChannel": null,
+  "zahls": null
+}

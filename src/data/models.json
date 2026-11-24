@@ -12,7 +12,8 @@
     "id": "belle",
     "name": "Belle",
     "type": { "it": "Carolina senza frange", "de": "Carolina ohne Fransen", "en": "Carolina, without fringe" },
-    "price": 40,
+    "price": 55,
+    "removableStrap": true,
     "dimensions": { "length": "22–25", "depth": "6", "height": "20–22", "handle": "2–3" },
     "image": "model-belle"
   },
