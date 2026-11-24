@@ -25,7 +25,7 @@
       },
       "process": {
         "title": "From broken umbrella to crochet bag",
-        "description": "From collecting umbrellas to adding the lining, discover how a Chère Pochette is made in five steps."
+        "description": "From collecting umbrellas to adding the lining, discover how a Chère Pochette is made in six steps."
       },
       "team": {
         "title": "Our team in Bellinzona",
@@ -126,6 +126,7 @@
     "heroBagHands": "Hands holding a burgundy crochet Belle bag",
     "heroBagUmbrella": "Burgundy crochet bag resting on a red umbrella",
     "umbrellasCollected": "Broken umbrellas collected in a bin and a crate",
+    "liningCut": "A woman cuts green lining fabric beside a sewing machine",
     "umbrellasFabrics": "Fabrics from recovered umbrellas: polka dots, flowers, animal print and bright colours",
     "yarnFettuccia": "Balls of crochet yarn in pink, burgundy, cream and black",
     "womenCrochet": "Women crocheting together around a wooden table",
@@ -160,7 +161,7 @@
     "process": {
       "eyebrow": "From umbrella to bag",
       "title": "How a Chère Pochette is made",
-      "text": "Five steps, from collecting the materials to the very last stitch.",
+      "text": "Six steps, from collecting the materials to the very last stitch.",
       "cta": "Discover the process"
     },
     "story": {
@@ -379,7 +380,7 @@
   "process": {
     "eyebrow": "Our process",
     "title": "From umbrella to bag",
-    "intro": "A broken umbrella becomes the lining of a handmade bag. Here’s how a Chère Pochette comes together in five steps.",
+    "intro": "A broken umbrella becomes the lining of a handmade bag. Here’s how a Chère Pochette comes together in six steps.",
     "stepLabel": "Step {n}",
     "steps": [
       {
@@ -398,9 +399,14 @@
         "text": "A group of women from different cultures crochets each bag by hand, stitch by stitch."
       },
       {
+        "id": "lining-preparation",
+        "title": "Cutting and fitting the lining",
+        "text": "We cut the fabric from recovered umbrellas to fit each design. Then we fit the lining inside the bag."
+      },
+      {
         "id": "lining",
         "title": "Lining",
-        "text": "The umbrella fabric becomes the lining. A different pattern every time – a little surprise when you open the bag."
+        "text": "Open the bag to discover the colours and pattern of the umbrella used for the lining."
       },
       {
         "id": "final",

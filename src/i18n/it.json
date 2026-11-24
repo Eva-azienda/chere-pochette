@@ -25,7 +25,7 @@
       },
       "process": {
         "title": "Dall'ombrello alla borsa all'uncinetto",
-        "description": "Dal recupero degli ombrelli alla fodera, scopri in cinque passi come nasce una Chère Pochette."
+        "description": "Dal recupero degli ombrelli alla fodera, scopri in sei passi come nasce una Chère Pochette."
       },
       "team": {
         "title": "Il nostro team a Bellinzona",
@@ -126,6 +126,7 @@
     "heroBagHands": "Mani che tengono una borsa Belle all'uncinetto color bordeaux",
     "heroBagUmbrella": "Borsa all'uncinetto bordeaux appoggiata su un ombrello rosso",
     "umbrellasCollected": "Ombrelli rotti raccolti in un cestino e in una cassetta",
+    "liningCut": "Una donna taglia la stoffa verde per la fodera accanto alla macchina da cucire",
     "umbrellasFabrics": "Tessuti di ombrelli recuperati: pois, fiori, animalier e colori vivaci",
     "yarnFettuccia": "Gomitoli di fettuccia in rosa, bordeaux, panna e nero",
     "womenCrochet": "Donne attorno a un tavolo di legno mentre lavorano all'uncinetto",
@@ -160,7 +161,7 @@
     "process": {
       "eyebrow": "Dall'ombrello alla borsa",
       "title": "Come nasce una Chère Pochette",
-      "text": "Cinque passi, dalla raccolta dei materiali all'ultimo punto.",
+      "text": "Sei passi, dalla raccolta dei materiali all'ultimo punto.",
       "cta": "Scopri il processo"
     },
     "story": {
@@ -379,7 +380,7 @@
   "process": {
     "eyebrow": "Il nostro processo",
     "title": "Dall'ombrello alla borsa",
-    "intro": "Da un ombrello rotto alla fodera di una borsa fatta a mano. Ecco come nasce una Chère Pochette, in cinque passi.",
+    "intro": "Da un ombrello rotto alla fodera di una borsa fatta a mano. Ecco come nasce una Chère Pochette, in sei passi.",
     "stepLabel": "Passo {n}",
     "steps": [
       {
@@ -398,9 +399,14 @@
         "text": "La borsa prende forma all’uncinetto, punto dopo punto, grazie al lavoro di un gruppo di donne di culture diverse."
       },
       {
+        "id": "lining-preparation",
+        "title": "Taglio e preparazione della fodera",
+        "text": "Tagliamo la stoffa degli ombrelli recuperati su misura per ogni modello. Poi inseriamo la fodera all’interno della borsa."
+      },
+      {
         "id": "lining",
         "title": "Fodera",
-        "text": "Il tessuto degli ombrelli diventa la fodera interna. Ogni volta una fantasia diversa, da scoprire aprendo la borsa."
+        "text": "Aprendo la borsa si scoprono i colori e la fantasia dell’ombrello da cui proviene la fodera."
       },
       {
         "id": "final",

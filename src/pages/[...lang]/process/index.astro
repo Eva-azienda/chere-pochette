@@ -1,5 +1,5 @@
 ---
-/** From umbrella to bag: the 5 steps, joined by a thin thread. */
+/** From umbrella to bag: the six steps, joined by a thin thread. */
 import type { ImageMetadata } from 'astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BrandPicture from '../../../components/BrandPicture.astro';
@@ -8,6 +8,7 @@ import ThreadDivider from '../../../components/ThreadDivider.astro';
 import umbrellasCollected from '../../../assets/brand/umbrellas-collected.jpg';
 import umbrellasFabrics from '../../../assets/brand/umbrellas-fabrics.jpg';
 import womenCrochet from '../../../assets/brand/women-crochet-45.jpg';
+import liningCut from '../../../assets/brand/lining-cut.jpg';
 import bagUmbrella from '../../../assets/brand/hero-bag-umbrella-45.jpg';
 import bagHands from '../../../assets/brand/hero-bag-hands-45.jpg';
 import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
@@ -27,6 +28,7 @@ const photos: Record<string, { src: ImageMetadata; alt: string; position?: strin
   recovery: { src: umbrellasCollected, alt: 'images.umbrellasCollected', position: '40% 50%' },
   selection: { src: umbrellasFabrics, alt: 'images.umbrellasFabrics' },
   creation: { src: womenCrochet, alt: 'images.womenCrochet', position: '50% 40%' },
+  'lining-preparation': { src: liningCut, alt: 'images.liningCut' },
   lining: { src: bagUmbrella, alt: 'images.heroBagUmbrella', position: '53% 60%' },
   final: { src: bagHands, alt: 'images.heroBagHands' },
 };

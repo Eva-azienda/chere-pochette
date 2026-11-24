@@ -53,7 +53,7 @@ Keys are written in `camelCase` and grouped by page or component.
 - `items` = an array of objects (`{ title, text }`, FAQ uses `{ q, a }`). `tips` = an array of strings.
 - `id` inside `process.steps` is a **technical key, never translate it**.
   It is the same in all languages and lets the site pick the right image or icon:
-  - steps: `recovery`, `selection`, `creation`, `lining`, `final`
+  - steps: `recovery`, `selection`, `creation`, `lining-preparation`, `lining`, `final`
 - Arrays must have the **same length** in all three languages (same number of paragraphs, FAQ items…).
 
 ---
