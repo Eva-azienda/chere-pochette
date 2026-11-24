@@ -19,6 +19,8 @@
     { "id": "grigio-perla", "hex": "#C9C6C1", "it": "Grigio perla", "de": "Perlgrau", "en": "Pearl grey" },
     { "id": "cammello", "hex": "#A9744A", "it": "Cammello", "de": "Camel", "en": "Camel" },
     { "id": "giallo", "hex": "#EFE08A", "it": "Giallo", "de": "Gelb", "en": "Yellow" },
+    { "id": "marrone-cioccolato", "hex": "#4B3134", "it": "Marrone cioccolato", "de": "Schokoladenbraun", "en": "Chocolate brown" },
+    { "id": "verde-oliva", "hex": "#515440", "it": "Verde oliva", "de": "Olivgrün", "en": "Olive green" },
     { "id": "verde-salvia", "hex": "#9DAE94", "it": "Verde salvia", "de": "Salbeigrün", "en": "Sage green" },
     { "id": "azzurro", "hex": "#9FC2DD", "it": "Azzurro", "de": "Hellblau", "en": "Sky blue" },
     { "id": "blu-notte", "hex": "#24304F", "it": "Blu notte", "de": "Nachtblau", "en": "Navy" },

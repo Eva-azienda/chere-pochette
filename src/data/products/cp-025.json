@@ -1,0 +1,27 @@
+{
+  "id": "cp-025",
+  "number": 25,
+  "model": "coquette",
+  "status": "available",
+  "price": 55,
+  "colour": "rosso",
+  "lining": "multicolore",
+  "note": "",
+  "photos": [
+    {
+      "src": "media/products/cp-025/1",
+      "w": 864,
+      "h": 1080
+    },
+    {
+      "src": "media/products/cp-025/2",
+      "w": 900,
+      "h": 1125
+    }
+  ],
+  "createdAt": "2026-11-24T20:53:51Z",
+  "updatedAt": "2026-11-24T20:53:51Z",
+  "soldAt": null,
+  "soldChannel": null,
+  "zahls": null
+}

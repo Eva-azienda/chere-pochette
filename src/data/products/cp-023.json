@@ -1,0 +1,27 @@
+{
+  "id": "cp-023",
+  "number": 23,
+  "model": "belle",
+  "status": "available",
+  "price": 55,
+  "colour": "verde-oliva",
+  "lining": "multicolore",
+  "note": "",
+  "photos": [
+    {
+      "src": "media/products/cp-023/1",
+      "w": 864,
+      "h": 1080
+    },
+    {
+      "src": "media/products/cp-023/2",
+      "w": 864,
+      "h": 1080
+    }
+  ],
+  "createdAt": "2026-11-24T20:53:51Z",
+  "updatedAt": "2026-11-24T20:53:51Z",
+  "soldAt": null,
+  "soldChannel": null,
+  "zahls": null
+}
