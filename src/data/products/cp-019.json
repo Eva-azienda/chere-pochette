@@ -20,8 +20,21 @@
     }
   ],
   "createdAt": "2026-11-24T20:40:59.417Z",
-  "updatedAt": "2026-11-24T20:40:59.417Z",
+  "updatedAt": "2026-11-24T20:48:12Z",
   "soldAt": null,
   "soldChannel": null,
-  "zahls": null
+  "zahls": {
+    "amount": 5500,
+    "shippingFee": 900,
+    "shipping": {
+      "id": 39278029,
+      "link": "https://cherepochette.zahls.ch/it/?payment=115fefa23ed054b404db0c88ce0b8c40"
+    },
+    "pickup": {
+      "id": 39278030,
+      "link": "https://cherepochette.zahls.ch/it/?payment=762a9b0cde0cbbb3691fdfcffd6c411f"
+    },
+    "syncedAt": "2026-11-24T20:48:12Z",
+    "transactionId": null
+  }
 }
