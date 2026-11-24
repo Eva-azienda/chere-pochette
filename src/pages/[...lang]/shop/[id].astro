@@ -38,9 +38,8 @@ const info = describeProduct(product, lang);
 const available = product.status === 'available';
 const path = `shop/${product.id}/`;
 
-const metaVars = { model: info.title, number: info.number, price: info.price };
+const metaVars = { model: info.title, price: info.price };
 const title = t('meta.titleTemplate', { title: t('meta.pages.product.title', metaVars) });
-// "Belle · Bordeaux, pezzo unico N° 012: … CHF 40.–" – colour and number make every bag's description unique.
 const description = t('meta.pages.product.description', metaVars);
 
 const related = (await getAvailableProducts()).filter((p) => p.id !== product.id).slice(0, 4);
@@ -58,7 +57,7 @@ const jsonLd = [
   ]),
 ];
 const photoAlt = (n: number) =>
-  t('product.photoAlt', { model: info.modelName, colour: info.colour.label, number: info.number, n });
+  t('product.photoAlt', { model: info.modelName, colour: info.colour.label, n });
 
 const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${product.id} – ${info.title}`)}`;
 ---
@@ -107,7 +106,7 @@ const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${produ
       <header class="product__head">
         <p class="eyebrow">{t('product.eyebrow')}</p>
         <h1 class="product__title">{info.title}</h1>
-        <p class="product__number">{t('common.uniquePiece', { number: info.number })}</p>
+        <p class="product__label">{t('common.uniquePieceShort')}</p>
         {
           available ? (
             <p class="product__price">
@@ -285,7 +284,7 @@ const questionMail = `mailto:${site.email}?subject=${encodeURIComponent(`${produ
     font-size: var(--fs-2xl);
   }
 
-  .product__number {
+  .product__label {
     font-size: var(--fs-xs);
     font-weight: 600;
     letter-spacing: var(--tracking-wide);

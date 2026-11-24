@@ -8,7 +8,7 @@ import taxonomy from '../data/taxonomy.json';
 import siteData from '../data/site.json';
 import teamData from '../data/team.json';
 import type { Lang } from './i18n';
-import { formatPrice, padNumber } from './format';
+import { formatPrice } from './format';
 import { assetPath } from './urls';
 
 export const site = siteData;
@@ -86,8 +86,6 @@ export function describeProduct(p: Product, lang: Lang) {
     lining: getLiningLabel(p.lining, lang),
     /** "Belle · Bordeaux" */
     title: `${model.name} · ${colour.label}`,
-    /** "012" */
-    number: padNumber(p.number),
     /** "40.–" (without "CHF") */
     price: formatPrice(p.price),
   };

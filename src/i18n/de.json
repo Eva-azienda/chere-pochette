@@ -13,11 +13,11 @@
       },
       "shop": {
         "title": "Shop – handgemachte Häkeltaschen",
-        "description": "Häkeltaschen Jolie, Belle und Coquette: nummerierte Unikate, von Hand gemacht aus geretteten Materialien. Versand nur in der Schweiz oder kostenlose Abholung im Tessin nach Absprache."
+        "description": "Häkeltaschen Jolie, Belle und Coquette: Unikate, von Hand gemacht aus geretteten Materialien. Versand nur in der Schweiz oder kostenlose Abholung im Tessin nach Absprache."
       },
       "product": {
-        "title": "{model} – Häkeltasche Nr. {number}",
-        "description": "{model}, Unikat Nr. {number}, von Hand gehäkelt und mit Stoff aus kaputten Regenschirmen gefüttert. CHF {price}"
+        "title": "{model} – Häkeltasche",
+        "description": "{model}, Unikat, von Hand gehäkelt und mit Stoff aus kaputten Regenschirmen gefüttert. CHF {price}"
       },
       "about": {
         "title": "Unsere Geschichte: Häkeln und Upcycling",
@@ -81,7 +81,6 @@
   "common": {
     "buy": "Kaufen",
     "orderByEmail": "Per E-Mail bestellen",
-    "uniquePiece": "Unikat Nr. {number}",
     "uniquePieceShort": "Unikat",
     "sold": "Verkauft",
     "available": "Verfügbar",
@@ -149,7 +148,7 @@
       "notes": {
         "yarn": "von Hand gehäkelt",
         "handle": "gehäkelter Henkel",
-        "unique": "Unikat, nummeriert"
+        "unique": "Unikat"
       },
       "values": {
         "title": "Unsere Werte",
@@ -225,7 +224,7 @@
     },
     "card": {
       "view": "Ansehen",
-      "photoAlt": "Tasche {model} in {colour}, Unikat Nr. {number}"
+      "photoAlt": "Tasche {model} in {colour}, Unikat"
     }
   },
   "product": {
@@ -236,7 +235,7 @@
     "colour": "Farbe aussen",
     "lining": "Innen (Futter)",
     "note": "Eine Notiz zu dieser Tasche",
-    "photoAlt": "Häkeltasche {model} in {colour}, Unikat Nr. {number} – Foto {n}",
+    "photoAlt": "Häkeltasche {model} in {colour}, Unikat – Foto {n}",
     "dimensions": {
       "title": "Masse",
       "length": "Länge",
@@ -277,7 +276,7 @@
       "title": "Per E-Mail bestellen",
       "text": "Für diese Tasche ist die Online-Zahlung noch nicht aktiv. Schreib uns – wir antworten so schnell wie möglich.",
       "subject": "Bestellung {id} – {model}",
-      "body": "Guten Tag\n\nIch möchte die Tasche {model}, Unikat Nr. {number} ({id}), kaufen.\nLieferung: {delivery}.\n\nVielen Dank!"
+      "body": "Guten Tag\n\nIch möchte die Tasche {model}, Unikat, kaufen.\nLieferung: {delivery}.\n\nVielen Dank!"
     },
     "legalNote": {
       "text": "Mit deiner Bestellung akzeptierst du unsere",
@@ -420,7 +419,7 @@
       {
         "id": "final",
         "title": "Chère Pochette",
-        "text": "Es entsteht ein nummeriertes Unikat, bereit, getragen zu werden. Made to carry on."
+        "text": "Es entsteht ein Unikat, bereit, getragen zu werden. Made to carry on."
       }
     ],
     "closing": {
@@ -563,7 +562,7 @@
     "questions": "Hast du eine Frage? Schreib uns an {email}.",
     "cta": "Zurück zum Shop",
     "ctaHome": "Zur Startseite",
-    "bag": "Deine Tasche: {model}, Unikat Nr. {number}"
+    "bag": "Deine Tasche: {model}, Unikat"
   },
   "cancelled": {
     "eyebrow": "Zahlung nicht abgeschlossen",
@@ -575,7 +574,7 @@
     ],
     "retry": "Erneut versuchen",
     "cta": "Zurück zum Shop",
-    "bag": "Die Tasche, die du ausgewählt hattest: {model}, Unikat Nr. {number}"
+    "bag": "Die Tasche, die du ausgewählt hattest: {model}, Unikat"
   },
   "notFound": {
     "eyebrow": "Fehler 404",

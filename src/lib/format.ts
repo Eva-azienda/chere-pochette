@@ -13,11 +13,6 @@ export function formatPrice(chf: number): string {
   return whole ? `${grouped}.–` : `${grouped}.${rappen}`;
 }
 
-/** Unique piece number, zero-padded to 3 digits: 12 → "012". */
-export function padNumber(n: number): string {
-  return String(n).padStart(3, '0');
-}
-
 /** Date as shown in Switzerland: 29.10.2026 (de/it) or 29 October 2026 (en). */
 export function formatDate(iso: string, lang: string): string {
   const date = new Date(iso);

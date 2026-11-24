@@ -13,11 +13,11 @@
       },
       "shop": {
         "title": "Shop – borse all'uncinetto fatte a mano",
-        "description": "Borse all'uncinetto Jolie, Belle e Coquette: pezzi unici numerati, fatti a mano con materiali recuperati. Spedizione solo in Svizzera o ritiro gratuito in Ticino su accordo."
+        "description": "Borse all'uncinetto Jolie, Belle e Coquette: pezzi unici, fatti a mano con materiali recuperati. Spedizione solo in Svizzera o ritiro gratuito in Ticino su accordo."
       },
       "product": {
-        "title": "{model} – borsa all'uncinetto N° {number}",
-        "description": "{model}, pezzo unico N° {number}, lavorato a mano all’uncinetto e foderato con stoffa di ombrelli rotti. CHF {price}"
+        "title": "{model} – borsa all'uncinetto",
+        "description": "{model}, pezzo unico, lavorato a mano all’uncinetto e foderato con stoffa di ombrelli rotti. CHF {price}"
       },
       "about": {
         "title": "La nostra storia: uncinetto e upcycling",
@@ -81,7 +81,6 @@
   "common": {
     "buy": "Acquista",
     "orderByEmail": "Ordina via e-mail",
-    "uniquePiece": "Pezzo unico N° {number}",
     "uniquePieceShort": "Pezzo unico",
     "sold": "Venduta",
     "available": "Disponibile",
@@ -149,7 +148,7 @@
       "notes": {
         "yarn": "lavorata a mano all’uncinetto",
         "handle": "manico all’uncinetto",
-        "unique": "pezzo unico, numerato"
+        "unique": "pezzo unico"
       },
       "values": {
         "title": "I nostri valori",
@@ -225,7 +224,7 @@
     },
     "card": {
       "view": "Scopri",
-      "photoAlt": "Borsa {model} {colour}, pezzo unico N° {number}"
+      "photoAlt": "Borsa {model} {colour}, pezzo unico"
     }
   },
   "product": {
@@ -236,7 +235,7 @@
     "colour": "Colore esterno",
     "lining": "Interno (fodera)",
     "note": "Una nota su questa borsa",
-    "photoAlt": "Borsa all'uncinetto {model} color {colour}, pezzo unico N° {number} – foto {n}",
+    "photoAlt": "Borsa all'uncinetto {model} color {colour}, pezzo unico – foto {n}",
     "dimensions": {
       "title": "Dimensioni",
       "length": "Lunghezza",
@@ -277,7 +276,7 @@
       "title": "Ordina via e-mail",
       "text": "Per questa borsa il pagamento online non è ancora attivo. Scrivici: ti rispondiamo il prima possibile.",
       "subject": "Ordine {id} – {model}",
-      "body": "Buongiorno,\n\nvorrei acquistare la borsa {model}, pezzo unico N° {number} ({id}).\nConsegna: {delivery}.\n\nGrazie!"
+      "body": "Buongiorno,\n\nvorrei acquistare la borsa {model}, pezzo unico.\nConsegna: {delivery}.\n\nGrazie!"
     },
     "legalNote": {
       "text": "Ordinando accetti le nostre",
@@ -420,7 +419,7 @@
       {
         "id": "final",
         "title": "Chère Pochette",
-        "text": "Nasce un pezzo unico e numerato, pronto a essere portato. Made to carry on."
+        "text": "Nasce un pezzo unico, pronto a essere portato. Made to carry on."
       }
     ],
     "closing": {
@@ -563,7 +562,7 @@
     "questions": "Hai una domanda? Scrivici a {email}.",
     "cta": "Torna allo shop",
     "ctaHome": "Vai alla home",
-    "bag": "La tua borsa: {model}, pezzo unico N° {number}"
+    "bag": "La tua borsa: {model}, pezzo unico"
   },
   "cancelled": {
     "eyebrow": "Pagamento non completato",
@@ -575,7 +574,7 @@
     ],
     "retry": "Riprova",
     "cta": "Torna allo shop",
-    "bag": "La borsa che avevi scelto: {model}, pezzo unico N° {number}"
+    "bag": "La borsa che avevi scelto: {model}, pezzo unico"
   },
   "notFound": {
     "eyebrow": "Errore 404",

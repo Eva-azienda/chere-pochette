@@ -35,8 +35,6 @@ const options = (['shipping', 'pickup'] as Delivery[]).map((delivery) => {
   const subject = t('product.orderByEmail.subject', { id: product.id, model: info.modelName });
   const body = t('product.orderByEmail.body', {
     model: info.title,
-    number: info.number,
-    id: product.id,
     delivery: delivery === 'shipping' ? `${deliveryLabel} (+ CHF ${fee})` : deliveryLabel,
   });
   const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

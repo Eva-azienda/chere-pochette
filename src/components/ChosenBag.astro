@@ -11,7 +11,7 @@ import { localePath } from '../lib/urls';
 
 interface Props {
   lang: Lang;
-  /** i18n key of the sentence, with {model} and {number} (e.g. "thanks.bag"). */
+  /** i18n key of the sentence, with {model} (e.g. "thanks.bag"). */
   textKey: string;
 }
 
@@ -25,7 +25,6 @@ const bags = Object.fromEntries(
       p.id,
       {
         model: info.title,
-        number: info.number,
         photo: p.photos[0] ? photoUrl(p.photos[0].src, 400) : '',
         url: localePath(lang, `shop/${p.id}/`),
       },
@@ -41,7 +40,7 @@ const bags = Object.fromEntries(
 <script type="application/json" data-chosen-catalogue set:html={JSON.stringify(bags).replace(/</g, '\\u003c')} />
 
 <script>
-  type Bag = { model: string; number: string; photo: string; url: string };
+  type Bag = { model: string; photo: string; url: string };
 
   const box = document.querySelector<HTMLElement>('[data-chosen-bag]');
   const catalogue = document.querySelector('[data-chosen-catalogue]');
@@ -51,7 +50,7 @@ const bags = Object.fromEntries(
     const bags = JSON.parse(catalogue.textContent || '{}') as Record<string, Bag>;
     const bag = bags[id];
     if (bag) {
-      const text = (box.dataset.text ?? '').replace('{model}', bag.model).replace('{number}', bag.number);
+      const text = (box.dataset.text ?? '').replace('{model}', bag.model);
       box.querySelector('[data-chosen-text]')!.textContent = text;
       const img = box.querySelector<HTMLImageElement>('[data-chosen-photo]')!;
       if (bag.photo) img.src = bag.photo;

@@ -142,7 +142,7 @@ export function productJsonLd(product: Product, lang: Lang): JsonLdNode {
   const { t } = useTranslations(lang);
   const info = describeProduct(product, lang);
   const url = absoluteUrl(localePath(lang, `shop/${product.id}/`));
-  const vars = { model: info.title, number: info.number, price: info.price };
+  const vars = { model: info.title, price: info.price };
   return {
     '@type': 'Product',
     '@id': `${url}#product`,

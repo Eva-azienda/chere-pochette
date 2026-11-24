@@ -28,7 +28,7 @@ Keys are written in `camelCase` and grouped by page or component.
 | `nav` | Menu labels: `home`, `shop`, `about`, `process`, `team`, `info`, `legal`, `contact` |
 | `languageNames` | Name of each language **in its own language** (Italiano, Deutsch, English) – identical in all files |
 | `brand` | `slogan`, `tagline` (both stay in English everywhere), `sloganMeaning`, `taglineSupport` (localized) |
-| `common` | Shared buttons and labels: buy, order by e-mail, "Pezzo unico N° {number}", sold, available, back, close, menu, price… |
+| `common` | Shared buttons and labels: buy, order by e-mail, "Pezzo unico", sold, available, back, close, menu, price… |
 | `a11y` | Screen-reader texts: skip link, menu buttons, gallery, breadcrumb, language switcher… |
 | `images` | Alt texts for the brand photos in `src/assets/brand/` (key = file name in camelCase, e.g. `hero-bag-hands.jpg` → `heroBagHands`), plus `teamGroup` for `src/assets/team/group.jpg` |
 | `home` | `hero` (`title` = headline, `lead`, `cta`, `notes` = only for the unused `BagSketch`), `featured`, `concept`, `models`, `process`, `story` (the Ukrainian women), `team`, `newsletter` (unused for now), `social` |
@@ -67,7 +67,6 @@ Dynamic values are written between curly braces. **Never translate or rename a p
 | `{title}` | Page title (in `meta.titleTemplate`) | `Shop – borse all'uncinetto fatte a mano` |
 | `{price}` | Bag price, **already formatted, without "CHF"** | `40.–` (whole francs, Swiss style) or `42.50` |
 | `{fee}` | Shipping fee from `site.json`, same format as `{price}` | `9.–` |
-| `{number}` | Unique piece number, zero-padded to 3 digits | `012` |
 | `{model}` | Model name from `models.json` | `Belle` |
 | `{colour}` | Localized colour name from `taxonomy.json` | `bordeaux` |
 | `{id}` | Product id | `cp-012` |
@@ -87,8 +86,7 @@ Notes:
 - `meta.titleTemplate` (`Chère Pochette · {title}`) is used for all pages **except the home page**,
   whose `meta.pages.home.title` is already complete. Every browser tab starts with the brand name.
 - Plurals: `shop.count.one` for exactly 1, `shop.count.other` for every other number.
-- `meta.pages.product.title` / `.description`: `{model}` is "Model · Colour", `{number}` the piece
-  number and `{price}` the price, so every bag gets its own title and description in search results.
+- `meta.pages.product.title` / `.description`: `{model}` is "Model · Colour", and `{price}` is the price.
   Keep the words people search for ("borsa all'uncinetto", "Häkeltasche", "crochet bag") in them.
 - Search engines show about 60 characters of a title and 155 of a description: keep new texts short.
   `npm run build` runs `scripts/check-seo.mjs` afterwards (titles, canonicals, sitemap, broken links).

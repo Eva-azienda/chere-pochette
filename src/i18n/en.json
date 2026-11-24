@@ -13,11 +13,11 @@
       },
       "shop": {
         "title": "Shop – handmade crochet bags",
-        "description": "Jolie, Belle and Coquette crochet bags: numbered one-of-a-kind pieces, handmade from recovered materials. Shipping within Switzerland only or free pickup in Ticino by arrangement."
+        "description": "Jolie, Belle and Coquette crochet bags: one-of-a-kind pieces, handmade from recovered materials. Shipping within Switzerland only or free pickup in Ticino by arrangement."
       },
       "product": {
-        "title": "{model} – crochet bag No. {number}",
-        "description": "{model}, one of a kind No. {number}, crocheted by hand and lined with fabric from broken umbrellas. CHF {price}"
+        "title": "{model} – crochet bag",
+        "description": "{model}, one of a kind, crocheted by hand and lined with fabric from broken umbrellas. CHF {price}"
       },
       "about": {
         "title": "Our story: crochet and upcycling",
@@ -81,7 +81,6 @@
   "common": {
     "buy": "Buy",
     "orderByEmail": "Order by e-mail",
-    "uniquePiece": "One of a kind No. {number}",
     "uniquePieceShort": "One of a kind",
     "sold": "Sold",
     "available": "Available",
@@ -149,7 +148,7 @@
       "notes": {
         "yarn": "crocheted by hand",
         "handle": "crocheted handle",
-        "unique": "one of a kind, numbered"
+        "unique": "one of a kind"
       },
       "values": {
         "title": "Our values",
@@ -225,7 +224,7 @@
     },
     "card": {
       "view": "View",
-      "photoAlt": "{model} bag in {colour}, one of a kind No. {number}"
+      "photoAlt": "{model} bag in {colour}, one of a kind"
     }
   },
   "product": {
@@ -236,7 +235,7 @@
     "colour": "Exterior colour",
     "lining": "Interior (lining)",
     "note": "A note about this bag",
-    "photoAlt": "{model} crochet bag in {colour}, one of a kind No. {number} – photo {n}",
+    "photoAlt": "{model} crochet bag in {colour}, one of a kind – photo {n}",
     "dimensions": {
       "title": "Dimensions",
       "length": "Length",
@@ -277,7 +276,7 @@
       "title": "Order by e-mail",
       "text": "Online payment isn't active for this bag yet. Write to us and we'll reply as soon as we can.",
       "subject": "Order {id} – {model}",
-      "body": "Hello,\n\nI would like to buy the {model} bag, one of a kind No. {number} ({id}).\nDelivery: {delivery}.\n\nThank you!"
+      "body": "Hello,\n\nI would like to buy the {model} bag, one of a kind.\nDelivery: {delivery}.\n\nThank you!"
     },
     "legalNote": {
       "text": "By ordering, you accept our",
@@ -420,7 +419,7 @@
       {
         "id": "final",
         "title": "Chère Pochette",
-        "text": "A numbered, one-of-a-kind piece is born, ready to be carried. Made to carry on."
+        "text": "A one-of-a-kind piece is born, ready to be carried. Made to carry on."
       }
     ],
     "closing": {
@@ -563,7 +562,7 @@
     "questions": "Any questions? Write to us at {email}.",
     "cta": "Back to the shop",
     "ctaHome": "Go to the home page",
-    "bag": "Your bag: {model}, one of a kind No. {number}"
+    "bag": "Your bag: {model}, one of a kind"
   },
   "cancelled": {
     "eyebrow": "Payment not completed",
@@ -575,7 +574,7 @@
     ],
     "retry": "Try again",
     "cta": "Back to the shop",
-    "bag": "The bag you chose: {model}, one of a kind No. {number}"
+    "bag": "The bag you chose: {model}, one of a kind"
   },
   "notFound": {
     "eyebrow": "Error 404",

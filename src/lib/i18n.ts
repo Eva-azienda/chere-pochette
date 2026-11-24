@@ -6,7 +6,7 @@
  *
  *   const { t, list } = useTranslations(lang);
  *   t('shop.title')                         → "Le nostre borse all'uncinetto"
- *   t('common.uniquePiece', { number: '012' }) → "Pezzo unico N° 012"
+ *   t('common.uniquePieceShort') → "Pezzo unico"
  *   list('about.born.paragraphs')           → an array from the JSON file
  *
  * A missing key stops the build with an error, so typos are caught before publishing.
