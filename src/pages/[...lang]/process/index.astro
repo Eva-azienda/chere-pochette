@@ -1,5 +1,5 @@
 ---
-/** From umbrella to bag: the six steps, joined by a thin thread. */
+/** From umbrella to bag: the seven steps, joined by a thin thread. */
 import type { ImageMetadata } from 'astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BrandPicture from '../../../components/BrandPicture.astro';
@@ -10,6 +10,7 @@ import umbrellasFabrics from '../../../assets/brand/umbrellas-fabrics.jpg';
 import crochetProcess from '../../../assets/brand/crochet-process.jpg';
 import liningCut from '../../../assets/brand/lining-cut.jpg';
 import bagNameplate from '../../../assets/brand/bag-nameplate.jpg';
+import bagUmbrella from '../../../assets/brand/hero-bag-umbrella-45.jpg';
 import bagHands from '../../../assets/brand/hero-bag-hands-45.jpg';
 import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
 import { localePath } from '../../../lib/urls';
@@ -30,6 +31,7 @@ const photos: Record<string, { src: ImageMetadata; alt: string; position?: strin
   creation: { src: crochetProcess, alt: 'images.womenCrochet' },
   'lining-preparation': { src: liningCut, alt: 'images.liningCut' },
   nameplate: { src: bagNameplate, alt: 'images.bagNameplate' },
+  lining: { src: bagUmbrella, alt: 'images.heroBagUmbrella', position: '53% 60%' },
   final: { src: bagHands, alt: 'images.heroBagHands' },
 };
 // The first step photo is visible right below the title: load it first (largest image on screen).

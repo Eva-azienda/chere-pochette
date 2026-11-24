@@ -25,7 +25,7 @@
       },
       "process": {
         "title": "Dall'ombrello alla borsa all'uncinetto",
-        "description": "Dal recupero degli ombrelli alla fodera, scopri in sei passi come nasce una Chère Pochette."
+        "description": "Dal recupero degli ombrelli alla fodera, scopri in sette passi come nasce una Chère Pochette."
       },
       "team": {
         "title": "Il nostro team a Bellinzona",
@@ -162,7 +162,7 @@
     "process": {
       "eyebrow": "Dall'ombrello alla borsa",
       "title": "Come nasce una Chère Pochette",
-      "text": "Sei passi, dalla raccolta dei materiali all'ultimo punto.",
+      "text": "Sette passi, dalla raccolta dei materiali all'ultimo punto.",
       "cta": "Scopri il processo"
     },
     "story": {
@@ -381,7 +381,7 @@
   "process": {
     "eyebrow": "Il nostro processo",
     "title": "Dall'ombrello alla borsa",
-    "intro": "Da un ombrello rotto alla fodera di una borsa fatta a mano. Ecco come nasce una Chère Pochette, in sei passi.",
+    "intro": "Da un ombrello rotto alla fodera di una borsa fatta a mano. Ecco come nasce una Chère Pochette, in sette passi.",
     "stepLabel": "Passo {n}",
     "steps": [
       {
@@ -408,6 +408,11 @@
         "id": "nameplate",
         "title": "Applicazione della targhetta",
         "text": "Fissiamo la targhetta dorata con il nome Chère Pochette sul davanti di ogni borsa."
+      },
+      {
+        "id": "lining",
+        "title": "Fodera",
+        "text": "Aprendo la borsa si scoprono i colori e la fantasia dell’ombrello da cui proviene la fodera."
       },
       {
         "id": "final",

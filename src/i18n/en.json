@@ -25,7 +25,7 @@
       },
       "process": {
         "title": "From broken umbrella to crochet bag",
-        "description": "From collecting umbrellas to adding the lining, discover how a Chère Pochette is made in six steps."
+        "description": "From collecting umbrellas to adding the lining, discover how a Chère Pochette is made in seven steps."
       },
       "team": {
         "title": "Our team in Bellinzona",
@@ -162,7 +162,7 @@
     "process": {
       "eyebrow": "From umbrella to bag",
       "title": "How a Chère Pochette is made",
-      "text": "Six steps, from collecting the materials to the very last stitch.",
+      "text": "Seven steps, from collecting the materials to the very last stitch.",
       "cta": "Discover the process"
     },
     "story": {
@@ -381,7 +381,7 @@
   "process": {
     "eyebrow": "Our process",
     "title": "From umbrella to bag",
-    "intro": "A broken umbrella becomes the lining of a handmade bag. Here’s how a Chère Pochette comes together in six steps.",
+    "intro": "A broken umbrella becomes the lining of a handmade bag. Here’s how a Chère Pochette comes together in seven steps.",
     "stepLabel": "Step {n}",
     "steps": [
       {
@@ -408,6 +408,11 @@
         "id": "nameplate",
         "title": "Attaching the nameplate",
         "text": "We attach the gold-coloured Chère Pochette nameplate to the front of each bag."
+      },
+      {
+        "id": "lining",
+        "title": "Lining",
+        "text": "Open the bag to discover the colours and pattern of the umbrella used for the lining."
       },
       {
         "id": "final",

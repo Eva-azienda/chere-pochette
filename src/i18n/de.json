@@ -25,7 +25,7 @@
       },
       "process": {
         "title": "Vom Regenschirm zur Häkeltasche",
-        "description": "Vom Sammeln der Regenschirme bis zum Einnähen des Futters. So entsteht eine Chère Pochette in sechs Schritten."
+        "description": "Vom Sammeln der Regenschirme bis zum Einnähen des Futters. So entsteht eine Chère Pochette in sieben Schritten."
       },
       "team": {
         "title": "Unser Team aus Bellinzona",
@@ -162,7 +162,7 @@
     "process": {
       "eyebrow": "Vom Regenschirm zur Tasche",
       "title": "So entsteht eine Chère Pochette",
-      "text": "Sechs Schritte, vom Sammeln der Materialien bis zur letzten Masche.",
+      "text": "Sieben Schritte, vom Sammeln der Materialien bis zur letzten Masche.",
       "cta": "Den Prozess entdecken"
     },
     "story": {
@@ -381,7 +381,7 @@
   "process": {
     "eyebrow": "Unser Prozess",
     "title": "Vom Regenschirm zur Tasche",
-    "intro": "Vom kaputten Regenschirm zum Futter einer handgemachten Tasche. So entsteht eine Chère Pochette in sechs Schritten.",
+    "intro": "Vom kaputten Regenschirm zum Futter einer handgemachten Tasche. So entsteht eine Chère Pochette in sieben Schritten.",
     "stepLabel": "Schritt {n}",
     "steps": [
       {
@@ -408,6 +408,11 @@
         "id": "nameplate",
         "title": "Das Markenschild anbringen",
         "text": "Wir befestigen das goldfarbene Schild mit dem Namen Chère Pochette auf der Vorderseite jeder Tasche."
+      },
+      {
+        "id": "lining",
+        "title": "Futter",
+        "text": "Beim Öffnen der Tasche kommen die Farben und das Muster des ursprünglichen Regenschirms zum Vorschein."
       },
       {
         "id": "final",
