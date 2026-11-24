@@ -7,6 +7,8 @@
     { "id": "lilla", "hex": "#B7A2C9", "it": "Lilla", "de": "Flieder", "en": "Lilac" },
     { "id": "panna", "hex": "#F1E9D8", "it": "Panna", "de": "Creme", "en": "Cream" },
     { "id": "beige", "hex": "#D6C3A5", "it": "Beige", "de": "Beige", "en": "Beige" },
+    { "id": "grigio-antracite", "hex": "linear-gradient(135deg,#747675,#393638)", "it": "Grigio e antracite", "de": "Grau und Anthrazit", "en": "Grey and charcoal" },
+    { "id": "azzurro-nero", "hex": "linear-gradient(135deg,#5A8FBA,#1E1E1E)", "it": "Azzurro e nero", "de": "Hellblau und Schwarz", "en": "Sky blue and black" },
     { "id": "grigio-perla", "hex": "#C9C6C1", "it": "Grigio perla", "de": "Perlgrau", "en": "Pearl grey" },
     { "id": "cammello", "hex": "#A9744A", "it": "Cammello", "de": "Camel", "en": "Camel" },
     { "id": "giallo", "hex": "#EFE08A", "it": "Giallo", "de": "Gelb", "en": "Yellow" },

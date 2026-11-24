@@ -22,5 +22,12 @@
     "price": 45,
     "dimensions": { "length": "22–25", "depth": "6", "height": "16–18", "handle": "2–3" },
     "image": "model-coquette"
+  },
+  {
+    "id": "essentielle",
+    "name": "Essentielle",
+    "type": { "it": "Borsa a mano", "de": "Handtasche", "en": "Handbag" },
+    "price": 55,
+    "dimensions": { "length": null, "depth": null, "height": null, "handle": null }
   }
 ]
