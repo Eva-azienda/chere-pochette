@@ -46,13 +46,6 @@ const backHref = localePath(lang, 'team/');
 ---
 
 <BaseLayout lang={lang} path={'team/' + member.slug + '/'} {...meta} noindex={profileDraft} jsonLd={jsonLd}>
-  <div class="container cv__nav">
-    <a class="cv__back" href={backHref}>
-      <Icon name="arrow-left" size={18} />
-      {t('team.member.backToTeam')}
-    </a>
-  </div>
-
   <article class="container cv">
     <div class="cv__paper">
       <header class="cv__hero">
@@ -125,19 +118,6 @@ const backHref = localePath(lang, 'team/');
 </BaseLayout>
 
 <style>
-  .cv__nav {
-    padding-block: var(--s-3);
-  }
-  .cv__back {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s-2);
-    min-height: var(--tap);
-    font-size: var(--fs-sm);
-    font-weight: 600;
-    color: var(--c-plum);
-    text-decoration: none;
-  }
   .cv {
     max-width: calc(64rem + 2 * var(--gutter));
     padding-bottom: var(--section-y);

@@ -17,6 +17,7 @@ import '../styles/global.css';
 // Same file as in the fontsource CSS above, so the browser downloads it only once.
 import bodoniLatin from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-opsz-normal.woff2?url';
 
+import PageNavigation from '../components/PageNavigation.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { HREFLANG, HTML_LANG, LOCALES, DEFAULT_LANG, type Lang, useTranslations } from '../lib/i18n';
@@ -126,6 +127,7 @@ const verification = (site as { seo?: { googleSiteVerification?: string; bingSit
     <a class="skip-link" href="#main">{t('a11y.skipToContent')}</a>
     <SiteHeader lang={lang} path={path} />
     <main id="main" tabindex="-1">
+      {path && <PageNavigation lang={lang} path={path} />}
       <slot />
     </main>
     <SiteFooter lang={lang} path={path} />

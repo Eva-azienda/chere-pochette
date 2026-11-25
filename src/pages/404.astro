@@ -10,6 +10,7 @@
  *    is no longer online" with the shop button first, instead of the generic message.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageNavigation from '../components/PageNavigation.astro';
 import ThreadDivider from '../components/ThreadDivider.astro';
 import { DEFAULT_LANG, HTML_LANG, LOCALES, useTranslations } from '../lib/i18n';
 import { BASE, localePath } from '../lib/urls';
@@ -42,6 +43,7 @@ const { pageMeta } = useTranslations(DEFAULT_LANG);
             lang={HTML_LANG[lang]}
             hidden={lang !== DEFAULT_LANG}
           >
+            <PageNavigation lang={lang} path="" />
             <p class="eyebrow" data-nf-eyebrow>
               {tr('notFound.eyebrow')}
             </p>
@@ -121,6 +123,10 @@ const { pageMeta } = useTranslations(DEFAULT_LANG);
 
   .nf__msg[hidden] {
     display: none;
+  }
+
+  .nf :global(.page-navigation) {
+    justify-content: center;
   }
 
   .nf .btn-row {

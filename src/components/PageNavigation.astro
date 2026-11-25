@@ -1,0 +1,64 @@
+---
+import Icon from './Icon.astro';
+import { useTranslations, type Lang } from '../lib/i18n';
+import { localePath } from '../lib/urls';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const { t } = useTranslations(lang);
+const parentPath = path.replace(/[^/]+\/$/, '');
+---
+
+<nav class="container page-navigation" aria-label={t('a11y.breadcrumb')}>
+  <a href={localePath(lang, parentPath)} data-page-back>
+    <Icon name="arrow-left" size={18} />
+    {t('common.back')}
+  </a>
+  <a href={localePath(lang)}>{t('nav.home')}</a>
+</nav>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('[data-page-back]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+      // Where supported, check the actual previous entry. Cross-origin entries are omitted.
+      const navigation = window.navigation;
+      if (navigation) {
+        const previous = navigation.entries()[(navigation.currentEntry?.index ?? 0) - 1];
+        if (!navigation.canGoBack || !previous?.url) return;
+      } else if (history.length <= 1 || !document.referrer.startsWith(location.origin + '/')) {
+        return;
+      }
+
+      event.preventDefault();
+      history.back();
+    });
+  });
+</script>
+
+<style>
+  .page-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-4);
+    padding-block: var(--s-2);
+  }
+
+  .page-navigation a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    min-height: var(--tap);
+    min-width: var(--tap);
+    color: var(--c-plum);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    text-underline-offset: 0.2em;
+  }
+</style>
