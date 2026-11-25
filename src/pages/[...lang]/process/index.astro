@@ -29,7 +29,7 @@ const photos: Record<string, { src: ImageMetadata; alt: string; position?: strin
   recovery: { src: umbrellasCollected, alt: 'images.umbrellasCollected', position: '40% 50%' },
   selection: { src: umbrellasFabrics, alt: 'images.umbrellasFabrics' },
   creation: { src: crochetProcess, alt: 'images.womenCrochet' },
-  'lining-preparation': { src: liningCut, alt: 'images.liningCut' },
+  'lining-preparation': { src: liningCut, alt: 'images.liningCut', position: '50% 90%' },
   nameplate: { src: bagNameplate, alt: 'images.bagNameplate' },
   lining: { src: bagLining, alt: 'images.bagLining' },
   final: { src: bagHands, alt: 'images.heroBagHands' },
@@ -53,7 +53,7 @@ const firstPhoto = steps.findIndex((step) => photos[step.id]);
               </div>
               <div class="step__body">
                 {photo && (
-                  <div class="step__media media">
+                  <div class:list={['step__media media', { 'step__media--lining-cut': step.id === 'lining-preparation' }]}>
                     <BrandPicture
                       src={photo.src}
                       alt={t(photo.alt)}
@@ -164,6 +164,10 @@ const firstPhoto = steps.findIndex((step) => photos[step.id]);
 
   .step__media {
     aspect-ratio: 4 / 5;
+  }
+
+  .step__media--lining-cut {
+    aspect-ratio: 1;
   }
 
   .step__media :global(picture),

@@ -65,13 +65,11 @@ Wird dieselbe Tasche wegen eines Fehlers zweimal bezahlt, erhält die zweite Per
 
 ### Lieferung
 
-Wir versenden mit der Schweizerischen Post in die Schweiz und nach Liechtenstein, meist innert 5 Arbeitstagen nach der Zahlung. Wählst du die Abholung in Bellinzona, melden wir uns für einen Termin.
+Wir versenden mit der Schweizerischen Post in die Schweiz, meist innert 5 Arbeitstagen nach der Zahlung. Wählst du die Abholung in Bellinzona, melden wir uns für einen Termin.
 
 ### Rückgabe und Mängel
 
 In der Schweiz gibt es kein gesetzliches Widerrufsrecht für Online-Käufe – eine Rückgabe ist bei uns trotzdem möglich: Schreib uns innert 14 Tagen nach Erhalt oder Abholung. Ist die Tasche unbenutzt und im Originalzustand, schickst du sie zurück (auf deine Kosten) oder bringst sie nach Absprache in Bellinzona vorbei. Wir erstatten dir den Preis der Tasche innert 14 Tagen nach ihrem Eingang; die ursprünglichen Versandkosten erstatten wir nicht.
-
-Wohnst du in Liechtenstein, hast du von Gesetzes wegen 14 Tage ab Erhalt, um ohne Angabe von Gründen vom Vertrag zurückzutreten: In diesem Fall erstatten wir dir auch die ursprünglichen Versandkosten.
 
 Kommt die Tasche beschädigt oder mangelhaft an, schreib uns innert 14 Tagen mit einem Foto: Wir schlagen dir eine Reparatur oder die Rückerstattung vor. Normale Abnutzung ist kein Mangel.
 

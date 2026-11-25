@@ -65,13 +65,11 @@ If, by mistake, the same bag is paid for twice, the second buyer receives a full
 
 ### Delivery
 
-We ship with Swiss Post within Switzerland and to Liechtenstein, usually within 5 working days of payment. If you choose pickup in Bellinzona, we contact you to arrange a time.
+We ship with Swiss Post within Switzerland, usually within 5 working days of payment. If you choose pickup in Bellinzona, we contact you to arrange a time.
 
 ### Returns and defects
 
 Swiss law gives no statutory right of withdrawal for online purchases, but we still accept returns: write to us within 14 days of receiving or collecting the bag. If it is unused and in its original condition, send it back (at your own cost) or hand it back in Bellinzona by appointment. We refund the price of the bag within 14 days of receiving it; the original shipping fee is not refunded.
-
-If you live in Liechtenstein, the law gives you 14 days from receipt to withdraw from the contract without giving a reason: in that case we also refund the original shipping fee.
 
 If the bag arrives damaged or faulty, write to us within 14 days with a photo: we will offer a repair or a refund. Normal wear is not a defect.
 
