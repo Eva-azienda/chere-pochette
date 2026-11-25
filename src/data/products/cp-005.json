@@ -2,7 +2,7 @@
   "id": "cp-005",
   "number": 5,
   "model": "essentielle",
-  "status": "available",
+  "status": "sold",
   "price": 55,
   "colour": "panna",
   "lining": "floreale",
@@ -20,9 +20,9 @@
     }
   ],
   "createdAt": "2026-11-24T19:53:23.309Z",
-  "updatedAt": "2026-11-24T20:02:12Z",
-  "soldAt": null,
-  "soldChannel": null,
+  "updatedAt": "2026-11-25T16:47:22Z",
+  "soldAt": "2026-11-25T16:47:22Z",
+  "soldChannel": "manual",
   "zahls": {
     "amount": 5500,
     "shippingFee": 900,
