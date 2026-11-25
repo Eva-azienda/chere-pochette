@@ -47,6 +47,9 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'always',
+  image: {
+    service: { entrypoint: './src/lib/team-image-service.ts' },
+  },
   i18n: {
     locales: ['it', 'de', 'en'],
     defaultLocale: 'it',
