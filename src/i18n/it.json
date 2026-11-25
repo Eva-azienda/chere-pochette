@@ -156,8 +156,6 @@
   "home": {
     "carousel": {
       "label": "Foto e video di Chère Pochette",
-      "previous": "Elemento precedente",
-      "next": "Elemento successivo",
       "play": "Avvia lo scorrimento automatico",
       "pause": "Metti in pausa lo scorrimento automatico"
     },
