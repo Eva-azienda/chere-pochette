@@ -4,7 +4,6 @@
  * cropped to a circle with the face in the middle) or, when there is no photo, the initials
  * (Monogram). Size: 96px on phones, 120px from 64rem; `lead` is a little larger (CEO).
  */
-import { Picture } from 'astro:assets';
 import Monogram from './Monogram.astro';
 import { teamPhoto } from '../lib/team-photos';
 import type { TeamMember } from '../lib/catalog';
@@ -18,40 +17,40 @@ interface Props {
 
 const { member, alt = '', lead = false } = Astro.props;
 const photo = teamPhoto(member);
-const sizes = lead ? '(min-width: 64rem) 136px, 112px' : '(min-width: 64rem) 120px, 96px';
-// Enough for 1×, 2× and 3× screens; never larger than the file (Astro doesn't upscale).
-const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) => !photo || w <= photo.width);
 ---
 
 {
   photo ? (
-    <Picture
-      src={photo}
-      alt={alt}
-      formats={['avif', 'webp']}
-      widths={widths}
-      sizes={sizes}
-      class:list={['avatar', { 'avatar--lead': lead }]}
-      loading="lazy"
-      decoding="async"
-    />
+    <span class:list={['avatar', { 'avatar--lead': lead }]}>
+      <!-- Use the ORIGINAL JPEG directly, without generating recompressed copies. -->
+      <img
+        src={photo.src}
+        alt={alt}
+        width={photo.width}
+        height={photo.height}
+        loading="lazy"
+        decoding="async"
+      />
+    </span>
   ) : (
     <Monogram name={member.name} size={lead ? 'md' : 'sm'} />
   )
 }
 
 <style>
+  /*
+   * The original 4:5 JPEG is served unchanged, in its original quality.
+   * A separate square CSS frame provides the round crop; the image itself
+   * keeps its native proportions. No rotation, filters or retouching.
+   */
   .avatar {
     display: block;
     flex-shrink: 0;
     width: 6rem;
-    height: auto;
-    aspect-ratio: 1;
+    height: 6rem;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
     border-radius: 50%;
-    object-fit: cover;
-    /* Keep faces and hair visible (the original 20% vertical crop), while
-       centering the unmodified source photo horizontally inside the circle. */
-    object-position: center 20%;
     margin-inline: auto;
     background: var(--c-powder);
     box-shadow:
@@ -60,8 +59,19 @@ const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) =
       0 0 0 6px color-mix(in srgb, var(--c-bordeaux) 22%, transparent);
   }
 
+  .avatar :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: 50% 20%;
+    transform: none;
+  }
+
   .avatar--lead {
     width: 7rem;
+    height: 7rem;
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--c-plum) 12%, transparent),
       0 0 0 5px var(--c-powder-2),
@@ -71,10 +81,12 @@ const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) =
   @media (min-width: 64rem) {
     .avatar {
       width: 7.5rem;
+      height: 7.5rem;
     }
 
     .avatar--lead {
       width: 8.5rem;
+      height: 8.5rem;
     }
   }
 </style>
