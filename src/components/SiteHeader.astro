@@ -22,7 +22,7 @@ const { lang, path } = Astro.props;
 const { t } = useTranslations(lang);
 
 // Main navigation (same order in header, menu and footer).
-const NAV = ['shop', 'about', 'process', 'team', 'info'] as const;
+const NAV = ['shop', 'about', 'process', 'team', 'donazione', 'info'] as const;
 const items = NAV.map((key) => ({
   key,
   href: localePath(lang, `${key}/`),

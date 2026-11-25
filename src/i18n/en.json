@@ -35,6 +35,10 @@
         "title": "{name} – {role}",
         "description": "{name}, {role} at Chère Pochette, a YES mini-company at SCC Bellinzona."
       },
+      "donation": {
+        "title": "Donation to Consultorio e Casa delle Donne",
+        "description": "Chère Pochette will donate {amount} for every bag sold to the Consultorio e Casa delle Donne association."
+      },
       "info": {
         "title": "Info & FAQ: shipping, returns and care",
         "description": "Shipping within Switzerland only, free pickup in Ticino by arrangement, returns within 14 days and care tips for your crochet bag."
@@ -63,6 +67,7 @@
     "about": "Our story",
     "process": "Our process",
     "team": "Team",
+    "donazione": "Donation",
     "info": "Info & FAQ",
     "legal": "Legal",
     "contact": "Contact"
@@ -470,6 +475,12 @@
       "previous": "Previous profile",
       "next": "Next profile"
     }
+  },
+  "donation": {
+    "title": "A donation for every bag",
+    "intro": "For every bag sold, Chère Pochette will donate {amount} to the Consultorio e Casa delle Donne association.",
+    "association": "The association offers a listening ear and advice to people experiencing domestic abuse. Its refuge provides a safe place for women affected by abuse and their children.",
+    "visit": "Learn about the association"
   },
   "info": {
     "eyebrow": "Info",

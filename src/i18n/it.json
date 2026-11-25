@@ -35,6 +35,10 @@
         "title": "{name} – {role}",
         "description": "{name}, {role} di Chère Pochette, mini-impresa YES della SCC di Bellinzona."
       },
+      "donation": {
+        "title": "Donazione al Consultorio e Casa delle Donne",
+        "description": "Per ogni borsa venduta, Chère Pochette donerà {amount} all’Associazione Consultorio e Casa delle Donne."
+      },
       "info": {
         "title": "Info & FAQ: spedizione, resi e cura",
         "description": "Spedizione solo in Svizzera, ritiro gratuito in Ticino su accordo, resi entro 14 giorni e consigli per lavare la tua borsa all'uncinetto."
@@ -63,6 +67,7 @@
     "about": "La nostra storia",
     "process": "Il processo",
     "team": "Il team",
+    "donazione": "Donazione",
     "info": "Info & FAQ",
     "legal": "Note legali",
     "contact": "Contatti"
@@ -470,6 +475,12 @@
       "previous": "Profilo precedente",
       "next": "Profilo successivo"
     }
+  },
+  "donation": {
+    "title": "Una donazione per ogni borsa",
+    "intro": "Per ogni borsa venduta, Chère Pochette donerà {amount} all’Associazione Consultorio e Casa delle Donne.",
+    "association": "L’associazione offre ascolto e consulenza a chi vive situazioni di violenza domestica. La Casa delle Donne offre un luogo protetto alle donne vittime di violenza e ai loro figli.",
+    "visit": "Scopri l’associazione"
   },
   "info": {
     "eyebrow": "Info",
