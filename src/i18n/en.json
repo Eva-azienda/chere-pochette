@@ -122,6 +122,17 @@
     "colourSwatch": "Colour: {colour}"
   },
   "images": {
+    "homeCarousel": {
+      "jolieDetail": "Ivory Jolie in close-up",
+      "belleDetail": "Chocolate-brown Belle among green leaves",
+      "atelierClip": "Video of the lining being sewn",
+      "coquetteLeaves": "Red fringed Coquette among autumn leaves",
+      "bellePark": "Chocolate-brown Belle carried in a park",
+      "essentielleBench": "Two-tone Essentielle on a red bench",
+      "lakeClip": "Video of the bags by the lake",
+      "joliePark": "Ivory Jolie on a park bench",
+      "coquetteCoral": "Coral Coquette with sunglasses"
+    },
     "heroLifestyle": "A woman in a white shirt and beige trousers carries a bordeaux crochet Belle bag in her hand, next to a stone wall",
     "heroBagHands": "Hands holding a burgundy crochet Belle bag",
     "heroBagUmbrella": "Burgundy crochet bag resting on a red umbrella",
@@ -143,6 +154,13 @@
     "belleOakChair": "Bordeaux crochet Belle bag resting on an oak chair"
   },
   "home": {
+    "carousel": {
+      "label": "Chère Pochette photos and videos",
+      "previous": "Previous item",
+      "next": "Next item",
+      "play": "Start automatic scrolling",
+      "pause": "Pause automatic scrolling"
+    },
     "hero": {
       "title": "A second life. A one-of-a-kind bag.",
       "lead": "Bags crocheted by hand in Ticino with linings made from recovered umbrellas.",

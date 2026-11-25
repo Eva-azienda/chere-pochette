@@ -2,6 +2,7 @@
 /** Home page shared by the Italian, German and English routes. */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BrandPicture from '../../components/BrandPicture.astro';
+import HomeCarousel from '../../components/HomeCarousel.astro';
 import Icon from '../../components/Icon.astro';
 import ModelsShowcase from '../../components/ModelsShowcase.astro';
 import heroLogo from '../../assets/brand/logo-bordeaux.png';
@@ -45,6 +46,7 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
       <div class="hero__product">
         <p>{t('home.hero.product')}</p>
       </div>
+      <HomeCarousel lang={lang} />
       <div class="hero__values" aria-labelledby="hero-values-title">
         <h2 id="hero-values-title">{t('home.hero.values.title')}</h2>
         <p>{t('home.hero.values.text')}</p>

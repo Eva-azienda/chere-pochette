@@ -122,6 +122,17 @@
     "colourSwatch": "Colore: {colour}"
   },
   "images": {
+    "homeCarousel": {
+      "jolieDetail": "Jolie color avorio in primo piano",
+      "belleDetail": "Belle color cioccolato tra le foglie verdi",
+      "atelierClip": "Video della cucitura della fodera",
+      "coquetteLeaves": "Coquette rossa con frange tra le foglie autunnali",
+      "bellePark": "Belle color cioccolato portata in un parco",
+      "essentielleBench": "Essentielle bicolore su una panchina rossa",
+      "lakeClip": "Video delle borse sul lungolago",
+      "joliePark": "Jolie color avorio su una panchina nel parco",
+      "coquetteCoral": "Coquette corallo con occhiali da sole"
+    },
     "heroLifestyle": "Una donna in camicia bianca e pantaloni beige porta a mano una borsa Belle all'uncinetto color bordeaux, accanto a un muro di pietra",
     "heroBagHands": "Mani che tengono una borsa Belle all'uncinetto color bordeaux",
     "heroBagUmbrella": "Borsa all'uncinetto bordeaux appoggiata su un ombrello rosso",
@@ -143,6 +154,13 @@
     "belleOakChair": "Borsa Belle all'uncinetto color bordeaux appoggiata su una sedia di legno di quercia"
   },
   "home": {
+    "carousel": {
+      "label": "Foto e video di Chère Pochette",
+      "previous": "Elemento precedente",
+      "next": "Elemento successivo",
+      "play": "Avvia lo scorrimento automatico",
+      "pause": "Metti in pausa lo scorrimento automatico"
+    },
     "hero": {
       "title": "Una seconda vita. Una borsa unica.",
       "lead": "Borse all’uncinetto fatte a mano in Ticino, con fodere ricavate da ombrelli recuperati.",
