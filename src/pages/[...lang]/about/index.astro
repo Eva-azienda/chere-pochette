@@ -7,7 +7,7 @@ import PageHeader from '../../../components/PageHeader.astro';
 import ThreadDivider from '../../../components/ThreadDivider.astro';
 import yarn from '../../../assets/brand/yarn-fettuccia.jpg';
 import umbrellaLiningStory from '../../../assets/brand/umbrella-lining-story.jpg';
-import umbrellaBag from '../../../assets/brand/hero-bag-umbrella-45.jpg';
+import bagLakeside from '../../../assets/brand/bag-lakeside.jpg';
 import womenLandscape from '../../../assets/brand/women-crochet.jpg';
 import womenPortrait from '../../../assets/brand/women-crochet-45.jpg';
 import { localeStaticPaths, useTranslations, type Lang } from '../../../lib/i18n';
@@ -89,7 +89,12 @@ const values = list<{ title: string; text: string }>('about.values.items');
   <section class="section section--powder" aria-labelledby="slogan">
     <div class="container feature">
       <div class="feature__media media">
-        <BrandPicture src={umbrellaBag} alt={t('images.heroBagUmbrella')} sizes="(min-width: 48rem) 45vw, 100vw" position="53% 60%" />
+        <BrandPicture
+          src={bagLakeside}
+          alt={t('images.bagLakeside')}
+          sizes="(min-width: 72rem) 34rem, (min-width: 48rem) 45vw, calc(100vw - 2rem)"
+          position="32% 50%"
+        />
       </div>
       <div class="feature__text stack">
         <p class="chapter">05</p>
