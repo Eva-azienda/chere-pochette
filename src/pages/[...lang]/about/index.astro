@@ -21,7 +21,7 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: Lang };
 const { t, list, pageMeta } = useTranslations(lang);
 const p = (key: string) => list<string>(`about.${key}.paragraphs`);
-const values = list<{ title: string; text: string }>('about.values.items');
+const values = list<{ title: string; text: string; detail?: string }>('about.values.items');
 ---
 
 <BaseLayout lang={lang} path="about/" {...pageMeta('about')}>
@@ -139,6 +139,7 @@ const values = list<{ title: string; text: string }>('about.values.items');
               <span class="values__n">{String(i + 1).padStart(2, '0')}</span>
               <h3>{value.title}</h3>
               <p>{value.text}</p>
+              {value.detail && <p class="values__detail">{value.detail}</p>}
             </li>
           ))
         }
@@ -290,6 +291,11 @@ const values = list<{ title: string; text: string }>('about.values.items');
     color: var(--c-muted);
   }
 
+  .values__detail {
+    grid-column: 2;
+    margin-top: var(--s-2);
+  }
+
   @media (min-width: 64rem) {
     .values {
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -303,6 +309,10 @@ const values = list<{ title: string; text: string }>('about.values.items');
       padding: var(--s-5) 0 0;
       border-top: 1px solid var(--c-plum);
       border-bottom: 0;
+    }
+
+    .values__detail {
+      grid-column: auto;
     }
 
     .values__n {

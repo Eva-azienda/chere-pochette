@@ -65,13 +65,11 @@ Se per un errore la stessa borsa venisse pagata due volte, la seconda persona ri
 
 ### Consegna
 
-Spediamo con La Posta Svizzera in Svizzera e nel Liechtenstein, di solito entro 5 giorni lavorativi dal pagamento. Se scegli il ritiro a Bellinzona, ti contattiamo per fissare un appuntamento.
+Spediamo con La Posta Svizzera in Svizzera, di solito entro 5 giorni lavorativi dal pagamento. Se scegli il ritiro a Bellinzona, ti contattiamo per fissare un appuntamento.
 
 ### Resi e difetti
 
 In Svizzera non esiste un diritto di recesso legale per gli acquisti online, ma ti offriamo comunque il reso: scrivici entro 14 giorni dal ricevimento o dal ritiro. Se la borsa non è stata usata ed è nelle condizioni originali, ce la rispedisci (spese a tuo carico) oppure la riconsegni a Bellinzona su appuntamento. Ti rimborsiamo il prezzo della borsa entro 14 giorni dal suo arrivo; le spese di spedizione iniziali non sono rimborsate.
-
-Se abiti nel Liechtenstein, hai per legge 14 giorni dal ricevimento per recedere dal contratto, senza indicare un motivo: in questo caso ti rimborsiamo anche le spese di spedizione iniziali.
 
 Se la borsa arriva danneggiata o difettosa, scrivici entro 14 giorni con una foto: ti proponiamo una riparazione o il rimborso. La normale usura non è un difetto.
 

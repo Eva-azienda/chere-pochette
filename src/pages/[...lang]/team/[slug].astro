@@ -2,7 +2,7 @@
 /**
  * Original curriculum text transcribed from the seven-page CV.pdf provided by
  * the team. Every visitor sees exactly one person's CV and can return to the
- * organigram. Existing photographs in src/assets/team/ remain untouched.
+ * organigram. The profile uses the same portrait as the organigram.
  * All original CV text is retained in Italian, as provided.
  */
 import { Picture } from 'astro:assets';
@@ -31,7 +31,7 @@ const { t } = useTranslations(lang);
 const cv = originalCvs[member.slug as keyof typeof originalCvs];
 if (!cv) throw new Error('Missing original CV for ' + member.slug);
 const photo = teamPhoto(member);
-const photoWidths = [240, 296, 480].filter((w) => photo && w <= photo.width);
+const photoWidths = photo ? [...new Set([240, 288, photo.width].filter((w) => w <= photo.width))] : [];
 const meta = {
   title: t('meta.titleTemplate', { title: t('meta.pages.teamMember.title', { name: member.name, role: member.roleCode }) }),
   description: metaDescription(member.bio[lang]),
@@ -62,8 +62,9 @@ const backHref = localePath(lang, 'team/');
                 src={photo}
                 alt={t('team.member.photoAlt', { name: member.name })}
                 formats={['avif', 'webp']}
+                quality={92}
                 widths={photoWidths}
-                sizes="(min-width: 48rem) 296px, 240px"
+                sizes="(min-width: 48rem) 288px, 240px"
                 class="portrait"
                 loading="eager"
               />
@@ -165,7 +166,7 @@ const backHref = localePath(lang, 'team/');
   .cv__portrait {
     justify-self: center;
     display: grid;
-    align-items: end;
+    align-items: center;
     width: min(100%, 15rem);
     min-height: 0;
   }
@@ -174,8 +175,9 @@ const backHref = localePath(lang, 'team/');
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 5;
-    object-fit: cover;
-    object-position: center 20%;
+    object-fit: contain;
+    object-position: center;
+    padding: var(--s-2);
     border-radius: var(--radius);
   }
   .cv__content {

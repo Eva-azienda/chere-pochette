@@ -7,8 +7,7 @@
   "currency": "CHF",
   "shippingFee": 9,
   "shippingCountries": [
-    "CH",
-    "LI"
+    "CH"
   ],
   "pickupPlace": "Bellinzona",
   "delivery": {
@@ -20,7 +19,7 @@
       1,
       3
     ],
-    "_comment": "Working days, shown to search engines (structured data). handlingDays = from payment to the parcel at Swiss Post (info page: within 5 working days). transitDays = Swiss Post to CH/LI."
+    "_comment": "Working days, shown to search engines (structured data). handlingDays = from payment to the parcel at Swiss Post (info page: within 5 working days). transitDays = Swiss Post within Switzerland."
   },
   "returns": {
     "days": 14,

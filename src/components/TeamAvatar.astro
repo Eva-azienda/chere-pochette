@@ -1,7 +1,7 @@
 ---
 /**
  * Round avatar of a team member for the org chart: her portrait (src/assets/team/<photo>.jpg,
- * cropped to a circle with the face in the middle) or, when there is no photo, the initials
+ * centred within a circular frame) or, when there is no photo, the initials
  * (Monogram). Size: 96px on phones, 120px from 64rem; `lead` is a little larger (CEO).
  */
 import { Picture } from 'astro:assets';
@@ -25,16 +25,18 @@ const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) =
 
 {
   photo ? (
-    <Picture
-      src={photo}
-      alt={alt}
-      formats={['avif', 'webp']}
-      widths={widths}
-      sizes={sizes}
-      class:list={['avatar', { 'avatar--lead': lead }]}
-      loading="lazy"
-      decoding="async"
-    />
+    <span class:list={['avatar', { 'avatar--lead': lead }]}>
+      <Picture
+        src={photo}
+        alt={alt}
+        formats={['avif', 'webp']}
+        quality={88}
+        widths={widths}
+        sizes={sizes}
+        loading="lazy"
+        decoding="async"
+      />
+    </span>
   ) : (
     <Monogram name={member.name} size={lead ? 'md' : 'sm'} />
   )
@@ -48,16 +50,25 @@ const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) =
     height: auto;
     aspect-ratio: 1;
     border-radius: 50%;
-    object-fit: cover;
-    /* Keep faces and hair visible (the original 20% vertical crop), while
-       centering the unmodified source photo horizontally inside the circle. */
-    object-position: center 20%;
+    overflow: hidden;
     margin-inline: auto;
     background: var(--c-powder);
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--c-plum) 12%, transparent),
       0 0 0 5px var(--c-white),
       0 0 0 6px color-mix(in srgb, var(--c-bordeaux) 22%, transparent);
+  }
+
+  .avatar :global(picture),
+  .avatar :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .avatar :global(img) {
+    padding: 11%;
+    object-fit: contain;
+    object-position: center;
   }
 
   .avatar--lead {
