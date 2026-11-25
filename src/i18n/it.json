@@ -125,11 +125,11 @@
     "homeCarousel": {
       "jolieDetail": "Jolie color avorio in primo piano",
       "belleDetail": "Belle color cioccolato tra le foglie verdi",
-      "atelierClip": "Video della cucitura della fodera",
+      "belleGoldenHall": "Una Belle chiara portata in una sala dalle decorazioni dorate",
       "coquetteLeaves": "Coquette rossa con frange tra le foglie autunnali",
       "bellePark": "Belle color cioccolato portata in un parco",
       "essentielleBench": "Essentielle bicolore su una panchina rossa",
-      "lakeClip": "Video delle borse sul lungolago",
+      "jolieEiffelTower": "Una Jolie bordeaux con la Torre Eiffel sullo sfondo",
       "joliePark": "Jolie color avorio su una panchina nel parco",
       "coquetteCoral": "Coquette corallo con occhiali da sole"
     },
@@ -155,7 +155,7 @@
   },
   "home": {
     "carousel": {
-      "label": "Foto e video di Chère Pochette",
+      "label": "Foto delle borse di Chère Pochette",
       "play": "Avvia lo scorrimento automatico",
       "pause": "Metti in pausa lo scorrimento automatico"
     },

@@ -125,11 +125,11 @@
     "homeCarousel": {
       "jolieDetail": "Elfenbeinfarbene Jolie in Nahaufnahme",
       "belleDetail": "Schokoladenbraune Belle zwischen grünen Blättern",
-      "atelierClip": "Video vom Nähen des Innenfutters",
+      "belleGoldenHall": "Eine helle Belle in einem goldverzierten Saal",
       "coquetteLeaves": "Rote Coquette mit Fransen zwischen Herbstblättern",
       "bellePark": "Schokoladenbraune Belle in einem Park",
       "essentielleBench": "Zweifarbige Essentielle auf einer roten Bank",
-      "lakeClip": "Video der Taschen am Seeufer",
+      "jolieEiffelTower": "Eine bordeauxrote Jolie mit dem Eiffelturm im Hintergrund",
       "joliePark": "Elfenbeinfarbene Jolie auf einer Parkbank",
       "coquetteCoral": "Korallfarbene Coquette mit Sonnenbrille"
     },
@@ -155,7 +155,7 @@
   },
   "home": {
     "carousel": {
-      "label": "Fotos und Videos von Chère Pochette",
+      "label": "Fotos der Taschen von Chère Pochette",
       "play": "Automatischen Bildlauf starten",
       "pause": "Automatischen Bildlauf anhalten"
     },

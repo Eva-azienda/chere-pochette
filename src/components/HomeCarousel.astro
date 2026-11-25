@@ -1,14 +1,13 @@
 ---
 import BrandPicture from './BrandPicture.astro';
 import { useTranslations, type Lang } from '../lib/i18n';
-import { assetPath } from '../lib/urls';
 import jolieDetail from '../assets/brand/carousel/jolie-detail.webp';
 import belleDetail from '../assets/brand/carousel/belle-detail.webp';
-import atelierPoster from '../assets/brand/carousel/atelier-poster.webp';
+import belleGoldenHall from '../assets/brand/carousel/belle-sala-dorata.webp';
 import coquetteLeaves from '../assets/brand/carousel/coquette-leaves.webp';
 import bellePark from '../assets/brand/carousel/belle-park.webp';
 import essentielleBench from '../assets/brand/carousel/essentielle-bench.webp';
-import lakePoster from '../assets/brand/carousel/lake-poster.webp';
+import jolieEiffelTower from '../assets/brand/carousel/jolie-torre-eiffel.webp';
 import joliePark from '../assets/brand/carousel/jolie-park.webp';
 import coquetteCoral from '../assets/brand/carousel/coquette-coral.webp';
 
@@ -18,11 +17,11 @@ const { t } = useTranslations(Astro.props.lang);
 const slides = [
   { image: jolieDetail, alt: 'jolieDetail', shape: 'wide', position: '51% 55%' },
   { image: belleDetail, alt: 'belleDetail', shape: 'portrait' },
-  { image: atelierPoster, alt: 'atelierClip', shape: 'video', video: 'cucitura-fodera.mp4' },
+  { image: belleGoldenHall, alt: 'belleGoldenHall', shape: 'portrait', position: '50% 60%' },
   { image: coquetteLeaves, alt: 'coquetteLeaves', shape: 'wide', position: '50% 50%' },
   { image: bellePark, alt: 'bellePark', shape: 'standard', position: '42% 50%' },
   { image: essentielleBench, alt: 'essentielleBench', shape: 'wide', position: '48% 50%' },
-  { image: lakePoster, alt: 'lakeClip', shape: 'video', video: 'borse-lungolago.mp4' },
+  { image: jolieEiffelTower, alt: 'jolieEiffelTower', shape: 'tall' },
   { image: joliePark, alt: 'joliePark', shape: 'wide', position: '58% 50%' },
   { image: coquetteCoral, alt: 'coquetteCoral', shape: 'wide', position: '45% 50%' },
 ];
@@ -30,28 +29,15 @@ const slides = [
 
 <section id="carosello" class="home-carousel" aria-label={t('home.carousel.label')} data-home-carousel>
   <ol class="carousel-track" id="home-carousel-track" tabindex="0">
-    {slides.map(({ image, alt, shape, position, video }) => (
+    {slides.map(({ image, alt, shape, position }) => (
       <li class="carousel-slide" data-shape={shape}>
-        {video ? (
-          <video
-            src={assetPath('media/editorial/' + video)}
-            poster={image.src}
-            width={image.width}
-            height={image.height}
-            aria-label={t('images.homeCarousel.' + alt)}
-            preload="none"
-            controls
-            playsinline
-          />
-        ) : (
-          <BrandPicture
-            src={image}
-            alt={t('images.homeCarousel.' + alt)}
-            sizes={shape === 'portrait' ? '(min-width: 48rem) 19rem, 10rem' : '(min-width: 72rem) 32rem, (min-width: 48rem) 45vw, 77vw'}
-            widths={[480, 768, 1080, 1440]}
-            position={position}
-          />
-        )}
+        <BrandPicture
+          src={image}
+          alt={t('images.homeCarousel.' + alt)}
+          sizes={shape === 'tall' ? '(min-width: 48rem) 14rem, 8rem' : shape === 'portrait' ? '(min-width: 48rem) 19rem, 10rem' : '(min-width: 72rem) 32rem, (min-width: 48rem) 45vw, 77vw'}
+          widths={[480, 768, 864, 1080, 1440]}
+          position={position}
+        />
       </li>
     ))}
   </ol>
@@ -71,7 +57,6 @@ const slides = [
     const toggle = controls.querySelector<HTMLButtonElement>('[data-toggle]')!;
     const symbol = toggle.querySelector('span')!;
     const motion = matchMedia('(prefers-reduced-motion: reduce)');
-    const videos = Array.from(track.querySelectorAll('video'));
     const speed = 42; // CSS pixels per second
     let rotating = !motion.matches;
     let inView = false;
@@ -148,16 +133,6 @@ const slides = [
       inView = entry.isIntersecting;
       syncMotion();
     }).observe(track);
-    const videoObserver = new IntersectionObserver((entries) => {
-      entries.filter((entry) => entry.intersectionRatio < 0.45).forEach((entry) => (entry.target as HTMLVideoElement).pause());
-    }, { threshold: 0.45 });
-    videos.forEach((video) => {
-      videoObserver.observe(video);
-      video.addEventListener('play', () => {
-        stop();
-        videos.filter((other) => other !== video).forEach((other) => other.pause());
-      });
-    });
   }
 </script>
 
@@ -199,18 +174,16 @@ const slides = [
 
   [data-shape='standard'] { width: min(77%, calc(var(--media-height) * 1.15)); }
   [data-shape='portrait'] { width: calc(var(--media-height) * 0.75); }
-  [data-shape='video'] { width: calc(var(--media-height) * 512 / 910); }
+  [data-shape='tall'] { width: calc(var(--media-height) * 9 / 16); }
 
   .carousel-slide :global(picture),
-  .carousel-slide :global(img),
-  .carousel-slide video {
+  .carousel-slide :global(img) {
     display: block;
     width: 100%;
     height: 100%;
   }
 
   .carousel-slide :global(img) { object-fit: cover; }
-  .carousel-slide video { object-fit: contain; }
 
   .carousel-controls:not([hidden]) {
     display: flex;
