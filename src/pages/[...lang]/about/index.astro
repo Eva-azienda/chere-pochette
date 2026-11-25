@@ -5,6 +5,7 @@ import ArtPicture from '../../../components/ArtPicture.astro';
 import BrandPicture from '../../../components/BrandPicture.astro';
 import PageHeader from '../../../components/PageHeader.astro';
 import ThreadDivider from '../../../components/ThreadDivider.astro';
+import storyPhotoShoot from '../../../assets/brand/story-photo-shoot.jpg';
 import yarn from '../../../assets/brand/yarn-fettuccia.jpg';
 import umbrellaLiningStory from '../../../assets/brand/umbrella-lining-story.jpg';
 import bagLakeside from '../../../assets/brand/bag-lakeside.jpg';
@@ -24,7 +25,18 @@ const values = list<{ title: string; text: string }>('about.values.items');
 ---
 
 <BaseLayout lang={lang} path="about/" {...pageMeta('about')}>
-  <PageHeader eyebrow={t('about.eyebrow')} title={t('about.title')} intro={t('about.intro')} />
+  <div class="story-hero">
+    <div class="story-hero__photo">
+      <BrandPicture
+        src={storyPhotoShoot}
+        alt={t('images.storyPhotoShoot')}
+        sizes="(min-width: 76rem) 72rem, calc(100vw - 2rem)"
+        widths={[480, 768, 864]}
+        loading="eager"
+      />
+    </div>
+    <PageHeader eyebrow={t('about.eyebrow')} title={t('about.title')} intro={t('about.intro')} />
+  </div>
 
   <!-- How it began (YES) -->
   <section class="section section--tight" aria-labelledby="born">
@@ -147,6 +159,65 @@ const values = list<{ title: string; text: string }>('about.values.items');
 </BaseLayout>
 
 <style>
+  .story-hero {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-items: center;
+    min-height: clamp(24rem, 40vw, 29rem);
+    max-width: var(--container);
+    margin-inline: auto;
+    width: calc(100% - 2 * var(--gutter));
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background: var(--c-plum);
+  }
+
+  .story-hero__photo,
+  .story-hero__photo::after {
+    position: absolute;
+    inset: 0;
+  }
+
+  .story-hero__photo {
+    z-index: -1;
+  }
+
+  .story-hero__photo::after {
+    content: '';
+    background: linear-gradient(
+      180deg,
+      rgb(23 14 19 / 35%),
+      rgb(23 14 19 / 65%) 25% 75%,
+      rgb(23 14 19 / 35%)
+    );
+  }
+
+  .story-hero__photo :global(picture),
+  .story-hero__photo :global(img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .story-hero__photo :global(img) {
+    object-fit: cover;
+    object-position: 50% 62%;
+  }
+
+  .story-hero :global(.page-header) {
+    padding-block: var(--s-7);
+  }
+
+  .story-hero :global(.page-header :is(h1, .eyebrow, .lead, .thread)) {
+    color: var(--c-white);
+  }
+
+  @media (min-width: 48rem) {
+    .story-hero__photo :global(img) {
+      object-position: 50% 56%;
+    }
+  }
+
   .chapter {
     font-family: var(--f-display);
     font-style: italic;
