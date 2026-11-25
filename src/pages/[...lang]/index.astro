@@ -1,14 +1,12 @@
 ---
 /** Home page shared by the Italian, German and English routes. */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ArtPicture from '../../components/ArtPicture.astro';
 import BrandPicture from '../../components/BrandPicture.astro';
 import Icon from '../../components/Icon.astro';
 import ModelsShowcase from '../../components/ModelsShowcase.astro';
 import heroLogo from '../../assets/brand/logo-bordeaux.png';
 import bagUmbrella from '../../assets/brand/hero-bag-umbrella-45.jpg';
-import womenLandscape from '../../assets/brand/women-crochet.jpg';
-import womenPortrait from '../../assets/brand/women-crochet-45.jpg';
+import crochetWorktable from '../../assets/brand/crochet-worktable.jpg';
 import { localeStaticPaths, useTranslations, type Lang } from '../../lib/i18n';
 import { localePath } from '../../lib/urls';
 import { site } from '../../lib/catalog';
@@ -100,20 +98,16 @@ const instagramHandle = `@${site.instagram.match(/instagram\.com\/([^/?#]+)/)?.[
     </div>
   </section>
 
-  <!-- ========== Interwoven stories: the multicultural crochet team ==========
-       Real photo: women-crochet.jpg (landscape) above the text on phones, its 4:5 crop
-       women-crochet-45.jpg on the left from 48rem. -->
+  <!-- ========== Interwoven stories: the multicultural crochet team ========== -->
   <section class="section story" aria-labelledby="story-title">
     <div class="container feature">
       <div class="feature__media media">
-        <ArtPicture
-          mobile={womenLandscape}
-          desktop={womenPortrait}
-          alt={t('images.womenCrochet')}
-          mobileSizes="calc(100vw - 2rem)"
-          desktopSizes="(min-width: 72rem) 34rem, 45vw"
-          mobilePosition="50% 45%"
-          desktopPosition="50% 40%"
+        <BrandPicture
+          src={crochetWorktable}
+          alt={t('images.crochetWorktable')}
+          sizes="(min-width: 72rem) 34rem, (min-width: 48rem) 45vw, calc(100vw - 2rem)"
+          widths={[480, 768, 864]}
+          position="50% 33%"
         />
       </div>
       <div class="feature__text stack">
