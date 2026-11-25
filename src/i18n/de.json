@@ -122,6 +122,17 @@
     "colourSwatch": "Farbe: {colour}"
   },
   "images": {
+    "homeCarousel": {
+      "jolieDetail": "Elfenbeinfarbene Jolie in Nahaufnahme",
+      "belleDetail": "Schokoladenbraune Belle zwischen grünen Blättern",
+      "atelierClip": "Video vom Nähen des Innenfutters",
+      "coquetteLeaves": "Rote Coquette mit Fransen zwischen Herbstblättern",
+      "bellePark": "Schokoladenbraune Belle in einem Park",
+      "essentielleBench": "Zweifarbige Essentielle auf einer roten Bank",
+      "lakeClip": "Video der Taschen am Seeufer",
+      "joliePark": "Elfenbeinfarbene Jolie auf einer Parkbank",
+      "coquetteCoral": "Korallfarbene Coquette mit Sonnenbrille"
+    },
     "heroLifestyle": "Eine Frau in weisser Bluse und beiger Hose trägt eine bordeauxrote Belle-Häkeltasche in der Hand, neben einer Steinmauer",
     "heroBagHands": "Hände halten eine bordeauxrote gehäkelte Tasche Belle",
     "heroBagUmbrella": "Bordeauxrote Häkeltasche auf einem roten Regenschirm",
@@ -143,6 +154,13 @@
     "belleOakChair": "Bordeauxrote Belle-Häkeltasche auf einem Stuhl aus Eichenholz"
   },
   "home": {
+    "carousel": {
+      "label": "Fotos und Videos von Chère Pochette",
+      "previous": "Vorheriges Element",
+      "next": "Nächstes Element",
+      "play": "Automatischen Bildlauf starten",
+      "pause": "Automatischen Bildlauf anhalten"
+    },
     "hero": {
       "title": "Ein zweites Leben. Eine einzigartige Tasche.",
       "lead": "Handgehäkelte Taschen aus dem Tessin mit Futter aus wiederverwendeten Regenschirmen.",

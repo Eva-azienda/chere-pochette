@@ -1,0 +1,217 @@
+---
+import BrandPicture from './BrandPicture.astro';
+import Icon from './Icon.astro';
+import { useTranslations, type Lang } from '../lib/i18n';
+import { assetPath } from '../lib/urls';
+import jolieDetail from '../assets/brand/carousel/jolie-detail.webp';
+import belleDetail from '../assets/brand/carousel/belle-detail.webp';
+import atelierPoster from '../assets/brand/carousel/atelier-poster.webp';
+import coquetteLeaves from '../assets/brand/carousel/coquette-leaves.webp';
+import bellePark from '../assets/brand/carousel/belle-park.webp';
+import essentielleBench from '../assets/brand/carousel/essentielle-bench.webp';
+import lakePoster from '../assets/brand/carousel/lake-poster.webp';
+import joliePark from '../assets/brand/carousel/jolie-park.webp';
+import coquetteCoral from '../assets/brand/carousel/coquette-coral.webp';
+
+interface Props { lang: Lang }
+
+const { t } = useTranslations(Astro.props.lang);
+const slides = [
+  { image: jolieDetail, alt: 'jolieDetail', shape: 'wide', position: '51% 55%' },
+  { image: belleDetail, alt: 'belleDetail', shape: 'portrait' },
+  { image: atelierPoster, alt: 'atelierClip', shape: 'video', video: 'cucitura-fodera.mp4' },
+  { image: coquetteLeaves, alt: 'coquetteLeaves', shape: 'wide', position: '50% 50%' },
+  { image: bellePark, alt: 'bellePark', shape: 'standard', position: '42% 50%' },
+  { image: essentielleBench, alt: 'essentielleBench', shape: 'wide', position: '48% 50%' },
+  { image: lakePoster, alt: 'lakeClip', shape: 'video', video: 'borse-lungolago.mp4' },
+  { image: joliePark, alt: 'joliePark', shape: 'wide', position: '58% 50%' },
+  { image: coquetteCoral, alt: 'coquetteCoral', shape: 'wide', position: '45% 50%' },
+];
+---
+
+<section id="carosello" class="home-carousel" aria-label={t('home.carousel.label')} data-home-carousel>
+  <ol class="carousel-track" id="home-carousel-track" tabindex="0">
+    {slides.map(({ image, alt, shape, position, video }) => (
+      <li class="carousel-slide" data-shape={shape}>
+        {video ? (
+          <video
+            src={assetPath('media/editorial/' + video)}
+            poster={image.src}
+            width={image.width}
+            height={image.height}
+            aria-label={t('images.homeCarousel.' + alt)}
+            preload="none"
+            controls
+            playsinline
+          />
+        ) : (
+          <BrandPicture
+            src={image}
+            alt={t('images.homeCarousel.' + alt)}
+            sizes={shape === 'portrait' ? '(min-width: 48rem) 15rem, 10rem' : '(min-width: 72rem) 34rem, (min-width: 48rem) 44vw, 85vw'}
+            widths={[480, 768, 1080, 1440]}
+            position={position}
+          />
+        )}
+      </li>
+    ))}
+  </ol>
+  <div class="carousel-controls" hidden>
+    <button type="button" aria-label={t('home.carousel.previous')} aria-controls="home-carousel-track" data-step="-1">
+      <Icon name="arrow-left" size={20} />
+    </button>
+    <button type="button" aria-controls="home-carousel-track" data-toggle
+      data-play-label={t('home.carousel.play')} data-pause-label={t('home.carousel.pause')}>
+      <span aria-hidden="true"></span>
+    </button>
+    <button type="button" aria-label={t('home.carousel.next')} aria-controls="home-carousel-track" data-step="1">
+      <Icon name="arrow-right" size={20} />
+    </button>
+  </div>
+</section>
+
+<script>
+  const carousel = document.querySelector<HTMLElement>('[data-home-carousel]');
+  if (carousel) {
+    const track = carousel.querySelector<HTMLOListElement>('.carousel-track')!;
+    const controls = carousel.querySelector<HTMLElement>('.carousel-controls')!;
+    const toggle = controls.querySelector<HTMLButtonElement>('[data-toggle]')!;
+    const symbol = toggle.querySelector('span')!;
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const videos = Array.from(track.querySelectorAll('video'));
+    let rotating = !motion.matches;
+    let inView = false;
+    let hovering = false;
+
+    const move = (direction: number) => {
+      const limit = track.scrollWidth - track.clientWidth;
+      if (limit <= 0) return;
+      const stops = [...new Set(Array.from(track.children, (slide) => Math.min((slide as HTMLElement).offsetLeft, limit)))];
+      const closest = stops.reduce((best, stop, index) =>
+        Math.abs(stop - track.scrollLeft) < Math.abs(stops[best] - track.scrollLeft) ? index : best, 0);
+      const next = closest + direction;
+      const wraps = next < 0 || next >= stops.length;
+      track.scrollTo({
+        left: stops[(next + stops.length) % stops.length],
+        behavior: wraps || motion.matches ? 'instant' : 'smooth',
+      });
+    };
+
+    const setRotation = (enabled: boolean) => {
+      rotating = enabled;
+      toggle.setAttribute('aria-label', (enabled ? toggle.dataset.pauseLabel : toggle.dataset.playLabel)!);
+      symbol.textContent = enabled ? 'Ⅱ' : '▶';
+    };
+    const stop = () => setRotation(false);
+
+    setRotation(rotating);
+    controls.hidden = false;
+    toggle.addEventListener('click', () => setRotation(!rotating));
+    motion.addEventListener('change', (event) => { if (event.matches) stop(); });
+    track.addEventListener('focusin', stop);
+    track.addEventListener('pointerdown', stop);
+    track.addEventListener('wheel', (event) => {
+      if (event.deltaX || event.shiftKey) stop();
+    }, { passive: true });
+    track.addEventListener('pointerenter', (event) => { hovering = event.pointerType === 'mouse'; });
+    track.addEventListener('pointerleave', () => { hovering = false; });
+    track.addEventListener('keydown', (event) => {
+      if (event.target !== track || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return;
+      event.preventDefault();
+      move(event.key === 'ArrowLeft' ? -1 : 1);
+    });
+    controls.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((button) =>
+      button.addEventListener('click', () => {
+        stop();
+        move(Number(button.dataset.step));
+      }),
+    );
+
+    new IntersectionObserver(([entry]) => { inView = entry.intersectionRatio >= 0.4; }, { threshold: 0.4 }).observe(track);
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.filter((entry) => entry.intersectionRatio < 0.45).forEach((entry) => (entry.target as HTMLVideoElement).pause());
+    }, { threshold: 0.45 });
+    videos.forEach((video) => {
+      videoObserver.observe(video);
+      video.addEventListener('play', () => {
+        stop();
+        videos.filter((other) => other !== video).forEach((other) => other.pause());
+      });
+    });
+    window.setInterval(() => {
+      if (rotating && inView && !hovering && !document.hidden) move(1);
+    }, 4800);
+  }
+</script>
+
+<style>
+  .home-carousel {
+    --media-height: clamp(12rem, 26vw, 20rem);
+    width: 100%;
+    min-width: 0;
+    margin-top: var(--s-2);
+  }
+
+  .carousel-track {
+    position: relative;
+    display: flex;
+    gap: var(--s-3);
+    margin: 0;
+    padding: 0 0 var(--s-2);
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-line-strong) transparent;
+  }
+
+  .carousel-slide {
+    height: var(--media-height);
+    flex: none;
+    width: min(87%, calc(var(--media-height) * 1.7778));
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background: var(--c-ivory-2);
+    scroll-snap-align: start;
+  }
+
+  [data-shape='standard'] { width: min(87%, calc(var(--media-height) * 1.3333)); }
+  [data-shape='portrait'] { width: calc(var(--media-height) * 0.75); }
+  [data-shape='video'] { width: calc(var(--media-height) * 512 / 910); }
+
+  .carousel-slide :global(picture),
+  .carousel-slide :global(img),
+  .carousel-slide video {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-slide :global(img) { object-fit: cover; }
+  .carousel-slide video { object-fit: contain; }
+
+  .carousel-controls:not([hidden]) {
+    display: flex;
+    justify-content: center;
+    gap: var(--s-2);
+    margin-top: var(--s-2);
+  }
+
+  .carousel-controls button {
+    display: grid;
+    place-items: center;
+    width: var(--tap);
+    height: var(--tap);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-pill);
+    background: var(--c-ivory);
+    color: var(--c-plum);
+    cursor: pointer;
+  }
+
+  .carousel-controls button:hover {
+    background: var(--c-powder-2);
+    border-color: var(--c-plum);
+  }
+</style>
