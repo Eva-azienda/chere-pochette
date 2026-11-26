@@ -36,7 +36,7 @@
         "description": "{name}, {role} bei Chère Pochette, einem YES-Miniunternehmen der SCC Bellinzona."
       },
       "donation": {
-        "title": "Spende an das Consultorio e Casa delle Donne",
+        "title": "Consultorio e Casa delle Donne",
         "description": "Chère Pochette spendet {amount} pro verkaufter Tasche an den Verein Consultorio e Casa delle Donne."
       },
       "info": {
@@ -67,7 +67,7 @@
     "about": "Unsere Geschichte",
     "process": "Unser Prozess",
     "team": "Team",
-    "donazione": "Spende",
+    "donazione": "Consultorio e Casa delle Donne",
     "info": "Info & FAQ",
     "legal": "Rechtliches",
     "contact": "Kontakt"
@@ -479,7 +479,7 @@
     }
   },
   "donation": {
-    "title": "Eine Spende für jede Tasche",
+    "title": "Consultorio e Casa delle Donne",
     "intro": "Für jede verkaufte Tasche spendet Chère Pochette {amount} an den Verein Consultorio e Casa delle Donne.",
     "association": "Der Verein hört Menschen zu, die häusliche Gewalt erleben, und berät sie. Das Frauenhaus bietet betroffenen Frauen und ihren Kindern einen geschützten Ort.",
     "visit": "Mehr über den Verein"
