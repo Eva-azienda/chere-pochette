@@ -18,6 +18,16 @@ const photos = new Map(
   Object.entries(files).map(([path, mod]) => [path.slice(path.lastIndexOf('/') + 1, -'.jpg'.length), mod.default]),
 );
 
+const avatarFiles = import.meta.glob<ImageMetadata>('../assets/team/avatars/*.webp', {
+  eager: true,
+  import: 'default',
+});
+
+/** Head-and-shoulders framing for the circular cards in the organisation chart. */
+export function teamAvatar(photo: string | null): ImageMetadata | undefined {
+  return photo ? avatarFiles[`../assets/team/avatars/${photo}.webp`] : undefined;
+}
+
 const warned = new Set<string>();
 
 /** The member's portrait, or undefined when there is none (show the Monogram instead). */
