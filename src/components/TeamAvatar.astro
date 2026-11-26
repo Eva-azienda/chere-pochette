@@ -1,12 +1,12 @@
 ---
 /**
- * Round avatar of a team member for the org chart: her portrait (src/assets/team/<photo>.jpg,
- * centred within a circular frame) or, when there is no photo, the initials
+ * Round avatar of a team member for the org chart: a framed portrait,
+ * the CV photo as a fallback, or, when there is no photo, the initials
  * (Monogram). Size: 96px on phones, 120px from 64rem; `lead` is a little larger (CEO).
  */
 import { Picture } from 'astro:assets';
 import Monogram from './Monogram.astro';
-import { teamPhoto } from '../lib/team-photos';
+import { teamAvatar, teamPhoto } from '../lib/team-photos';
 import type { TeamMember } from '../lib/catalog';
 
 interface Props {
@@ -17,7 +17,8 @@ interface Props {
 }
 
 const { member, alt = '', lead = false } = Astro.props;
-const photo = teamPhoto(member);
+const framed = teamAvatar(member.photo);
+const photo = framed ?? teamPhoto(member);
 const sizes = lead ? '(min-width: 64rem) 136px, 112px' : '(min-width: 64rem) 120px, 96px';
 // Enough for 1×, 2× and 3× screens; never larger than the file (Astro doesn't upscale).
 const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) => !photo || w <= photo.width);
@@ -25,12 +26,12 @@ const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) =
 
 {
   photo ? (
-    <span class:list={['avatar', { 'avatar--lead': lead }]}>
+    <span class:list={['avatar', { 'avatar--lead': lead, 'avatar--framed': framed }]}>
       <Picture
         src={photo}
         alt={alt}
         formats={['avif', 'webp']}
-        quality={88}
+        quality={95}
         widths={widths}
         sizes={sizes}
         loading="lazy"
@@ -66,9 +67,13 @@ const widths = (lead ? [136, 224, 272, 336] : [120, 192, 240, 288]).filter((w) =
   }
 
   .avatar :global(img) {
-    padding: 11%;
+    display: block;
     object-fit: contain;
     object-position: center;
+  }
+
+  .avatar:not(.avatar--framed) :global(img) {
+    padding: 11%;
   }
 
   .avatar--lead {
