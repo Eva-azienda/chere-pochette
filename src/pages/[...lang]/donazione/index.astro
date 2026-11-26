@@ -15,13 +15,12 @@ const amount = 'CHF 5.–';
 <BaseLayout lang={lang} path="donazione/" {...pageMeta('donation', { amount })}>
   <PageHeader title={t('donation.title')} intro={t('donation.intro', { amount })} />
 
-  <section class="section section--powder" aria-labelledby="association-title">
+  <div class="section section--powder">
     <div class="container container--narrow stack">
-      <h2 id="association-title" lang="it">Consultorio e Casa delle Donne</h2>
       <p>{t('donation.association')}</p>
       <a class="link-arrow" href="https://consultoriodelledonne.ch/chi-siamo/">
         {t('donation.visit')}
       </a>
     </div>
-  </section>
+  </div>
 </BaseLayout>
