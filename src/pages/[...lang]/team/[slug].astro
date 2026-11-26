@@ -28,19 +28,20 @@ export function getStaticPaths() {
 
 const { lang, member } = Astro.props as { lang: Lang; member: TeamMember };
 const { t } = useTranslations(lang);
+const firstName = member.name.split(/\s+/, 1)[0];
 const cv = originalCvs[member.slug as keyof typeof originalCvs];
 if (!cv) throw new Error('Missing original CV for ' + member.slug);
 const photo = teamPhoto(member);
 const photoWidths = photo ? [...new Set([240, 288, photo.width].filter((w) => w <= photo.width))] : [];
 const meta = {
-  title: t('meta.titleTemplate', { title: t('meta.pages.teamMember.title', { name: member.name, role: member.roleCode }) }),
+  title: t('meta.titleTemplate', { title: t('meta.pages.teamMember.title', { name: firstName, role: member.roleCode }) }),
   description: metaDescription(member.bio[lang]),
 };
 const profileDraft = LOCALES.some((l) => member.skills[l].length === 0 || member.experience[l].length === 0);
 const jsonLd = breadcrumbJsonLd(lang, [
   { name: t('nav.home'), path: '' },
   { name: t('nav.team'), path: 'team/' },
-  { name: member.name, path: 'team/' + member.slug + '/' },
+  { name: firstName, path: 'team/' + member.slug + '/' },
 ]);
 const backHref = localePath(lang, 'team/');
 ---
@@ -51,7 +52,7 @@ const backHref = localePath(lang, 'team/');
       <header class="cv__hero">
         <div class="cv__intro">
           <p class="cv__code">{cv.code}</p>
-          <h1>{member.name}</h1>
+          <h1>{firstName}</h1>
           <p class="cv__position">{cv.title}</p>
           <p class="cv__description">{cv.introduction}</p>
         </div>
@@ -60,7 +61,7 @@ const backHref = localePath(lang, 'team/');
             photo ? (
               <Picture
                 src={photo}
-                alt={t('team.member.photoAlt', { name: member.name })}
+                alt={t('team.member.photoAlt', { name: firstName })}
                 formats={['avif', 'webp']}
                 quality={92}
                 widths={photoWidths}
@@ -69,7 +70,7 @@ const backHref = localePath(lang, 'team/');
                 loading="eager"
               />
             ) : (
-              <Monogram name={member.name} size="lg" />
+              <Monogram name={firstName} size="lg" />
             )
           }
         </div>
