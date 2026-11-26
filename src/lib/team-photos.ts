@@ -3,6 +3,7 @@
  *
  *   src/assets/team/<photo>.jpg  – portrait of one member, 4:5, where <photo> is the "photo" value
  *                                  in src/data/team.json (normally the member's slug)
+ *   src/assets/team/avatars/     – head-and-shoulders photos for the organigram and CVs
  *   src/assets/team/group.jpg    – the group photo (home page + team page)
  *
  * A member whose "photo" is null – or whose file is missing – gets the initials avatar
@@ -30,10 +31,10 @@ export function teamAvatar(photo: string | null): ImageMetadata | undefined {
 
 const warned = new Set<string>();
 
-/** The member's portrait, or undefined when there is none (show the Monogram instead). */
+/** Prefer the centred portrait, then the older photo or initials. */
 export function teamPhoto(member: Pick<TeamMember, 'slug' | 'photo'>): ImageMetadata | undefined {
   if (!member.photo) return undefined;
-  const photo = photos.get(member.photo);
+  const photo = teamAvatar(member.photo) ?? photos.get(member.photo);
   if (!photo && !warned.has(member.slug)) {
     warned.add(member.slug);
     console.warn(`[team] ${member.slug}: src/assets/team/${member.photo}.jpg not found – showing initials instead.`);
