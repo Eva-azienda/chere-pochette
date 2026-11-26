@@ -6,9 +6,10 @@
  * (AES-256, password checked in the browser). Visitors type the password once; "Ricordami"
  * keeps them in for 30 days on that device. Nothing can be read in the page source without it.
  *
- *   SITE_PASSWORD set   → encrypt all pages (except /admin/, which has its own login),
+ *   preview.passwordRequired false → publish without the preview gate.
+ *   Otherwise, SITE_PASSWORD set → encrypt all pages (except /admin/, which has its own login),
  *                         replace robots.txt with "Disallow: /" and remove the sitemaps.
- *   SITE_PASSWORD empty → do nothing: the site is public (launch = delete the GitHub secret).
+ *   SITE_PASSWORD empty → publish without the preview gate.
  *
  * Notes
  * - Images, CSS and JS files are not encrypted (only the HTML pages are).
@@ -24,6 +25,13 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
+const site = JSON.parse(readFileSync(join(root, 'src/data/site.json'), 'utf8'));
+
+if (site.preview?.passwordRequired === false) {
+  console.log('Public launch enabled – skipping the website preview gate.');
+  process.exit(0);
+}
+
 const password = process.env.SITE_PASSWORD ?? '';
 
 if (!password) {

@@ -3,7 +3,7 @@
 State on **29 October 2026**. Tick a box by editing this file on github.com (`- [ ]` → `- [x]`).
 Suggested owner in brackets. Details: [SETUP.md](SETUP.md), [OPERATIONS.md](OPERATIONS.md), [CONTENT.md](CONTENT.md).
 
-**Launch = delete the repository secret `SITE_PASSWORD` and re-run Deploy** (last section).
+**Launch = set `preview.passwordRequired` to `false` in `src/data/site.json` and deploy** (last section).
 Online payment can be switched on before or after the launch; until then the shop works with "Ordina via e-mail".
 
 ## Done
@@ -82,20 +82,16 @@ Online payment can be switched on before or after the launch; until then the sho
 
 ## Go-live
 
-> **Decision (30.10.2026): launch only when online payments work.** The preview password stays on until the Zahls
-> verification is approved, a plan is chosen and the CHF test purchase + refund has passed. Checkout is already on
-> (since 30.10.2026), so launching = deleting `SITE_PASSWORD`; the public site starts with "Paga con Zahls".
-
+> **Launch update (26.11.2026):** publish the site so Zahls can review it. Take orders by e-mail while the Zahls payment pages are offline. Enable online payments after completing the Zahls activation and verification.
 
 - [ ] Test on an iPhone and an Android phone: home, shop, product, order, info, team, language switch (team)
 - [ ] Accessibility and legal check by a coach (keyboard, contrast, legal pages) (CEO)
-- [ ] **Launch: delete `SITE_PASSWORD`** (Settings → Secrets and variables → Actions) → Actions → **Deploy** →
-      *Run workflow* → check https://cherepochette.ch opens without password (CTO)
+- [ ] **Launch:** set `preview.passwordRequired` to `false` and deploy, then check that https://cherepochette.ch opens without a password (CTO)
 - [ ] Update the Instagram bio link to https://cherepochette.ch (CMO)
 
 ## Search engines (after launch)
 
-- [ ] Once `SITE_PASSWORD` is deleted: check https://cherepochette.ch/robots.txt and the canonical tags (CTO)
+- [ ] After public launch: check https://cherepochette.ch/robots.txt and the canonical tags (CTO)
 - [ ] Google Search Console: add a **Domain** property (TXT record at Hostpoint), submit `sitemap-index.xml` (CTO)
 - [ ] Bing Webmaster Tools: import from Search Console (CTO)
 - [ ] Rich Results Test on one bag page (Product + Offer) (CTO)
