@@ -481,6 +481,7 @@
   "donation": {
     "title": "Consultorio e Casa delle Donne",
     "intro": "Per ogni borsa venduta, Chère Pochette donerà {amount} all’Associazione Consultorio e Casa delle Donne.",
+    "commitment": "Chère Pochette è un’azienda di donne per le donne. Ci stanno a cuore il loro benessere, la loro forza e i loro diritti. Per questo, il contrasto alla violenza sulle donne è un tema che sentiamo particolarmente vicino: sostenere il Consultorio e Casa delle Donne è il nostro modo di trasformare questi valori in un aiuto concreto.",
     "association": "L’associazione offre ascolto e consulenza a chi vive situazioni di violenza domestica. La Casa delle Donne offre un luogo protetto alle donne vittime di violenza e ai loro figli.",
     "visit": "Scopri l’associazione"
   },
