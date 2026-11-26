@@ -16,7 +16,7 @@ sync, and what to do when something goes wrong. No server is involved — everyt
 | `.github/workflows/deploy.yml` ("Deploy") | Tests → Zahls sync → commit sync result → build → preview gate → GitHub Pages. |
 | `.github/workflows/zahls-check.yml` ("Zahls check") | Manual button: tests the Zahls instance + API key, changes nothing (§5). |
 | `scripts/zahls-sync.mjs` | With checkout on: creates two Paylinks per available bag, detects payments, marks bags sold, closes links. With checkout off: connection test only. |
-| `scripts/protect-site.mjs` | Preview password gate while the secret `SITE_PASSWORD` exists (§3). |
+| `scripts/protect-site.mjs` | Preview password gate controlled by the site configuration and `SITE_PASSWORD` (§3). |
 | `"checkout"` in `src/data/site.json` | The switch: online payment on (`true`) or off (anything else → "Ordina via e-mail"). |
 | `scripts/admin-setup.mjs` | Creates the encrypted `public/admin/auth.json` for the admin login (§10). |
 
@@ -46,7 +46,7 @@ published commit (used by the cron to know what is online — do not use that ta
 
 ## 3. Preview password gate
 
-While the repository secret **`SITE_PASSWORD`** exists, the Deploy step *Password gate (preview)* runs
+While the repository secret **`SITE_PASSWORD`** exists and `preview.passwordRequired` is not `false` in `src/data/site.json`, the Deploy step *Password gate (preview)* runs
 `scripts/protect-site.mjs` on the built site:
 
 - every HTML page is encrypted with **StatiCrypt** (AES-256; the password is checked in the browser);
@@ -58,9 +58,9 @@ While the repository secret **`SITE_PASSWORD`** exists, the Deploy step *Passwor
 
 | Task | How |
 |---|---|
-| **Launch the site** | Settings → Secrets and variables → Actions → delete **`SITE_PASSWORD`** → Actions → **Deploy** → *Run workflow*. The log then says "SITE_PASSWORD not set – the website is public"; robots.txt and sitemap are back. |
+| **Launch the site** | Set `preview.passwordRequired` to `false` in `src/data/site.json` and deploy. The configuration retains the preview secret for a possible rollback. |
 | Change the preview password | `gh secret set SITE_PASSWORD` (or web → *Update*) → Run Deploy. **Logs everyone out.** |
-| Back to preview after launch | Create the secret again → Run Deploy. |
+| Back to preview after launch | Set `preview.passwordRequired` to `true`, confirm that `SITE_PASSWORD` is set, and deploy. |
 
 Limits: it hides the **pages**, not the content — the repository is public, and images, CSS and JS are not
 encrypted. `/thanks/` is gated too (irrelevant while checkout is off).

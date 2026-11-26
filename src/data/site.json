@@ -25,9 +25,12 @@
     "days": 14,
     "_comment": "Return window shown to search engines. Must match the legal texts (src/content/legal) and info.returns."
   },
+  "preview": {
+    "passwordRequired": false
+  },
   "checkout": {
-    "enabled": true,
-    "_comment": "Online payment via Zahls (Paylinks per bag). Switched on 30.10.2026 while the site is still behind the preview password, so links and buttons are ready; real payments start once the Zahls account verification (KYC) is approved. Set to false to go back to 'order by e-mail' (the sync then leaves existing links alone)."
+    "enabled": false,
+    "_comment": "Orders are taken by e-mail while Zahls payment pages are offline. Set to true after activating and verifying Zahls payments."
   },
   "organisation": {
     "legalName": "Chère Pochette – mini-impresa YES",
