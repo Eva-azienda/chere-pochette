@@ -38,7 +38,7 @@ Ogni borsa è un **pezzo unico**: una borsa = una scheda nell'admin = una pagina
 3. Tocca **Entra** («Verifico…» per qualche secondo).
 4. Il telefono propone di **salvare la password**: va bene sul tuo telefono personale.
 
-**Cosa vedi:** la schermata **Inventario**. Resti collegata finché non tocchi **Esci** (in alto a destra).
+**Cosa vedi:** la schermata **Inventario**. Tocca **Esci** (in alto a destra) quando hai finito. Se chiudi o ricarichi la pagina, devi accedere di nuovo.
 Su un telefono che non è tuo tocca sempre **Esci** alla fine. La volta dopo l'e-mail è già compilata.
 
 ## 3. La schermata Inventario

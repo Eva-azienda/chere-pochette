@@ -11,7 +11,7 @@
  *    site (about 2 minutes).
  *  - Login: ONE admin, e-mail + password. auth.json (created by `npm run admin:setup`) holds
  *    the token encrypted with a key derived from both (crypto.js). After login the session
- *    { owner, repo, branch, token } stays in localStorage until "Esci".
+ *    stays in memory for the lifetime of the page.
  *  - Routes (in the #hash, so they work under any base path):
  *      #/  inventory · #/nuova  new bag · #/borsa/<id>  detail/edit · #/fatto  success
  *  - Files: github.js (API + commits), store.js (data rules), store-github.js (backend),
@@ -26,7 +26,6 @@ import { renderInventory, TABS } from './screens/inventory.js';
 import { renderProductForm, createDraft, discardDraft, draftHasContent } from './screens/product-form.js';
 import { renderDone } from './screens/done.js';
 
-const SESSION_KEY = 'cp-admin-session';
 const EMAIL_KEY = 'cp-admin-email'; // last e-mail used on this device (pre-filled on the login)
 const TAB_KEY = 'cp-admin-tab';
 const BLOB_CACHE_PREFIX = 'cp-admin:blob:';
@@ -65,15 +64,6 @@ function readTab() {
   }
 }
 
-function readSession() {
-  try {
-    const s = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
-    return s && s.owner && s.repo && s.token ? s : null;
-  } catch {
-    return null;
-  }
-}
-
 function readEmail() {
   try {
     return localStorage.getItem(EMAIL_KEY) || '';
@@ -92,36 +82,24 @@ function writeEmail(email) {
 
 /**
  * Removes leftovers of older admin versions (keys "cp-admin-…" this version does not use),
- * so they cannot fill the browser storage the session and the cache need.
+ * including any access token saved by a previous version.
  */
 function cleanStorage() {
   try {
-    const keep = new Set([SESSION_KEY, EMAIL_KEY]);
     for (let i = localStorage.length - 1; i >= 0; i--) {
       const key = localStorage.key(i);
-      if (key && key.startsWith('cp-admin-') && !keep.has(key)) localStorage.removeItem(key);
+      if (key && key.startsWith('cp-admin-') && key !== EMAIL_KEY) localStorage.removeItem(key);
     }
   } catch {
     /* ignore */
   }
 }
 
-function writeSession(session) {
+function clearBlobCache() {
   try {
-    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-  } catch {
-    toast('Questo browser non può ricordare l’accesso: dovrai rifarlo alla prossima apertura.');
-  }
-}
-
-function clearSession({ clearCache = false } = {}) {
-  try {
-    localStorage.removeItem(SESSION_KEY);
-    if (clearCache) {
-      for (let i = localStorage.length - 1; i >= 0; i--) {
-        const key = localStorage.key(i);
-        if (key && key.startsWith(BLOB_CACHE_PREFIX)) localStorage.removeItem(key);
-      }
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith(BLOB_CACHE_PREFIX)) localStorage.removeItem(key);
     }
   } catch {
     /* ignore */
@@ -461,7 +439,6 @@ async function loginWithPassword(email, password) {
   const opened = await decryptAuth(state.authConfig, email, password);
   const session = { owner: opened.owner, repo: opened.repo, branch: opened.branch, token: opened.token, via: 'password' };
   const backend = await verify(session);
-  writeSession(session);
   writeEmail(normalizeEmail(email));
   offerToSavePassword(email.trim(), password);
   start(backend);
@@ -470,7 +447,6 @@ async function loginWithPassword(email, password) {
 async function loginAdvanced(fields) {
   const session = { owner: fields.owner, repo: fields.repo, branch: fields.branch || 'main', token: fields.token, via: 'advanced' };
   const backend = await verify(session);
-  writeSession(session);
   start(backend);
 }
 
@@ -496,7 +472,6 @@ function resetState() {
 
 /** Token expired / revoked: back to the login, keeping the unsaved new bag in memory. */
 function expire() {
-  clearSession();
   resetState();
   showLogin(
     'Accesso scaduto: accedi di nuovo con e-mail e password.' +
@@ -506,7 +481,7 @@ function expire() {
 
 /** "Esci" button. */
 function logout() {
-  clearSession({ clearCache: true });
+  clearBlobCache();
   resetState();
   discardDraft(state.newDraft);
   state.newDraft = null;
@@ -594,9 +569,10 @@ function boot() {
     }
   });
 
-  const session = readSession();
-  if (session) start(new GitHubBackend(session));
-  else showLogin();
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted && state.backend) logout();
+  });
+  showLogin();
 }
 
 boot();
