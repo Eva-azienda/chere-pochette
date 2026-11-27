@@ -2,7 +2,7 @@
   "id": "cp-024",
   "number": 24,
   "model": "coquette",
-  "status": "available",
+  "status": "hidden",
   "price": 55,
   "colour": "marrone-cioccolato",
   "lining": "animalier",
@@ -20,7 +20,7 @@
     }
   ],
   "createdAt": "2026-11-24T20:53:51Z",
-  "updatedAt": "2026-11-24T20:57:11Z",
+  "updatedAt": "2026-11-27T12:09:47Z",
   "soldAt": null,
   "soldChannel": null,
   "zahls": {
